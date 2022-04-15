@@ -10,8 +10,8 @@ import Container from "@mui/material/Container"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
-import Logo from "../static/images/Logo.png"
-import UserPicture from "../static/images/userPortrait.png"
+import Logo from "../../static/images/Logo.png"
+import UserPicture from "../../static/images/userPortrait.png"
 
 const pages = ["Appointments", "Doctors", "Prescriptions", "About"]
 
@@ -31,7 +31,13 @@ const UserNavbar = () => {
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<IconButton sx={{ p: 0 }}>
-						<Avatar alt="Remy Sharp" src={Logo} />
+						<Avatar
+							sx={{
+								display: { xs: "none", md: "flex" },
+							}}
+							alt="One Health"
+							src={Logo}
+						/>
 						<Typography
 							variant="h6"
 							noWrap
@@ -83,14 +89,6 @@ const UserNavbar = () => {
 							))}
 						</Menu>
 					</Box>
-					<Typography
-						variant="h6"
-						noWrap
-						component="div"
-						sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-					>
-						LOGO
-					</Typography>
 					<Box
 						sx={{
 							flexGrow: 0,

@@ -1,11 +1,11 @@
 import React from 'react'
 import "./App.css"
-import UserNavbar from "./components/UserNavbar"
+import UserHome from './pages/UserHome'
 
 function App() {
 	return (
     <div>
-    <UserNavbar />
+    <UserHome />
     </div>
   )
 }
