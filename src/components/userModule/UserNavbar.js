@@ -33,7 +33,7 @@ const UserNavbar = () => {
 					<IconButton sx={{ p: 0 }}>
 						<Avatar
 							sx={{
-								display: { xs: "none", md: "flex" },
+								display: { xs: "none", sm: "flex" },
 							}}
 							alt="One Health"
 							src={Logo}
@@ -46,14 +46,14 @@ const UserNavbar = () => {
 								fontSize: "0.9rem",
 								color: "white",
 								mr: 2,
-								display: { xs: "none", md: "flex" },
+								display: { xs: "none", sm: "flex" },
 							}}
 						>
 							One Health Hospital
 						</Typography>
 					</IconButton>
 
-					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+					<Box sx={{ flexGrow: 1, display: { xs: "flex", sm: "none" } }}>
 						<IconButton
 							size="large"
 							aria-label="account of current user"
@@ -79,7 +79,7 @@ const UserNavbar = () => {
 							open={Boolean(anchorElNav)}
 							onClose={handleCloseNavMenu}
 							sx={{
-								display: { xs: "block", md: "none" },
+								display: { xs: "block", sm: "none" },
 							}}
 						>
 							{pages.map((page) => (
@@ -93,7 +93,7 @@ const UserNavbar = () => {
 						sx={{
 							flexGrow: 0,
 							marginLeft: "auto",
-							display: { xs: "none", md: "flex" },
+							display: { xs: "none", sm: "flex" },
 						}}
 					>
 						{pages.map((page) => (

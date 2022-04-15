@@ -5,7 +5,6 @@ import Card from "@mui/material/Card"
 import CardActionArea from "@mui/material/CardActionArea"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
-import { SmallButton } from "../Buttons"
 
 function Banner(props) {
 	return (
@@ -27,22 +26,40 @@ function Banner(props) {
 						}}
 					>
 						<Typography
-							align="center"
 							sx={{
 								display: { xs: "block", sm: "block" },
-								fontSize: { xs: "0.8rem", sm: "1rem" },
+								fontSize: { xs: "0.6rem", sm: "0.6rem" },
 							}}
 							component="p"
 						>
-							{props.smallPhrase ? props.smallPhrase : ""}
+							{props.smallText ? props.smallText : ""}
+						</Typography>
+						<Typography
+							sx={{
+								display: { xs: "block", sm: "block" },
+								fontSize: { xs: "0.7rem", sm: "1rem" },
+							}}
+							component="p"
+						>
+							{props.largeText ? props.largeText : ""}
+						</Typography>
+						<Typography
+							sx={{
+								align: "center",
+								display: { xs: "block", sm: "block" },
+								fontSize: { xs: "1rem", sm: "1.2rem" },
+							}}
+							component="p"
+						>
+							{props.phrase ? props.phrase : ""}
 						</Typography>
 					</CardContent>
 					<CardMedia
 						component="img"
 						sx={{
 							margin: "0.4rem",
-							maxWidth: { xs: 180, sm: 400 },
-							maxHeight: { xs: 150, sm: 300},
+							maxWidth: { xs: 200, sm: 400 },
+							maxHeight: { xs: 300, sm: 300 },
 							display: { xs: "block", sm: "block" },
 						}}
 						image={props.image}

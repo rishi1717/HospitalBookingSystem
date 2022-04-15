@@ -15,7 +15,7 @@ function UserHome() {
 			<UserNavbar />
 			<Container>
 				<Banner
-					smallText="Hi Rishi"
+					smallText="Hi Rishi,"
 					largeText="Welcome Back"
 					phrase="Feel better about finding Healthcare"
 					image={image1}

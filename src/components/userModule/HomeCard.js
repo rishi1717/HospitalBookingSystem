@@ -9,7 +9,7 @@ import { SmallButton } from "../Buttons"
 
 function HomeCard(props) {
 	return (
-		<Grid item xs={12} md={6} sx={{ mt: "1rem" }}>
+		<Grid item xs={12} sm={6} sx={{ mt: "1rem" }}>
 			<CardActionArea component="a" href="#">
 				<Card
 					sx={{
@@ -27,8 +27,8 @@ function HomeCard(props) {
 						}}
 					>
 						<Typography
-							align="center"
 							sx={{
+                                marginLeft: '1rem',
 								display: { xs: "block", sm: "block" },
 								fontSize: { xs: "0.8rem", sm: "1rem" },
 							}}
