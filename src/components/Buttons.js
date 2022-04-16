@@ -5,7 +5,7 @@ import { Typography } from "@mui/material"
 export function SmallButton(props) {
 	return (
 		<Button
-			sx={{ margin: "1rem", width: { xs: "5rem", sm: "10rem" } }}
+			sx={{ margin: "1rem", width: { xs: "5rem", sm: "auto" } }}
 			margin="auto"
 			variant="contained"
 		>

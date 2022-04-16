@@ -9,6 +9,7 @@ import image4 from "../static/images/hospital.webp"
 import image5 from "../static/images/userPortrait-removebg.png"
 import Banner from "../components/userModule/Banner"
 import Footer from "../components/userModule/footer"
+import AppointmentCard from "../components/userModule/AppointmentCard"
 
 function UserHome() {
 	return (
@@ -21,6 +22,9 @@ function UserHome() {
 					phrase="Feel better about finding Healthcare"
 					image={image1}
 				/>
+				<Grid container spacing={2}>
+				<AppointmentCard doctor='Dr.Santhosh'/>
+				</Grid>
 				<Grid container spacing={2}>
 					<HomeCard
 						smallPhrase="We care about our Patients. Take a look at your "

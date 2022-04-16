@@ -18,7 +18,7 @@ function Banner(props) {
 			>
 				<CardContent
 					sx={{
-						flex: 1,
+						flex: 2,
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "center",
@@ -26,7 +26,7 @@ function Banner(props) {
 				>
 					<Typography
 						sx={{
-							fontSize: { xs: "0.6rem", sm: "1rem" },
+							fontSize: { xs: "0.65rem", sm: "1rem" },
 						}}
 						component="p"
 					>
@@ -55,7 +55,6 @@ function Banner(props) {
 						margin: "0.4rem",
 						maxWidth: { xs: 200, sm: 600 },
 						maxHeight: { xs: 300, sm: 300 },
-						display: { xs: "block", sm: "block" },
 					}}
 					image={props.image}
 					alt="image"
