@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper"
 import { Grid, Typography } from "@mui/material"
 import { SmallButton } from "../Buttons"
 let array=[1,2]
-export default function AppointmentCard(props) {
+export default function AppointmentCard() {
 	return (
 		<>
 			{array.map((e) => (
@@ -30,19 +30,29 @@ export default function AppointmentCard(props) {
 								}}
 								component="p"
 							>
-								Appointment with {props.doctor ? props.doctor : ""}
+								Appointment with Dr.Santhosh
 							</Typography>
 							<Typography
 								sx={{
-									fontSize: { xs: "1rem", sm: "1.4rem" },
+									fontSize: {
+										xs: "1rem",
+										sm: "1.4rem",
+										color: "#595959",
+										fontWeight: "bold",
+									},
 								}}
 								component="p"
 							>
-								116/04/2022
+								16/04/2022
 							</Typography>
 							<Typography
 								sx={{
-									fontSize: { xs: "1.3rem", sm: "2rem" },
+									fontSize: {
+										xs: "1.3rem",
+										sm: "1.8rem",
+										color: "#595959",
+										fontWeight: "bold",
+									},
 								}}
 								component="p"
 							>
@@ -51,19 +61,18 @@ export default function AppointmentCard(props) {
 							<Grid
 								container
 								rowSpacing={1}
-								columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+								columnSpacing={{ xs: 1,}}
 							>
-								<Grid item xs={3.5} sm={3} sx={{ ml: "auto" }}>
-									<SmallButton value="Reschedule" />
+								<Grid item xs={3.5}sx={{ ml: "auto" }}>
+									<SmallButton color="#FEB139" value="Reschedule" />
 								</Grid>
 								<Grid
 									item
 									xs={3}
 									sm={3}
-									md={2.7}
 									sx={{ mr: { xs: "2rem", sm: "0.5rem" } }}
 								>
-									<SmallButton value="Cancel" />
+									<SmallButton color="#CC3E34" value="Cancel" />
 								</Grid>
 							</Grid>
 						</Paper>

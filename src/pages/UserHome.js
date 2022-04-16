@@ -22,27 +22,27 @@ function UserHome() {
 					phrase="Feel better about finding Healthcare"
 					image={image1}
 				/>
-				<Grid container spacing={2}>
+				<Grid container spacing={2} mt={1} mb={1}>
 				<AppointmentCard doctor='Dr.Santhosh'/>
 				</Grid>
 				<Grid container spacing={2}>
 					<HomeCard
-						smallPhrase="We care about our Patients. Take a look at your "
+						smallPhrase="We care about our Patients. Take a look at your Profile"
 						phrase="Profile"
 						image={image5}
 					/>
 					<HomeCard
-						smallPhrase="We provide our services in various "
+						smallPhrase="We provide our services in various Departments"
 						phrase="Departments"
 						image={image2}
 					/>
 					<HomeCard
-						smallPhrase="Now in our app, you can view your "
+						smallPhrase="Now in our app, you can view your Prescription"
 						phrase="Prescription"
 						image={image3}
 					/>
 					<HomeCard
-						smallPhrase="See how One Health Hospital is making an impact on lifes of our patients "
+						smallPhrase="See how One Health Hospital is making an impact on lifes of our patients."
 						phrase="About"
 						image={image4}
 					/>

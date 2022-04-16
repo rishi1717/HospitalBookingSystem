@@ -30,6 +30,7 @@ function HomeCard(props) {
 							marginLeft: "1rem",
 							display: { xs: "block", sm: "block" },
 							fontSize: { xs: "0.8rem", sm: "1rem" },
+							fontFamily: "sans-serif",
 						}}
 						component="p"
 					>

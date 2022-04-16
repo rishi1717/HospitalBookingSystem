@@ -3,9 +3,21 @@ import Button from "@mui/material/Button"
 import { Typography } from "@mui/material"
 
 export function SmallButton(props) {
+	let bgcolor = props.color ? props.color : "#1976D2"
 	return (
 		<Button
-			sx={{ margin: "1rem", width: { xs: "5rem", sm: "auto" } }}
+			sx={{
+				margin: "1rem",
+				width: {
+					xs: "auto",
+					sm: "auto",
+					backgroundColor: bgcolor,
+					"&:hover": {
+						backgroundColor: "#fff",
+						color: bgcolor,
+					},
+				},
+			}}
 			margin="auto"
 			variant="contained"
 		>
