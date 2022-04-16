@@ -3,6 +3,7 @@ import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
 import UserDoctorPage from "./pages/UserDoctorPage"
+import UserPrescriptions from "./pages/UserPrescriptions"
 const UserAppointments = React.lazy(() => import("./pages/userAppointments"))
 const UserHome = React.lazy(() => import("./pages/UserHome"))
 
@@ -33,6 +34,14 @@ function App() {
 						element={
 							<React.Suspense>
 								<UserDoctorPage />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/prescriptions"
+						element={
+							<React.Suspense>
+								<UserPrescriptions />
 							</React.Suspense>
 						}
 					/>
