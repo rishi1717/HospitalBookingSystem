@@ -14,7 +14,9 @@ const Footer = () => {
 						sm={2}
 						sx={{ m: { xs: 0.2, sm: 2 }, mt: { xs: 1.8, sm: 2 } }}
 					>
-						<Typography sx={{ fontSize: "0.6rem" }}>
+						<Typography
+							sx={{ fontSize: { xs: "0.6rem", sm: "0.7rem" } }}
+						>
 							One Health Hospital
 							<br /> Kakanad,
 							<br /> Cochin,
@@ -39,7 +41,9 @@ const Footer = () => {
 						sx={{ m: { xs: 0.2, sm: 2 } }}
 						order={{ xs: 2, sm: 3 }}
 					>
-						<Typography sx={{ fontSize: "0.6rem" }}>
+						<Typography
+							sx={{ fontSize: { xs: "0.6rem", sm: "0.7rem" } }}
+						>
 							<b>Phone :</b> 0497-2422359
 							<br /> <b>Mobile :</b> 7990000122, 7990000242
 							<br />
