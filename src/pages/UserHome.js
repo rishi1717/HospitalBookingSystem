@@ -8,6 +8,7 @@ import image3 from "../static/images/medicine2.webp"
 import image4 from "../static/images/hospital.webp"
 import image5 from "../static/images/userPortrait-removebg.png"
 import Banner from "../components/userModule/Banner"
+import Footer from "../components/userModule/footer"
 
 function UserHome() {
 	return (
@@ -16,7 +17,7 @@ function UserHome() {
 			<Container>
 				<Banner
 					smallText="Hi Rishi,"
-					largeText="Welcome Back"
+					largeText="Welcome Back!"
 					phrase="Feel better about finding Healthcare"
 					image={image1}
 				/>
@@ -43,6 +44,7 @@ function UserHome() {
 					/>
 				</Grid>
 			</Container>
+			<Footer />
 		</div>
 	)
 }
