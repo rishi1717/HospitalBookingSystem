@@ -1,6 +1,5 @@
 import React from "react"
 import HomeCard from "../components/userModule/HomeCard"
-import UserNavbar from "../components/userModule/UserNavbar"
 import { Container, Grid } from "@mui/material"
 import image1 from "../static/images/medicalTeam.jpg"
 import image2 from "../static/images/services.png"
@@ -14,7 +13,6 @@ import AppointmentCard from "../components/userModule/AppointmentCard"
 function UserHome() {
 	return (
 		<div>
-			<UserNavbar />
 			<Container>
 				<Banner
 					smallText="Hi Rishi,"

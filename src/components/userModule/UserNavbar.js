@@ -8,12 +8,21 @@ import Menu from "@mui/material/Menu"
 import MenuIcon from "@mui/icons-material/Menu"
 import Container from "@mui/material/Container"
 import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import Logo from "../../static/images/Logo.png"
 import UserPicture from "../../static/images/userPortrait.png"
+import { Link } from "react-router-dom"
 
-const pages = ["Appointments", "Doctors", "Prescriptions", "About"]
+const linkStyle = {
+	padding: "1rem",
+	textDecoration: "none",
+	color: "white",
+}
+const linkStyle2 = {
+	padding: "1rem",
+	textDecoration: "none",
+	color: "black",
+}
 
 const UserNavbar = () => {
 	const [anchorElNav, setAnchorElNav] = React.useState(null)
@@ -30,7 +39,7 @@ const UserNavbar = () => {
 		<AppBar position="static" sx={{ borderRadius: "0.6rem" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<IconButton sx={{ p: 0 }}>
+					<IconButton sx={{ p: 0, display: { xs: "none", sm: "flex" } }}>
 						<Avatar
 							sx={{
 								display: { xs: "none", sm: "flex" },
@@ -38,19 +47,21 @@ const UserNavbar = () => {
 							alt="One Health"
 							src={Logo}
 						/>
-						<Typography
-							variant="h6"
-							noWrap
-							component="div"
-							sx={{
-								fontSize: "0.9rem",
-								color: "white",
-								mr: 2,
-								display: { xs: "none", sm: "flex" },
-							}}
-						>
-							One Health Hospital
-						</Typography>
+						<Link style={linkStyle} to="/">
+							<Typography
+								variant="h6"
+								noWrap
+								component="div"
+								sx={{
+									fontSize: "0.9rem",
+									color: "white",
+									mr: 2,
+									display: { xs: "none", sm: "flex" },
+								}}
+							>
+								One Health Hospital
+							</Typography>
+						</Link>
 					</IconButton>
 
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", sm: "none" } }}>
@@ -82,11 +93,35 @@ const UserNavbar = () => {
 								display: { xs: "block", sm: "none" },
 							}}
 						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
+							<MenuItem onClick={handleCloseNavMenu}>
+								<Link style={linkStyle2} to="/">
+									<Typography textAlign="center">Home</Typography>
+								</Link>
+							</MenuItem>
+							<MenuItem onClick={handleCloseNavMenu}>
+								<Link style={linkStyle2} to="/appointments">
+									<Typography textAlign="center">
+										Appointments
+									</Typography>
+								</Link>
+							</MenuItem>
+							<MenuItem onClick={handleCloseNavMenu}>
+								<Link style={linkStyle2} to="/doctors">
+									<Typography textAlign="center">Doctors</Typography>
+								</Link>
+							</MenuItem>
+							<MenuItem onClick={handleCloseNavMenu}>
+								<Link style={linkStyle2} to="/prescription">
+									<Typography textAlign="center">
+										Prescription
+									</Typography>
+								</Link>
+							</MenuItem>
+							<MenuItem onClick={handleCloseNavMenu}>
+								<Link style={linkStyle2} to="/about">
+									<Typography textAlign="center">About</Typography>
+								</Link>
+							</MenuItem>
 						</Menu>
 					</Box>
 					<Box
@@ -96,20 +131,18 @@ const UserNavbar = () => {
 							display: { xs: "none", sm: "flex" },
 						}}
 					>
-						{pages.map((page) => (
-							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								sx={{
-									fontSize: "0.7rem",
-									my: 2,
-									color: "white",
-									display: "block",
-								}}
-							>
-								{page}
-							</Button>
-						))}
+						<Link style={linkStyle} to="/appointments">
+							Appointments
+						</Link>
+						<Link style={linkStyle} to="/doctors">
+							Doctors
+						</Link>
+						<Link style={linkStyle} to="/prescriptions">
+							Prescriptions
+						</Link>
+						<Link style={linkStyle} to="/about">
+							About
+						</Link>
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
