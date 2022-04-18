@@ -7,13 +7,14 @@ export function SmallButton(props) {
 	let text = props.text ? props.text : "#fff"
 	return (
 		<Button
+			type={props.type}
 			sx={{
 				margin: "1rem",
 				width: {
 					xs: "auto",
 					sm: "auto",
 					backgroundColor: bgcolor,
-					color:text,
+					color: text,
 					"&:hover": {
 						backgroundColor: text,
 						color: bgcolor,

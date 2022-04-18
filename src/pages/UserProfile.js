@@ -15,7 +15,6 @@ function UserProfile() {
 			direction="column"
 			alignItems="center"
 			justify="center"
-			style={{ minHeight: "100vh" }}
 		>
 			<Card
 				elevation={3}
