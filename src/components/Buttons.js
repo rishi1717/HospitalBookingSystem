@@ -34,7 +34,7 @@ export function SmallButton(props) {
 }
 export function MediumButton(props) {
 	return (
-		<Button size="medium" variant="contained">
+		<Button size="medium" variant="contained" sx={{mt:4}}>
 			{props.value}
 		</Button>
 	)

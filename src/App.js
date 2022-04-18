@@ -2,7 +2,8 @@ import React from "react"
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
-import AboutUs from "./pages/AboutUs"
+const AboutUs = React.lazy(() => import("./pages/AboutUs"))
+const Landing = React.lazy(() => import("./pages/Landing"))
 const UserAppointments = React.lazy(() => import("./pages/userAppointments"))
 const UserHome = React.lazy(() => import("./pages/UserHome"))
 const UserDoctorPage = React.lazy(() => import("./pages/UserDoctorPage"))
@@ -14,6 +15,14 @@ function App() {
 			<BrowserRouter>
 				<UserNavbar />
 				<Routes>
+					<Route
+						path="/landing"
+						element={
+							<React.Suspense>
+								<Landing />
+							</React.Suspense>
+						}
+					/>
 					<Route
 						path="/login"
 						element={

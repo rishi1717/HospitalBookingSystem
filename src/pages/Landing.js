@@ -2,7 +2,7 @@ import React from "react"
 import { Container, Grid, Typography } from "@mui/material"
 import Footer from "../components/userModule/footer"
 import { Box } from "@mui/system"
-import imageJoy from "../static/images/joyful-female-doctor.svg"
+import imageIntro from "../static/images/receptionWaiting.webp"
 import imageTeams from "../static/images/teams.webp"
 import imageLab from "../static/images/labaratory2.webp"
 import AboutCard from "../components/userModule/AboutCard"
@@ -11,24 +11,27 @@ import image2 from "../static/images/maskedMan.svg"
 import image3 from "../static/images/tempCheck.svg"
 import image4 from "../static/images/sanitize.svg"
 import HeadAndPara from "../components/userModule/headAndPara"
+import { MediumButton } from "../components/Buttons"
 
-function AboutUs() {
+function Landing() {
 	return (
 		<div>
+			<Typography
+				sx={{
+					textAlign: "right",
+					mt: 2,
+					mr: { xs: 1, sm: 10},
+					mb: -1,
+					fontSize: { xs: "0.8rem", sm: "1.6rem" },
+					fontFamily: "revert",
+					color: "#595959",
+				}}
+				component="p"
+			>
+				Wait Less at the Reception! Make an Online Appointment
+			</Typography>
 			<Container>
 				<Grid textAlign={"center"}>
-					<Typography
-						sx={{
-							fontSize: { xs: "1.2rem", sm: "2rem" },
-							fontFamily: "sans-serif",
-							mt: 2,
-							fontWeight: "bold",
-							color: "#595959",
-						}}
-						component="p"
-					>
-						About Us
-					</Typography>
 					<Box
 						mt={1}
 						sm={4}
@@ -38,11 +41,12 @@ function AboutUs() {
 							height: "auto",
 							width: "auto",
 							// maxHeight: {xs:0, sm: 233, md: 400 },
-							maxWidth: { xs: 300, sm: 400, md: 500 },
+							maxWidth: { xs: 350, sm: 700, md: 1000 },
 						}}
 						alt="Hospital"
-						src={imageJoy}
+						src={imageIntro}
 					/>
+					<MediumButton value="Register to make an Appointment" />
 					<HeadAndPara
 						head="Committed To Your Safety"
 						para="At One Health Hospital we continue to follow the highest level of safety precautions as we treat our patients. We are strictly adhering to all ICMR & WHO mandated protocols, to keep you and your family safe & healthy."
@@ -115,4 +119,4 @@ function AboutUs() {
 	)
 }
 
-export default AboutUs
+export default Landing
