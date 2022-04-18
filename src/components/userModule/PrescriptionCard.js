@@ -10,6 +10,7 @@ export default function PrescriptionCard(props) {
 		<>
 			{prescriptions.map((e) => (
 				<Card
+				key={e}
 					sx={{
 						display: "flex",
 						m: "0.4rem",
