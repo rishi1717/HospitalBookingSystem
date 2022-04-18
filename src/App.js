@@ -2,17 +2,25 @@ import React from "react"
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
-import UserDoctorPage from "./pages/UserDoctorPage"
-import UserPrescriptions from "./pages/UserPrescriptions"
 const UserAppointments = React.lazy(() => import("./pages/userAppointments"))
 const UserHome = React.lazy(() => import("./pages/UserHome"))
-
+const UserDoctorPage = React.lazy(() => import("./pages/UserDoctorPage"))
+const UserPrescriptions = React.lazy(() => import("./pages/UserPrescriptions"))
+const UserLogin = React.lazy(() => import("./pages/UserLogin"))
 function App() {
 	return (
 		<div>
 			<BrowserRouter>
 				<UserNavbar />
 				<Routes>
+					<Route
+						path="/login"
+						element={
+							<React.Suspense>
+								<UserLogin />
+							</React.Suspense>
+						}
+					/>
 					<Route
 						path="/"
 						element={

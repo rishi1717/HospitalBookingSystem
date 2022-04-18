@@ -60,7 +60,14 @@ export default function PrescriptionCard(props) {
 							color="text.secondary"
 							component="div"
 						>
-							<a href='https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf' target="_blank" download="PDF"><FileDownloadOutlinedIcon /></a>
+							<a
+								href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+								rel="noopener noreferrer"
+								target="_blank"
+								download="PDF"
+							>
+								<FileDownloadOutlinedIcon />
+							</a>
 						</Typography>
 					</CardContent>
 				</Card>
