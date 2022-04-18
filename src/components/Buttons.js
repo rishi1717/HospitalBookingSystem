@@ -4,6 +4,7 @@ import { Typography } from "@mui/material"
 
 export function SmallButton(props) {
 	let bgcolor = props.color ? props.color : "#1976D2"
+	let text = props.text ? props.text : "#fff"
 	return (
 		<Button
 			sx={{
@@ -12,8 +13,9 @@ export function SmallButton(props) {
 					xs: "auto",
 					sm: "auto",
 					backgroundColor: bgcolor,
+					color:text,
 					"&:hover": {
-						backgroundColor: "#fff",
+						backgroundColor: text,
 						color: bgcolor,
 					},
 				},
@@ -34,7 +36,7 @@ export function SmallButton(props) {
 }
 export function MediumButton(props) {
 	return (
-		<Button size="medium" variant="contained" sx={{mt:4}}>
+		<Button size="medium" variant="contained" sx={{ mt: 4 }}>
 			{props.value}
 		</Button>
 	)

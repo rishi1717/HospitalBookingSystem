@@ -9,6 +9,7 @@ const UserHome = React.lazy(() => import("./pages/UserHome"))
 const UserDoctorPage = React.lazy(() => import("./pages/UserDoctorPage"))
 const UserPrescriptions = React.lazy(() => import("./pages/UserPrescriptions"))
 const UserLogin = React.lazy(() => import("./pages/UserLogin"))
+const UserProfile = React.lazy(() => import("./pages/UserProfile"))
 function App() {
 	return (
 		<div>
@@ -68,6 +69,14 @@ function App() {
 						element={
 							<React.Suspense>
 								<AboutUs />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/profile"
+						element={
+							<React.Suspense>
+								<UserProfile />
 							</React.Suspense>
 						}
 					/>

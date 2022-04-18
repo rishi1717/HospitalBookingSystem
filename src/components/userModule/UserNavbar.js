@@ -146,9 +146,11 @@ const UserNavbar = () => {
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
-						<IconButton sx={{ p: 0 }}>
-							<Avatar alt="Remy Sharp" src={UserPicture} />
-						</IconButton>
+						<Link to='/profile'>
+							<IconButton sx={{ p: 0 }}>
+								<Avatar alt="Remy Sharp" src={UserPicture} />
+							</IconButton>
+						</Link>
 					</Box>
 				</Toolbar>
 			</Container>
