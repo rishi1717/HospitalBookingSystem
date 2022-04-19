@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia"
 import image from "../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
+import { Link } from "react-router-dom"
 // import LogoutIcon from "@mui/icons-material/Logout"
 function UserProfile() {
 	return (
@@ -127,10 +128,10 @@ function UserProfile() {
 				</CardContent>
 			</Card>
 			<Grid alignItems="center" justify="center">
-				<SmallButton value="Edit Details" color="#eaeaea" text="#595959" />
-				<SmallButton value="Prescriptions" color="#eaeaea" text="#595959" />
-				<SmallButton value="Appointments" color="#eaeaea" text="#595959" />
-				<SmallButton value="Logout" color="#eaeaea" text="#B81C1C" />
+				<Link style={{textDecoration: "none",}} to='/editprofile'><SmallButton value="Edit Details" color="#eaeaea" text="#595959" /></Link>
+				<Link style={{textDecoration: "none",}} to='/prescriptions'><SmallButton value="Prescriptions" color="#eaeaea" text="#595959" /></Link>
+				<Link style={{textDecoration: "none",}} to='/appointments'><SmallButton value="Appointments" color="#eaeaea" text="#595959" /></Link>
+				<Link style={{textDecoration: "none",}} to='/login'><SmallButton value="Logout" color="#eaeaea" text="#B81C1C" /></Link>
 			</Grid>
 		</Grid>
 	)
