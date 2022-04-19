@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import { SmallButton } from "../Buttons"
+import { Link } from "react-router-dom"
 
 export default function DoctorCard(props) {
 
@@ -54,8 +55,8 @@ export default function DoctorCard(props) {
 				</Typography>
 			</CardContent>
 			<CardContent sx={{display:'flex', flexDirection:'column'}}>
-				<SmallButton value="Profile"/>
-				<SmallButton value="Book"/>
+				<Link to='/doctorprofile' style={{textDecoration:'none'}}><SmallButton value="Profile"/></Link>
+				<Link to='/doctorprofile' style={{textDecoration:'none'}}><SmallButton value="Appoint"/></Link>
 			</CardContent>
 			
 		</Card>
