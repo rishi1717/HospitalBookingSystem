@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import HomeCard from "../components/userModule/HomeCard"
 import { Container, Grid } from "@mui/material"
 import image1 from "../static/images/medicalTeam.jpg"
@@ -9,8 +9,19 @@ import image5 from "../static/images/userPortrait-removebg.png"
 import Banner from "../components/userModule/Banner"
 import Footer from "../components/userModule/footer"
 import AppointmentCard from "../components/userModule/AppointmentCard"
+import axios from 'axios'
 
 function UserHome() {
+	const [appointments,setAppointments] = useState([])
+	useEffect(()=>{
+		(async function() {
+			const data= await axios.get(
+				"http://localhost:3000/appointments"
+			)
+			setAppointments(data.data)
+			console.log(data.data)
+		})()
+	},[])
 	return (
 		<div>
 			<Container>
@@ -21,7 +32,7 @@ function UserHome() {
 					image={image1}
 				/>
 				<Grid container spacing={2} mt={1} mb={1}>
-				<AppointmentCard doctor='Dr.Santhosh'/>
+				<AppointmentCard appointments={appointments}/>
 				</Grid>
 				<Grid container spacing={2}>
 					<HomeCard
