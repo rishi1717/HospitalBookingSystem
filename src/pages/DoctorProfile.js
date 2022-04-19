@@ -57,7 +57,7 @@ function DoctorProfile() {
 							image={image}
 							alt="image"
 						/>
-						<Link style={{ textDecoration: "none" }} to="/editprofile">
+						<Link style={{ textDecoration: "none" }} to="/booking">
 							<SmallButton
 								value="Book now"
 								color="#609acf"

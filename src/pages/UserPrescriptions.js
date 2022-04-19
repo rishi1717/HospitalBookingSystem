@@ -5,10 +5,23 @@ import PrescriptionCard from "../components/userModule/PrescriptionCard"
 function UserPrescriptions() {
 	return (
 		<Container>
+			<Typography
+				sx={{
+					textAlign:'center',
+					fontSize: { xs: "1rem", sm: "1.5rem" },
+					fontFamily: "sans-serif",
+					mt: 2,
+					fontWeight: "bold",
+					color: "#595959",
+				}}
+				component="p"
+			>
+				Prescriptions
+			</Typography>
 			<Search />
 			<Card
 				sx={{
-					display: "flex",
+					display:{xs:'none',sm:"flex"},
 					m: "1rem",
 					flexDirection: { xs: "column", md: "row" },
 					backgroundColor: "#585858",
@@ -55,11 +68,7 @@ function UserPrescriptions() {
 					</Typography>
 				</CardContent>
 				<CardContent sx={{ flex: "0.1 0 auto" }}>
-					<Typography
-						variant="subtitle1"
-						color="white"
-						component="div"
-					>
+					<Typography variant="subtitle1" color="white" component="div">
 						Download
 					</Typography>
 				</CardContent>

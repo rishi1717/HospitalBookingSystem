@@ -3,6 +3,8 @@ import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
 import EditUser from "./pages/EditUser"
+import ConfirmBooking from "./pages/ConfirmBooking"
+const Booking = React.lazy(() => import("./pages/booking"))
 const DoctorProfile =  React.lazy(() => import("./pages/DoctorProfile"))
 const Register = React.lazy(() => import("./pages/Register"))
 const AboutUs = React.lazy(() => import("./pages/AboutUs"))
@@ -104,6 +106,22 @@ function App() {
 						element={
 							<React.Suspense>
 								<DoctorProfile />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/booking"
+						element={
+							<React.Suspense>
+								<Booking />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/confirmbooking"
+						element={
+							<React.Suspense>
+								<ConfirmBooking />
 							</React.Suspense>
 						}
 					/>

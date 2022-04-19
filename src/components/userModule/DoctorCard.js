@@ -56,7 +56,7 @@ export default function DoctorCard(props) {
 			</CardContent>
 			<CardContent sx={{display:'flex', flexDirection:'column'}}>
 				<Link to='/doctorprofile' style={{textDecoration:'none'}}><SmallButton value="Profile"/></Link>
-				<Link to='/doctorprofile' style={{textDecoration:'none'}}><SmallButton value="Appoint"/></Link>
+				<Link to='/booking' style={{textDecoration:'none'}}><SmallButton value="Appoint"/></Link>
 			</CardContent>
 			
 		</Card>

@@ -26,7 +26,7 @@ export function SmallButton(props) {
 		>
 			<Typography
 				sx={{
-					fontSize: { xs: "0.4rem", sm: "0.7rem" },
+					fontSize: { xs: "0.5rem", sm: "0.7rem" },
 				}}
 				component="p"
 			>
