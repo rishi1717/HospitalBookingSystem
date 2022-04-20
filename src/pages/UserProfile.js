@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useEffect, useState } from "react"
 import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
@@ -7,8 +7,17 @@ import image from "../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
 import { Link } from "react-router-dom"
+import axios from 'axios'
 // import LogoutIcon from "@mui/icons-material/Logout"
 function UserProfile() {
+	const [user,setUser] = useState([])
+	useEffect(()=>{
+		(async function (){
+			const userData = await axios.get("http://localhost:4000/users/1")
+			setUser(userData.data)
+			console.log(userData.data.firstName)
+		})()
+	},[])
 	return (
 		<Grid
 			container
@@ -68,7 +77,7 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>Name :</b> Rishi Releesh
+						<b>Name :</b> {user.firstName}
 					</Typography>
 					<Typography
 						sx={{
@@ -79,7 +88,8 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>ID :</b> AD7956
+						<b>ID :</b>
+						{user.id}
 					</Typography>
 					<Typography
 						sx={{
@@ -90,7 +100,7 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>Age :</b> 22
+						<b>Age :</b> {user.age}
 					</Typography>
 					<Typography
 						sx={{
@@ -101,7 +111,7 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>Gender :</b> Male
+						<b>Gender :</b> {user.gender}
 					</Typography>
 					<Typography
 						sx={{
@@ -112,7 +122,7 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>Mobile :</b> 7994268435
+						<b>Mobile :</b> {user.phone}
 					</Typography>
 					<Typography
 						sx={{
@@ -123,15 +133,35 @@ function UserProfile() {
 						}}
 						component="p"
 					>
-						<b>Blood Group :</b> B +ve
+						<b>Blood Group :</b> {user.blood}
 					</Typography>
 				</CardContent>
 			</Card>
 			<Grid alignItems="center" justify="center">
-				<Link style={{textDecoration: "none",}} to='/editprofile'><SmallButton value="Edit Details" color="#eaeaea" text="#595959" /></Link>
-				<Link style={{textDecoration: "none",}} to='/prescriptions'><SmallButton value="Prescriptions" color="#eaeaea" text="#595959" /></Link>
-				<Link style={{textDecoration: "none",}} to='/appointments'><SmallButton value="Appointments" color="#eaeaea" text="#595959" /></Link>
-				<Link style={{textDecoration: "none",}} to='/login'><SmallButton value="Logout" color="#eaeaea" text="#B81C1C" /></Link>
+				<Link style={{ textDecoration: "none" }} to="/editprofile">
+					<SmallButton
+						value="Edit Details"
+						color="#eaeaea"
+						text="#595959"
+					/>
+				</Link>
+				<Link style={{ textDecoration: "none" }} to="/prescriptions">
+					<SmallButton
+						value="Prescriptions"
+						color="#eaeaea"
+						text="#595959"
+					/>
+				</Link>
+				<Link style={{ textDecoration: "none" }} to="/appointments">
+					<SmallButton
+						value="Appointments"
+						color="#eaeaea"
+						text="#595959"
+					/>
+				</Link>
+				<Link style={{ textDecoration: "none" }} to="/login">
+					<SmallButton value="Logout" color="#eaeaea" text="#B81C1C" />
+				</Link>
 			</Grid>
 		</Grid>
 	)
