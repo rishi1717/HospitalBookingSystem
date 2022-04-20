@@ -9,7 +9,14 @@ import { Link } from "react-router-dom"
 export default function DoctorCard(props) {
 
 	return (
-		<Card sx={{ display: "flex", m:'1rem', flexDirection:{xs:'column', md:'row'}, borderRadius:2 }}>
+		<Card
+			sx={{
+				display: "flex",
+				m: "1rem",
+				flexDirection: { xs: "column", md: "row" },
+				borderRadius: 2,
+			}}
+		>
 			<CardMedia
 				component="img"
 				sx={{ width: 151 }}
@@ -18,21 +25,21 @@ export default function DoctorCard(props) {
 			/>
 			<CardContent sx={{ flex: "1 0 auto" }}>
 				<Typography component="div" variant="h5">
-					Rishi
+					{props.doctor.name}
 				</Typography>
 				<Typography
 					variant="subtitle1"
 					color="text.secondary"
 					component="div"
 				>
-					Consultant-general medicine
+					{props.doctor.department}
 				</Typography>
 				<Typography
 					variant="subtitle1"
 					color="text.secondary"
 					component="div"
 				>
-					MBBS,MD
+					{props.doctor.qualification}
 				</Typography>
 			</CardContent>
 			<CardContent sx={{ flex: "1 0 auto" }}>
@@ -44,21 +51,24 @@ export default function DoctorCard(props) {
 					color="text.secondary"
 					component="div"
 				>
-					Mon-Sun
+					{props.doctor.days}
 				</Typography>
 				<Typography
 					variant="subtitle1"
 					color="text.secondary"
 					component="div"
 				>
-					10 : 00 AM to 5 : 00 PM
+					{props.doctor.optime}
 				</Typography>
 			</CardContent>
-			<CardContent sx={{display:'flex', flexDirection:'column'}}>
-				<Link to='/doctorprofile' style={{textDecoration:'none'}}><SmallButton value="Profile"/></Link>
-				<Link to='/booking' style={{textDecoration:'none'}}><SmallButton value="Appoint"/></Link>
+			<CardContent sx={{ display: "flex", flexDirection: "column" }}>
+				<Link to="/doctorprofile" style={{ textDecoration: "none" }}>
+					<SmallButton value="Profile" />
+				</Link>
+				<Link to="/booking" style={{ textDecoration: "none" }}>
+					<SmallButton value="Appoint" />
+				</Link>
 			</CardContent>
-			
 		</Card>
 	)
 }
