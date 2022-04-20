@@ -9,7 +9,7 @@ export default function Departments() {
 	const [departments, setDepartments] = useState([])
 	const [doctors, setDoctors] = useState([])
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			const departmentData = await axios.get(
 				"http://localhost:4000/departments"
 			)

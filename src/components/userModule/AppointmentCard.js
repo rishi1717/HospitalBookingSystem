@@ -17,11 +17,9 @@ export default function AppointmentCard() {
 				const doctorsData = await axios.get(
 					`http://localhost:4000/doctors/${data.id}`
 				)
-				console.log(doctorsData.data);
 				setDoctors([...doctors,doctorsData.data]);
 			})
 			setAppointments(appointmentData.data)
-			console.log(doctors);
 		})()
 	}, [])
 	return (
