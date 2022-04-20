@@ -1,19 +1,135 @@
 {
-  "posts": [
+  "users":[
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id":1,
+      "firstName":"Rishi",
+      "secondName":"Releesh",
+      "age":22,
+      "gender":"male",
+      "email":"rishi@mail.com",
+      "phone":7994625486,
+      "blood":"b+ve",
+      "prescriptions":[
+        {
+          "id":1,
+          "medicine":"aspirin",
+          "dosage":"twice daily",
+          "date":"22-04-2022",
+          "doctor":"Dr.Santhosh"
+        },
+        {
+          "id":2,
+          "medicine":"Paracetamol",
+          "dosage":"thrice daily, after food",
+          "date":"22-04-2022",
+          "doctor":"Dr.Jiljith"
+        }
+      ]
+    },
+    {
+      "id":2,
+      "firstName":"Rithwik",
+      "secondName":"Releesh",
+      "age":18,
+      "gender":"male",
+      "email":"rithwik@mail.com",
+      "phone":7994851682,
+      "blood":"b+ve",
+      "prescriptions":[
+        {
+          "id":1,
+          "medicine":"aspirin",
+          "dosage":"twice daily",
+          "date":"22-04-2022",
+          "doctor":"Dr.Santhosh"
+        },
+        {
+          "id":2,
+          "medicine":"Paracetamol",
+          "dosage":"thrice daily, after food",
+          "date":"22-04-2022",
+          "doctor":"Dr.Jiljith"
+        }
+      ]
     }
   ],
-  "comments": [
+
+  "departments":[
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id":1,
+      "name":"General",
+      "doctorid":[1,3,5]
+    },
+    {
+      "id":2,
+      "name":"Orthopaedic",
+      "doctorid":[2,4]
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr.Santhosh",
+      "department":"General",
+      "qualification":"MD,MBBS",
+      "expertise":"Critical care",
+      "days":"mon-sat",
+      "time":"8:00 AM to 4:00 PM"
+    },
+    {
+      "id": 2,
+      "name": "Dr.Jiljith",
+      "department":"Orthopaedic",
+      "qualification":"MD,MBBS",
+      "expertise":"Critical care",
+      "days":"mon-wed",
+      "time":"10:00 AM to 6:00 PM"
+    },
+    {
+      "id": 3,
+      "name": "Dr.Sniya",
+      "department":"General",
+      "qualification":"MD,MBBS",
+      "expertise":"Critical care",
+      "days":"wed-friday",
+      "time":"8:00 AM to 6:00 PM"
+    },
+    {
+      "id": 4,
+      "name": "Dr.Rajesh",
+      "department":"Orthopaedic",
+      "qualification":"MD,MBBS",
+      "expertise":"Critical care",
+      "days":"mon-friday",
+      "time":"10:00 AM to 5:00 PM"
+    },
+    {
+      "id": 5,
+      "name": "Dr.Sukanya",
+      "department":"General",
+      "qualification":"MD,MBBS",
+      "expertise":"Critical care",
+      "days":"mon-saturday",
+      "time":"9:00 AM to 2:00 PM"
+    }
+  ],
+
+  "appointments":[
+    {
+      "id":1,
+      "user":1,
+      "doctor":1,
+      "time":"5:00 PM",
+      "date":"25-04-2022"
+    },
+    {
+      "id":2,
+      "user":1,
+      "doctor":2,
+      "time":"5:30 PM",
+      "date":"25-04-2022"
+    }
+  ]
+
 }

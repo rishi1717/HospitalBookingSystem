@@ -10,11 +10,11 @@ function HomeCard(props) {
 	return (
 		<Grid item xs={12} sm={6} sx={{ mt: "1rem" }}>
 			<Card
-				elevation={1}
+				elevation={3}
 				sx={{
 					display: "flex",
 					maxHeight: "18rem",
-					minHeight: { xs: 0, sm: 200 },
+					minHeight: { xs: 0, sm: 200 }
 				}}
 			>
 				<CardContent

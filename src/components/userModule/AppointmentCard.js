@@ -9,22 +9,25 @@ export default function AppointmentCard() {
 	const [appointments, setAppointments] = useState([])
 	const [doctors, setDoctors] = useState([])
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			const appointmentData = await axios.get(
 				"http://localhost:4000/appointments"
 			)
+			setAppointments(appointmentData.data)
 			appointmentData.data.map(async (data) => {
 				const doctorsData = await axios.get(
 					`http://localhost:4000/doctors/${data.id}`
 				)
 				setDoctors([...doctors,doctorsData.data]);
 			})
-			setAppointments(appointmentData.data)
 		})()
 	}, [])
 	return (
 		<>
-			{appointments.map((appointment) => {
+			{appointments.map((appointment,index) => {
+				let doctor = doctors[index]
+				console.log(doctor)
+				console.log(appointment)
 				return (
 					<Grid key={appointment.id} item xs={12} sm={6}>
 						<Box
