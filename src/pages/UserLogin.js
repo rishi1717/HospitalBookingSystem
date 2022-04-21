@@ -1,6 +1,6 @@
 import * as React from "react"
 import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"	
+import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
@@ -12,16 +12,55 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import image from "../static/images/hospital.webp"
 import { Container } from "@mui/material"
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import Swal from "sweetalert2"
 
+const Toast = Swal.mixin({
+	background: "#1E1E1E",
+	color: "white",
+	toast: true,
+	position: "top-end",
+	showConfirmButton: false,
+	timerProgressBar: true,
+})
 
 export default function UserLogin() {
-	const handleSubmit = (event) => {
-		event.preventDefault()
-		const data = new FormData(event.currentTarget)
-		console.log({
-			email: data.get("email"),
-			password: data.get("password"),
-		})
+	const navigate = useNavigate()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+
+	const [data, setData] = React.useState({
+		email: "",
+		password: "",
+	})
+
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value })
+	}
+
+	const onSubmit = async () => {
+		try {
+			console.log(data)
+
+			const resData = await axios.post("http://localhost:4000/users/signup",data)
+
+			console.log(resData)
+			Toast.fire({
+				position: "bottom-right",
+				icon: "success",
+				title: "user Logged in",
+				showConfirmButton: false,
+				timer: 3000,
+			})
+			navigate("/")
+		} catch (e) {
+			console.log(e.message)
+		}
 	}
 
 	return (
@@ -75,10 +114,13 @@ export default function UserLogin() {
 						<Box
 							component="form"
 							noValidate
-							onSubmit={handleSubmit}
+							onSubmit={handleSubmit(onSubmit)}
 							sx={{ mt: 1 }}
 						>
 							<TextField
+								{...register("email", {
+									required: "Provide email!",
+								})}
 								margin="normal"
 								required
 								fullWidth
@@ -87,8 +129,15 @@ export default function UserLogin() {
 								name="email"
 								autoComplete="email"
 								autoFocus
+								onChange={handleChange}
+								value={data.email}
+								error={errors.email}
+								helperText={errors.email ? errors.email.message : null}
 							/>
 							<TextField
+								{...register("password", {
+									required: "provide a password!",
+								})}
 								margin="normal"
 								required
 								fullWidth
@@ -96,7 +145,12 @@ export default function UserLogin() {
 								label="Password"
 								type="password"
 								id="password"
-								autoComplete="current-password"
+								onChange={handleChange}
+								value={data.password}
+								error={errors.password}
+								helperText={
+									errors.password ? errors.password.message : null
+								}
 							/>
 							<FormControlLabel
 								control={<Checkbox value="remember" color="primary" />}
