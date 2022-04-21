@@ -107,7 +107,7 @@
       "expertise": "Critical care",
       "days": "mon-sat",
       "time": "8:00 AM to 4:00 PM",
-      "experience":"over 5 years",
+      "experience": "over 5 years",
       "fee": 300
     },
     {
@@ -118,7 +118,7 @@
       "expertise": "Critical care",
       "days": "mon-wed",
       "time": "10:00 AM to 6:00 PM",
-      "experience":"Over 8 years",
+      "experience": "Over 8 years",
       "fee": 400
     },
     {
@@ -129,7 +129,7 @@
       "expertise": "Critical care",
       "days": "wed-friday",
       "time": "8:00 AM to 6:00 PM",
-      "experience":"over 14 years",
+      "experience": "over 14 years",
       "fee": 450
     },
     {
@@ -140,7 +140,7 @@
       "expertise": "Critical care",
       "days": "mon-friday",
       "time": "10:00 AM to 5:00 PM",
-      "experience":"over 11 years",
+      "experience": "over 11 years",
       "fee": 350
     },
     {
@@ -151,55 +151,65 @@
       "expertise": "Critical care",
       "days": "mon-saturday",
       "time": "9:00 AM to 2:00 PM",
-      "experience":"over 2 years",
+      "experience": "over 2 years",
       "fee": 250
     }
   ],
   "appointments": [
     {
       "id": 1,
-      "user": 1,
+      "userId": 1,
+      "doctorId": 2,
+      "user": "Rishi",
       "doctor": "Dr.Jiljith",
       "time": "5:00 PM",
       "date": "25-04-2022",
       "active": true,
-      "status":"Scheduled"
+      "status": "Scheduled"
     },
     {
       "id": 2,
-      "user": 1,
+      "userId": 1,
+      "doctorId": 1,
+      "user": "Rishi",
       "doctor": "Dr.Santhosh",
       "time": "5:30 PM",
       "date": "25-04-2022",
       "active": true,
-      "status":"Scheduled"
+      "status": "Scheduled"
     },
     {
       "id": 3,
-      "user": 1,
-      "doctor": "Dr.Sneha",
+      "user": "Rishi",
+      "userId": 1,
+      "doctorId": 3,
+      "doctor": "Dr.Sniya",
       "time": "11:30 AM",
       "date": "05-02-2022",
       "active": false,
-      "status":"canceled"
+      "status": "canceled"
     },
     {
       "id": 4,
-      "user": 1,
+      "userId": 1,
+      "doctorId": 1,
+      "user": "Rishi",
       "doctor": "Dr.Santhosh",
       "time": "12:30 PM",
       "date": "30-01-2022",
       "active": false,
-      "status":"completed"
+      "status": "completed"
     },
     {
       "id": 5,
-      "user": 1,
+      "userId": 1,
+      "doctorId": 1,
+      "user": "Rishi",
       "doctor": "Dr.Santhosh",
       "time": "10:00 AM",
       "date": "22-01-2022",
       "active": false,
-      "status":"completed"
+      "status": "completed"
     }
   ]
 }

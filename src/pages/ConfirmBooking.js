@@ -4,8 +4,12 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
+import { useLocation } from "react-router-dom"
 
 function ConfirmBooking() {
+	const location = useLocation()
+	const details = location.state.details
+	console.log(details)
 	return (
 		<Grid
 			container
@@ -56,7 +60,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Patient Name :</b> Rishi Releesh
+						<b>Patient Name :</b> {details.user}
 					</Typography>
 					<Typography
 						sx={{
@@ -67,7 +71,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Age :</b> 22
+						<b>Age :</b> {details.age}
 					</Typography>
 					<Typography
 						sx={{
@@ -78,7 +82,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Gender :</b> Male
+						<b>Gender :</b> {details.gender}
 					</Typography>
 
 					<Typography
@@ -90,7 +94,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Mobile :</b> 7994268435
+						<b>Mobile :</b> {details.phone}
 					</Typography>
 					<Typography
 						sx={{
@@ -101,7 +105,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Appointed to :</b> Dr. Santhosh
+						<b>Appointed to :</b> {details.doctor}
 					</Typography>
 					<Typography
 						sx={{
@@ -112,7 +116,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Reason :</b> Fever
+						<b>Reason :</b> {details.reason}
 					</Typography>
 					<Typography
 						sx={{
@@ -134,7 +138,7 @@ function ConfirmBooking() {
 						}}
 						component="p"
 					>
-						<b>Amount to be paid :</b> 400 Rs
+						<b>Amount to be paid :</b> {details.fee}
 					</Typography>
 				</CardContent>
 				<Box

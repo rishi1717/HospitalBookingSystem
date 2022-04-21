@@ -9,7 +9,7 @@ export function SmallButton(props) {
 		<Button
 			type={props.type}
 			sx={{
-				margin: "1rem",
+				margin: "0.6rem",
 				width: {
 					xs: "auto",
 					sm: "auto",
@@ -26,7 +26,7 @@ export function SmallButton(props) {
 		>
 			<Typography
 				sx={{
-					fontSize: { xs: "0.5rem", sm: "0.7rem" },
+					fontSize: { xs: "0.5rem", sm: "0.6rem" },
 				}}
 				component="p"
 			>

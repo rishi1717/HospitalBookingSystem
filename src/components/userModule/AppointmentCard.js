@@ -76,9 +76,9 @@ export default function AppointmentCard() {
 									<Grid
 										container
 										rowSpacing={1}
-										columnSpacing={{ xs: 1 }}
+										columnSpacing={{ xs: 4 , sm:0}}
 									>
-										<Grid item xs={3.5} sx={{ ml: "auto" }}>
+										<Grid item xs={3.5} sm={3} sx={{ ml: {sm:"auto", xs:0} }}>
 											<SmallButton
 												color="#FEB139"
 												value="Reschedule"
@@ -86,8 +86,8 @@ export default function AppointmentCard() {
 										</Grid>
 										<Grid
 											item
-											xs={3}
-											sm={3}
+											xs={2}
+											sm={2.9}
 											sx={{ mr: { xs: "2rem", sm: "0.5rem" } }}
 										>
 											<SmallButton color="#CC3E34" value="Cancel" />
