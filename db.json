@@ -149,16 +149,47 @@
     {
       "id": 1,
       "user": 1,
-      "doctor": 1,
+      "doctor": "Dr.Jiljith",
       "time": "5:00 PM",
-      "date": "25-04-2022"
+      "date": "25-04-2022",
+      "active": true,
+      "status":"Scheduled"
     },
     {
       "id": 2,
       "user": 1,
-      "doctor": 2,
+      "doctor": "Dr.Santhosh",
       "time": "5:30 PM",
-      "date": "25-04-2022"
+      "date": "25-04-2022",
+      "active": true,
+      "status":"Scheduled"
+    },
+    {
+      "id": 3,
+      "user": 1,
+      "doctor": "Dr.Sneha",
+      "time": "11:30 AM",
+      "date": "05-02-2022",
+      "active": false,
+      "status":"canceled"
+    },
+    {
+      "id": 4,
+      "user": 1,
+      "doctor": "Dr.Santhosh",
+      "time": "12:30 PM",
+      "date": "30-01-2022",
+      "active": false,
+      "status":"completed"
+    },
+    {
+      "id": 5,
+      "user": 1,
+      "doctor": "Dr.Santhosh",
+      "time": "10:00 AM",
+      "date": "22-01-2022",
+      "active": false,
+      "status":"completed"
     }
   ]
 }

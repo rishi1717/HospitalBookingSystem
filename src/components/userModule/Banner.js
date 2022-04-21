@@ -26,7 +26,7 @@ function Banner(props) {
 				>
 					<Typography
 						sx={{
-							fontSize: { xs: "0.65rem", sm: "1rem", color: "#595959" },
+							fontSize: { xs: "0.8rem", sm: "1rem", color: "#595959" },
 						}}
 						component="p"
 					>
@@ -34,7 +34,7 @@ function Banner(props) {
 					</Typography>
 					<Typography
 						sx={{
-							fontSize: { xs: "0.7rem", sm: "1.8rem", color: "#595959" },
+							fontSize: { xs: "1rem", sm: "1.8rem", color: "#595959" },
 						}}
 						component="p"
 					>
@@ -42,7 +42,7 @@ function Banner(props) {
 					</Typography>
 					<Typography
 						sx={{
-							fontSize: { xs: "1rem", sm: "2rem", fontFamily: "revert" },
+							fontSize: { xs: "1.1rem", sm: "2rem", fontFamily: "revert" },
 						}}
 						component="p"
 					>
