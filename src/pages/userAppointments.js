@@ -80,7 +80,7 @@ function UserAppointments() {
 							</CardContent>
 						</Grid>
 
-						<Grid item xs={2}>
+						<Grid item xs={2.5}>
 							<CardContent>
 								<Typography
 									variant="subtitle1"
@@ -93,7 +93,7 @@ function UserAppointments() {
 							</CardContent>
 						</Grid>
 
-						<Grid item xs={3}>
+						<Grid item xs={2}>
 							<CardContent>
 								<Typography
 									variant="subtitle1"

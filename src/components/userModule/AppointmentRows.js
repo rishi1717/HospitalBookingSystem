@@ -30,7 +30,7 @@ export default function AppointmentRows(props) {
 					}}
 				>
 					<Grid container spacing={2}>
-						<Grid item xs={12} sm={3}>
+						<Grid item xs={6} sm={3}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
@@ -79,7 +79,7 @@ export default function AppointmentRows(props) {
 						</Grid>
 						{appointment.active ? (
 							<Grid item xs={6} sm={3}>
-								<CardContent sx={{ flex: "0.1 0 auto" }}>
+								<CardContent sx={{display:'flex', flex: "0.1 0 auto" }}>
 									<SmallButton value="reschedule" color="#FEB139" />
 									<SmallButton value="cancel" color="#CC3E34" />
 								</CardContent>
@@ -91,6 +91,7 @@ export default function AppointmentRows(props) {
 										variant="subtitle1"
 										color="#FEB139"
 										component="div"
+                                        ml={2}
 									>
 										No Actions
 									</Typography>

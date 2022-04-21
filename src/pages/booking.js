@@ -3,10 +3,13 @@ import React from "react"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 // import { Link } from "react-router-dom"
 
 const Booking = () => {
+	const location = useLocation()
+	const {doctor} = location.state
+	console.log(doctor)
 	const [value, setValue] = React.useState(null)
 	const navigate = useNavigate()
 	const handleSubmit = (event) => {
@@ -24,7 +27,7 @@ const Booking = () => {
 		<>
 			<Typography
 				sx={{
-                    textAlign:'center',
+					textAlign: "center",
 					fontSize: { xs: "1rem", sm: "1.5rem" },
 					fontFamily: "sans-serif",
 					mt: 2,
@@ -83,21 +86,12 @@ const Booking = () => {
 						<TextField
 							required
 							fullWidth
-							id="doctor"
-							label="Appointment to"
-							name="doctor"
-						/>
-					</Grid>
-					<Grid item xs={12}>
-						<TextField
-							required
-							fullWidth
 							id="reason"
 							label="Reason for appointment"
 							name="reason"
 						/>
 					</Grid>
-					<Grid item xs={6}>
+					<Grid item xs={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
 								label="Select date to be appointed"
@@ -110,6 +104,36 @@ const Booking = () => {
 								renderInput={(params) => <TextField {...params} />}
 							/>
 						</LocalizationProvider>
+					</Grid>
+					<Grid item xs={4}>
+						<LocalizationProvider dateAdapter={AdapterDateFns}>
+							<DatePicker
+								label="Select time to be appointed"
+								id="date"
+								name="date"
+								value={value}
+								onChange={(newValue) => {
+									setValue(newValue)
+								}}
+								renderInput={(params) => <TextField {...params} />}
+							/>
+						</LocalizationProvider>
+					</Grid>
+					<Grid item xs={8}>
+						<TextField
+							fullWidth
+							id="doctor"
+							label="Appointment to"
+							name="doctor"
+						/>
+					</Grid>
+					<Grid item xs={4}>
+						<TextField
+							fullWidth
+							id="fee"
+							label="Fee to be paid"
+							name="fee"
+						/>
 					</Grid>
 				</Grid>
 				<Button

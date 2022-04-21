@@ -7,7 +7,6 @@ import { SmallButton } from "../Buttons"
 import { Link } from "react-router-dom"
 
 export default function DoctorCard(props) {
-
 	return (
 		<Card
 			sx={{
@@ -62,7 +61,11 @@ export default function DoctorCard(props) {
 				</Typography>
 			</CardContent>
 			<CardContent sx={{ display: "flex", flexDirection: "column" }}>
-				<Link to="/doctorprofile" style={{ textDecoration: "none" }}>
+				<Link
+					to="/doctorprofile"
+					state={{ doctor: props.doctor }}
+					style={{ textDecoration: "none" }}
+				>
 					<SmallButton value="Profile" />
 				</Link>
 				<Link to="/booking" style={{ textDecoration: "none" }}>

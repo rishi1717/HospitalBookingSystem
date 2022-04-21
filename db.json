@@ -106,7 +106,9 @@
       "qualification": "MD,MBBS",
       "expertise": "Critical care",
       "days": "mon-sat",
-      "time": "8:00 AM to 4:00 PM"
+      "time": "8:00 AM to 4:00 PM",
+      "experience":"over 5 years",
+      "fee": 300
     },
     {
       "id": 2,
@@ -115,7 +117,9 @@
       "qualification": "MD,MBBS",
       "expertise": "Critical care",
       "days": "mon-wed",
-      "time": "10:00 AM to 6:00 PM"
+      "time": "10:00 AM to 6:00 PM",
+      "experience":"Over 8 years",
+      "fee": 400
     },
     {
       "id": 3,
@@ -124,7 +128,9 @@
       "qualification": "MD,MBBS",
       "expertise": "Critical care",
       "days": "wed-friday",
-      "time": "8:00 AM to 6:00 PM"
+      "time": "8:00 AM to 6:00 PM",
+      "experience":"over 14 years",
+      "fee": 450
     },
     {
       "id": 4,
@@ -133,7 +139,9 @@
       "qualification": "MD,MBBS",
       "expertise": "Critical care",
       "days": "mon-friday",
-      "time": "10:00 AM to 5:00 PM"
+      "time": "10:00 AM to 5:00 PM",
+      "experience":"over 11 years",
+      "fee": 350
     },
     {
       "id": 5,
@@ -142,7 +150,9 @@
       "qualification": "MD,MBBS",
       "expertise": "Critical care",
       "days": "mon-saturday",
-      "time": "9:00 AM to 2:00 PM"
+      "time": "9:00 AM to 2:00 PM",
+      "experience":"over 2 years",
+      "fee": 250
     }
   ],
   "appointments": [

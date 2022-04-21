@@ -6,9 +6,11 @@ import CardMedia from "@mui/material/CardMedia"
 import image from "../static/images/doctorPortrait.webp"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 // import LogoutIcon from "@mui/icons-material/Logout"
 function DoctorProfile() {
+	const location = useLocation()
+	const {doctor} = location.state
 	return (
 		<Card
 			elevation={3}
@@ -44,7 +46,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>Dr Jiljith</b>
+							<b>{doctor.name}</b>
 						</Typography>
 						<CardMedia
 							component="img"
@@ -57,7 +59,7 @@ function DoctorProfile() {
 							image={image}
 							alt="image"
 						/>
-						<Link style={{ textDecoration: "none" }} to="/booking">
+						<Link style={{ textDecoration: "none" }} state={{doctor:doctor}} to="/booking">
 							<SmallButton
 								value="Book now"
 								color="#609acf"
@@ -88,21 +90,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>Qualification :</b>
-						</Typography>
-						<Typography
-							sx={{
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							MBBS , MD
+							<b>Qualification :</b> {doctor.qualification}
 						</Typography>
 						<Typography
 							sx={{
@@ -117,21 +105,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>College :</b>
-						</Typography>
-						<Typography
-							sx={{
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							MBBS,MD- Pariyaram Medical College
+							<b>Department :</b> {doctor.department}
 						</Typography>
 						<Typography
 							sx={{
@@ -146,21 +120,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>Experience :</b>
-						</Typography>
-						<Typography
-							sx={{
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							Over 8 years of experience in general medicine.
+							<b>Experience :</b> {doctor.experience}
 						</Typography>
 						<Typography
 							sx={{
@@ -175,23 +135,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>Area of Expertise :</b>
-						</Typography>
-						<Typography
-							sx={{
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							Handling Complicated Diabetic patients, Snake bites,
-							Critical Care, Infection Diseases and other Life style
-							Disease
+							<b>Area of Expertise :</b> {doctor.expertise}
 						</Typography>
 						<Typography
 							sx={{
@@ -206,21 +150,7 @@ function DoctorProfile() {
 							}}
 							component="p"
 						>
-							<b>OP Time :</b>
-						</Typography>
-						<Typography
-							sx={{
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							Mon – Sat, 10am to 5pm
+							<b>OP Time :</b> {doctor.days} from {doctor.time}
 						</Typography>
 					</CardContent>
 				</Grid>
