@@ -187,7 +187,7 @@
       "time": "11:30 AM",
       "date": "05-02-2022",
       "active": false,
-      "status": "canceled"
+      "status": "Canceled"
     },
     {
       "id": 4,
@@ -198,7 +198,7 @@
       "time": "12:30 PM",
       "date": "30-01-2022",
       "active": false,
-      "status": "completed"
+      "status": "Completed"
     },
     {
       "id": 5,
@@ -209,7 +209,7 @@
       "time": "10:00 AM",
       "date": "22-01-2022",
       "active": false,
-      "status": "completed"
+      "status": "Completed"
     }
   ]
 }

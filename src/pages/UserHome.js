@@ -7,7 +7,6 @@ import image3 from "../static/images/medicine2.webp"
 import image4 from "../static/images/hospital.webp"
 import image5 from "../static/images/userPortrait-removebg.png"
 import Banner from "../components/userModule/Banner"
-import Footer from "../components/userModule/footer"
 import AppointmentCard from "../components/userModule/AppointmentCard"
 
 function UserHome() {
@@ -50,7 +49,6 @@ function UserHome() {
 					/>
 				</Grid>
 			</Container>
-			<Footer />
 		</div>
 	)
 }

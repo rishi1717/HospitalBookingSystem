@@ -1,6 +1,5 @@
 import React from "react"
 import { Container, Grid, Typography } from "@mui/material"
-import Footer from "../components/userModule/footer"
 import { Box } from "@mui/system"
 import imageJoy from "../static/images/joyful-female-doctor.svg"
 import imageTeams from "../static/images/teams.webp"
@@ -110,7 +109,6 @@ function AboutUs() {
 					/>
 				</Grid>
 			</Container>
-			<Footer />
 		</div>
 	)
 }

@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
 import EditUser from "./pages/EditUser"
 import ConfirmBooking from "./pages/ConfirmBooking"
+import Navbar from "./components/Navbar"
+import Footer from "./components/userModule/footer"
 const Payment =  React.lazy(() => import("./pages/Payment"))
 const Booking = React.lazy(() => import("./pages/booking"))
 const DoctorProfile =  React.lazy(() => import("./pages/DoctorProfile"))
@@ -20,12 +22,12 @@ function App() {
 	return (
 		<div>
 			<BrowserRouter>
-				<UserNavbar />
 				<Routes>
 					<Route
 						path="/landing"
 						element={
 							<React.Suspense>
+								<Navbar />
 								<Landing />
 							</React.Suspense>
 						}
@@ -34,6 +36,7 @@ function App() {
 						path="/register"
 						element={
 							<React.Suspense>
+								<Navbar />
 								<Register />
 							</React.Suspense>
 						}
@@ -42,6 +45,7 @@ function App() {
 						path="/login"
 						element={
 							<React.Suspense>
+								<Navbar />
 								<UserLogin />
 							</React.Suspense>
 						}
@@ -50,6 +54,7 @@ function App() {
 						path="/"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<UserHome />
 							</React.Suspense>
 						}
@@ -58,6 +63,7 @@ function App() {
 						path="/appointments"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<UserAppointments />
 							</React.Suspense>
 						}
@@ -66,6 +72,7 @@ function App() {
 						path="/doctors"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<UserDoctorPage />
 							</React.Suspense>
 						}
@@ -74,6 +81,7 @@ function App() {
 						path="/prescriptions"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<UserPrescriptions />
 							</React.Suspense>
 						}
@@ -82,6 +90,7 @@ function App() {
 						path="/about"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<AboutUs />
 							</React.Suspense>
 						}
@@ -90,6 +99,7 @@ function App() {
 						path="/profile"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<UserProfile />
 							</React.Suspense>
 						}
@@ -98,6 +108,7 @@ function App() {
 						path="/editprofile"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<EditUser />
 							</React.Suspense>
 						}
@@ -106,6 +117,7 @@ function App() {
 						path="/doctorprofile"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<DoctorProfile />
 							</React.Suspense>
 						}
@@ -114,6 +126,7 @@ function App() {
 						path="/booking"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<Booking />
 							</React.Suspense>
 						}
@@ -122,6 +135,7 @@ function App() {
 						path="/confirmbooking"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<ConfirmBooking />
 							</React.Suspense>
 						}
@@ -130,11 +144,13 @@ function App() {
 						path="/payment"
 						element={
 							<React.Suspense>
+								<UserNavbar />
 								<Payment />
 							</React.Suspense>
 						}
 					/>
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	)

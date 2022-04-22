@@ -2,7 +2,6 @@ import React from "react"
 import { Card, CardContent, Container, Grid, Typography } from "@mui/material"
 import image1 from "../static/images/appointment.svg"
 import Banner from "../components/userModule/Banner"
-import Footer from "../components/userModule/footer"
 import AppointmentCard from "../components/userModule/AppointmentCard"
 import HeadAndPara from "../components/userModule/headAndPara"
 import { SmallButton } from "../components/Buttons"
@@ -108,7 +107,6 @@ function UserAppointments() {
 				</Card>
 				<AppointmentRows />
 			</Container>
-			<Footer />
 		</div>
 	)
 }

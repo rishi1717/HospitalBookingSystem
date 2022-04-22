@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from "react"
 import Box from "@mui/material/Box"
 import Paper from "@mui/material/Paper"
-import { Grid, Typography } from "@mui/material"
+import { Button, Grid, TextField, Typography } from "@mui/material"
 import { SmallButton } from "../Buttons"
 import axios from "axios"
+import Modal from "@mui/material/Modal"
+
+const style = {
+	position: "absolute",
+	top: "50%",
+	left: "50%",
+	transform: "translate(-50%, -50%)",
+	width: 400,
+	bgcolor: "background.paper",
+	border: "2px solid #000",
+	boxShadow: 24,
+	p: 4,
+}
 
 export default function AppointmentCard() {
+	const [open, setOpen] = React.useState(false)
+	const [canceling, setCanceling] = React.useState("")
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
+
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
 		;(async function() {
@@ -18,7 +36,8 @@ export default function AppointmentCard() {
 	return (
 		<>
 			{appointments.map((appointment, index) => {
-				if (appointment.active) {
+				if (appointment.status === "Scheduled") {
+					const id = appointment.id
 					return (
 						<Grid key={appointment.id} item xs={12} sm={6}>
 							<Box
@@ -76,15 +95,24 @@ export default function AppointmentCard() {
 									<Grid
 										container
 										rowSpacing={1}
-										columnSpacing={{ xs: 4 , sm:0}}
+										columnSpacing={{ xs: 4, sm: 0 }}
 									>
-										<Grid item xs={3.5} sm={3} sx={{ ml: {sm:"auto", xs:0} }}>
+										<Grid
+											item
+											xs={3.5}
+											sm={3}
+											sx={{ ml: { sm: "auto", xs: 0 } }}
+										>
 											<SmallButton
 												color="#FEB139"
 												value="Reschedule"
 											/>
 										</Grid>
 										<Grid
+											onClick={() => {
+												console.log(appointment)
+												handleOpen()
+											}}
 											item
 											xs={2}
 											sm={2.9}
@@ -95,10 +123,71 @@ export default function AppointmentCard() {
 									</Grid>
 								</Paper>
 							</Box>
+							<Modal
+								open={open}
+								onClose={handleClose}
+								aria-labelledby="modal-modal-title"
+								aria-describedby="modal-modal-description"
+							>
+								<Box sx={style}>
+									<TextField
+										required
+										fullWidth
+										id="cancelingFor"
+										label="Reason For cancelling"
+										name="cancelingFor"
+										value={canceling}
+										onChange={({ currentTarget: input }) => {
+											setCanceling(input.value)
+										}}
+									/>
+									<Grid container spacing={2}>
+										<Grid item xs={6} sm={4} ml="auto">
+											<Button
+												onClick={handleClose}
+												fullWidth
+												variant="contained"
+												sx={{
+													mt: 3,
+													mb: 2,
+												}}
+											>
+												Keep Appointment
+											</Button>
+										</Grid>
+										<Grid item xs={6} sm={4}>
+											<Button
+												onClick={() => {
+												console.log(appointment)
+													const newData = {
+														...appointment,
+														status: "Canceled",
+														cancelReason: canceling,
+													}
+													console.log(newData)
+													axios.put(
+														`http://localhost:4000/appointments/${id}`,
+														newData
+													)
+													handleClose()
+												}}
+												fullWidth
+												variant="contained"
+												sx={{
+													mt: 3,
+													mb: 2,
+													backgroundColor: "#EF4242",
+												}}
+											>
+												Cancel Appointment
+											</Button>
+										</Grid>
+									</Grid>
+								</Box>
+							</Modal>
 						</Grid>
 					)
-				}
-				else{
+				} else {
 					return null
 				}
 			})}

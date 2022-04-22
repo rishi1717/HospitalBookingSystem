@@ -1,6 +1,5 @@
 import React from "react"
 import { Container, Grid, Typography } from "@mui/material"
-import Footer from "../components/userModule/footer"
 import { Box } from "@mui/system"
 import imageIntro from "../static/images/receptionWaiting.webp"
 import imageTeams from "../static/images/teams.webp"
@@ -114,7 +113,6 @@ function Landing() {
 					/>
 				</Grid>
 			</Container>
-			<Footer />
 		</div>
 	)
 }
