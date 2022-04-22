@@ -68,7 +68,11 @@ export default function DoctorCard(props) {
 				>
 					<SmallButton value="Profile" />
 				</Link>
-				<Link to="/booking" style={{ textDecoration: "none" }}>
+				<Link
+					to="/booking"
+					state={{ doctor: props.doctor }}
+					style={{ textDecoration: "none" }}
+				>
 					<SmallButton value="Appoint" />
 				</Link>
 			</CardContent>

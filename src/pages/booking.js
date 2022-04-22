@@ -7,18 +7,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { TimePicker } from "@mui/x-date-pickers/TimePicker"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import axios from "axios"
-import Swal from "sweetalert2"
-// import { Link } from "react-router-dom"
-
-const Toast = Swal.mixin({
-	background: "#1E1E1E",
-	color: "white",
-	toast: true,
-	position: "top-end",
-	showConfirmButton: false,
-	timerProgressBar: true,
-})
 
 const Booking = () => {
 	const location = useLocation()
@@ -61,19 +49,10 @@ const Booking = () => {
 	})
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
-		console.log(data)
 	}
 
 	const onSubmit = () => {
-		axios.post("http://localhost:4000/appointments", data)
 		navigate("/confirmbooking", { state: { details: data } })
-		Toast.fire({
-			position: "bottom-right",
-			icon: "success",
-			title: "Appointment Booked",
-			showConfirmButton: false,
-			timer: 3000,
-		})
 	}
 
 	return (
@@ -177,7 +156,7 @@ const Booking = () => {
 								required: "State reason for appointment!",
 								minLength: {
 									value: 5,
-									message: "Atleast 2 characters required",
+									message: "Atleast 5 characters required",
 								},
 							})}
 							required
@@ -232,6 +211,13 @@ const Booking = () => {
 							label="Appointment to"
 							name="doctor"
 							value={doctor.name}
+							InputProps={{
+								style: {
+									fontSize: "1rem",
+									color: "#595959",
+									fontWeight: "bold",
+								},
+							}}
 						/>
 					</Grid>
 					<Grid item xs={4}>
@@ -240,7 +226,14 @@ const Booking = () => {
 							id="fee"
 							label="Fee to be paid"
 							name="fee"
-							value={doctor.fee}
+							value={doctor.fee + " Rs/"}
+							InputProps={{
+								style: {
+									fontSize: "1.1rem",
+									color: "#595959",
+									fontWeight: "bold",
+								},
+							}}
 						/>
 					</Grid>
 				</Grid>
@@ -251,6 +244,15 @@ const Booking = () => {
 					sx={{ mt: 3, mb: 2 }}
 				>
 					Book
+				</Button>
+
+				<Button
+					fullWidth
+					variant="contained"
+					sx={{ backgroundColor: "#EF4242", mt: 3, mb: 2 }}
+					onClick={() => navigate("/doctors")}
+				>
+					Cancel
 				</Button>
 			</Box>
 		</>

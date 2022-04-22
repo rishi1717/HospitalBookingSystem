@@ -4,12 +4,11 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 function ConfirmBooking() {
 	const location = useLocation()
 	const details = location.state.details
-	console.log(details)
 	return (
 		<Grid
 			container
@@ -151,8 +150,16 @@ function ConfirmBooking() {
 						mr: { xs: 2, sm: 5 },
 					}}
 				>
-					<SmallButton value="Cancel" color="#eaeaea" text="#EF4242" />
-					<SmallButton value="Confirm" color="#eaeaea" text="#609ACF" />
+					<Link style={{ textDecoration: "none" }} to="/doctors">
+						<SmallButton value="Cancel" color="#eaeaea" text="#EF4242" />
+					</Link>
+					<Link
+						style={{ textDecoration: "none" }}
+						to="/payment"
+						state={{ details: details }}
+					>
+						<SmallButton value="Confirm" color="#eaeaea" text="#609ACF" />
+					</Link>
 				</Box>
 			</Card>
 		</Grid>

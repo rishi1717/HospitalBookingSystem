@@ -5,6 +5,7 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import { SmallButton } from "../Buttons"
+import { Link } from "react-router-dom"
 
 function HomeCard(props) {
 	return (
@@ -14,7 +15,7 @@ function HomeCard(props) {
 				sx={{
 					display: "flex",
 					maxHeight: "18rem",
-					minHeight: { xs: 0, sm: 200 }
+					minHeight: { xs: 0, sm: 200 },
 				}}
 			>
 				<CardContent
@@ -36,7 +37,9 @@ function HomeCard(props) {
 					>
 						{props.smallPhrase ? props.smallPhrase : ""}
 					</Typography>
-					<SmallButton value={props.phrase} />
+					<Link to={props.link} style={{textDecoration:'none'}}>
+						<SmallButton value={props.phrase} />
+					</Link>
 				</CardContent>
 				<CardMedia
 					component="img"

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import UserNavbar from "./components/userModule/UserNavbar"
 import EditUser from "./pages/EditUser"
 import ConfirmBooking from "./pages/ConfirmBooking"
+const Payment =  React.lazy(() => import("./pages/Payment"))
 const Booking = React.lazy(() => import("./pages/booking"))
 const DoctorProfile =  React.lazy(() => import("./pages/DoctorProfile"))
 const Register = React.lazy(() => import("./pages/Register"))
@@ -122,6 +123,14 @@ function App() {
 						element={
 							<React.Suspense>
 								<ConfirmBooking />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/payment"
+						element={
+							<React.Suspense>
+								<Payment />
 							</React.Suspense>
 						}
 					/>

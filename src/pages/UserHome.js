@@ -11,7 +11,6 @@ import Footer from "../components/userModule/footer"
 import AppointmentCard from "../components/userModule/AppointmentCard"
 
 function UserHome() {
-	
 	return (
 		<div>
 			<Container>
@@ -22,27 +21,31 @@ function UserHome() {
 					image={image1}
 				/>
 				<Grid container spacing={2} mt={1} mb={1}>
-				<AppointmentCard/>
+					<AppointmentCard />
 				</Grid>
 				<Grid container spacing={2}>
 					<HomeCard
 						smallPhrase="We care about our Patients. Take a look at your Profile"
 						phrase="Profile"
+						link="Profile"
 						image={image5}
 					/>
 					<HomeCard
 						smallPhrase="We provide our services in various Departments"
 						phrase="Departments"
+						link="doctors"
 						image={image2}
 					/>
 					<HomeCard
 						smallPhrase="Now in our app, you can view your Prescription"
-						phrase="Prescription"
+						phrase="prescription"
+						link="prescriptions"
 						image={image3}
 					/>
 					<HomeCard
 						smallPhrase="See how One Health Hospital is making an impact on lifes of our patients."
 						phrase="About"
+						link="about"
 						image={image4}
 					/>
 				</Grid>
