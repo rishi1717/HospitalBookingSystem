@@ -24,6 +24,20 @@
           "dosage": "thrice daily, after food",
           "date": "22-04-2022",
           "doctor": "Dr.Jiljith"
+        },
+        {
+          "id": 3,
+          "medicine": "aspirin",
+          "dosage": "twice daily",
+          "date": "22-04-2022",
+          "doctor": "Dr.Santhosh"
+        },
+        {
+          "id": 4,
+          "medicine": "Paracetamol",
+          "dosage": "thrice daily, after food",
+          "date": "22-04-2022",
+          "doctor": "Dr.Jiljith"
         }
       ]
     },
@@ -47,6 +61,20 @@
         },
         {
           "id": 2,
+          "medicine": "Paracetamol",
+          "dosage": "thrice daily, after food",
+          "date": "22-04-2022",
+          "doctor": "Dr.Jiljith"
+        },
+        {
+          "id": 3,
+          "medicine": "aspirin",
+          "dosage": "twice daily",
+          "date": "22-04-2022",
+          "doctor": "Dr.Santhosh"
+        },
+        {
+          "id": 4,
           "medicine": "Paracetamol",
           "dosage": "thrice daily, after food",
           "date": "22-04-2022",
@@ -176,7 +204,8 @@
       "time": "5:30 PM",
       "date": "25-04-2022",
       "active": true,
-      "status": "Scheduled"
+      "status": "Canceled",
+      "cancelReason": ""
     },
     {
       "id": 3,

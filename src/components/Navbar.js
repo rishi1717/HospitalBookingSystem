@@ -46,7 +46,7 @@ const Navbar = () => {
 							alt="One Health"
 							src={Logo}
 						/>
-						<Link style={linkStyle} to="/">
+						<Link style={linkStyle} to="/landing">
 							<Typography
 								variant="h6"
 								noWrap
@@ -113,7 +113,7 @@ const Navbar = () => {
 						sx={{
 							flexGrow: 0,
 							marginLeft: "auto",
-							display: { xs: "none", sm: "flex" },
+							display: { xs: "flex", sm: "flex" },
 						}}
 					>
 						<Link style={linkStyle} to="/login">

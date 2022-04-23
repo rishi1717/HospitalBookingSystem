@@ -4,7 +4,7 @@ import Search from "../components/Search"
 import PrescriptionCard from "../components/userModule/PrescriptionCard"
 function UserPrescriptions() {
 	return (
-		<Container>
+		<Container sx={{mb:10}}>
 			<Typography
 				sx={{
 					textAlign: "center",

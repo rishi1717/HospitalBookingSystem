@@ -19,7 +19,7 @@ function Landing() {
 				sx={{
 					textAlign: "right",
 					mt: 2,
-					mr: { xs: 1, sm: 10},
+					mr: { xs: 1, sm: 10 },
 					mb: -1,
 					fontSize: { xs: "0.8rem", sm: "1.6rem" },
 					fontFamily: "revert",
@@ -40,7 +40,7 @@ function Landing() {
 							height: "auto",
 							width: "auto",
 							// maxHeight: {xs:0, sm: 233, md: 400 },
-							maxWidth: { xs: 350, sm: 700, md: 1000 },
+							maxWidth: { xs: 340, sm: 700, md: 1000 },
 						}}
 						alt="Hospital"
 						src={imageIntro}
@@ -111,6 +111,7 @@ function Landing() {
 						alt="Hospital"
 						src={imageLab}
 					/>
+					
 				</Grid>
 			</Container>
 		</div>
