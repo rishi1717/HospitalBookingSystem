@@ -48,7 +48,7 @@ export default function Register() {
 
 	const onSubmit = () => {
 		console.log(data)
-		axios.post("http://localhost:4000/users",data)
+		axios.post("http://localhost:4000/user",data)
 		navigate("/login")
 		Toast.fire({
 			position: "bottom-right",

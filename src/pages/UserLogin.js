@@ -45,9 +45,7 @@ export default function UserLogin() {
 
 	const onSubmit = async () => {
 		try {
-			console.log(data)
-
-			const resData = await axios.post("http://localhost:4000/users/login",data)
+			const resData = await axios.post("http://localhost:4000/user/login",data)
 
 			console.log(resData)
 			Toast.fire({
@@ -77,7 +75,6 @@ export default function UserLogin() {
 						sx={{
 							height: "auto",
 							width: "auto",
-							// maxHeight: {xs:0, sm: 233, md: 400 },
 							maxWidth: { xs: 0, sm: 400, md: 500 },
 						}}
 						alt="Hospital"
