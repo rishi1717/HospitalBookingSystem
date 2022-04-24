@@ -8,14 +8,15 @@ import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
 import { Link } from "react-router-dom"
 import axios from 'axios'
-// import LogoutIcon from "@mui/icons-material/Logout"
+
 function UserProfile() {
 	const [user,setUser] = useState([])
 	useEffect(()=>{
 		(async function (){
-			const userData = await axios.get("http://localhost:4000/users/1")
-			setUser(userData.data)
-			console.log(userData.data.firstName)
+			const userData = await axios.get(
+				"http://localhost:4000/user/6263b790bb65608cbe37b1b3"
+			)
+			setUser(userData.data.user)
 		})()
 	},[])
 	return (
@@ -89,7 +90,7 @@ function UserProfile() {
 						component="p"
 					>
 						<b>ID :</b>
-						{user.id}
+						{user._id}
 					</Typography>
 					<Typography
 						sx={{

@@ -47,7 +47,7 @@ export default function UserLogin() {
 		try {
 			console.log(data)
 
-			const resData = await axios.post("http://localhost:4000/users/signup",data)
+			const resData = await axios.post("http://localhost:4000/users/login",data)
 
 			console.log(resData)
 			Toast.fire({

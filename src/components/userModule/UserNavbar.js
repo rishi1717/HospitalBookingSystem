@@ -111,7 +111,7 @@ const UserNavbar = () => {
 								</Link>
 							</MenuItem>
 							<MenuItem onClick={handleCloseNavMenu}>
-								<Link style={linkStyle2} to="/prescription">
+								<Link style={linkStyle2} to="/prescriptions">
 									<Typography textAlign="center">
 										Prescription
 									</Typography>

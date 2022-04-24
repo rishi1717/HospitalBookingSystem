@@ -26,11 +26,11 @@ export default function AppointmentCard() {
 
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			const appointmentData = await axios.get(
-				"http://localhost:4000/appointments"
+				"http://localhost:4000/appointment"
 			)
-			setAppointments(appointmentData.data)
+			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
 	return (
@@ -39,7 +39,7 @@ export default function AppointmentCard() {
 				if (appointment.status === "Scheduled") {
 					const id = appointment.id
 					return (
-						<Grid key={appointment.id} item xs={12} sm={6}>
+						<Grid key={appointment._id} item xs={12} sm={6}>
 							<Box
 								sx={{
 									display: "flex",
@@ -166,7 +166,7 @@ export default function AppointmentCard() {
 													}
 													console.log(newData)
 													axios.put(
-														`http://localhost:4000/appointments/${id}`,
+														`http://localhost:4000/appointment/${id}`,
 														newData
 													)
 													handleClose()

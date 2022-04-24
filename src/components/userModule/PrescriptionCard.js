@@ -9,16 +9,18 @@ import { Grid } from "@mui/material"
 export default function PrescriptionCard(props) {
 	const [prescriptions, setPrescriptions] = React.useState([])
 	React.useEffect(() => {
-		;(async function() {
-			const userData = await axios.get("http://localhost:4000/users/1")
-			setPrescriptions(userData.data.prescriptions)
+		(async function() {
+			const userData = await axios.get(
+				"http://localhost:4000/prescription"
+			)
+			setPrescriptions(userData.data.prescription)
 		})()
 	}, [])
 	return (
 		<>
 			{prescriptions.map((prescription) => (
 				<Card
-					key={prescription.id}
+					key={prescription._id}
 					sx={{
 						display: "flex",
 						m: "0.4rem",

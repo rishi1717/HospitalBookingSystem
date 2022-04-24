@@ -11,18 +11,18 @@ export default function Departments() {
 	useEffect(() => {
 		(async function() {
 			const departmentData = await axios.get(
-				"http://localhost:4000/departments"
+				"http://localhost:4000/department"
 			)
-			const doctorData = await axios.get("http://localhost:4000/doctors")
-			setDepartments(departmentData.data)
-			setDoctors(doctorData.data)
+			const doctorData = await axios.get("http://localhost:4000/doctor")
+			setDepartments(departmentData.data.department)
+			setDoctors(doctorData.data.doctor)
 		})()
 	}, [])
 	return (
 		<div>
 			{departments.map((department) => (
 				<Accordion
-					key={department.id}
+					key={department._id}
 					sx={{
 						m: "1rem",
 						borderRadius: 2,
@@ -37,8 +37,8 @@ export default function Departments() {
 					</AccordionSummary>
 					<AccordionDetails>
 						{doctors.map((doctor) => (
-							<div key={doctor.id}>
-								{department.doctorid.includes(doctor.id) ? (
+							<div key={doctor._id}>
+								{department.doctors.includes(doctor._id) ? (
 									<DoctorCard
 										key={doctor.id}
 										doctor={doctor}

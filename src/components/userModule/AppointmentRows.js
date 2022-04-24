@@ -26,18 +26,18 @@ export default function AppointmentRows(props) {
 	const handleClose = () => setOpen(false)
 	const [appointments, setAppointments] = React.useState([])
 	React.useEffect(() => {
-		;(async function() {
+		(async function() {
 			const appointmentData = await axios.get(
-				"http://localhost:4000/appointments"
+				"http://localhost:4000/appointment"
 			)
-			setAppointments(appointmentData.data)
+			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
 	return (
 		<>
 			{appointments.map((appointment) => (
 				<Card
-					key={appointment.id}
+					key={appointment._id}
 					sx={{
 						display: "flex",
 						m: "0.4rem",
@@ -158,7 +158,7 @@ export default function AppointmentRows(props) {
 														}
 														console.log(newData)
 														axios.put(
-															`http://localhost:4000/appointments/${appointment.id}`,
+															`http://localhost:4000/appointment/${appointment.id}`,
 															newData
 														)
 														handleClose()
