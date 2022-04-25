@@ -1,4 +1,14 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material"
+import {
+	Box,
+	FormControl,
+	FormHelperText,
+	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
+	TextField,
+	Typography,
+} from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
@@ -8,6 +18,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import FullLayout from "../layouts/FullLayout"
+import { MediumButton } from "../components/Buttons"
 
 const Booking = () => {
 	const location = useLocation()
@@ -52,6 +63,10 @@ const Booking = () => {
 		setData({ ...data, [input.name]: input.value })
 	}
 
+	const handleChangeSelect = (event) => {
+		setData({ ...data, [event.target.name]: event.target.value })
+	}
+
 	const onSubmit = () => {
 		navigate("/confirmbooking", { state: { details: data } })
 	}
@@ -78,7 +93,7 @@ const Booking = () => {
 				sx={{ m: { xs: 2, sm: 10 } }}
 			>
 				<Grid container spacing={2}>
-					<Grid item xs={12} sm={12}>
+					<Grid item xs={12} sm={8}>
 						<TextField
 							{...register("user", {
 								required: "Provide patient name!",
@@ -99,7 +114,7 @@ const Booking = () => {
 							helperText={errors.user ? errors.user.message : null}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={6} sm={4}>
 						<TextField
 							{...register("age", {
 								required: "Provide age!",
@@ -115,23 +130,32 @@ const Booking = () => {
 							helperText={errors.age ? errors.age.message : null}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							{...register("gender", {
-								required: "Provide your gender",
-							})}
-							required
-							fullWidth
-							id="gender"
-							label="Gender"
-							name="gender"
-							onChange={handleChange}
-							value={data.gender}
-							error={errors.gender}
-							helperText={errors.gender ? errors.gender.message : null}
-						/>
+					<Grid item xs={6} sm={3}>
+						<FormControl fullWidth>
+							<InputLabel id="gender">Gender</InputLabel>
+							<Select
+								{...register("gender", {
+									required: "Select gender!",
+								})}
+								required
+								fullWidth
+								label="Gender"
+								id="gender"
+								name="gender"
+								value={data.gender}
+								onChange={handleChangeSelect}
+								error={errors.gender}
+							>
+								<MenuItem value={"Male"}>Male</MenuItem>
+								<MenuItem value={"Female"}>Female</MenuItem>
+								<MenuItem value={"Others"}>Others</MenuItem>
+							</Select>
+							<FormHelperText sx={{ color: "#D32F2F" }}>
+								{errors.gender ? errors.gender.message : null}
+							</FormHelperText>
+						</FormControl>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} md={9}>
 						<TextField
 							{...register("phone", {
 								required: "Provide phone number!",
@@ -171,7 +195,42 @@ const Booking = () => {
 							helperText={errors.reason ? errors.reason.message : null}
 						/>
 					</Grid>
+
+					<Grid item xs={8}>
+						<TextField
+							fullWidth
+							id="doctor"
+							label="Appointment to"
+							name="doctor"
+							value={doctor.name}
+							InputProps={{
+								style: {
+									fontSize: "1rem",
+									color: "#595959",
+									fontWeight: "bold",
+								},
+							}}
+						/>
+					</Grid>
+
 					<Grid item xs={4}>
+						<TextField
+							fullWidth
+							id="fee"
+							label="Fee to be paid"
+							name="fee"
+							value={doctor.fee + " Rs/"}
+							InputProps={{
+								style: {
+									fontSize: "1.1rem",
+									color: "#595959",
+									fontWeight: "bold",
+								},
+							}}
+						/>
+					</Grid>
+
+					<Grid item xs={6} sm={3.5}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
 								label="Select date to be appointed"
@@ -185,7 +244,7 @@ const Booking = () => {
 							/>
 						</LocalizationProvider>
 					</Grid>
-					<Grid item xs={4}>
+					<Grid item xs={6} sm={3.5}>
 						{/* <TimePicker
 							amPmAriaLabel="Select AM/PM"
 							format="h:m a"
@@ -205,56 +264,11 @@ const Booking = () => {
 							/>
 						</LocalizationProvider>
 					</Grid>
-					<Grid item xs={8}>
-						<TextField
-							fullWidth
-							id="doctor"
-							label="Appointment to"
-							name="doctor"
-							value={doctor.name}
-							InputProps={{
-								style: {
-									fontSize: "1rem",
-									color: "#595959",
-									fontWeight: "bold",
-								},
-							}}
-						/>
-					</Grid>
-					<Grid item xs={4}>
-						<TextField
-							fullWidth
-							id="fee"
-							label="Fee to be paid"
-							name="fee"
-							value={doctor.fee + " Rs/"}
-							InputProps={{
-								style: {
-									fontSize: "1.1rem",
-									color: "#595959",
-									fontWeight: "bold",
-								},
-							}}
-						/>
-					</Grid>
 				</Grid>
-				<Button
-					type="submit"
-					fullWidth
-					variant="contained"
-					sx={{ mt: 3, mb: 2 }}
-				>
-					Book
-				</Button>
-
-				<Button
-					fullWidth
-					variant="contained"
-					sx={{ backgroundColor: "#EF4242", mt: 3, mb: 2 }}
-					onClick={() => navigate("/doctors")}
-				>
-					Cancel
-				</Button>
+				<Grid item xs={6} sm={6}>
+					<MediumButton value="Confirm" />
+					<MediumButton value="Cancel" color="#EF4242" text="white" />
+				</Grid>
 			</Box>
 		</FullLayout>
 	)

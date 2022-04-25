@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../layouts/FullLayout"
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -20,7 +21,6 @@ const Toast = Swal.mixin({
 	showConfirmButton: false,
 	timerProgressBar: true,
 })
-
 
 export default function Register() {
 	const navigate = useNavigate()
@@ -32,24 +32,27 @@ export default function Register() {
 
 	const [data, setData] = useState({
 		firstName: "",
-		secondName:"",
-		age:"",
-		gender:"",
-		email:"",
-		password:"",
-		cpassword:"",
-		blood:"",
-		phone:""
-
+		secondName: "",
+		age: "",
+		gender: "",
+		email: "",
+		password: "",
+		cpassword: "",
+		blood: "",
+		phone: "",
 	})
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
 	}
 
+	const handleChangeSelect = (event) => {
+		setData({ ...data, [event.target.name]: event.target.value })
+	}
+
 	const onSubmit = () => {
 		console.log(data)
-		axios.post("/user",data)
+		axios.post("/user", data)
 		navigate("/login")
 		Toast.fire({
 			position: "bottom-right",
@@ -167,7 +170,7 @@ export default function Register() {
 											}
 										/>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+									{/* <Grid item xs={12} sm={4}>
 										<TextField
 											{...register("gender", {
 												required: "Select your gender!",
@@ -184,8 +187,37 @@ export default function Register() {
 												errors.gender ? errors.gender.message : null
 											}
 										/>
+									</Grid> */}
+
+									<Grid item xs={6} sm={4}>
+										<FormControl fullWidth>
+											<InputLabel id="gender">Gender</InputLabel>
+											<Select
+												{...register("gender", {
+													required: "Select gender!",
+												})}
+												required
+												fullWidth
+												label="Gender"
+												id="gender"
+												name="gender"
+												value={data.gender}
+												onChange={handleChangeSelect}
+												error={errors.gender}
+											>
+												<MenuItem value={"Male"}>Male</MenuItem>
+												<MenuItem value={"Female"}>Female</MenuItem>
+												<MenuItem value={"Others"}>Others</MenuItem>
+											</Select>
+											<FormHelperText sx={{ color: "#D32F2F" }}>
+												{errors.gender
+													? errors.gender.message
+													: null}
+											</FormHelperText>
+										</FormControl>
 									</Grid>
-									<Grid item xs={12} sm={4}>
+
+									{/* <Grid item xs={12} sm={4}>
 										<TextField
 											{...register("blood", {})}
 											fullWidth
@@ -195,7 +227,32 @@ export default function Register() {
 											onChange={handleChange}
 											value={data.blood}
 										/>
+									</Grid> */}
+
+									<Grid item xs={6} sm={4}>
+										<FormControl fullWidth>
+											<InputLabel id="blood">Blood</InputLabel>
+											<Select
+												{...register("blood", {})}
+												fullWidth
+												label="Blood"
+												id="blood"
+												name="blood"
+												value={data.blood}
+												onChange={handleChangeSelect}
+												error={errors.blood}
+											>
+												<MenuItem value={"A+ve"}>A+ve</MenuItem>
+												<MenuItem value={"A-ve"}>A-ve</MenuItem>
+												<MenuItem value={"B+ve"}>B+ve</MenuItem>
+												<MenuItem value={"B-ve"}>B-ve</MenuItem>
+												<MenuItem value={"AB+ve"}>AB+ve</MenuItem>
+												<MenuItem value={"O+ve"}>O+ve</MenuItem>
+												<MenuItem value={"O-ve"}>O-ve</MenuItem>
+											</Select>
+										</FormControl>
 									</Grid>
+
 									<Grid item xs={12}>
 										<TextField
 											{...register("email", {

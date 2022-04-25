@@ -36,8 +36,23 @@ export function SmallButton(props) {
 	)
 }
 export function MediumButton(props) {
+	let bgcolor = props.color ? props.color : "#1976D2"
+	let text = props.text ? props.text : "#fff"
 	return (
-		<Button size="medium" variant="contained" sx={{ mt: 4 }}>
+		<Button
+			size="medium"
+			variant="contained"
+			sx={{
+				mt: 4,
+				ml: 1,
+				backgroundColor: bgcolor,
+				color: text,
+				"&:hover": {
+					backgroundColor: text,
+					color: bgcolor,
+				},
+			}}
+		>
 			{props.value}
 		</Button>
 	)
