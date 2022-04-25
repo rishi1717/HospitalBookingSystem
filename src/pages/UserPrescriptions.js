@@ -7,7 +7,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material"
-import axios from "axios"
+import axios from "../axios.js"
 import React, { useEffect, useState } from "react"
 import PrescriptionCard from "../components/userModule/PrescriptionCard"
 import FullLayout from "../layouts/FullLayout"
@@ -18,7 +18,7 @@ function UserPrescriptions() {
 	const [searchValue, setSearchValue] = useState("")
 	useEffect(() => {
 		(async function() {
-			const userData = await axios.get("http://localhost:4000/prescription")
+			const userData = await axios.get("/prescription")
 			setPrescriptions(userData.data.prescription)
 		})()
 	}, [])

@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import axios from 'axios'
+import axios from "../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../layouts/FullLayout"
 
@@ -49,7 +49,7 @@ export default function Register() {
 
 	const onSubmit = () => {
 		console.log(data)
-		axios.post("http://localhost:4000/user",data)
+		axios.post("/user",data)
 		navigate("/login")
 		Toast.fire({
 			position: "bottom-right",

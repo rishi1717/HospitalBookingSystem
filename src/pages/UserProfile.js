@@ -7,7 +7,7 @@ import image from "../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../components/Buttons"
 import { Link } from "react-router-dom"
-import axios from 'axios'
+import axios from "../axios.js"
 import FullLayout from "../layouts/FullLayout"
 
 function UserProfile() {
@@ -15,7 +15,7 @@ function UserProfile() {
 	useEffect(()=>{
 		(async function (){
 			const userData = await axios.get(
-				"http://localhost:4000/user/6263b790bb65608cbe37b1b3"
+				"/user/6263b790bb65608cbe37b1b3"
 			)
 			setUser(userData.data.user)
 		})()

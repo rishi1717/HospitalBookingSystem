@@ -14,7 +14,7 @@ import image from "../static/images/hospital.webp"
 import { Container } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios from "../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../layouts/FullLayout"
 
@@ -46,7 +46,7 @@ export default function UserLogin() {
 
 	const onSubmit = async () => {
 		try {
-			const resData = await axios.post("http://localhost:4000/user/login",data)
+			const resData = await axios.post("/user/login",data)
 
 			console.log(resData)
 			localStorage.setItem("userToken", resData.data.token)

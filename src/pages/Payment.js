@@ -2,7 +2,7 @@ import { Box, Button, Card, Grid, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import axios from "axios"
+import axios from "../axios.js"
 import Swal from "sweetalert2"
 import image from "../static/images/cardSchemes.webp"
 import FullLayout from "../layouts/FullLayout"
@@ -42,7 +42,7 @@ const Payment = () => {
 	}
 
 	const onSubmit = () => {
-		axios.post("http://localhost:4000/appointments", details)
+		axios.post("/appointments", details)
 		Toast.fire({
 			position: "bottom-right",
 			icon: "success",

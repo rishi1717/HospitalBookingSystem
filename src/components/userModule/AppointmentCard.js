@@ -3,7 +3,7 @@ import Box from "@mui/material/Box"
 import Paper from "@mui/material/Paper"
 import { Button, Grid, TextField, Typography } from "@mui/material"
 import { SmallButton } from "../Buttons"
-import axios from "axios"
+import axios from "../../axios.js"
 import Modal from "@mui/material/Modal"
 
 const style = {
@@ -28,7 +28,7 @@ export default function AppointmentCard() {
 	useEffect(() => {
 		(async function() {
 			const appointmentData = await axios.get(
-				"http://localhost:4000/appointment"
+				"/appointment"
 			)
 			setAppointments(appointmentData.data.appointment)
 		})()
@@ -163,7 +163,7 @@ export default function AppointmentCard() {
 														cancelReason: canceling,
 													}
 													axios.put(
-														`http://localhost:4000/appointment/${id}`,
+														`/appointment/${id}`,
 														newData
 													)
 													handleClose()

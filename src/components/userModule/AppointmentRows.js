@@ -2,7 +2,7 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
-import axios from "axios"
+import axios from "../../axios.js"
 import { Box, Button, Grid, TextField } from "@mui/material"
 import { SmallButton } from "../Buttons"
 import Modal from "@mui/material/Modal"
@@ -28,7 +28,7 @@ export default function AppointmentRows(props) {
 	React.useEffect(() => {
 		;(async function() {
 			const appointmentData = await axios.get(
-				"http://localhost:4000/appointment"
+				"/appointment"
 			)
 			setAppointments(appointmentData.data.appointment)
 		})()
@@ -166,7 +166,7 @@ export default function AppointmentRows(props) {
 														}
 														console.log(newData)
 														axios.put(
-															`http://localhost:4000/appointment/${appointment.id}`,
+															`/appointment/${appointment.id}`,
 															newData
 														)
 														handleClose()
