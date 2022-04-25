@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import Swal from "sweetalert2"
 import image from "../static/images/cardSchemes.webp"
+import FullLayout from "../layouts/FullLayout"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -53,7 +54,7 @@ const Payment = () => {
 	}
 
 	return (
-		<>
+		<FullLayout>
 			<Typography
 				sx={{
 					textAlign: "center",
@@ -211,7 +212,7 @@ const Payment = () => {
 					</Grid>
 				</Box>
 			</Card>
-		</>
+		</FullLayout>
 	)
 }
 

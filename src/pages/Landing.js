@@ -11,10 +11,11 @@ import image3 from "../static/images/tempCheck.svg"
 import image4 from "../static/images/sanitize.svg"
 import HeadAndPara from "../components/userModule/headAndPara"
 import { MediumButton } from "../components/Buttons"
+import FullLayout from "../layouts/FullLayout"
 
 function Landing() {
 	return (
-		<div>
+		<FullLayout>
 			<Typography
 				sx={{
 					textAlign: "right",
@@ -114,7 +115,7 @@ function Landing() {
 					
 				</Grid>
 			</Container>
-		</div>
+		</FullLayout>
 	)
 }
 

@@ -10,10 +10,11 @@ import image2 from "../static/images/maskedMan.svg"
 import image3 from "../static/images/tempCheck.svg"
 import image4 from "../static/images/sanitize.svg"
 import HeadAndPara from "../components/userModule/headAndPara"
+import FullLayout from "../layouts/FullLayout"
 
 function AboutUs() {
 	return (
-		<div>
+		<FullLayout>
 			<Container>
 				<Grid textAlign={"center"}>
 					<Typography
@@ -109,7 +110,7 @@ function AboutUs() {
 					/>
 				</Grid>
 			</Container>
-		</div>
+		</FullLayout>
 	)
 }
 

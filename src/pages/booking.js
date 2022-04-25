@@ -7,6 +7,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { TimePicker } from "@mui/x-date-pickers/TimePicker"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import FullLayout from "../layouts/FullLayout"
 
 const Booking = () => {
 	const location = useLocation()
@@ -56,7 +57,7 @@ const Booking = () => {
 	}
 
 	return (
-		<>
+		<FullLayout>
 			<Typography
 				sx={{
 					textAlign: "center",
@@ -255,7 +256,7 @@ const Booking = () => {
 					Cancel
 				</Button>
 			</Box>
-		</>
+		</FullLayout>
 	)
 }
 

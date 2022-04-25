@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import Swal from "sweetalert2"
+import FullLayout from "../layouts/FullLayout"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -60,7 +61,7 @@ export default function Register() {
 	}
 
 	return (
-		<>
+		<FullLayout>
 			<Container component="main" maxWidth="md">
 				<Typography
 					align="center"
@@ -303,6 +304,6 @@ export default function Register() {
 					</Grid>
 				</Grid>
 			</Container>
-		</>
+		</FullLayout>
 	)
 }

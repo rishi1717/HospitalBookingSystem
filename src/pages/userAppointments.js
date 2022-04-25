@@ -7,10 +7,11 @@ import HeadAndPara from "../components/userModule/headAndPara"
 import { SmallButton } from "../components/Buttons"
 import AppointmentRows from "../components/userModule/AppointmentRows"
 import { Link } from "react-router-dom"
+import FullLayout from "../layouts/FullLayout"
 
 function UserAppointments() {
 	return (
-		<div>
+		<FullLayout>
 			<Container>
 				<Banner
 					smallText="Hi Rishi,"
@@ -107,7 +108,7 @@ function UserAppointments() {
 				</Card>
 				<AppointmentRows />
 			</Container>
-		</div>
+		</FullLayout>
 	)
 }
 

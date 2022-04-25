@@ -8,10 +8,11 @@ import image4 from "../static/images/hospital.webp"
 import image5 from "../static/images/userPortrait-removebg.png"
 import Banner from "../components/userModule/Banner"
 import AppointmentCard from "../components/userModule/AppointmentCard"
+import FullLayout from "../layouts/FullLayout"
 
 function UserHome() {
 	return (
-		<div>
+		<FullLayout>
 			<Container>
 				<Banner
 					smallText="Hi Rishi,"
@@ -49,7 +50,7 @@ function UserHome() {
 					/>
 				</Grid>
 			</Container>
-		</div>
+		</FullLayout>
 	)
 }
 

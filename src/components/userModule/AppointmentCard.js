@@ -110,7 +110,6 @@ export default function AppointmentCard() {
 										</Grid>
 										<Grid
 											onClick={() => {
-												console.log(appointment)
 												handleOpen()
 											}}
 											item
@@ -158,13 +157,11 @@ export default function AppointmentCard() {
 										<Grid item xs={6} sm={4}>
 											<Button
 												onClick={() => {
-												console.log(appointment)
 													const newData = {
 														...appointment,
 														status: "Canceled",
 														cancelReason: canceling,
 													}
-													console.log(newData)
 													axios.put(
 														`http://localhost:4000/appointment/${id}`,
 														newData
