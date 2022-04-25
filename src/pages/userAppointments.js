@@ -1,15 +1,27 @@
-import React from "react"
-import { Card, CardContent, Container, Grid, Typography } from "@mui/material"
+import React, { useRef } from "react"
+import {
+	Button,
+	Card,
+	CardContent,
+	Container,
+	Grid,
+	Typography,
+} from "@mui/material"
 import image1 from "../static/images/appointment.svg"
 import Banner from "../components/userModule/Banner"
 import AppointmentCard from "../components/userModule/AppointmentCard"
 import HeadAndPara from "../components/userModule/headAndPara"
-import { SmallButton } from "../components/Buttons"
+import { MediumButton } from "../components/Buttons"
 import AppointmentRows from "../components/userModule/AppointmentRows"
 import { Link } from "react-router-dom"
 import FullLayout from "../layouts/FullLayout"
+import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined"
 
 function UserAppointments() {
+	const appointmentRef = useRef()
+	const handleClickAppointment = () => {
+		appointmentRef.current.scrollIntoView({ behavior: "smooth" })
+	}
 	return (
 		<FullLayout>
 			<Container>
@@ -21,17 +33,27 @@ function UserAppointments() {
 				<Grid container spacing={2} mt={1} mb={1}>
 					<AppointmentCard />
 				</Grid>
+
 				<Grid textAlign={"center"}>
+					<Button
+						onClick={handleClickAppointment}
+						sx={{ borderRadius: 50, background: "#eaeaea" }}
+					>
+						See your history <ArrowDownwardOutlinedIcon />
+					</Button>
 					<HeadAndPara
 						head="Well Trained and Dedicated Doctors and Staffs "
 						para="We have highly trained experts & doctors, trained in international institutions, coupled with years of experience to deliver just the right medical outcomes. Our team of highly qualified doctors have several unique achievements to their credits, but the most important thing is our multi-disciplinary approach to providing the best possible treatment for each patient."
 					/>
 
 					<Link style={{ textDecoration: "none" }} to="/doctors">
-						<SmallButton value="Make an Appointment now" />
+						<MediumButton value="Make an Appointment now" />
 					</Link>
-					<HeadAndPara head="Your appointment history" para="" />
+					<div ref={appointmentRef}>
+						<HeadAndPara head="Your appointment history" para="" />
+					</div>
 				</Grid>
+
 				<Card
 					sx={{
 						display: { xs: "none", sm: "flex" },
