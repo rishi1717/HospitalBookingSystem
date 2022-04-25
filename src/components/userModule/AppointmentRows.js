@@ -26,7 +26,7 @@ export default function AppointmentRows(props) {
 	const handleClose = () => setOpen(false)
 	const [appointments, setAppointments] = React.useState([])
 	React.useEffect(() => {
-		(async function() {
+		;(async function() {
 			const appointmentData = await axios.get(
 				"http://localhost:4000/appointment"
 			)
@@ -39,6 +39,10 @@ export default function AppointmentRows(props) {
 				<Card
 					key={appointment._id}
 					sx={{
+						border: appointment.status === "Scheduled"
+								? 1
+								: 0,
+						borderColor:"green",
 						display: "flex",
 						m: "0.4rem",
 						flexDirection: { xs: "column", md: "row" },
@@ -87,7 +91,11 @@ export default function AppointmentRows(props) {
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
-									color="text.secondary"
+									color={
+										appointment.status === "Scheduled"
+											? "green"
+											: "text.secondary"
+									}
 									component="div"
 								>
 									{appointment.status}
