@@ -8,7 +8,7 @@ const Search = () => {
 			justifyContent="center"
 			component="form"
 			autoComplete="off"
-			// onChange={handleSearch}
+			onChange={()=>{console.log('123')}}
 			noValidate
 			sx={{ mt: 1, mb: 2 }}
 		>

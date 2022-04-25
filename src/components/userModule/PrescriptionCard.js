@@ -3,19 +3,10 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined"
-import axios from "axios"
 import { Grid } from "@mui/material"
 
-export default function PrescriptionCard(props) {
-	const [prescriptions, setPrescriptions] = React.useState([])
-	React.useEffect(() => {
-		(async function() {
-			const userData = await axios.get(
-				"http://localhost:4000/prescription"
-			)
-			setPrescriptions(userData.data.prescription)
-		})()
-	}, [])
+export default function PrescriptionCard({prescriptions}) {
+	
 	return (
 		<>
 			{prescriptions.map((prescription) => (
