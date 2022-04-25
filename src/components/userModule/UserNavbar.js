@@ -37,6 +37,11 @@ const UserNavbar = () => {
 
 	return (
 		<AppBar position="static" sx={{ borderRadius: "0.6rem" }}>
+			<style>
+				@import
+				url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
+			</style>
+			
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<IconButton sx={{ p: 0, display: { xs: "none", sm: "flex" } }}>
@@ -53,7 +58,8 @@ const UserNavbar = () => {
 								noWrap
 								component="div"
 								sx={{
-									fontSize: "0.9rem",
+									fontFamily: "Sniglet",
+									fontSize: "1.1rem",
 									color: "white",
 									mr: 2,
 									display: { xs: "none", sm: "flex" },
@@ -146,7 +152,7 @@ const UserNavbar = () => {
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
-						<Link to='/profile'>
+						<Link to="/profile">
 							<IconButton sx={{ p: 0 }}>
 								<Avatar alt="Remy Sharp" src={UserPicture} />
 							</IconButton>

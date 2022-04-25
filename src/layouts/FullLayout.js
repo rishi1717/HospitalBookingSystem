@@ -5,11 +5,17 @@ import Footer from "../components/userModule/footer"
 
 const FullLayout = ({ children }) => {
 	return (
-		<>
-			{localStorage.userToken ? <UserNavbar /> : <Navbar />}
+		<div
+			style={{ minHeight: "98vh", display: "flex", flexDirection: "column" }}
+		>
+			<div style={{ position: "sticky", zIndex:2, top: 0 }}>
+				{localStorage.userToken ? <UserNavbar /> : <Navbar />}
+			</div>
 			{children}
-			<Footer />
-		</>
+			<div style={{ marginTop:'auto' }}>
+				<Footer />
+			</div>
+		</div>
 	)
 }
 

@@ -1,14 +1,14 @@
 import React from "react"
-import HomeCard from "../components/userModule/HomeCard"
+import HomeCard from "../userModule/HomeCard"
 import { Container, Grid } from "@mui/material"
-import image1 from "../static/images/medicalTeam.jpg"
-import image2 from "../static/images/services.png"
-import image3 from "../static/images/medicine2.webp"
-import image4 from "../static/images/hospital.webp"
-import image5 from "../static/images/userPortrait-removebg.png"
-import Banner from "../components/userModule/Banner"
-import AppointmentCard from "../components/userModule/AppointmentCard"
-import FullLayout from "../layouts/FullLayout"
+import image1 from "../../static/images/medicalTeam.jpg"
+import image2 from "../../static/images/services.png"
+import image3 from "../../static/images/medicine2.webp"
+import image4 from "../../static/images/hospital.webp"
+import image5 from "../../static/images/userPortrait-removebg.png"
+import Banner from "../userModule/Banner"
+import AppointmentCard from "../userModule/AppointmentCard"
+import FullLayout from "../../layouts/FullLayout"
 
 function UserHome() {
 	return (

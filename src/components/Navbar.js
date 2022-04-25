@@ -36,6 +36,10 @@ const Navbar = () => {
 
 	return (
 		<AppBar position="static" sx={{ borderRadius: "0.6rem" }}>
+			<style>
+				@import
+				url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
+			</style>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<IconButton sx={{ p: 0, display: { xs: "none", sm: "flex" } }}>
@@ -46,13 +50,14 @@ const Navbar = () => {
 							alt="One Health"
 							src={Logo}
 						/>
-						<Link style={linkStyle} to="/landing">
+						<Link style={linkStyle} to="/">
 							<Typography
 								variant="h6"
 								noWrap
 								component="div"
 								sx={{
-									fontSize: "0.9rem",
+									fontFamily: "Sniglet",
+									fontSize: "1.1rem",
 									color: "white",
 									mr: 2,
 									display: { xs: "none", sm: "flex" },
