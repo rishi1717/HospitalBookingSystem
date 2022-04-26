@@ -1,18 +1,27 @@
 import * as React from "react"
 import Box from "@mui/material/Box"
-import Divider from "@mui/material/Divider"
 import Drawer from "@mui/material/Drawer"
-import InboxIcon from "@mui/icons-material/MoveToInbox"
 import List from "@mui/material/List"
 import ListItem from "@mui/material/ListItem"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
-import MailIcon from "@mui/icons-material/Mail"
+import SickIcon from '@mui/icons-material/Sick';
+import AssignmentIndRoundedIcon from "@mui/icons-material/AssignmentIndRounded"
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
+import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded"
+import MenuIcon from "@mui/icons-material/Menu"
 import Toolbar from "@mui/material/Toolbar"
+import { AppBar, Avatar, IconButton, Typography } from "@mui/material"
+import { Link } from "react-router-dom"
+import Logo from "../static/images/Logo.png"
 
-const drawerWidth = "20%"
+const linkStyle = {
+	textDecoration: "none",
+	color: "white",
+}
+const drawerWidth = "17%"
 
-const DoctorsLayout = (props) => {
+const ResponsiveDrawer = (props) => {
 	const { window, children } = props
 	const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -21,18 +30,57 @@ const DoctorsLayout = (props) => {
 	}
 
 	const drawer = (
-		<div>
-			<Toolbar />
-			<Divider />
-			<List>
-				{["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-					<ListItem button key={text}>
-						<ListItemIcon>
-							{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-						</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
-				))}
+		<div style={{ height: "100vh", backgroundColor: "#1976D2", display:'flex',flexDirection:'column'}}>
+			<IconButton sx={{ p: 1 }}>
+				<Link style={linkStyle} to="/">
+					<Avatar alt="One Health" src={Logo} />
+				</Link>
+				<style>
+					@import
+					url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap')
+				</style>
+				<Link style={linkStyle} to="/">
+					<Typography
+						variant="h6"
+						noWrap
+						component="div"
+						sx={{
+							fontFamily: "Sniglet",
+							fontSize: "1rem",
+							color: "white",
+							mr: 2,
+							display: { xs: "none", sm: "flex" },
+						}}
+					>
+						One Health Hospital
+					</Typography>
+				</Link>
+			</IconButton>
+			<List sx={{mt:'30%', height:'50vh', display:'flex',flexDirection:'column', WebkitJustifyContent:'space-around' }}>
+				<ListItem button>
+					<ListItemIcon sx={{ color: "white" }}>
+						<DashboardRoundedIcon />
+					</ListItemIcon>
+					<ListItemText sx={{ color: "white" }} primary="Dashboard" />
+				</ListItem>
+				<ListItem button>
+					<ListItemIcon sx={{ color: "white" }}>
+						<SickIcon />
+					</ListItemIcon>
+					<ListItemText sx={{ color: "white" }} primary="Patients" />
+				</ListItem>
+				<ListItem button>
+					<ListItemIcon sx={{ color: "white" }}>
+						<DateRangeRoundedIcon />
+					</ListItemIcon>
+					<ListItemText sx={{ color: "white" }} primary="Schedule" />
+				</ListItem>
+				<ListItem button>
+					<ListItemIcon sx={{ color: "white" }}>
+						<AssignmentIndRoundedIcon />
+					</ListItemIcon>
+					<ListItemText sx={{ color: "white" }} primary="Profile" />
+				</ListItem>
 			</List>
 		</div>
 	)
@@ -42,6 +90,34 @@ const DoctorsLayout = (props) => {
 
 	return (
 		<Box sx={{ display: "flex" }}>
+			<AppBar
+				position="fixed"
+				sx={{
+                    display:{xs:'block',sm:'none'},
+					width: { sm: `calc(100% - ${drawerWidth}px)` },
+					ml: { sm: `${drawerWidth}px` },
+					backgroundColor: "white",
+				}}
+			>
+				<Toolbar>
+					<IconButton
+						aria-label="open drawer"
+						edge="start"
+						onClick={handleDrawerToggle}
+						sx={{ mr: 2, display: { sm: "none" } }}
+					>
+						<MenuIcon />
+					</IconButton>
+					<Typography
+						variant="h6"
+						noWrap
+						component="div"
+						sx={{ color: "#595959" }}
+					>
+						One Health Hospital
+					</Typography>
+				</Toolbar>
+			</AppBar>
 			<Box
 				component="nav"
 				sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -69,6 +145,7 @@ const DoctorsLayout = (props) => {
 					variant="permanent"
 					sx={{
 						display: { xs: "none", sm: "block" },
+						backgroundColor: "#1976D2",
 						"& .MuiDrawer-paper": {
 							boxSizing: "border-box",
 							width: drawerWidth,
@@ -85,4 +162,4 @@ const DoctorsLayout = (props) => {
 	)
 }
 
-export default DoctorsLayout
+export default ResponsiveDrawer
