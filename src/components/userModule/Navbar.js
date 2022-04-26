@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import Container from "@mui/material/Container"
 import Avatar from "@mui/material/Avatar"
 import MenuItem from "@mui/material/MenuItem"
-import Logo from "../static/images/Logo.png"
+import Logo from "../../static/images/Logo.png"
 import { Link } from "react-router-dom"
 
 const linkStyle = {

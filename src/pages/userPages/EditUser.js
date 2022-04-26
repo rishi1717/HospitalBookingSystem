@@ -2,10 +2,10 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
-import image from "../static/images/userPortrait.png"
+import image from "../../static/images/userPortrait.png"
 import { Box, Button, Grid, TextField } from "@mui/material"
-import { SmallButton } from "../components/Buttons"
-import FullLayout from "../layouts/FullLayout"
+import { SmallButton } from "../../components/Buttons"
+import FullLayout from "../../layouts/FullLayout"
 // import LogoutIcon from "@mui/icons-material/Logout"
 function EditUser() {
 	const handleSubmit = (event) => {

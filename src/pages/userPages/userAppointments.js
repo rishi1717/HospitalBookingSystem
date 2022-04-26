@@ -7,14 +7,14 @@ import {
 	Grid,
 	Typography,
 } from "@mui/material"
-import image1 from "../static/images/appointment.svg"
-import Banner from "../components/userModule/Banner"
-import AppointmentCard from "../components/userModule/AppointmentCard"
-import HeadAndPara from "../components/userModule/headAndPara"
-import { MediumButton } from "../components/Buttons"
-import AppointmentRows from "../components/userModule/AppointmentRows"
+import image1 from "../../static/images/appointment.svg"
+import Banner from "../../components/userModule/Banner"
+import AppointmentCard from "../../components/userModule/AppointmentCard"
+import HeadAndPara from "../../components/userModule/headAndPara"
+import { MediumButton } from "../../components/Buttons"
+import AppointmentRows from "../../components/userModule/AppointmentRows"
 import { Link } from "react-router-dom"
-import FullLayout from "../layouts/FullLayout"
+import FullLayout from "../../layouts/FullLayout"
 import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined"
 
 function UserAppointments() {

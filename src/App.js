@@ -1,19 +1,19 @@
 import React from "react"
 import "./App.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-const EditUser = React.lazy(()=>import("./pages/EditUser"))
-const ConfirmBooking = React.lazy(()=>import("./pages/ConfirmBooking"))
-const Payment =  React.lazy(() => import("./pages/Payment"))
-const Booking = React.lazy(() => import("./pages/booking"))
-const DoctorProfile =  React.lazy(() => import("./pages/DoctorProfile"))
-const Register = React.lazy(() => import("./pages/Register"))
-const AboutUs = React.lazy(() => import("./pages/AboutUs"))
-const UserAppointments = React.lazy(() => import("./pages/userAppointments"))
-const UserDoctorPage = React.lazy(() => import("./pages/UserDoctorPage"))
-const UserPrescriptions = React.lazy(() => import("./pages/UserPrescriptions"))
-const UserLogin = React.lazy(() => import("./pages/UserLogin"))
-const UserProfile = React.lazy(() => import("./pages/UserProfile"))
-const Landing = React.lazy(()=> import('./pages/Landing'))
+const EditUser = React.lazy(()=>import("./pages/userPages/EditUser"))
+const ConfirmBooking = React.lazy(()=>import("./pages/userPages/ConfirmBooking"))
+const Payment =  React.lazy(() => import("./pages/userPages/Payment"))
+const Booking = React.lazy(() => import("./pages/userPages/booking"))
+const DoctorProfile =  React.lazy(() => import("./pages/userPages/DoctorProfile"))
+const Register = React.lazy(() => import("./pages/userPages/Register"))
+const AboutUs = React.lazy(() => import("./pages/userPages/AboutUs"))
+const UserAppointments = React.lazy(() => import("./pages/userPages/userAppointments"))
+const UserDoctorPage = React.lazy(() => import("./pages/userPages/UserDoctorPage"))
+const UserPrescriptions = React.lazy(() => import("./pages/userPages/UserPrescriptions"))
+const UserLogin = React.lazy(() => import("./pages/userPages/UserLogin"))
+const UserProfile = React.lazy(() => import("./pages/userPages/UserProfile"))
+const Landing = React.lazy(()=> import('./pages/userPages/Landing'))
 
 function App() {
 	return (

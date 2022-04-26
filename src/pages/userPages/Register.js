@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import axios from "../axios.js"
+import axios from "../../axios.js"
 import Swal from "sweetalert2"
-import FullLayout from "../layouts/FullLayout"
+import FullLayout from "../../layouts/FullLayout"
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material"
 
 const Toast = Swal.mixin({

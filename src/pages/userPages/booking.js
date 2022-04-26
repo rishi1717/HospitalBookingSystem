@@ -17,8 +17,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { TimePicker } from "@mui/x-date-pickers/TimePicker"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import FullLayout from "../layouts/FullLayout"
-import { MediumButton } from "../components/Buttons"
+import FullLayout from "../../layouts/FullLayout"
+import { MediumButton } from "../../components/Buttons"
 
 const Booking = () => {
 	const location = useLocation()

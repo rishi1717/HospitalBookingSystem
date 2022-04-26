@@ -1,15 +1,25 @@
-import * as React from "react"
+import React, { useEffect, useState } from "react"
 import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import image from "../../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
-import { SmallButton } from "../components/Buttons"
-import { Link, useLocation } from "react-router-dom"
-import FullLayout from "../layouts/FullLayout"
+import { SmallButton } from "../../components/Buttons"
+import { Link } from "react-router-dom"
+import axios from "../../axios.js"
+import FullLayout from "../../layouts/FullLayout"
 
-function ConfirmBooking() {
-	const location = useLocation()
-	const details = location.state.details
+function UserProfile() {
+	const [user,setUser] = useState([])
+	useEffect(()=>{
+		(async function (){
+			const userData = await axios.get(
+				"/user/6263b790bb65608cbe37b1b3"
+			)
+			setUser(userData.data.user)
+		})()
+	},[])
 	return (
 		<FullLayout>
 			<Grid
@@ -19,29 +29,38 @@ function ConfirmBooking() {
 				alignItems="center"
 				justify="center"
 			>
-				<Typography
-					sx={{
-						fontSize: { xs: "1rem", sm: "1.5rem" },
-						fontFamily: "sans-serif",
-						mt: 2,
-						fontWeight: "bold",
-						color: "#595959",
-					}}
-					component="p"
-				>
-					Confirm Booking
-				</Typography>
 				<Card
 					elevation={3}
 					sx={{
 						mt: 5,
 						display: "flex",
-						flexDirection: { xs: "column", sm: "row" },
+						maxHeight: "18rem",
 						minHeight: { xs: 0, sm: 150 },
 						px: { xs: 1, sm: 7 },
 						py: { xs: 2, sm: 4 },
 					}}
 				>
+					<Box
+						component="div"
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							mr: { xs: 2, sm: 5 },
+						}}
+					>
+						<CardMedia
+							component="img"
+							sx={{
+								margin: "0.4rem",
+								maxWidth: { xs: 120, sm: 150 },
+								maxHeight: { xs: 120, sm: 150 },
+								borderRadius: 100,
+							}}
+							image={image}
+							alt="image"
+						/>
+					</Box>
 					<CardContent
 						sx={{
 							flex: 1,
@@ -61,7 +80,7 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Patient Name :</b> {details.user}
+							<b>Name :</b> {user.firstName}
 						</Typography>
 						<Typography
 							sx={{
@@ -76,7 +95,8 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Age :</b> {details.age}
+							<b>ID :</b>
+							{user._id}
 						</Typography>
 						<Typography
 							sx={{
@@ -91,23 +111,7 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Gender :</b> {details.gender}
-						</Typography>
-
-						<Typography
-							sx={{
-								mt: 2,
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							<b>Mobile :</b> {details.phone}
+							<b>Age :</b> {user.age}
 						</Typography>
 						<Typography
 							sx={{
@@ -122,7 +126,7 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Appointed to :</b> {details.doctor}
+							<b>Gender :</b> {user.gender}
 						</Typography>
 						<Typography
 							sx={{
@@ -137,7 +141,7 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Reason :</b> {details.reason}
+							<b>Mobile :</b> {user.phone}
 						</Typography>
 						<Typography
 							sx={{
@@ -152,56 +156,44 @@ function ConfirmBooking() {
 							}}
 							component="p"
 						>
-							<b>Scheduled at :</b> date And time
-						</Typography>
-						<Typography
-							sx={{
-								mt: 2,
-								fontSize: {
-									xs: "0.75rem",
-									sm: "1rem",
-									textAlign: "left",
-								},
-								fontFamily: "sans-serif",
-								color: "#595959",
-							}}
-							component="p"
-						>
-							<b>Amount to be paid :</b> {details.fee}
+							<b>Blood Group :</b> {user.blood}
 						</Typography>
 					</CardContent>
-					<Box
-						component="div"
-						sx={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "center",
-							alignItems: "center",
-							mr: { xs: 2, sm: 5 },
-						}}
-					>
-						<Link style={{ textDecoration: "none" }} to="/doctors">
-							<SmallButton
-								value="Cancel"
-								color="#eaeaea"
-								text="#EF4242"
-							/>
-						</Link>
-						<Link
-							style={{ textDecoration: "none" }}
-							to="/payment"
-							state={{ details: details }}
-						>
-							<SmallButton
-								value="Confirm"
-								color="#eaeaea"
-								text="#609ACF"
-							/>
-						</Link>
-					</Box>
 				</Card>
+				<Grid alignItems="center" justify="center">
+					<Link style={{ textDecoration: "none" }} to="/editprofile">
+						<SmallButton
+							value="Edit Details"
+							color="#eaeaea"
+							text="#595959"
+						/>
+					</Link>
+					<Link style={{ textDecoration: "none" }} to="/prescriptions">
+						<SmallButton
+							value="Prescriptions"
+							color="#eaeaea"
+							text="#595959"
+						/>
+					</Link>
+					<Link style={{ textDecoration: "none" }} to="/appointments">
+						<SmallButton
+							value="Appointments"
+							color="#eaeaea"
+							text="#595959"
+						/>
+					</Link>
+					<Link
+						onClick={() => {
+							localStorage.removeItem("userToken")
+						}}
+						style={{ textDecoration: "none" }}
+						to="/login"
+					>
+						<SmallButton value="Logout" color="#eaeaea" text="#B81C1C" />
+					</Link>
+				</Grid>
 			</Grid>
 		</FullLayout>
 	)
 }
-export default ConfirmBooking
+export default UserProfile

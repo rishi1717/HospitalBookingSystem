@@ -1,5 +1,5 @@
 import React from "react"
-import Navbar from "../components/Navbar"
+import Navbar from "../components/userModule/Navbar"
 import UserNavbar from "../components/userModule/UserNavbar"
 import Footer from "../components/userModule/footer"
 

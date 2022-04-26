@@ -10,13 +10,13 @@ import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
-import image from "../static/images/hospital.webp"
+import image from "../../static/images/hospital.webp"
 import { Container } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
-import axios from "../axios.js"
+import axios from "../../axios.js"
 import Swal from "sweetalert2"
-import FullLayout from "../layouts/FullLayout"
+import FullLayout from "../../layouts/FullLayout"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",

@@ -7,10 +7,10 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material"
-import axios from "../axios.js"
+import axios from "../../axios.js"
 import React, { useEffect, useState } from "react"
-import PrescriptionCard from "../components/userModule/PrescriptionCard"
-import FullLayout from "../layouts/FullLayout"
+import PrescriptionCard from "../../components/userModule/PrescriptionCard"
+import FullLayout from "../../layouts/FullLayout"
 
 function UserPrescriptions() {
 	const [prescriptions, setPrescriptions] = useState([])

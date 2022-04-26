@@ -1,9 +1,9 @@
 import { Box, Container, TextField } from "@mui/material"
-import axios from "../axios.js"
+import axios from "../../axios.js"
 import React, { useEffect, useState } from "react"
-import Departments from "../components/userModule/Departments"
-import Doctors from "../components/userModule/doctors"
-import FullLayout from "../layouts/FullLayout"
+import Departments from "../../components/userModule/Departments"
+import Doctors from "../../components/userModule/doctors"
+import FullLayout from "../../layouts/FullLayout"
 
 function UserDoctorPage() {
 	const [departments, setDepartments] = useState([])

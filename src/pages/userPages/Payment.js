@@ -2,10 +2,10 @@ import { Box, Button, Card, Grid, TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import axios from "../axios.js"
+import axios from "../../axios.js"
 import Swal from "sweetalert2"
-import image from "../static/images/cardSchemes.webp"
-import FullLayout from "../layouts/FullLayout"
+import image from "../../static/images/cardSchemes.webp"
+import FullLayout from "../../layouts/FullLayout"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
