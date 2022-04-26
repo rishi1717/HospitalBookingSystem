@@ -89,13 +89,12 @@ const ResponsiveDrawer = (props) => {
 		window !== undefined ? () => window().document.body : undefined
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<>
 			<AppBar
-				position="fixed"
 				sx={{
-                    display:{xs:'block',sm:'none'},
-					width: { sm: `calc(100% - ${drawerWidth}px)` },
-					ml: { sm: `${drawerWidth}px` },
+					display: { xs: "block", sm: "none" },
+					width: { xs: `calc(100% - ${drawerWidth}px)` },
+					ml: { xs: `${drawerWidth}px` },
 					backgroundColor: "white",
 				}}
 			>
@@ -112,53 +111,56 @@ const ResponsiveDrawer = (props) => {
 						variant="h6"
 						noWrap
 						component="div"
-						sx={{ color: "#595959" }}
+						sx={{ fontFamily: "Sniglet", color: "#595959" }}
 					>
 						One Health Hospital
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<Box
-				component="nav"
-				sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-				aria-label="mailbox folders"
-			>
-				<Drawer
-					container={container}
-					variant="temporary"
-					open={mobileOpen}
-					onClose={handleDrawerToggle}
-					ModalProps={{
-						keepMounted: true,
-					}}
-					sx={{
-						display: { xs: "block", sm: "none" },
-						"& .MuiDrawer-paper": {
-							boxSizing: "border-box",
-							width: drawerWidth,
-						},
-					}}
+			<Toolbar sx={{display:{xs:'block',sm:'none'}}}/>
+			<Box sx={{ display: "flex" }}>
+				<Box
+					component="nav"
+					sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+					aria-label="mailbox folders"
 				>
-					{drawer}
-				</Drawer>
-				<Drawer
-					variant="permanent"
-					sx={{
-						display: { xs: "none", sm: "block" },
-						backgroundColor: "#1976D2",
-						"& .MuiDrawer-paper": {
-							boxSizing: "border-box",
-							width: drawerWidth,
-						},
-					}}
-					open
-				>
-					{drawer}
-				</Drawer>
-			</Box>
+					<Drawer
+						container={container}
+						variant="temporary"
+						open={mobileOpen}
+						onClose={handleDrawerToggle}
+						ModalProps={{
+							keepMounted: true,
+						}}
+						sx={{
+							display: { xs: "block", sm: "none" },
+							"& .MuiDrawer-paper": {
+								boxSizing: "border-box",
+								width: drawerWidth,
+							},
+						}}
+					>
+						{drawer}
+					</Drawer>
+					<Drawer
+						variant="permanent"
+						sx={{
+							display: { xs: "none", sm: "block" },
+							backgroundColor: "#1976D2",
+							"& .MuiDrawer-paper": {
+								boxSizing: "border-box",
+								width: drawerWidth,
+							},
+						}}
+						open
+					>
+						{drawer}
+					</Drawer>
+				</Box>
 
-			<Box>{children}</Box>
-		</Box>
+				<Box>{children}</Box>
+			</Box>
+		</>
 	)
 }
 

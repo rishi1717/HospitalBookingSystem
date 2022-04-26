@@ -20,7 +20,7 @@ export default function DoctorCard(props) {
 				component="img"
 				sx={{ width: 151 }}
 				image={props.image}
-				alt="Live from space album cover"
+				alt="picture"
 			/>
 			<CardContent sx={{ flex: "1 0 auto" }}>
 				<Typography component="div" variant="h5">
