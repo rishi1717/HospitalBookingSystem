@@ -15,9 +15,10 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
-import { Avatar } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Avatar, Button } from "@mui/material"
+import { Link, useNavigate } from "react-router-dom"
 import Logo from "../static/images/Logo.png"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 const linkStyle = {
 	padding: "1rem",
@@ -28,6 +29,7 @@ const linkStyle = {
 const drawerWidth = 240
 
 function ResponsiveDrawer(props) {
+    const navigate = useNavigate()
 	const { window, children } = props
 	const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -36,7 +38,7 @@ function ResponsiveDrawer(props) {
 	}
 
 	const drawer = (
-		<div>
+		<div style={{ height: "100vh" }}>
 			<style>
 				@import
 				url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
@@ -61,31 +63,49 @@ function ResponsiveDrawer(props) {
 			</IconButton>
 			<Toolbar />
 			<List>
-				<ListItem button sx={{marginTop:2}}>
+				<ListItem
+					button
+					sx={{ marginTop: 2 }}
+					onClick={() => {
+						navigate("../doctor")
+					}}
+				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<DashboardRoundedIcon />
 					</ListItemIcon>
 					<ListItemText primary="DashBoard" />
 				</ListItem>
-				<ListItem button  sx={{marginTop:2}}>
+				<ListItem button sx={{ marginTop: 2 }}>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<SickIcon />
 					</ListItemIcon>
 					<ListItemText primary="Patients" />
 				</ListItem>
-				<ListItem button  sx={{marginTop:2}}>
+				<ListItem button sx={{ marginTop: 2 }}>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<DateRangeRoundedIcon />
 					</ListItemIcon>
 					<ListItemText primary="Schedule" />
 				</ListItem>
-				<ListItem button  sx={{marginTop:2}}>
+				<ListItem
+					button
+					sx={{ marginTop: 2 }}
+					onClick={() => {
+						navigate("profile")
+					}}
+				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<AssignmentIndRoundedIcon />
 					</ListItemIcon>
 					<ListItemText primary="Profile" />
 				</ListItem>
 			</List>
+			<Button
+				sx={{ color: "red", position: "absolute", bottom: 10, left: 65 }}
+			>
+				Logout
+				<LogoutIcon />
+			</Button>
 		</div>
 	)
 
@@ -114,7 +134,7 @@ function ResponsiveDrawer(props) {
 						<MenuIcon />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
-						Responsive drawer
+						Doctor Page
 					</Typography>
 				</Toolbar>
 			</AppBar>
@@ -163,7 +183,7 @@ function ResponsiveDrawer(props) {
 					width: { sm: `calc(100% - ${drawerWidth}px)` },
 				}}
 			>
-				<Toolbar sx={{display:{sm:'none'}}}/>
+				<Toolbar sx={{ display: { sm: "none" } }} />
 				{children}
 			</Box>
 		</Box>

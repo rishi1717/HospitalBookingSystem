@@ -2,6 +2,7 @@ import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import DoctorLogin from "../pages/doctorPages/doctorLogin"
 import DoctorHome from "../pages/doctorPages/doctorHome"
+import DoctorProfile from "../pages/doctorPages/doctorProfile"
 function DoctorRoutes() {
 	return (
 		<>
@@ -20,6 +21,14 @@ function DoctorRoutes() {
 						element={
 							<React.Suspense>
 								<DoctorHome />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/doctor/profile"
+						element={
+							<React.Suspense>
+								<DoctorProfile />
 							</React.Suspense>
 						}
 					/>

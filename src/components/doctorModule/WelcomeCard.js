@@ -67,12 +67,12 @@ const WelcomeCard = () => {
 						</CardContent>
 					</Grid>
 					<Grid item xs={12} sm={6.5}>
-						<CardContent>
+						<CardContent sx={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
 							<Typography
 								component="div"
 								sx={{
 									fontSize: { xs: "1rem", sm: "1.2rem" },
-                                    textAlign:'center'
+									textAlign: "center",
 								}}
 							>
 								Welcome
@@ -88,7 +88,16 @@ const WelcomeCard = () => {
 							</Typography>
 						</CardContent>
 					</Grid>
-					<Grid item xs={6} sm={2.5}>
+					<Grid
+						item
+						xs={6}
+						sm={2.5}
+						sx={{
+							display: "flex",
+							alignContent: "center",
+							justifyContent: "center",
+						}}
+					>
 						<CardMedia
 							component="img"
 							sx={{ width: 120, borderRadius: "100%", m: 1 }}
