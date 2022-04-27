@@ -1,8 +1,14 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import DoctorLogin from "../pages/doctorPages/doctorLogin"
-import DoctorHome from "../pages/doctorPages/doctorHome"
-import DoctorProfile from "../pages/doctorPages/doctorProfile"
+import DoctorSchedule from "../pages/doctorPages/doctorSchedule"
+const DoctorLogin = React.lazy(() => import("../pages/doctorPages/doctorLogin"))
+const DoctorHome = React.lazy(() => import("../pages/doctorPages/doctorHome"))
+const DoctorProfile = React.lazy(() =>
+	import("../pages/doctorPages/doctorProfile")
+)
+const DoctorPatients = React.lazy(() =>
+	import("../pages/doctorPages/doctorPatients")
+)
 function DoctorRoutes() {
 	return (
 		<>
@@ -29,6 +35,22 @@ function DoctorRoutes() {
 						element={
 							<React.Suspense>
 								<DoctorProfile />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/doctor/patients"
+						element={
+							<React.Suspense>
+								<DoctorPatients />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/doctor/schedule"
+						element={
+							<React.Suspense>
+								<DoctorSchedule />
 							</React.Suspense>
 						}
 					/>

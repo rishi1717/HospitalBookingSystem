@@ -75,13 +75,25 @@ function ResponsiveDrawer(props) {
 					</ListItemIcon>
 					<ListItemText primary="DashBoard" />
 				</ListItem>
-				<ListItem button sx={{ marginTop: 2 }}>
+				<ListItem
+					button
+					sx={{ marginTop: 2 }}
+					onClick={() => {
+						navigate("../doctor/patients")
+					}}
+				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<SickIcon />
 					</ListItemIcon>
 					<ListItemText primary="Patients" />
 				</ListItem>
-				<ListItem button sx={{ marginTop: 2 }}>
+				<ListItem
+					button
+					sx={{ marginTop: 2 }}
+					onClick={() => {
+						navigate("../doctor/schedule")
+					}}
+				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<DateRangeRoundedIcon />
 					</ListItemIcon>
@@ -91,7 +103,7 @@ function ResponsiveDrawer(props) {
 					button
 					sx={{ marginTop: 2 }}
 					onClick={() => {
-						navigate("profile")
+						navigate("../doctor/profile")
 					}}
 				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
