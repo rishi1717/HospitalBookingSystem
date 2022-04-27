@@ -28,6 +28,7 @@ const Toast = Swal.mixin({
 })
 
 export default function UserLogin() {
+	const [error, setError] = React.useState()
 	const navigate = useNavigate()
 	const {
 		register,
@@ -46,9 +47,7 @@ export default function UserLogin() {
 
 	const onSubmit = async () => {
 		try {
-			const resData = await axios.post("/user/login",data)
-
-			console.log(resData)
+			const resData = await axios.post("/user/login", data)
 			localStorage.setItem("userToken", resData.data.token)
 			Toast.fire({
 				position: "bottom-right",
@@ -58,8 +57,8 @@ export default function UserLogin() {
 				timer: 3000,
 			})
 			navigate("/")
-		} catch (e) {
-			console.log(e.message)
+		} catch (err) {
+			setError(err.response.data.message)
 		}
 	}
 
@@ -154,6 +153,9 @@ export default function UserLogin() {
 										errors.password ? errors.password.message : null
 									}
 								/>
+								<Typography sx={{ color: "red", m: 1 }}>
+									{error ? error : ""}
+								</Typography>
 								<FormControlLabel
 									control={
 										<Checkbox value="remember" color="primary" />

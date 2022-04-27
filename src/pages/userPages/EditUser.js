@@ -3,18 +3,91 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import image from "../../static/images/userPortrait.png"
-import { Box, Button, Grid, TextField } from "@mui/material"
+import {
+	Box,
+	Button,
+	FormControl,
+	FormHelperText,
+	Grid,
+	InputLabel,
+	MenuItem,
+	Select,
+	TextField,
+	Typography,
+} from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
 import FullLayout from "../../layouts/FullLayout"
-// import LogoutIcon from "@mui/icons-material/Logout"
+import { useLocation, useNavigate } from "react-router-dom"
+import axios from "../../axios"
+import { useForm } from "react-hook-form"
+import Swal from "sweetalert2"
+
+const Toast = Swal.mixin({
+	background: "#1E1E1E",
+	color: "white",
+	toast: true,
+	position: "top-end",
+	showConfirmButton: false,
+	timerProgressBar: true,
+})
+
 function EditUser() {
-	const handleSubmit = (event) => {
-		event.preventDefault()
-		const data = new FormData(event.currentTarget)
-		console.log({
-			email: data.get("email"),
-			password: data.get("password"),
+	const navigate = useNavigate()
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm()
+	const [error, setError] = React.useState()
+
+	const location = useLocation()
+	const { user } = location.state
+	console.log(user)
+	const [data, setData] = React.useState({
+		firstName: user.firstName,
+		secondName: user.secondName,
+		age: user.age,
+		gender: user.gender,
+		email: user.email,
+		blood: user.blood,
+		phone: user.phone,
+	})
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value })
+	}
+
+	const handleChangeSelect = (event) => {
+		setData({ ...data, [event.target.name]: event.target.value })
+	}
+
+	const onSubmit = async () => {
+		const con = await Swal.fire({
+			title: "Are you sure?",
+			text: "User details will Updated!",
+			background: "#eaeaea",
+			color: "#595959",
+			showCancelButton: true,
+			cancelButtonColor: "#B81C1C",
+			confirmButtonText: "Update",
+			confirmButtonColor: "#609ACF",
 		})
+		if (con.isConfirmed) {
+			try {
+				await axios.put(`/user/${user._id}`, data)
+				navigate("/profile")
+				Toast.fire({
+					position: "bottom-right",
+					icon: "success",
+					title: "user updated",
+					showConfirmButton: false,
+					timer: 3000,
+				})
+			} catch (err) {
+				if (err.response) {
+					setError(err.response.data.message)
+				}
+			}
+		}
 	}
 	return (
 		<FullLayout>
@@ -91,12 +164,20 @@ function EditUser() {
 								<Box
 									component="form"
 									noValidate
-									onSubmit={handleSubmit}
+									onSubmit={handleSubmit(onSubmit)}
 									sx={{ mt: 2 }}
 								>
 									<Grid container spacing={2}>
 										<Grid item xs={12} sm={6}>
 											<TextField
+												{...register("firstName", {
+													required: "Provide first name!",
+													minLength: {
+														value: 2,
+														message:
+															"Atleast 2 characters required",
+													},
+												})}
 												autoComplete="given-name"
 												name="firstName"
 												required
@@ -104,63 +185,167 @@ function EditUser() {
 												id="firstName"
 												label="First Name"
 												autoFocus
+												onChange={handleChange}
+												value={data.firstName}
+												error={errors.firstName}
+												helperText={
+													errors.firstName
+														? errors.firstName.message
+														: null
+												}
 											/>
 										</Grid>
 										<Grid item xs={12} sm={6}>
 											<TextField
+												{...register("secondName", {
+													required: "Provide last name!",
+													minLength: {
+														value: 2,
+														message:
+															"Atleast 2 characters required",
+													},
+												})}
 												required
 												fullWidth
-												id="lastName"
-												label="Last Name"
-												name="lastName"
+												id="secondName"
+												label="Second Name"
+												name="secondName"
+												onChange={handleChange}
+												value={data.secondName}
+												error={errors.secondName}
+												helperText={
+													errors.secondName
+														? errors.secondName.message
+														: null
+												}
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
 											<TextField
+												{...register("age", {
+													required: "Enter your age!",
+													min: {
+														value: 18,
+														message: "You need to be 18 or older",
+													},
+												})}
 												required
 												fullWidth
 												id="age"
 												label="Age"
 												name="age"
+												onChange={handleChange}
+												value={data.age}
+												error={errors.age}
+												helperText={
+													errors.age ? errors.age.message : null
+												}
 											/>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<TextField
-												required
-												fullWidth
-												id="gender"
-												label="Gender"
-												name="gender"
-											/>
+											<FormControl fullWidth>
+												<InputLabel id="gender">Gender</InputLabel>
+												<Select
+													{...register("gender", {
+														required: "Select gender!",
+													})}
+													required
+													fullWidth
+													label="Gender"
+													id="gender"
+													name="gender"
+													value={data.gender}
+													onChange={handleChangeSelect}
+													error={errors.gender}
+												>
+													<MenuItem value={"Male"}>Male</MenuItem>
+													<MenuItem value={"Female"}>
+														Female
+													</MenuItem>
+													<MenuItem value={"Others"}>
+														Others
+													</MenuItem>
+												</Select>
+												<FormHelperText sx={{ color: "#D32F2F" }}>
+													{errors.gender
+														? errors.gender.message
+														: null}
+												</FormHelperText>
+											</FormControl>
 										</Grid>
 										<Grid item xs={12} sm={4}>
-											<TextField
-												required
-												fullWidth
-												id="blood"
-												label="Blood Group"
-												name="blood"
-											/>
+											<FormControl fullWidth>
+												<InputLabel id="blood">Blood</InputLabel>
+												<Select
+													{...register("blood", {})}
+													fullWidth
+													label="Blood"
+													id="blood"
+													name="blood"
+													value={data.blood}
+													onChange={handleChangeSelect}
+													error={errors.blood}
+												>
+													<MenuItem value={"A+ve"}>A+ve</MenuItem>
+													<MenuItem value={"A-ve"}>A-ve</MenuItem>
+													<MenuItem value={"B+ve"}>B+ve</MenuItem>
+													<MenuItem value={"B-ve"}>B-ve</MenuItem>
+													<MenuItem value={"AB+ve"}>
+														AB+ve
+													</MenuItem>
+													<MenuItem value={"O+ve"}>O+ve</MenuItem>
+													<MenuItem value={"O-ve"}>O-ve</MenuItem>
+												</Select>
+											</FormControl>
 										</Grid>
 										<Grid item xs={12}>
 											<TextField
+												{...register("email", {
+													required: "Provide email!",
+												})}
 												required
 												fullWidth
 												id="email"
 												label="Email Address"
 												name="email"
 												autoComplete="email"
+												onChange={handleChange}
+												value={data.email}
+												error={errors.email}
+												helperText={
+													errors.email
+														? errors.email.message
+														: null
+												}
 											/>
 										</Grid>
 										<Grid item xs={12}>
 											<TextField
+												{...register("phone", {
+													required: "Provide phone number!",
+													minLength: {
+														value: 9,
+														message: "Not valid",
+													},
+												})}
 												required
 												fullWidth
 												id="phone"
 												label="Phone"
 												name="phone"
+												onChange={handleChange}
+												value={data.phone}
+												error={errors.phone}
+												helperText={
+													errors.phone
+														? errors.phone.message
+														: null
+												}
 											/>
 										</Grid>
+										<Typography sx={{ color: "red", m: 2 }}>
+											{error ? error : ""}
+										</Typography>
 									</Grid>
 									<Grid alignItems="center" justify="center">
 										<SmallButton
@@ -170,7 +355,7 @@ function EditUser() {
 										/>
 										<SmallButton
 											type="submit"
-											value="Edit"
+											value="Update"
 											color="#eaeaea"
 											text="#609acf"
 										/>

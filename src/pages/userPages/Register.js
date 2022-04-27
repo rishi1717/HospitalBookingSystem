@@ -11,7 +11,13 @@ import { useNavigate } from "react-router-dom"
 import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../../layouts/FullLayout"
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material"
+import {
+	FormControl,
+	FormHelperText,
+	InputLabel,
+	MenuItem,
+	Select,
+} from "@mui/material"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -29,6 +35,8 @@ export default function Register() {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
+
+	const [error,setError] = useState()
 
 	const [data, setData] = useState({
 		firstName: "",
@@ -50,17 +58,22 @@ export default function Register() {
 		setData({ ...data, [event.target.name]: event.target.value })
 	}
 
-	const onSubmit = () => {
-		console.log(data)
-		axios.post("/user", data)
-		navigate("/login")
-		Toast.fire({
-			position: "bottom-right",
-			icon: "success",
-			title: "user registered",
-			showConfirmButton: false,
-			timer: 3000,
-		})
+	const onSubmit = async () => {
+		try {
+			await axios.post("/user", data)
+			navigate("/login")
+			Toast.fire({
+				position: "bottom-right",
+				icon: "success",
+				title: "user registered",
+				showConfirmButton: false,
+				timer: 3000,
+			})
+		} catch (err) {
+			if (err.response) {
+				setError(err.response.data.message)
+			}
+		}
 	}
 
 	return (
@@ -170,24 +183,6 @@ export default function Register() {
 											}
 										/>
 									</Grid>
-									{/* <Grid item xs={12} sm={4}>
-										<TextField
-											{...register("gender", {
-												required: "Select your gender!",
-											})}
-											required
-											fullWidth
-											id="gender"
-											label="Gender"
-											name="gender"
-											onChange={handleChange}
-											value={data.gender}
-											error={errors.gender}
-											helperText={
-												errors.gender ? errors.gender.message : null
-											}
-										/>
-									</Grid> */}
 
 									<Grid item xs={6} sm={4}>
 										<FormControl fullWidth>
@@ -216,19 +211,6 @@ export default function Register() {
 											</FormHelperText>
 										</FormControl>
 									</Grid>
-
-									{/* <Grid item xs={12} sm={4}>
-										<TextField
-											{...register("blood", {})}
-											fullWidth
-											id="blood"
-											label="Blood Group"
-											name="blood"
-											onChange={handleChange}
-											value={data.blood}
-										/>
-									</Grid> */}
-
 									<Grid item xs={6} sm={4}>
 										<FormControl fullWidth>
 											<InputLabel id="blood">Blood</InputLabel>
@@ -299,8 +281,8 @@ export default function Register() {
 											{...register("password", {
 												required: "Create a password!",
 												minLength: {
-													value: 6,
-													message: "Atleast 6 characters required",
+													value: 8,
+													message: "Atleast 8 characters required",
 												},
 											})}
 											required
@@ -340,6 +322,9 @@ export default function Register() {
 											}
 										/>
 									</Grid>
+									<Typography sx={{color:"red", m:2}}>
+										{error?error:""}
+									</Typography>
 								</Grid>
 								<Button
 									type="submit"

@@ -6,20 +6,20 @@ import CardMedia from "@mui/material/CardMedia"
 import image from "../../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "../../axios.js"
 import FullLayout from "../../layouts/FullLayout"
+import Swal from "sweetalert2"
 
 function UserProfile() {
-	const [user,setUser] = useState([])
-	useEffect(()=>{
-		(async function (){
-			const userData = await axios.get(
-				"/user/6263b790bb65608cbe37b1b3"
-			)
+	const navigate = useNavigate()
+	const [user, setUser] = useState([])
+	useEffect(() => {
+		(async function() {
+			const userData = await axios.get("/user/6263b790bb65608cbe37b1b3")
 			setUser(userData.data.user)
 		})()
-	},[])
+	}, [])
 	return (
 		<FullLayout>
 			<Grid
@@ -161,7 +161,11 @@ function UserProfile() {
 					</CardContent>
 				</Card>
 				<Grid alignItems="center" justify="center">
-					<Link style={{ textDecoration: "none" }} to="/editprofile">
+					<Link
+						style={{ textDecoration: "none" }}
+						state={{ user: user }}
+						to="/editprofile"
+					>
 						<SmallButton
 							value="Edit Details"
 							color="#eaeaea"
@@ -183,11 +187,25 @@ function UserProfile() {
 						/>
 					</Link>
 					<Link
-						onClick={() => {
-							localStorage.removeItem("userToken")
+						onClick={async () => {
+							const con = await Swal.fire({
+								title: "Are you sure?",
+								text: "User will be logged out!",
+								background: "#eaeaea",
+								color: "#595959",
+								showCancelButton: true,
+								cancelButtonColor: "#B81C1C",
+								confirmButtonText: "Logout",
+								confirmButtonColor: "#609ACF",
+							})
+							if(con.isConfirmed){
+								localStorage.removeItem("userToken")
+								navigate('/login')
+							}
+							
 						}}
 						style={{ textDecoration: "none" }}
-						to="/login"
+						to='/profile'
 					>
 						<SmallButton value="Logout" color="#eaeaea" text="#B81C1C" />
 					</Link>
