@@ -20,8 +20,23 @@ const DoctorPatients = () => {
 			>
 				Patients
 			</Typography>
-            <Toolbar/>
-            <PatientTable />
+			<Toolbar sx={{display:{xs:'none',sm:'block'}}}/>
+			<Typography
+				sx={{
+					fontSize: {
+						xs: "1rem",
+						sm: "1.2rem",
+					},
+					fontFamily: "sans-serif",
+					color: "#595959",
+                    textAlign:'center',
+                    mb:3
+				}}
+				component="p"
+			>
+				Your patients list
+			</Typography>
+			<PatientTable />
 		</DoctorsLayout>
   )
 }

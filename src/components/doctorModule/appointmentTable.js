@@ -7,41 +7,46 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 
-function createData(id, name, date, reason, condition, profile) {
-	return { id, name, date, reason, condition, profile }
+function createData( name, time, reason, profile, complete) {
+	return { name, time, reason, profile, complete }
 }
 
 const rows = [
-	createData(1, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(2, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(3, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(4, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(5, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
+	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
 ]
 
-export default function PatientTable() {
+export default function AppointmentTable() {
 	return (
-		<TableContainer component={Paper} sx={{maxWidth:'88vw'}}>
-			<Table sx={{ minWidth: {sm:650} }} aria-label="simple table">
+		<TableContainer
+			component={Paper}
+			sx={{ maxWidth: "88vw", mt: 2, border: 1, borderColor: "#609acf" }}
+		>
+			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
 				<TableHead>
-					<TableRow sx={{ backgroundColor: "#1976D2" }}>
-						<TableCell align="center" sx={{ color: "white" }}>
-							ID
-						</TableCell>
+					<TableRow sx={{ backgroundColor: "#609acf" }}>
 						<TableCell align="center" sx={{ color: "white" }}>
 							Patient Name
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Recent Appointment
+							Time
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
 							Reason
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Condition
+							Profile
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Profile
+							Complete
 						</TableCell>
 					</TableRow>
 				</TableHead>
@@ -51,14 +56,11 @@ export default function PatientTable() {
 							key={index}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
-							<TableCell align="center" component="th" scope="row">
-								{row.id}
-							</TableCell>
 							<TableCell align="center">{row.name}</TableCell>
-							<TableCell align="center">{row.date}</TableCell>
+							<TableCell align="center">{row.time}</TableCell>
 							<TableCell align="center">{row.reason}</TableCell>
-							<TableCell align="center">{row.condition}</TableCell>
 							<TableCell align="center">{row.profile}</TableCell>
+							<TableCell align="center">{row.complete}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
