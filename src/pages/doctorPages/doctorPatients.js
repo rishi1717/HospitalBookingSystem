@@ -1,4 +1,4 @@
-import { Toolbar, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 import React from "react"
 import PatientTable from "../../components/doctorModule/patientTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"

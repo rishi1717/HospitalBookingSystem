@@ -6,42 +6,35 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
+import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
+import { Button } from "@mui/material"
 
-function createData(id, name, date, reason, condition, profile) {
-	return { id, name, date, reason, condition, profile }
+function createData(index, details, status) {
+	return { index, details, status }
 }
 
 const rows = [
-	createData(1, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(2, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(3, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(4, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(5, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
+	createData(1, "Rishi", "Actions"),
+	createData(2, "Rishi", "Actions"),
+	createData(3, "Rishi", "Actions"),
+	createData(4, "Rishi", "Actions"),
+	createData(5, "Rishi", "Actions"),
 ]
 
 export default function ScheduleTable() {
 	return (
-		<TableContainer component={Paper} sx={{ maxWidth: "88vw",mt:2 }}>
+		<TableContainer component={Paper} sx={{ maxWidth: "88vw", mt: 2 }}>
 			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
 				<TableHead>
 					<TableRow sx={{ backgroundColor: "#1976D2" }}>
 						<TableCell align="center" sx={{ color: "white" }}>
-							ID
+							Index
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Patient Name
+							Details
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Recent Appointment
-						</TableCell>
-						<TableCell align="center" sx={{ color: "white" }}>
-							Reason
-						</TableCell>
-						<TableCell align="center" sx={{ color: "white" }}>
-							Condition
-						</TableCell>
-						<TableCell align="center" sx={{ color: "white" }}>
-							Profile
+							Actions
 						</TableCell>
 					</TableRow>
 				</TableHead>
@@ -51,16 +44,22 @@ export default function ScheduleTable() {
 							key={index}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
-							<TableCell align="center" component="th" scope="row">
-								{row.id}
-							</TableCell>
-							<TableCell align="center">{row.name}</TableCell>
-							<TableCell align="center">{row.date}</TableCell>
-							<TableCell align="center">{row.reason}</TableCell>
-							<TableCell align="center">{row.condition}</TableCell>
-							<TableCell align="center">{row.profile}</TableCell>
+							<TableCell align="center">{row.index}</TableCell>
+							<TableCell align="center">{row.details}</TableCell>
+							<TableCell align="center">{row.status}</TableCell>
 						</TableRow>
 					))}
+					<TableRow
+						sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+					>
+						<TableCell align="center"></TableCell>
+						<TableCell align="center">
+							<Button>
+								<AddBoxRoundedIcon />
+							</Button>
+						</TableCell>
+						<TableCell align="center"></TableCell>
+					</TableRow>
 				</TableBody>
 			</Table>
 		</TableContainer>

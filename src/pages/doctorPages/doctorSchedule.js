@@ -1,4 +1,4 @@
-import { TextField, Toolbar, Typography } from "@mui/material"
+import { TextField, Typography } from "@mui/material"
 import React, { useState } from "react"
 import ScheduleTable from "../../components/doctorModule/scheduleTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
