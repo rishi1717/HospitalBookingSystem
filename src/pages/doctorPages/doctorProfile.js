@@ -31,7 +31,7 @@ function DoctorProfile() {
 					border: 1,
 					borderColor: "#1976D2",
 					m: "auto",
-					mt: { xs: 2, sm: 10 },
+					mt: { xs: 2, sm: 7 },
 					width: "85%",
 					minHeight: { xs: 0, sm: 150 },
 					px: { xs: 1, sm: 7 },

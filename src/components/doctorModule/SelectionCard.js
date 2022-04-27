@@ -1,8 +1,10 @@
 import { Button, Grid, Paper } from "@mui/material"
 import { Box } from "@mui/system"
 import React from "react"
+import { useNavigate } from "react-router-dom"
 
 const SelectionCard = (props) => {
+	const navigate = useNavigate()
 	return (
 		<>
 			<Grid item xs={12} sm={6}>
@@ -16,9 +18,15 @@ const SelectionCard = (props) => {
 						backgroundColor: "#eaeaea",
 					}}
 				>
-					<Button sx={{ p: 2, fontWeight: "bold" }}>{props.value}</Button>
+					<Button
+						onClick={() => {
+							if (props.link) navigate(props.link)
+						}}
+						sx={{ p: 2, fontWeight: "bold" }}
+					>
+						{props.value}
+					</Button>
 					<Box sx={{ p: 2 }} textAlign="center">
-						{" "}
 						You have 11 appointments today{" "}
 					</Box>
 				</Paper>

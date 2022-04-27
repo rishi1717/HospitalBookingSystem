@@ -1,5 +1,6 @@
-import { Typography } from '@mui/material'
+import { Toolbar, Typography } from '@mui/material'
 import React from 'react'
+import PatientTable from '../../components/doctorModule/patientTable'
 import DoctorsLayout from '../../layouts/DoctorsLayout'
 
 const DoctorPatients = () => {
@@ -19,6 +20,8 @@ const DoctorPatients = () => {
 			>
 				Patients
 			</Typography>
+            <Toolbar/>
+            <PatientTable />
 		</DoctorsLayout>
   )
 }

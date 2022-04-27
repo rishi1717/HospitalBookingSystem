@@ -24,10 +24,10 @@ const DoctorHome = () => {
 				</Typography>
 				<WelcomeCard />
 				<Grid container spacing={2} marginTop={2}>
-					<SelectionCard value="Appointments" />
-					<SelectionCard value="Patients" />
-					<SelectionCard value="Schedule" />
-					<SelectionCard value="Profile" />
+					<SelectionCard value="Appointments" link='/doctor/appointments'/>
+					<SelectionCard value="Patients" link='/doctor/patients'/>
+					<SelectionCard value="Schedule" link='/doctor/schedule'/>
+					<SelectionCard value="Profile" link='/doctor/profile'/>
 				</Grid>
 			</DoctorsLayout>
 		</>

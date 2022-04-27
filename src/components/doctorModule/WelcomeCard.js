@@ -7,13 +7,14 @@ import Image from "../../static/images/doctorPortrait.webp"
 import moment from "moment"
 import { Container, Grid } from "@mui/material"
 
-const date = moment().format("MMMM Do")
-const day = moment().format("dddd")
-
 const WelcomeCard = () => {
-	const [time, setTime] = useState()
+	const [time, setTime] = useState(moment().format("h:mm a"))
+	const [date, setDate] = useState(moment().format("MMMM Do"))
+	const [day, setDay] = useState(moment().format("dddd"))
 	setInterval(() => {
 		setTime(moment().format("h:mm a"))
+		setDate(moment().format("MMMM Do"))
+		setDay(moment().format("dddd"))
 	}, 1000)
 	return (
 		<Container>
@@ -75,14 +76,14 @@ const WelcomeCard = () => {
 									textAlign: "center",
 								}}
 							>
-								Welcome
+								Welcome 
 								<span
 									style={{
 										fontSize: { xs: "1.2rem", sm: "1.4rem" },
 										fontWeight: "bold",
 									}}
 								>
-									Dr.Santhosh
+									&nbsp; Dr.Santhosh
 								</span>
 								, Have a great day
 							</Typography>

@@ -13,6 +13,7 @@ import SickIcon from "@mui/icons-material/Sick"
 import AssignmentIndRoundedIcon from "@mui/icons-material/AssignmentIndRounded"
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded"
 import DateRangeRoundedIcon from "@mui/icons-material/DateRangeRounded"
+import MoreTimeRoundedIcon from "@mui/icons-material/MoreTimeRounded"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import { Avatar, Button } from "@mui/material"
@@ -38,7 +39,7 @@ function ResponsiveDrawer(props) {
 	}
 
 	const drawer = (
-		<div style={{ height: "100vh" }}>
+		<div style={{ height: "100vh", backgroundColor: "#eaeaea" }}>
 			<style>
 				@import
 				url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
@@ -74,6 +75,18 @@ function ResponsiveDrawer(props) {
 						<DashboardRoundedIcon />
 					</ListItemIcon>
 					<ListItemText primary="DashBoard" />
+				</ListItem>
+				<ListItem
+					button
+					sx={{ marginTop: 2 }}
+					onClick={() => {
+						navigate("../doctor/appointments")
+					}}
+				>
+					<ListItemIcon sx={{ color: "#1976D2" }}>
+						<MoreTimeRoundedIcon />
+					</ListItemIcon>
+					<ListItemText primary="Appointments" />
 				</ListItem>
 				<ListItem
 					button
