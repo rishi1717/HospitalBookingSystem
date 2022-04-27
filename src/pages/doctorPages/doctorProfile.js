@@ -14,8 +14,8 @@ function DoctorProfile() {
 			<Typography
 				sx={{
 					fontSize: {
-						xs: "1rem",
-						sm: "1.2rem",
+						xs: "1.2rem",
+						sm: "1.4rem",
 					},
 					display: { xs: "none", sm: "block" },
 					fontFamily: "sans-serif",
@@ -41,8 +41,8 @@ function DoctorProfile() {
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "1rem",
-							sm: "1.2rem",
+							xs: "1.2rem",
+							sm: "1.4rem",
 						},
 						display: { xs: "none", sm: "block" },
 						fontFamily: "sans-serif",

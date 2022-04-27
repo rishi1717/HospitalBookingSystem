@@ -13,8 +13,8 @@ const DoctorAppointments = () => {
 			<Typography
 				sx={{
 					fontSize: {
-						xs: "1rem",
-						sm: "1.2rem",
+						xs: "1.2rem",
+						sm: "1.4rem",
 					},
 					display: { xs: "none", sm: "block" },
 					fontFamily: "sans-serif",
@@ -24,17 +24,17 @@ const DoctorAppointments = () => {
 			>
 				Appointments
 			</Typography>
-			<Toolbar sx={{ display: { xs: "none", sm: "block" } }} />
 			<Typography
 				sx={{
 					fontSize: {
-						xs: "1rem",
-						sm: "1.2rem",
+						xs: "1.2rem",
+						sm: "1.4rem",
 					},
 					fontFamily: "sans-serif",
 					color: "#595959",
 					textAlign: "center",
 					mb: 3,
+					mt: { xs: 1, sm: 3 },
 				}}
 				component="p"
 			>
