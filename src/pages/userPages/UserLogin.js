@@ -49,6 +49,7 @@ export default function UserLogin() {
 		try {
 			const resData = await axios.post("/user/login", data)
 			localStorage.setItem("userToken", resData.data.token)
+			localStorage.setItem("userId", resData.data.user._id)
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",

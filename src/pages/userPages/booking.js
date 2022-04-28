@@ -1,5 +1,6 @@
 import {
 	Box,
+	Button,
 	FormControl,
 	FormHelperText,
 	Grid,
@@ -14,64 +15,82 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { TimePicker } from "@mui/x-date-pickers/TimePicker"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import FullLayout from "../../layouts/FullLayout"
 import { MediumButton } from "../../components/Buttons"
 import Unauthorized from "./Unauthorized"
+import axios from "../../axios"
 
 const Booking = () => {
-	const location = useLocation()
-	let doctor = {fee:0, name:'not selected'}
-	if (location.state) {
-		doctor = location.state.doctor
-	}
-
-	const navigate = useNavigate()
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm()
-
-	const [date, setDate] = React.useState("")
-	const [time, setTime] = React.useState("")
-
-	useEffect(() => {
-		console.log(date)
-		setData({ ...data, date: date })
-	}, [date])
-	useEffect(() => {
-		console.log(time)
-		setData({ ...data, time: time })
-	}, [time])
-
-	const [data, setData] = useState({
-		user: "",
-		age: "",
-		gender: "",
-		phone: "",
-		reason: "",
-		fee: doctor.fee,
-		doctor: doctor.name,
-		time: time,
-		date: date,
-		active: true,
-		status: "Scheduled",
-	})
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value })
-	}
-
-	const handleChangeSelect = (event) => {
-		setData({ ...data, [event.target.name]: event.target.value })
-	}
-
-	const onSubmit = () => {
-		navigate("/confirmbooking", { state: { details: data } })
-	}
-
 	if (localStorage.userToken) {
+		const location = useLocation()
+		let doctor = { fee: 0, name: "not selected" }
+		if (location.state) {
+			doctor = location.state.doctor
+		}
+
+		const [user, setUser] = useState([])
+		const [date, setDate] = React.useState(null)
+		const [time, setTime] = React.useState(null)
+
+		const [data, setData] = useState({
+			user: "",
+			age: "",
+			gender: "",
+			phone: "",
+			reason: "",
+			fee: doctor.fee,
+			doctor: doctor.name,
+			time: time,
+			date: date,
+			active: true,
+			status: "Scheduled",
+		})
+
+		useEffect(() => {
+			setData({
+				...data,
+				user: user.firstName,
+				age: user.age,
+				gender: user.gender,
+				phone: user.phone,
+			})
+		}, [user])
+
+		useEffect(() => {
+			;(async function() {
+				const userData = await axios.get(`/user/${localStorage.userId}`)
+				setUser(userData.data.user)
+			})()
+		}, [])
+
+		const navigate = useNavigate()
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
+		} = useForm()
+
+		useEffect(() => {
+			setData({ ...data, date: date })
+		}, [date])
+		useEffect(() => {
+			setData({ ...data, time: time })
+		}, [time])
+
+		const handleChange = ({ currentTarget: input }) => {
+			setData({ ...data, [input.name]: input.value })
+		}
+
+		const handleChangeSelect = (event) => {
+			setData({ ...data, [event.target.name]: event.target.value })
+		}
+
+		const onSubmit = () => {
+			navigate("/confirmbooking", { state: { details: data } })
+		}
+
 		return (
 			<FullLayout>
 				<Typography
@@ -236,7 +255,7 @@ const Booking = () => {
 						<Grid item xs={6} sm={3.5}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
-									label="Select date to be appointed"
+									label="Select date"
 									id="date"
 									name="date"
 									value={date}
@@ -248,15 +267,9 @@ const Booking = () => {
 							</LocalizationProvider>
 						</Grid>
 						<Grid item xs={6} sm={3.5}>
-							{/* <TimePicker
-							amPmAriaLabel="Select AM/PM"
-							format="h:m a"
-							onChange={setTime}
-							value={time}
-						/> */}
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<TimePicker
-									label="Select time to be appointed"
+									label="Select time"
 									id="time"
 									name="time"
 									value={time}
@@ -269,8 +282,23 @@ const Booking = () => {
 						</Grid>
 					</Grid>
 					<Grid item xs={6} sm={6}>
-						<MediumButton value="Confirm" />
-						<MediumButton value="Cancel" color="#EF4242" text="white" />
+						<Button
+							type="submit"
+							sx={{
+								mt: 4,
+								ml: 1,
+								backgroundColor: "#609acf",
+								color: "white",
+								"&:hover": {
+									backgroundColor: "white",
+									color: "#609acf",
+								},
+							}}
+						>
+							Confirm
+						</Button>
+						<Link style={{textDecoration:'none'}} to='/doctors'><MediumButton value="Cancel" color="#EF4242" text="white" /></Link>
+						
 					</Grid>
 				</Box>
 			</FullLayout>

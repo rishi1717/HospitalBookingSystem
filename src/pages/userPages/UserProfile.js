@@ -16,8 +16,8 @@ function UserProfile() {
 	const navigate = useNavigate()
 	const [user, setUser] = useState([])
 	useEffect(() => {
-		;(async function() {
-			const userData = await axios.get("/user/6263b790bb65608cbe37b1b3")
+		(async function() {
+			const userData = await axios.get(`/user/${localStorage.userId}`)
 			setUser(userData.data.user)
 		})()
 	}, [])

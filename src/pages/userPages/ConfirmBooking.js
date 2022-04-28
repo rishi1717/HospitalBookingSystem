@@ -2,13 +2,15 @@ import * as React from "react"
 import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import { Box, Grid } from "@mui/material"
+import { Box, Button, Grid } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import FullLayout from "../../layouts/FullLayout"
 import Unauthorized from "./Unauthorized"
+import Swal from "sweetalert2"
 
 function ConfirmBooking() {
+	const navigate = useNavigate()
 	const location = useLocation()
 	const details = location.state.details
 
@@ -180,27 +182,57 @@ function ConfirmBooking() {
 								flexDirection: "column",
 								justifyContent: "center",
 								alignItems: "center",
-								mr: { xs: 2, sm: 5 },
+								ml: { xs: 0, sm: 5 },
 							}}
 						>
-							<Link style={{ textDecoration: "none" }} to="/doctors">
-								<SmallButton
-									value="Cancel"
-									color="#eaeaea"
-									text="#EF4242"
-								/>
-							</Link>
-							<Link
-								style={{ textDecoration: "none" }}
-								to="/payment"
-								state={{ details: details }}
+							<Button
+								sx={{
+									mt: 4,
+									ml: 1,
+									backgroundColor: "#EF4242",
+									color: "white",
+									"&:hover": {
+										backgroundColor: "white",
+										color: "#EF4242",
+									},
+								}}
+								onClick={async () => {
+									const con = await Swal.fire({
+										title: "Are you sure?",
+										text: "Provided details will be cleared!",
+										background: "#eaeaea",
+										color: "#595959",
+										showCancelButton: true,
+										cancelButtonColor: "#609ACF",
+										confirmButtonText: "Cancel",
+										cancelButtonText: "Don't Cancel",
+										confirmButtonColor: "#B81C1C",
+									})
+									if (con.isConfirmed) {
+										navigate("/doctors")
+									}
+								}}
 							>
-								<SmallButton
-									value="Confirm"
-									color="#eaeaea"
-									text="#609ACF"
-								/>
-							</Link>
+								Cancel
+							</Button>
+							<Button
+								sx={{
+									fontSize:'0.8rem',
+									mt: 4,
+									ml: 1,
+									backgroundColor: "#609acf",
+									color: "white",
+									"&:hover": {
+										backgroundColor: "white",
+										color: "#609acf",
+									},
+								}}
+								onClick={async () => {
+									navigate("/payment", { state: { details: details } })
+								}}
+							>
+								Confirm
+							</Button>
 						</Box>
 					</Card>
 				</Grid>
