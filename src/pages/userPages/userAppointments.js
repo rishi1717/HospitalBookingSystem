@@ -16,13 +16,15 @@ import AppointmentRows from "../../components/userModule/AppointmentRows"
 import { Link } from "react-router-dom"
 import FullLayout from "../../layouts/FullLayout"
 import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined"
+import Unauthorized from "./Unauthorized"
 
 function UserAppointments() {
 	const appointmentRef = useRef()
 	const handleClickAppointment = () => {
 		appointmentRef.current.scrollIntoView({ behavior: "smooth" })
 	}
-	return (
+
+	if (localStorage.userToken) {	return (
 		<FullLayout>
 			<Container>
 				<Banner
@@ -132,6 +134,10 @@ function UserAppointments() {
 			</Container>
 		</FullLayout>
 	)
+	} else {
+		return <Unauthorized />
+	}
+
 }
 
 export default UserAppointments

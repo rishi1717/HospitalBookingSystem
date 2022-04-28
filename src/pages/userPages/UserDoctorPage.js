@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import Departments from "../../components/userModule/Departments"
 import Doctors from "../../components/userModule/doctors"
 import FullLayout from "../../layouts/FullLayout"
+import Unauthorized from "./Unauthorized.js"
 
 function UserDoctorPage() {
 	const [departments, setDepartments] = useState([])
@@ -33,7 +34,8 @@ function UserDoctorPage() {
 		)
 		setResult(searchResult)
 	}
-	return (
+
+	if (localStorage.userToken) {return (
 		<FullLayout>
 			<Container>
 				<Box
@@ -65,6 +67,10 @@ function UserDoctorPage() {
 			</Container>
 		</FullLayout>
 	)
+	} else {
+		return <Unauthorized />
+	}
+	
 }
 
 export default UserDoctorPage
