@@ -40,7 +40,7 @@ export function MediumButton(props) {
 	let text = props.text ? props.text : "#fff"
 	return (
 		<Button
-			size="medium"
+			size="medium" 
 			variant="contained"
 			sx={{
 				mt: 4,
