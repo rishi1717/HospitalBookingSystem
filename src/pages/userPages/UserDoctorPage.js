@@ -13,10 +13,10 @@ function UserDoctorPage() {
 	const [searchValue, setSearchValue] = useState("")
 	useEffect(() => {
 		;(async function() {
-			const departmentData = await axios.get(
-				"/department"
-			)
-			const doctorData = await axios.get("/doctor")
+			const departmentData = await axios.get("/department")
+			const doctorData = await axios.get("/doctor", {
+				headers: { Authorization: `Bearer ${localStorage.userToken}` },
+			})
 			setDepartments(departmentData.data.department)
 			setDoctors(doctorData.data.doctor)
 		})()
@@ -35,42 +35,42 @@ function UserDoctorPage() {
 		setResult(searchResult)
 	}
 
-	if (localStorage.userToken) {return (
-		<FullLayout>
-			<Container>
-				<Box
-					display="flex"
-					justifyContent="center"
-					component="form"
-					autoComplete="off"
-					onChange={handleSearch}
-					onSubmit={handleSearch}
-					noValidate
-					sx={{ mt: 1, mb: 2 }}
-				>
-					<TextField
-						margin="normal"
-						fullWidth
-						id="search"
-						label="Search"
-						name="search"
-						autoFocus
-						variant="standard"
-						sx={{ width: "90%" }}
-					/>
-				</Box>
-				{searchValue === "" ? (
-					<Departments departments={departments} doctors={doctors} />
-				) : (
-					<Doctors doctors={result} />
-				)}
-			</Container>
-		</FullLayout>
-	)
+	if (localStorage.userToken) {
+		return (
+			<FullLayout>
+				<Container>
+					<Box
+						display="flex"
+						justifyContent="center"
+						component="form"
+						autoComplete="off"
+						onChange={handleSearch}
+						onSubmit={handleSearch}
+						noValidate
+						sx={{ mt: 1, mb: 2 }}
+					>
+						<TextField
+							margin="normal"
+							fullWidth
+							id="search"
+							label="Search"
+							name="search"
+							autoFocus
+							variant="standard"
+							sx={{ width: "90%" }}
+						/>
+					</Box>
+					{searchValue === "" ? (
+						<Departments departments={departments} doctors={doctors} />
+					) : (
+						<Doctors doctors={result} />
+					)}
+				</Container>
+			</FullLayout>
+		)
 	} else {
 		return <Unauthorized />
 	}
-	
 }
 
 export default UserDoctorPage
