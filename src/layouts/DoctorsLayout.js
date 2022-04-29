@@ -20,6 +20,7 @@ import { Avatar, Button } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom"
 import Logo from "../static/images/Logo.png"
 import LogoutIcon from "@mui/icons-material/Logout"
+import Swal from "sweetalert2"
 
 const linkStyle = {
 	padding: "1rem",
@@ -127,6 +128,23 @@ function ResponsiveDrawer(props) {
 			</List>
 			<Button
 				sx={{ color: "red", position: "absolute", bottom: 10, left: 65 }}
+				onClick={async () => {
+					const con = await Swal.fire({
+						title: "Are you sure?",
+						text: "You will be logged out!",
+						background: "#eaeaea",
+						color: "#595959",
+						showCancelButton: true,
+						cancelButtonColor: "#B81C1C",
+						confirmButtonText: "Logout",
+						confirmButtonColor: "#609ACF",
+					})
+					if (con.isConfirmed) {
+						localStorage.removeItem("doctorToken")
+						localStorage.removeItem("doctorId")
+						navigate("/doctor/login")
+					}
+				}}
 			>
 				Logout
 				<LogoutIcon />

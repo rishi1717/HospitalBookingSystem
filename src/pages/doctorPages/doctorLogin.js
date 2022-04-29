@@ -50,6 +50,7 @@ export default function DoctorLogin() {
 
 			console.log(resData)
 			localStorage.setItem("doctorToken", resData.data.token)
+			localStorage.setItem("doctorId", resData.data.doctor)
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
