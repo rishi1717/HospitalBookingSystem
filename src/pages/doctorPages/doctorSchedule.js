@@ -7,52 +7,54 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 
 const DoctorSchedule = () => {
-	const [date, setDate] = useState(new Date())
-	return (
-		<DoctorsLayout>
-			<Typography
-				sx={{
-					fontSize: {
-						xs: "1.2rem",
-						sm: "1.4rem",
-					},
-					display: { xs: "none", sm: "block" },
-					fontFamily: "sans-serif",
-					color: "#1976D2",
-				}}
-				component="p"
-			>
-				Schedule
-			</Typography>
-			<Typography
-				sx={{
-					fontSize: {
-						xs: "1.2rem",
-						sm: "1.4rem",
-					},
-					fontFamily: "sans-serif",
-					color: "#595959",
-					textAlign: "center",
-					mb: 3,
-					mt: { xs: 1, sm: 3 },
-				}}
-				component="p"
-			>
-				Your Schedule
-			</Typography>
-			<LocalizationProvider dateAdapter={AdapterDateFns}>
-				<DatePicker
-					label="Select Date"
-					value={date}
-					onChange={(newDate) => {
-						setDate(newDate)
+	if (localStorage.doctorToken) {
+		const [date, setDate] = useState(new Date())
+		return (
+			<DoctorsLayout>
+				<Typography
+					sx={{
+						fontSize: {
+							xs: "1.2rem",
+							sm: "1.4rem",
+						},
+						display: { xs: "none", sm: "block" },
+						fontFamily: "sans-serif",
+						color: "#1976D2",
 					}}
-					renderInput={(params) => <TextField {...params} />}
-				/>
-			</LocalizationProvider>
-			<ScheduleTable />
-		</DoctorsLayout>
-	)
+					component="p"
+				>
+					Schedule
+				</Typography>
+				<Typography
+					sx={{
+						fontSize: {
+							xs: "1.2rem",
+							sm: "1.4rem",
+						},
+						fontFamily: "sans-serif",
+						color: "#595959",
+						textAlign: "center",
+						mb: 3,
+						mt: { xs: 1, sm: 3 },
+					}}
+					component="p"
+				>
+					Your Schedule
+				</Typography>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<DatePicker
+						label="Select Date"
+						value={date}
+						onChange={(newDate) => {
+							setDate(newDate)
+						}}
+						renderInput={(params) => <TextField {...params} />}
+					/>
+				</LocalizationProvider>
+				<ScheduleTable />
+			</DoctorsLayout>
+		)
+	}
 }
 
 export default DoctorSchedule
