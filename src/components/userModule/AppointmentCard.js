@@ -163,7 +163,6 @@ export default function AppointmentCard() {
 											<Button
 												onClick={async () => {
 													const newData = {
-														...appointment,
 														status: "Canceled",
 														cancelReason: canceling,
 													}

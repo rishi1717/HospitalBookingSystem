@@ -158,9 +158,7 @@ export default function AppointmentRows(props) {
 											<Grid item xs={6} sm={4}>
 												<Button
 													onClick={async () => {
-														console.log(appointment)
 														const newData = {
-															...appointment,
 															status: "Canceled",
 															cancelReason: canceling,
 														}
