@@ -19,7 +19,9 @@ function UserPrescriptions() {
 	const [searchValue, setSearchValue] = useState("")
 	useEffect(() => {
 		;(async function() {
-			const userData = await axios.get("/prescription")
+			const userData = await axios.get("/prescription", {
+				headers: { "auth-token": localStorage.userToken },
+			})
 			setPrescriptions(userData.data.prescription)
 		})()
 	}, [])

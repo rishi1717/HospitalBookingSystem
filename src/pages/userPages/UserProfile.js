@@ -17,7 +17,9 @@ function UserProfile() {
 	const [user, setUser] = useState([])
 	useEffect(() => {
 		(async function() {
-			const userData = await axios.get(`/user/${localStorage.userId}`)
+			const userData = await axios.get(`/user/${localStorage.userId}`, {
+				headers: { "auth-token": localStorage.user },
+			})
 			setUser(userData.data.user)
 		})()
 	}, [])

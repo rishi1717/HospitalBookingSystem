@@ -43,7 +43,6 @@ function EditUser() {
 
 	const location = useLocation()
 	const { user } = location.state
-	console.log(user)
 	const [data, setData] = React.useState({
 		firstName: user.firstName,
 		secondName: user.secondName,
@@ -74,7 +73,9 @@ function EditUser() {
 		})
 		if (con.isConfirmed) {
 			try {
-				await axios.put(`/user/${user._id}`, data)
+				await axios.put(`/user/${user._id}`, data, {
+				headers: { "auth-token": localStorage.userToken },
+			})
 				navigate("/profile")
 				Toast.fire({
 					position: "bottom-right",

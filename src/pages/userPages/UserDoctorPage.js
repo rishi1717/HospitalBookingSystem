@@ -13,9 +13,11 @@ function UserDoctorPage() {
 	const [searchValue, setSearchValue] = useState("")
 	useEffect(() => {
 		;(async function() {
-			const departmentData = await axios.get("/department")
+			const departmentData = await axios.get("/department", {
+				headers: { "auth-token": localStorage.userToken },
+			})
 			const doctorData = await axios.get("/doctor", {
-				headers: { Authorization: `Bearer ${localStorage.userToken}` },
+				headers: { 'auth-token': localStorage.userToken},
 			})
 			setDepartments(departmentData.data.department)
 			setDoctors(doctorData.data.doctor)
