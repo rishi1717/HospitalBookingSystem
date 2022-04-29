@@ -24,6 +24,8 @@ export default function AppointmentCard() {
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
+	const [cancelId,setCancelId] = useState(0)
+
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
 		(async function() {
@@ -39,7 +41,6 @@ export default function AppointmentCard() {
 		<>
 			{appointments.map((appointment, index) => {
 				if (appointment.status === "Scheduled") {
-					const id = appointment.id
 					return (
 						<Grid key={appointment._id} item xs={12} sm={6}>
 							<Box
@@ -113,6 +114,8 @@ export default function AppointmentCard() {
 										<Grid
 											onClick={() => {
 												handleOpen()
+												console.log(appointment._id)
+												setCancelId(appointment._id)
 											}}
 											item
 											xs={2}
@@ -158,15 +161,27 @@ export default function AppointmentCard() {
 										</Grid>
 										<Grid item xs={6} sm={4}>
 											<Button
-												onClick={() => {
+												onClick={async () => {
 													const newData = {
 														...appointment,
 														status: "Canceled",
 														cancelReason: canceling,
 													}
-													axios.put(
-														`/appointment/${id}`,
+													await axios.put(
+														`/appointment/${cancelId}`,
 														newData
+													)
+													const appointmentData = await axios.get(
+														"/appointment",
+														{
+															headers: {
+																"auth-token":
+																	localStorage.userToken,
+															},
+														}
+													)
+													setAppointments(
+														appointmentData.data.appointment
 													)
 													handleClose()
 												}}

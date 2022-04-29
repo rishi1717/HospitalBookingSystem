@@ -24,14 +24,13 @@ export default function AppointmentRows(props) {
 	const [canceling, setCanceling] = React.useState("")
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
+	const [cancelId, setCancelId] = React.useState(0)
 	const [appointments, setAppointments] = React.useState([])
 	React.useEffect(() => {
 		;(async function() {
-			const appointmentData = await axios.get(
-				"/appointment", {
+			const appointmentData = await axios.get("/appointment", {
 				headers: { "auth-token": localStorage.userToken },
-			}
-			)
+			})
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
@@ -41,10 +40,8 @@ export default function AppointmentRows(props) {
 				<Card
 					key={appointment._id}
 					sx={{
-						border: appointment.status === "Scheduled"
-								? 1
-								: 0,
-						borderColor:"green",
+						border: appointment.status === "Scheduled" ? 1 : 0,
+						borderColor: "green",
 						display: "flex",
 						m: "0.4rem",
 						flexDirection: { xs: "column", md: "row" },
@@ -113,7 +110,8 @@ export default function AppointmentRows(props) {
 										<SmallButton value="reschedule" color="#FEB139" />
 										<Grid
 											onClick={() => {
-												console.log(appointment)
+												setCancelId(appointment._id)
+												console.log(appointment._id)
 												handleOpen()
 											}}
 											item
@@ -159,7 +157,7 @@ export default function AppointmentRows(props) {
 											</Grid>
 											<Grid item xs={6} sm={4}>
 												<Button
-													onClick={() => {
+													onClick={async () => {
 														console.log(appointment)
 														const newData = {
 															...appointment,
@@ -167,9 +165,21 @@ export default function AppointmentRows(props) {
 															cancelReason: canceling,
 														}
 														console.log(newData)
-														axios.put(
-															`/appointment/${appointment.id}`,
+														await axios.put(
+															`/appointment/${cancelId}`,
 															newData
+														)
+														const appointmentData = await axios.get(
+															"/appointment",
+															{
+																headers: {
+																	"auth-token":
+																		localStorage.userToken,
+																},
+															}
+														)
+														setAppointments(
+															appointmentData.data.appointment
 														)
 														handleClose()
 													}}
