@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
-import image from "../../static/images/userPortrait.png"
 import { Box, Grid } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
 import { Link, useNavigate } from "react-router-dom"
@@ -16,9 +15,9 @@ function UserProfile() {
 	const navigate = useNavigate()
 	const [user, setUser] = useState([])
 	useEffect(() => {
-		(async function() {
+		;(async function() {
 			const userData = await axios.get(`/user/${localStorage.userId}`, {
-				headers: { "auth-token": localStorage.user },
+				headers: { "auth-token": localStorage.userToken },
 			})
 			setUser(userData.data.user)
 		})()
@@ -62,8 +61,8 @@ function UserProfile() {
 									maxHeight: { xs: 120, sm: 150 },
 									borderRadius: 100,
 								}}
-								image={image}
-								alt="image"
+								src={user.image}
+								alt={user.image}
 							/>
 						</Box>
 						<CardContent

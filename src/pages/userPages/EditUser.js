@@ -1,11 +1,9 @@
-import * as React from "react"
+import React, { useState } from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import image from "../../static/images/userPortrait.png"
+import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
 import {
-	Box,
-	Button,
+	Fab,
 	FormControl,
 	FormHelperText,
 	Grid,
@@ -15,6 +13,7 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material"
+import { Box } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
 import FullLayout from "../../layouts/FullLayout"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -34,6 +33,28 @@ const Toast = Swal.mixin({
 
 function EditUser() {
 	const navigate = useNavigate()
+	const [selectedFile, setSelectedFile] = useState()
+	const [preview, setPreview] = useState()
+	React.useEffect(() => {
+		setData({ ...data, image: selectedFile })
+		if (!selectedFile) {
+			setPreview(undefined)
+			return
+		}
+		const objectUrl = URL.createObjectURL(selectedFile)
+		setPreview(objectUrl)
+
+		return () => URL.revokeObjectURL(objectUrl)
+	}, [selectedFile])
+
+	const onSelectFile = (e) => {
+		if (!e.target.files || e.target.files.length === 0) {
+			setSelectedFile(undefined)
+			return
+		}
+		setSelectedFile(e.target.files[0])
+	}
+
 	const {
 		register,
 		handleSubmit,
@@ -61,6 +82,18 @@ function EditUser() {
 	}
 
 	const onSubmit = async () => {
+		const newForm = new FormData()
+		newForm.append("firstName", data.firstName)
+		newForm.append("secondName", data.secondName)
+		newForm.append("age", data.age)
+		newForm.append("gender", data.gender)
+		newForm.append("email", data.email)
+		newForm.append("blood", data.blood)
+		newForm.append("phone", data.phone)
+		if (selectedFile) {
+			newForm.append("image", selectedFile)
+		}
+
 		const con = await Swal.fire({
 			title: "Are you sure?",
 			text: "User details will Updated!",
@@ -73,9 +106,9 @@ function EditUser() {
 		})
 		if (con.isConfirmed) {
 			try {
-				await axios.put(`/user/${user._id}`, data, {
-				headers: { "auth-token": localStorage.userToken },
-			})
+				await axios.put(`/user/${user._id}`, newForm, {
+					headers: { "auth-token": localStorage.userToken },
+				})
 				navigate("/profile")
 				Toast.fire({
 					position: "bottom-right",
@@ -105,6 +138,9 @@ function EditUser() {
 					m="auto"
 				>
 					<Card
+						component="form"
+						noValidate
+						onSubmit={handleSubmit(onSubmit)}
 						elevation={3}
 						sx={{
 							mt: 5,
@@ -126,26 +162,75 @@ function EditUser() {
 								mr: { xs: 2, sm: 5 },
 							}}
 						>
-							<CardMedia
-								component="img"
-								sx={{
-									margin: "0.4rem",
-									maxWidth: { xs: 120, sm: 150 },
-									maxHeight: { xs: 120, sm: 150 },
-									borderRadius: 100,
-								}}
-								image={image}
-								alt="image"
-							/>
-							<Grid item xs={12} sm={6} textAlign="center">
-								<Button
-									variant="outlined"
-									component="label"
-									sx={{ fontSize: "0.8rem" }}
-								>
-									Change picture
-									<input type="file" hidden />
-								</Button>
+							<Grid item xs={12} mt={{ xs: 4, sm: 0 }}>
+								{!selectedFile && (
+									<Grid container spacing={2}>
+										<Grid item xs={12}>
+											<img
+												style={{
+													width: "12rem",
+													borderRadius: 100,
+												}}
+												src={user.image}
+												alt=""
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<label htmlFor="image">
+												<input
+													style={{ display: "none" }}
+													id="image"
+													name="image"
+													type="file"
+													onChange={onSelectFile}
+												/>
+
+												<Fab
+													size="small"
+													component="span"
+													aria-label="add"
+													variant="extended"
+												>
+													<AddBoxRoundedIcon /> Upload photo
+												</Fab>
+											</label>
+										</Grid>
+									</Grid>
+								)}
+								{selectedFile && (
+									<Grid container spacing={2}>
+										<Grid item xs={12}>
+											<img
+												style={{
+													width: "12rem",
+													borderRadius: 100,
+												}}
+												src={preview}
+												alt=""
+											/>
+										</Grid>
+										<Grid item xs={12}>
+											<label htmlFor="image">
+												<input
+													style={{ display: "none" }}
+													id="image"
+													name="image"
+													type="file"
+													onChange={onSelectFile}
+												/>
+
+												<Fab
+													size="small"
+													component="span"
+													aria-label="add"
+													variant="extended"
+												>
+													<AddBoxRoundedIcon /> Change photo
+												</Fab>
+											</label>
+										</Grid>
+									</Grid>
+								)}
 							</Grid>
 						</Box>
 						<CardContent
@@ -165,12 +250,7 @@ function EditUser() {
 										justifyContent: "center",
 									}}
 								>
-									<Box
-										component="form"
-										noValidate
-										onSubmit={handleSubmit(onSubmit)}
-										sx={{ mt: 2 }}
-									>
+									<Box sx={{ mt: 2 }}>
 										<Grid container spacing={2}>
 											<Grid item xs={12} sm={6}>
 												<TextField

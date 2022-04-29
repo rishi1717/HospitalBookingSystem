@@ -86,27 +86,30 @@ export default function Register() {
 
 	const onSubmit = async () => {
 		try {
-			const newForm = new FormData()
-			newForm.append("firstName", data.firstName)
-			newForm.append("secondName", data.secondName)
-			newForm.append("age", data.age)
-			newForm.append("gender", data.gender)
-			newForm.append("email", data.email)
-			newForm.append("password", data.password)
-			newForm.append("cpassword", data.cpassword)
-			newForm.append("blood", data.blood)
-			newForm.append("phone", data.phone)
-			newForm.append("image", selectedFile)
-			await axios.post("/user", data)
-			navigate("/login")
-			Toast.fire({
-				position: "bottom-right",
-				icon: "success",
-				title: "user registered",
-				showConfirmButton: false,
-				timer: 3000,
-			})
-		} catch (err) {
+					const newForm = new FormData()
+					newForm.append("firstName", data.firstName)
+					newForm.append("secondName", data.secondName)
+					newForm.append("age", data.age)
+					newForm.append("gender", data.gender)
+					newForm.append("email", data.email)
+					newForm.append("password", data.password)
+					newForm.append("cpassword", data.cpassword)
+					newForm.append("blood", data.blood)
+					newForm.append("phone", data.phone)
+					newForm.append("image", selectedFile)
+					for (var key of newForm.entries()) {
+						console.log(key[0] + ", " + key[1])
+					}
+					await axios.post("/user", newForm)
+					navigate("/login")
+					Toast.fire({
+						position: "bottom-right",
+						icon: "success",
+						title: "user registered",
+						showConfirmButton: false,
+						timer: 3000,
+					})
+				} catch (err) {
 			if (err.response) {
 				setError(err.response.data.message)
 			}
