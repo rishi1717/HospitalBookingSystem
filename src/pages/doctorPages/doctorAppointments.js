@@ -45,8 +45,8 @@ const DoctorAppointments = () => {
 			<Typography
 				sx={{
 					fontSize: {
-						xs: "1rem",
-						sm: "1.2rem",
+						xs: "1.2rem",
+						sm: "1.4rem",
 					},
 					fontFamily: "sans-serif",
 					color: "#595959",
