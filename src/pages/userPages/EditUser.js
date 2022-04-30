@@ -16,7 +16,7 @@ import {
 import { Box } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
 import FullLayout from "../../layouts/FullLayout"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from "../../axios"
 import { useForm } from "react-hook-form"
 import Swal from "sweetalert2"
@@ -162,9 +162,24 @@ function EditUser() {
 								mr: { xs: 2, sm: 5 },
 							}}
 						>
-							<Grid item xs={12} mt={{ xs: 4, sm: 0 }}>
+							<Grid
+								item
+								xs={12}
+								mt={{ xs: 4, sm: 0 }}
+								sx={{
+									display: "flex",
+									justifyContent: "cener",
+									alignItems: "center",
+								}}
+							>
 								{!selectedFile && (
-									<Grid container spacing={2}>
+									<Grid
+										container
+										spacing={2}
+										direction="column"
+										alignItems="center"
+										justifyContent="center"
+									>
 										<Grid item xs={12}>
 											<img
 												style={{
@@ -191,7 +206,7 @@ function EditUser() {
 													aria-label="add"
 													variant="extended"
 												>
-													<AddBoxRoundedIcon /> Upload photo
+													<AddBoxRoundedIcon /> Update photo
 												</Fab>
 											</label>
 										</Grid>
@@ -451,11 +466,16 @@ function EditUser() {
 											</Typography>
 										</Grid>
 										<Grid alignItems="center" justify="center">
-											<SmallButton
-												value="Cancel"
-												color="#eaeaea"
-												text="#B81C1C"
-											/>
+											<Link
+												style={{ textDecoration: "none" }}
+												to="/profile"
+											>
+												<SmallButton
+													value="Cancel"
+													color="#eaeaea"
+													text="#B81C1C"
+												/>
+											</Link>
 											<SmallButton
 												type="submit"
 												value="Update"

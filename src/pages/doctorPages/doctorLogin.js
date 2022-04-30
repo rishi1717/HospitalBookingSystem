@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import axios from "../../axios.js"
 import Swal from "sweetalert2"
-import image from "../../static/images/doctor-character.webp"
+import image from "../../static/images/teams.webp"
 import Paper from "@mui/material/Paper"
 
 const Toast = Swal.mixin({
@@ -27,6 +27,7 @@ const Toast = Swal.mixin({
 })
 
 export default function DoctorLogin() {
+	const [error, setError] = React.useState()
 	const navigate = useNavigate()
 	const {
 		register,
@@ -59,7 +60,7 @@ export default function DoctorLogin() {
 			})
 			navigate("/doctor")
 		} catch (err) {
-			console.log(err.message)
+			setError(err.response.data.message)
 		}
 	}
 
@@ -76,21 +77,23 @@ export default function DoctorLogin() {
 			</Box>
 			<Container>
 				<Grid container mt={4}>
-					<Grid item xs={false} sm={6}>
+					<Grid
+						item
+						xs={false}
+						sm={6}
+						sx={{ display: { xs: "none", sm: "block" } }}
+					>
 						<Box
 							item
 							mt={10}
 							xs={false}
-							sm={4}
-							md={7}
 							component="img"
 							sx={{
 								height: "auto",
 								width: "auto",
-								maxWidth: { xs: 0, sm: 400 },
+								maxWidth: { xs: 0, sm: 500 },
 								borderRadius: 100,
-
-								ml: 5,
+								display: { xs: "none", sm: "block" },
 							}}
 							alt="Hospital"
 							src={image}
@@ -155,6 +158,9 @@ export default function DoctorLogin() {
 										errors.password ? errors.password.message : null
 									}
 								/>
+								<Typography sx={{ color: "red", m: 1 }}>
+									{error ? error : ""}
+								</Typography>
 								<FormControlLabel
 									control={
 										<Checkbox value="remember" color="primary" />
