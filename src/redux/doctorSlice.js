@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-	token:'',
-    id:'',
+	token: "",
+	id: "",
 }
-
 
 export const doctorSlice = createSlice({
 	name: "doctorToken",
@@ -17,10 +16,10 @@ export const doctorSlice = createSlice({
 			state.id = action.payload
 		},
 		removeDoctorToken: (state) => {
-			state.token = ''
+			state.token = ""
 		},
 		removeDoctorId: (state) => {
-			state.id = ''
+			state.id = ""
 		},
 	},
 })
