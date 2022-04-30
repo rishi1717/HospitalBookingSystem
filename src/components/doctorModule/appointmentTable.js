@@ -6,25 +6,15 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
+import { SmallButton } from "../Buttons"
+import { Checkbox } from "@mui/material"
 
-function createData( name, time, reason, profile, complete) {
-	return { name, time, reason, profile, complete }
-}
+export default function AppointmentTable({ appointments }) {
+	const [checked, setChecked] = React.useState(true)
 
-const rows = [
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-	createData("Rishi", "10:10 AM", "Flu", "Button", "Check"),
-]
-
-export default function AppointmentTable() {
+	const handleChange = (event) => {
+		setChecked(event.target.checked)
+	}
 	return (
 		<TableContainer
 			component={Paper}
@@ -51,16 +41,24 @@ export default function AppointmentTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row,index) => (
+					{appointments.map((row, index) => (
 						<TableRow
 							key={index}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
-							<TableCell align="center">{row.name}</TableCell>
+							<TableCell align="center">{row.user}</TableCell>
 							<TableCell align="center">{row.time}</TableCell>
-							<TableCell align="center">{row.reason}</TableCell>
-							<TableCell align="center">{row.profile}</TableCell>
-							<TableCell align="center">{row.complete}</TableCell>
+							<TableCell align="center">{row.user}</TableCell>
+							<TableCell align="center">
+								<SmallButton value="Profile" />
+							</TableCell>
+							<TableCell align="center">
+								<Checkbox
+									checked={checked}
+									onChange={handleChange}
+									inputProps={{ "aria-label": "controlled" }}
+								/>
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

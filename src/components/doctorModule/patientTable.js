@@ -19,7 +19,8 @@ const rows = [
 	createData(5, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
 ]
 
-export default function PatientTable() {
+export default function PatientTable({users}) {
+	console.log(users);
 	return (
 		<TableContainer component={Paper} sx={{maxWidth:'88vw'}}>
 			<Table sx={{ minWidth: {sm:650} }} aria-label="simple table">

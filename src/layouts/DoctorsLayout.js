@@ -21,6 +21,8 @@ import { Link, useNavigate } from "react-router-dom"
 import Logo from "../static/images/Logo.png"
 import LogoutIcon from "@mui/icons-material/Logout"
 import Swal from "sweetalert2"
+import { useDispatch } from "react-redux"
+import {removeDoctorId,removeDoctorToken} from "../redux/doctorSlice"
 
 const linkStyle = {
 	padding: "1rem",
@@ -31,6 +33,7 @@ const linkStyle = {
 const drawerWidth = 240
 
 function ResponsiveDrawer(props) {
+	const dispatch = useDispatch()
     const navigate = useNavigate()
 	const { window, children } = props
 	const [mobileOpen, setMobileOpen] = React.useState(false)
@@ -140,8 +143,8 @@ function ResponsiveDrawer(props) {
 						confirmButtonColor: "#609ACF",
 					})
 					if (con.isConfirmed) {
-						localStorage.removeItem("doctorToken")
-						localStorage.removeItem("doctorId")
+						dispatch(removeDoctorToken())
+						dispatch(removeDoctorId())
 						navigate("/doctor/login")
 					}
 				}}

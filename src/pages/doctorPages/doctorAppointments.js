@@ -1,14 +1,24 @@
 import { TextField, Toolbar, Typography } from "@mui/material"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import AppointmentTable from "../../components/doctorModule/appointmentTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useSelector } from "react-redux"
+import axios from "../../axios"
 
 const DoctorAppointments = () => {
+	const [appointments,setAppointments] = useState([])
 	const docState = useSelector((storeState) => storeState.doctor)
+	useEffect(() => {
+		(async function() {
+			const appointmentData = await axios.get("/appointment", {
+				headers: { "auth-token": docState.token },
+			})
+			setAppointments(appointmentData.data.appointment)
+		})()
+	}, [])
 	if (docState.token) {
 		const [date, setDate] = useState(null)
 		return (
@@ -46,7 +56,7 @@ const DoctorAppointments = () => {
 				>
 					Your Appointments today
 				</Typography>
-				<AppointmentTable />
+				<AppointmentTable appointments={appointments} />
 				<Toolbar />
 				<Typography
 					sx={{
@@ -73,7 +83,7 @@ const DoctorAppointments = () => {
 						renderInput={(params) => <TextField {...params} />}
 					/>
 				</LocalizationProvider>
-				<AppointmentTable />
+				<AppointmentTable appointments={appointments} />
 			</DoctorsLayout>
 		)
 	}
