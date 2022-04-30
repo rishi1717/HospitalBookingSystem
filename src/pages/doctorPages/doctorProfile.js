@@ -7,9 +7,11 @@ import image from "../../static/images/doctorPortrait.webp"
 import { Box, Grid } from "@mui/material"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { MediumButton } from "../../components/Buttons"
+import { useSelector } from "react-redux"
 
 function DoctorProfile() {
-	if (localStorage.doctorToken) {
+	const docState = useSelector((storeState) => storeState.doctor)
+	if (docState.token) {
 		return (
 			<DoctorsLayout>
 				<Typography

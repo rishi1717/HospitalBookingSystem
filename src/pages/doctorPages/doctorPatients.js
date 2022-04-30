@@ -1,10 +1,12 @@
 import { Typography } from "@mui/material"
 import React from "react"
+import { useSelector } from "react-redux"
 import PatientTable from "../../components/doctorModule/patientTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 
 const DoctorPatients = () => {
-	if (localStorage.doctorToken) {
+	const docState = useSelector((storeState) => storeState.doctor)
+	if (docState.token) {
 		return (
 			<DoctorsLayout>
 				<Typography

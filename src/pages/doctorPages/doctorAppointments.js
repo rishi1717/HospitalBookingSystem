@@ -5,9 +5,11 @@ import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
+import { useSelector } from "react-redux"
 
 const DoctorAppointments = () => {
-	if (localStorage.doctorToken) {
+	const docState = useSelector((storeState) => storeState.doctor)
+	if (docState.token) {
 		const [date, setDate] = useState(null)
 		return (
 			<DoctorsLayout>
@@ -17,7 +19,10 @@ const DoctorAppointments = () => {
 							xs: "1.2rem",
 							sm: "1.4rem",
 						},
-						display: { xs: "none", sm: "block" },
+						display: {
+							xs: "none",
+							sm: "block",
+						},
 						fontFamily: "sans-serif",
 						color: "#1976D2",
 					}}

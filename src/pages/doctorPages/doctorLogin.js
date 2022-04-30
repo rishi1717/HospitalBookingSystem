@@ -16,6 +16,8 @@ import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import image from "../../static/images/teams.webp"
 import Paper from "@mui/material/Paper"
+import { useDispatch } from "react-redux"
+import { addDoctorToken,addDoctorId } from "../../redux/doctorSlice"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -27,6 +29,7 @@ const Toast = Swal.mixin({
 })
 
 export default function DoctorLogin() {
+	const dispatch = useDispatch()
 	const [error, setError] = React.useState()
 	const navigate = useNavigate()
 	const {
@@ -48,9 +51,8 @@ export default function DoctorLogin() {
 		try {
 			const resData = await axios.post("/doctor/login", data)
 
-			console.log(resData)
-			localStorage.setItem("doctorToken", resData.data.token)
-			localStorage.setItem("doctorId", resData.data.doctor)
+			dispatch(addDoctorToken(resData.data.token))
+			dispatch(addDoctorId(resData.data.doctor))
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",

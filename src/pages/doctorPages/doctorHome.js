@@ -1,16 +1,13 @@
-import { Button, Grid, Typography } from "@mui/material"
+import { Grid, Typography } from "@mui/material"
 import React from "react"
 import SelectionCard from "../../components/doctorModule/SelectionCard"
 import WelcomeCard from "../../components/doctorModule/WelcomeCard"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
-import { useSelector, useDispatch } from "react-redux"
-import { addDoctorToken,removeDoctorToken } from "../../redux/doctorSlice"
+import { useSelector } from "react-redux"
 
 const DoctorHome = () => {
-	const docToken = useSelector((storeState) => storeState.doctor)
-	const dispatch = useDispatch()
-	console.log(docToken)
-	if (localStorage.doctorToken) {
+	const docState = useSelector((storeState) => storeState.doctor)
+	if (docState.token) {
 		return (
 			<>
 				<DoctorsLayout>
@@ -28,22 +25,6 @@ const DoctorHome = () => {
 					>
 						DashBoard
 					</Typography>
-					<Button
-						onClick={() => {
-							dispatch(addDoctorToken('rishirrxx'))
-							console.log(docToken.token)
-						}}
-					>
-						click
-					</Button>
-					<Button
-						onClick={() => {
-							dispatch(removeDoctorToken())
-							console.log(docToken.token)
-						}}
-					>
-						remove
-					</Button>
 					<WelcomeCard />
 					<Grid container spacing={2} marginTop={2}>
 						<SelectionCard
