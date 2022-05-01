@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useEffect, useState } from "react"
 import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
@@ -8,10 +8,22 @@ import { Box, Grid } from "@mui/material"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { MediumButton } from "../../components/Buttons"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import axios from "../../axios"
 
 function DoctorProfile() {
 	const docState = useSelector((storeState) => storeState.doctor)
 	if (docState.token) {
+		const [doctor, setDoctor] = useState([])
+		useEffect(() => {
+			;(async function() {
+				const doctorData = await axios.get(`/doctor/${docState.id}`, {
+					headers: { "auth-token": docState.token },
+				})
+				setDoctor(doctorData.data.doctor)
+				console.log(doctorData.data.doctor)
+			})()
+		}, [])
 		return (
 			<DoctorsLayout>
 				<Typography
@@ -104,7 +116,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>Name :</b> Name
+									<b>Name :</b> {doctor.name}
 								</Typography>
 								<Typography
 									sx={{
@@ -119,7 +131,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>Qualification :</b> Qualified
+									<b>Qualification :</b> {doctor.qualification}
 								</Typography>
 								<Typography
 									sx={{
@@ -134,7 +146,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>Department :</b> Department
+									<b>Department :</b> {doctor.department}
 								</Typography>
 								<Typography
 									sx={{
@@ -149,7 +161,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>Experience :</b> Experience
+									<b>Experience :</b> {doctor.experience}
 								</Typography>
 								<Typography
 									sx={{
@@ -164,7 +176,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>Area of Expertise :</b> Expertise
+									<b>Area of Expertise :</b> {doctor.expertise}
 								</Typography>
 								<Typography
 									sx={{
@@ -179,12 +191,18 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>OP Time :</b> day to day from this to this
+									<b>OP Time :</b> {doctor.days} from {doctor.time}
 								</Typography>
 							</CardContent>
 						</Grid>
 						<div style={{ marginLeft: "auto", marginTop: 2 }}>
-							<MediumButton value="Edit" color="#595959" />
+							<Link
+								style={{ textDecoration: "none" }}
+								state={{ doctor: doctor }}
+								to="/doctor/Profile/edit"
+							>
+								<MediumButton value="Edit" color="#595959" />
+							</Link>
 						</div>
 					</Grid>
 				</Card>

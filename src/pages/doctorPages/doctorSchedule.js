@@ -1,15 +1,26 @@
 import { TextField, Typography } from "@mui/material"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import ScheduleTable from "../../components/doctorModule/scheduleTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useSelector } from "react-redux"
+import axios from "../../axios"
 
 const DoctorSchedule = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
+
 	if (docState.token) {
+		const [schedules, setSchedules] = useState([])
+		useEffect(() => {
+			;(async function() {
+				const scheduleData = await axios.get(`/schedule/?id=${docState.id}`, {
+					headers: { "auth-token": docState.token },
+				})
+				setSchedules(scheduleData.data.schedule)
+			})()
+		}, [])
 		const [date, setDate] = useState(new Date())
 		return (
 			<DoctorsLayout>
@@ -53,7 +64,7 @@ const DoctorSchedule = () => {
 						renderInput={(params) => <TextField {...params} />}
 					/>
 				</LocalizationProvider>
-				<ScheduleTable />
+				<ScheduleTable schedules={schedules}/>
 			</DoctorsLayout>
 		)
 	}

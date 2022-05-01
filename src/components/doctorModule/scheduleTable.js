@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useState } from "react"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
@@ -7,21 +7,16 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
-import { Button } from "@mui/material"
+import { Button, Checkbox } from "@mui/material"
+import { SmallButton } from "../Buttons"
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 
-function createData(index, details, status) {
-	return { index, details, status }
-}
+export default function ScheduleTable({ schedules }) {
+	const [checked, setChecked] = useState(true)
 
-const rows = [
-	createData(1, "Rishi", "Actions"),
-	createData(2, "Rishi", "Actions"),
-	createData(3, "Rishi", "Actions"),
-	createData(4, "Rishi", "Actions"),
-	createData(5, "Rishi", "Actions"),
-]
-
-export default function ScheduleTable() {
+	const handleChange = (event) => {
+		setChecked(event.target.checked)
+	}
 	return (
 		<TableContainer component={Paper} sx={{ maxWidth: "88vw", mt: 2 }}>
 			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
@@ -34,24 +29,40 @@ export default function ScheduleTable() {
 							Details
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
+							Status
+						</TableCell>
+						<TableCell align="center" sx={{ color: "white" }}>
 							Actions
 						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row, index) => (
+					{schedules.map((row, index) => (
 						<TableRow
 							key={index}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
-							<TableCell align="center">{row.index}</TableCell>
-							<TableCell align="center">{row.details}</TableCell>
+							<TableCell align="center">{index + 1}</TableCell>
+							<TableCell align="center">{row.detail}</TableCell>
 							<TableCell align="center">{row.status}</TableCell>
+							<TableCell align="center">
+								<Checkbox
+									checked={checked}
+									onChange={handleChange}
+									inputProps={{ "aria-label": "controlled" }}
+								/>
+								<SmallButton
+									value={<DeleteRoundedIcon />}
+									text="red"
+									color="white"
+								/>
+							</TableCell>
 						</TableRow>
 					))}
 					<TableRow
 						sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 					>
+						<TableCell align="center"></TableCell>
 						<TableCell align="center"></TableCell>
 						<TableCell align="center">
 							<Button>
