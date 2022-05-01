@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { SmallButton } from "../Buttons"
+import { Link } from "react-router-dom"
 
 export default function PatientTable({users}) {
 	console.log(users)
@@ -45,7 +46,9 @@ export default function PatientTable({users}) {
 							<TableCell align="center">{row.age}</TableCell>
 							<TableCell align="center">{row.gender}</TableCell>
 							<TableCell align="center">
-								<SmallButton value="Profile" />
+								<Link style={{textDecoration:'none'}} state={{id:row._id}} to={`profile`}>
+									<SmallButton value="Profile" />
+								</Link>
 							</TableCell>
 						</TableRow>
 					))}
