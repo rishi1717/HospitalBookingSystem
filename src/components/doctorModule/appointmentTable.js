@@ -7,14 +7,8 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { SmallButton } from "../Buttons"
-import { Checkbox } from "@mui/material"
 
 export default function AppointmentTable({ appointments }) {
-	const [checked, setChecked] = React.useState(true)
-
-	const handleChange = (event) => {
-		setChecked(event.target.checked)
-	}
 	return (
 		<TableContainer
 			component={Paper}
@@ -35,9 +29,6 @@ export default function AppointmentTable({ appointments }) {
 						<TableCell align="center" sx={{ color: "white" }}>
 							Profile
 						</TableCell>
-						<TableCell align="center" sx={{ color: "white" }}>
-							Complete
-						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -48,16 +39,9 @@ export default function AppointmentTable({ appointments }) {
 						>
 							<TableCell align="center">{row.user}</TableCell>
 							<TableCell align="center">{row.time}</TableCell>
-							<TableCell align="center">{row.user}</TableCell>
+							<TableCell align="center">{row.reason}</TableCell>
 							<TableCell align="center">
 								<SmallButton value="Profile" />
-							</TableCell>
-							<TableCell align="center">
-								<Checkbox
-									checked={checked}
-									onChange={handleChange}
-									inputProps={{ "aria-label": "controlled" }}
-								/>
 							</TableCell>
 						</TableRow>
 					))}

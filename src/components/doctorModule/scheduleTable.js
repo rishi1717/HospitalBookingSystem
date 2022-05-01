@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
 import { Button, Checkbox } from "@mui/material"
-import { SmallButton } from "../Buttons"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 
 export default function ScheduleTable({ schedules }) {
@@ -45,17 +44,20 @@ export default function ScheduleTable({ schedules }) {
 							<TableCell align="center">{index + 1}</TableCell>
 							<TableCell align="center">{row.detail}</TableCell>
 							<TableCell align="center">{row.status}</TableCell>
-							<TableCell align="center">
+							<TableCell
+								align="center"
+								sx={{
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+								}}
+							>
 								<Checkbox
 									checked={checked}
 									onChange={handleChange}
 									inputProps={{ "aria-label": "controlled" }}
 								/>
-								<SmallButton
-									value={<DeleteRoundedIcon />}
-									text="red"
-									color="white"
-								/>
+								<DeleteRoundedIcon />
 							</TableCell>
 						</TableRow>
 					))}
@@ -64,7 +66,7 @@ export default function ScheduleTable({ schedules }) {
 					>
 						<TableCell align="center"></TableCell>
 						<TableCell align="center"></TableCell>
-						<TableCell align="center">
+						<TableCell align="left">
 							<Button>
 								<AddBoxRoundedIcon />
 							</Button>
