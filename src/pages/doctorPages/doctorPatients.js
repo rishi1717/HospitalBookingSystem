@@ -9,11 +9,11 @@ const DoctorPatients = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
 	const [users, setUsers] = useState([])
 	useEffect(() => {
-		;(async function() {
-			const appointmentData = await axios.get("/users", {
+		(async function() {
+			const userData = await axios.get("/user", {
 				headers: { "auth-token": docState.token },
 			})
-			setUsers(appointmentData.data.appointment)
+			setUsers(userData.data.user)
 		})()
 	}, [])
 	if (docState.token) {

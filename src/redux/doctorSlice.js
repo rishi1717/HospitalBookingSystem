@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
 	token: "",
 	id: "",
+	name: "",
 }
 
 export const doctorSlice = createSlice({
@@ -21,13 +22,23 @@ export const doctorSlice = createSlice({
 		removeDoctorId: (state) => {
 			state.id = ""
 		},
+		addDoctorName: (state, action) => {
+			state.name = action.payload
+		},
+		removeDoctorName: (state) => {
+			state.name = ""
+		},
 	},
 })
 
-const addDoctorToken = doctorSlice.actions.addDoctorToken
-const removeDoctorToken = doctorSlice.actions.removeDoctorToken
-const addDoctorId = doctorSlice.actions.addDoctorId
-const removeDoctorId = doctorSlice.actions.removeDoctorId
+const {
+	addDoctorToken,
+	removeDoctorToken,
+	addDoctorId,
+	removeDoctorId,
+	addDoctorName,
+	removeDoctorName,
+} = doctorSlice.actions
 
 export default doctorSlice.reducer
-export { addDoctorToken, removeDoctorToken, addDoctorId, removeDoctorId }
+export { addDoctorToken, removeDoctorToken, addDoctorId, removeDoctorId,addDoctorName,removeDoctorName }

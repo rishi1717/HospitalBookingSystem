@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography"
 import Image from "../../static/images/doctorPortrait.webp"
 import moment from "moment"
 import { Container, Grid } from "@mui/material"
+import { useSelector } from "react-redux"
 
 const WelcomeCard = () => {
+	const docName = useSelector((storeState) => storeState.doctor.name)
 	const [time, setTime] = useState(moment().format("h:mm a"))
 	const [date, setDate] = useState(moment().format("MMMM Do"))
 	const [day, setDay] = useState(moment().format("dddd"))
@@ -83,7 +85,7 @@ const WelcomeCard = () => {
 										fontWeight: "bold",
 									}}
 								>
-									&nbsp; Dr.Santhosh
+									&nbsp; {docName}
 								</span>
 								, Have a great day
 							</Typography>

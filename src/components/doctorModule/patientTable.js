@@ -6,24 +6,13 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-
-function createData(id, name, date, reason, condition, profile) {
-	return { id, name, date, reason, condition, profile }
-}
-
-const rows = [
-	createData(1, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(2, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(3, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(4, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-	createData(5, "Rishi", "14/12/2021", "Flu", "Cured", "Button"),
-]
+import { SmallButton } from "../Buttons"
 
 export default function PatientTable({users}) {
-	console.log(users);
+	console.log(users)
 	return (
-		<TableContainer component={Paper} sx={{maxWidth:'88vw'}}>
-			<Table sx={{ minWidth: {sm:650} }} aria-label="simple table">
+		<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
+			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
 				<TableHead>
 					<TableRow sx={{ backgroundColor: "#1976D2" }}>
 						<TableCell align="center" sx={{ color: "white" }}>
@@ -33,13 +22,10 @@ export default function PatientTable({users}) {
 							Patient Name
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Recent Appointment
+							Age
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
-							Reason
-						</TableCell>
-						<TableCell align="center" sx={{ color: "white" }}>
-							Condition
+							Gender
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
 							Profile
@@ -47,19 +33,20 @@ export default function PatientTable({users}) {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row,index) => (
+					{users.map((row, index) => (
 						<TableRow
 							key={index}
 							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
 							<TableCell align="center" component="th" scope="row">
-								{row.id}
+								{row._id}
 							</TableCell>
-							<TableCell align="center">{row.name}</TableCell>
-							<TableCell align="center">{row.date}</TableCell>
-							<TableCell align="center">{row.reason}</TableCell>
-							<TableCell align="center">{row.condition}</TableCell>
-							<TableCell align="center">{row.profile}</TableCell>
+							<TableCell align="center">{row.firstName}</TableCell>
+							<TableCell align="center">{row.age}</TableCell>
+							<TableCell align="center">{row.gender}</TableCell>
+							<TableCell align="center">
+								<SmallButton value="Profile" />
+							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>

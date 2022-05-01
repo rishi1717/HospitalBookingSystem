@@ -17,7 +17,7 @@ import Swal from "sweetalert2"
 import image from "../../static/images/teams.webp"
 import Paper from "@mui/material/Paper"
 import { useDispatch } from "react-redux"
-import { addDoctorToken,addDoctorId } from "../../redux/doctorSlice"
+import { addDoctorToken,addDoctorId,addDoctorName } from "../../redux/doctorSlice"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -52,7 +52,8 @@ export default function DoctorLogin() {
 			const resData = await axios.post("/doctor/login", data)
 
 			dispatch(addDoctorToken(resData.data.token))
-			dispatch(addDoctorId(resData.data.doctor))
+			dispatch(addDoctorId(resData.data.doctorId))
+			dispatch(addDoctorName(resData.data.doctorName))
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
