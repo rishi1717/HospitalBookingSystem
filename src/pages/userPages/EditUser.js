@@ -81,6 +81,7 @@ function EditUser() {
 		setData({ ...data, [event.target.name]: event.target.value })
 	}
 
+
 	const onSubmit = async () => {
 		const newForm = new FormData()
 		newForm.append("firstName", data.firstName)
@@ -92,7 +93,13 @@ function EditUser() {
 		newForm.append("phone", data.phone)
 		if (selectedFile) {
 			newForm.append("image", selectedFile)
+			console.log(selectedFile)
 		}
+		else{
+			newForm.append("image", user.image)
+			console.log(user.image)
+		}
+		
 
 		const con = await Swal.fire({
 			title: "Are you sure?",
@@ -123,7 +130,7 @@ function EditUser() {
 				}
 			}
 		}
-	}
+	}	
 
 	if (localStorage.userToken) {
 		return (
@@ -213,7 +220,13 @@ function EditUser() {
 									</Grid>
 								)}
 								{selectedFile && (
-									<Grid container spacing={2}>
+									<Grid
+										container
+										spacing={2}
+										direction="column"
+										alignItems="center"
+										justifyContent="center"
+									>
 										<Grid item xs={12}>
 											<img
 												style={{

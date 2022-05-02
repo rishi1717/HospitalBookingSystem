@@ -295,7 +295,7 @@ const Booking = () => {
 								},
 							}}
 						>
-							Confirm
+							Book Appointment
 						</Button>
 						<Link style={{textDecoration:'none'}} to='/doctors'><MediumButton value="Cancel" color="#EF4242" text="white" /></Link>
 						
