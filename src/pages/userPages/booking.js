@@ -21,6 +21,12 @@ import FullLayout from "../../layouts/FullLayout"
 import { MediumButton } from "../../components/Buttons"
 import Unauthorized from "./Unauthorized"
 import axios from "../../axios"
+import dayjs from "dayjs"
+// import customParseFormat from "dayjs/plugin/customParseFormat"
+// dayjs.extend(customParseFormat)
+// const ti = "19:20"
+// const me = dayjs(ti, "HH:mm")
+// console.log(me.format("hh:mm A"))
 
 const Booking = () => {
 	if (localStorage.userToken) {
@@ -30,10 +36,7 @@ const Booking = () => {
 			doctor = location.state.doctor
 		}
 
-		const [user, setUser] = useState([])
-		const [date, setDate] = React.useState(null)
-		const [time, setTime] = React.useState(null)
-
+		const [user, setUser] = useState({})
 		const [data, setData] = useState({
 			user: "",
 			age: "",
@@ -42,42 +45,39 @@ const Booking = () => {
 			reason: "",
 			fee: doctor.fee,
 			doctor: doctor.name,
-			time: time,
-			date: date,
+			time: null,
+			date: null,
 			active: true,
 			status: "Scheduled",
 		})
 
 		useEffect(() => {
-			setData({
-				...data,
-				user: user.firstName,
-				age: user.age,
-				gender: user.gender,
-				phone: user.phone,
-			})
-		}, [user])
-
-		useEffect(() => {
 			;(async function() {
-				const userData = await axios.get(`/user/${localStorage.userId}`)
+				const userData = await axios.get(`/user/${localStorage.userId}`, {
+					headers: { "auth-token": localStorage.userToken },
+				})
 				setUser(userData.data.user)
 			})()
 		}, [])
+
+		useEffect(() => {
+			setData({
+				...data,
+				user: user.firstName ? user.firstName : "",
+				age: user.age ? user.age : "",
+				gender: user.gender ? user.gender : "",
+				phone: user.phone ? user.phone : "",
+			})
+			reset()
+		}, [user])
 
 		const navigate = useNavigate()
 		const {
 			register,
 			handleSubmit,
+			reset,
 			formState: { errors },
 		} = useForm()
-
-		useEffect(() => {
-			setData({ ...data, date: date })
-		}, [date])
-		useEffect(() => {
-			setData({ ...data, time: time })
-		}, [time])
 
 		const handleChange = ({ currentTarget: input }) => {
 			setData({ ...data, [input.name]: input.value })
@@ -87,8 +87,29 @@ const Booking = () => {
 			setData({ ...data, [event.target.name]: event.target.value })
 		}
 
-		const onSubmit = () => {
-			navigate("/confirmbooking", { state: { details: data } })
+		const onSubmit = async () => {
+			const details = {
+				...data,
+				date: dayjs(data.date).format("DD/MM/YYYY"),
+				time: dayjs(data.time).format("HH:mm"),
+				userId: localStorage.userId,
+				doctorId: doctor._id,
+			}
+			console.log(details)
+
+			try {
+				const appointmentsData = await axios.get(`/appointment/${doctor._id}/${data.date}`, {
+					headers: { "auth-token": localStorage.userToken },
+				})
+				console.log(appointmentsData.data.timeArray)
+			} catch (err) {
+				console.log(err.message)
+			}
+
+			// axios.post("/appointment", details, {
+			// 	headers: { "auth-token": localStorage.userToken },
+			// })
+			// navigate("/confirmbooking", { state: { details: data } })
 		}
 
 		return (
@@ -255,12 +276,16 @@ const Booking = () => {
 						<Grid item xs={6} sm={3.5}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
+									{...register("date", {
+										required: "Pick date!",
+									})}
 									label="Select date"
 									id="date"
 									name="date"
-									value={date}
+									value={data.date}
 									onChange={(newValue) => {
-										setDate(newValue)
+										setData({ ...data, date: newValue })
+										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
 								/>
@@ -269,12 +294,16 @@ const Booking = () => {
 						<Grid item xs={6} sm={3.5}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<TimePicker
+									{...register("time", {
+										required: "Pick time!",
+									})}
 									label="Select time"
 									id="time"
 									name="time"
-									value={time}
+									value={data.time}
 									onChange={(newValue) => {
-										setTime(newValue)
+										setData({ ...data, time: newValue })
+										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
 								/>
@@ -297,8 +326,13 @@ const Booking = () => {
 						>
 							Book Appointment
 						</Button>
-						<Link style={{textDecoration:'none'}} to='/doctors'><MediumButton value="Cancel" color="#EF4242" text="white" /></Link>
-						
+						<Link style={{ textDecoration: "none" }} to="/doctors">
+							<MediumButton
+								value="Cancel"
+								color="#EF4242"
+								text="white"
+							/>
+						</Link>
 					</Grid>
 				</Box>
 			</FullLayout>

@@ -39,10 +39,11 @@ function ConfirmBooking() {
 						elevation={3}
 						sx={{
 							mt: 5,
+							mb: 5,
 							display: "flex",
 							flexDirection: { xs: "column", sm: "row" },
 							minHeight: { xs: 0, sm: 150 },
-							px: { xs: 1, sm: 7 },
+							px: { xs: 2, sm: 7 },
 							py: { xs: 2, sm: 4 },
 						}}
 					>
@@ -156,7 +157,22 @@ function ConfirmBooking() {
 								}}
 								component="p"
 							>
-								<b>Scheduled at :</b> date And time
+								<b>Date :</b> date 
+							</Typography>
+							<Typography
+								sx={{
+									mt: 2,
+									fontSize: {
+										xs: "0.75rem",
+										sm: "1rem",
+										textAlign: "left",
+									},
+									fontFamily: "sans-serif",
+									color: "#595959",
+								}}
+								component="p"
+							>
+								<b>Time :</b> time
 							</Typography>
 							<Typography
 								sx={{
