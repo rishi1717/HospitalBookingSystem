@@ -91,7 +91,7 @@ const Booking = () => {
 			const details = {
 				...data,
 				date: dayjs(data.date).format("DD/MM/YYYY"),
-				time: dayjs(data.time).format("HH:mm"),
+				time: dayjs(data.time).format("hh:mm A"),
 				userId: localStorage.userId,
 				doctorId: doctor._id,
 			}
@@ -102,6 +102,10 @@ const Booking = () => {
 					headers: { "auth-token": localStorage.userToken },
 				})
 				console.log(appointmentsData.data.timeArray)
+				console.log(details.time)
+				if (appointmentsData.data.timeArray.includes(details.time)) {
+					alert("Appointment already booked")
+				}
 			} catch (err) {
 				console.log(err.message)
 			}
@@ -306,6 +310,12 @@ const Booking = () => {
 										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
+									shouldDisableTime={(timeValue,ClockType)=>{
+										if((ClockType === 'minutes' && timeValue % 15 !== 0) || (ClockType === 'hours' && timeValue > 22)){
+											return true
+										}
+										return false
+									}}
 								/>
 							</LocalizationProvider>
 						</Grid>
