@@ -22,28 +22,16 @@ import { MediumButton } from "../../components/Buttons"
 import Unauthorized from "./Unauthorized"
 import axios from "../../axios"
 import dayjs from "dayjs"
+import customParseFormat from "dayjs/plugin/customParseFormat"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
+dayjs.extend(customParseFormat)
 
 // import customParseFormat from "dayjs/plugin/customParseFormat"
 // dayjs.extend(customParseFormat)
 // const ti = "19:20"
 // const me = dayjs(ti, "HH:mm")
 // console.log(me.format("hh:mm A"))
-const slots = []
-let startTime = dayjs()
-	.hour(6)
-	.minute(0)
-	.second(0)
-let endTime = dayjs()
-	.hour(20)
-	.minute(0)
-	.second(0)
-while (startTime.isBefore(endTime)) {
-	slots.push(startTime.format("hh:mm A"))
-	startTime = startTime.add(30, "minute")
-}
-console.log(slots)
 
 const responsive = {
 	superLargeDesktop: {
@@ -71,7 +59,34 @@ const Booking = () => {
 		if (location.state) {
 			doctor = location.state.doctor
 		}
+		const [slots, setSlots] = useState([
+			1,
+			2,
+			3,
+			4,
+			5,
+			6,
+			6,
+			7,
+			8,
+			9,
+			10,
+			11,
+			12,
+			13,
+			14,
+			15,
+			16,
+			17,
+			18,
+		])
 		const [booked, setBooked] = useState([])
+		const [startTime, setStartTime] = useState(0)
+		const [startHour, setStartHour] = useState(0)
+		const [startMinute, setStartMinute] = useState(0)
+		const [endTime, setEndTime] = useState(0)
+		const [endHour, setEndHour] = useState(0)
+		const [endMinute, setEndMinute] = useState(0)
 		const [user, setUser] = useState({})
 		const [data, setData] = useState({
 			user: "",
@@ -107,6 +122,31 @@ const Booking = () => {
 			reset()
 		}, [user])
 
+		useEffect(() => {
+			setStartHour(dayjs(startTime, "hh:mm A").format("HH"))
+			setStartMinute(dayjs(startTime, "hh:mm A").format("mm"))
+			setEndHour(dayjs(endTime, "hh:mm A").format("HH"))
+			setEndMinute(dayjs(endTime, "hh:mm A").format("mm"))
+		}, [startTime, endTime])
+
+		useEffect(() => {
+			console.log(startHour, startMinute, endHour, endMinute)
+			let startTime = dayjs()
+				.hour(startHour)
+				.minute(startMinute)
+			let endTime = dayjs()
+				.hour(endHour)
+				.minute(endMinute)
+			// console.log(startTime," TO ", endTime)
+			let tempSlots = []
+			while (startTime.isBefore(endTime)) {
+				tempSlots.push(startTime.format("hh:mm A"))
+				startTime = startTime.add(30, "minute")
+			}
+			console.log(tempSlots)
+			setSlots(tempSlots)
+		}, [endMinute])
+
 		const navigate = useNavigate()
 		const {
 			register,
@@ -124,7 +164,6 @@ const Booking = () => {
 		}
 
 		const handleTimeClick = (index, time) => {
-			console.log(index, time)
 			setData({ ...data, time: time })
 		}
 
@@ -317,6 +356,7 @@ const Booking = () => {
 						<Grid item xs={12} sm={3}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
+									disablePast
 									{...register("date", {
 										required: "Pick date!",
 									})}
@@ -334,8 +374,13 @@ const Booking = () => {
 												},
 											}
 										)
-										console.log(appointmentsData.data.timeArray)
 										setBooked(appointmentsData.data.timeArray)
+										setStartTime(
+											appointmentsData.data.doctorTiming.startTime
+										)
+										setEndTime(
+											appointmentsData.data.doctorTiming.endTime
+										)
 										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
@@ -354,6 +399,8 @@ const Booking = () => {
 								<Carousel
 									responsive={responsive}
 									autoPlaySpeed={100000}
+									customRightArrow={<></>}
+									customLeftArrow={<></>}
 								>
 									{slots.map((slot, index) => {
 										return (
@@ -375,6 +422,11 @@ const Booking = () => {
 											</Button>
 										)
 									})}
+									{slots.length === 0 ? (
+										<Typography sx={{ fontSize: 12 }}>
+											No Time slot available
+										</Typography>
+									) : null}
 								</Carousel>
 							</Container>
 						</Grid>
