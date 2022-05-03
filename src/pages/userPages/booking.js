@@ -1,6 +1,7 @@
 import {
 	Box,
 	Button,
+	Container,
 	FormControl,
 	FormHelperText,
 	Grid,
@@ -14,7 +15,6 @@ import React, { useEffect, useState } from "react"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import { TimePicker } from "@mui/x-date-pickers/TimePicker"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import FullLayout from "../../layouts/FullLayout"
@@ -22,11 +22,47 @@ import { MediumButton } from "../../components/Buttons"
 import Unauthorized from "./Unauthorized"
 import axios from "../../axios"
 import dayjs from "dayjs"
+import Carousel from "react-multi-carousel"
+import "react-multi-carousel/lib/styles.css"
+
 // import customParseFormat from "dayjs/plugin/customParseFormat"
 // dayjs.extend(customParseFormat)
 // const ti = "19:20"
 // const me = dayjs(ti, "HH:mm")
 // console.log(me.format("hh:mm A"))
+const slots = []
+let startTime = dayjs()
+	.hour(6)
+	.minute(0)
+	.second(0)
+let endTime = dayjs()
+	.hour(20)
+	.minute(0)
+	.second(0)
+while (startTime.isBefore(endTime)) {
+	slots.push(startTime.format("hh:mm A"))
+	startTime = startTime.add(30, "minute")
+}
+console.log(slots)
+
+const responsive = {
+	superLargeDesktop: {
+		breakpoint: { max: 4000, min: 3000 },
+		items: 10,
+	},
+	desktop: {
+		breakpoint: { max: 3000, min: 1024 },
+		items: 8,
+	},
+	tablet: {
+		breakpoint: { max: 1024, min: 464 },
+		items: 6,
+	},
+	mobile: {
+		breakpoint: { max: 464, min: 0 },
+		items: 4,
+	},
+}
 
 const Booking = () => {
 	if (localStorage.userToken) {
@@ -35,7 +71,7 @@ const Booking = () => {
 		if (location.state) {
 			doctor = location.state.doctor
 		}
-
+		const [booked, setBooked] = useState([])
 		const [user, setUser] = useState({})
 		const [data, setData] = useState({
 			user: "",
@@ -87,23 +123,24 @@ const Booking = () => {
 			setData({ ...data, [event.target.name]: event.target.value })
 		}
 
+		const handleTimeClick = (index, time) => {
+			console.log(index, time)
+			setData({ ...data, time: time })
+		}
+
 		const onSubmit = async () => {
 			const details = {
 				...data,
 				date: dayjs(data.date).format("DD/MM/YYYY"),
-				time: dayjs(data.time).format("hh:mm A"),
 				userId: localStorage.userId,
 				doctorId: doctor._id,
 			}
-			console.log(details)
 
 			try {
-				const appointmentsData = await axios.get(`/appointment/${doctor._id}/${data.date}`, {
-					headers: { "auth-token": localStorage.userToken },
-				})
-				console.log(appointmentsData.data.timeArray)
-				console.log(details.time)
-				if (appointmentsData.data.timeArray.includes(details.time)) {
+				// console.log(details.time)
+				// console.log(data.date)
+				// console.log(doctor._id)
+				if (booked.includes(details.time)) {
 					alert("Appointment already booked")
 				}
 			} catch (err) {
@@ -277,7 +314,7 @@ const Booking = () => {
 							/>
 						</Grid>
 
-						<Grid item xs={6} sm={3.5}>
+						<Grid item xs={12} sm={3}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
 									{...register("date", {
@@ -287,37 +324,59 @@ const Booking = () => {
 									id="date"
 									name="date"
 									value={data.date}
-									onChange={(newValue) => {
+									onChange={async (newValue) => {
 										setData({ ...data, date: newValue })
+										const appointmentsData = await axios.get(
+											`/appointment/${doctor._id}/${newValue}`,
+											{
+												headers: {
+													"auth-token": localStorage.userToken,
+												},
+											}
+										)
+										console.log(appointmentsData.data.timeArray)
+										setBooked(appointmentsData.data.timeArray)
 										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
 								/>
 							</LocalizationProvider>
 						</Grid>
-						<Grid item xs={6} sm={3.5}>
-							<LocalizationProvider dateAdapter={AdapterDateFns}>
-								<TimePicker
-									{...register("time", {
-										required: "Pick time!",
+						<Grid item xs={12} sm={9}>
+							<Container
+								sx={{
+									border: 1,
+									borderColor: "#595959",
+									borderRadius: 1,
+									p: 1,
+								}}
+							>
+								<Carousel
+									responsive={responsive}
+									autoPlaySpeed={100000}
+								>
+									{slots.map((slot, index) => {
+										return (
+											<Button
+												onClick={() => {
+													handleTimeClick(index, slot)
+												}}
+												disabled={booked.includes(slot)}
+												sx={{
+													backgroundColor:
+														slot === data.time
+															? "#609acf"
+															: "#f5f5f5",
+													color: slot === data.time ? "#000" : "",
+												}}
+												key={index}
+											>
+												{slot}
+											</Button>
+										)
 									})}
-									label="Select time"
-									id="time"
-									name="time"
-									value={data.time}
-									onChange={(newValue) => {
-										setData({ ...data, time: newValue })
-										reset()
-									}}
-									renderInput={(params) => <TextField {...params} />}
-									shouldDisableTime={(timeValue,ClockType)=>{
-										if((ClockType === 'minutes' && timeValue % 15 !== 0) || (ClockType === 'hours' && timeValue > 22)){
-											return true
-										}
-										return false
-									}}
-								/>
-							</LocalizationProvider>
+								</Carousel>
+							</Container>
 						</Grid>
 					</Grid>
 					<Grid item xs={6} sm={6}>
