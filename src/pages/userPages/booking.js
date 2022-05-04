@@ -48,7 +48,7 @@ const responsive = {
 	},
 	mobile: {
 		breakpoint: { max: 464, min: 0 },
-		items: 4,
+		items: 3,
 	},
 }
 
@@ -59,27 +59,7 @@ const Booking = () => {
 		if (location.state) {
 			doctor = location.state.doctor
 		}
-		const [slots, setSlots] = useState([
-			1,
-			2,
-			3,
-			4,
-			5,
-			6,
-			6,
-			7,
-			8,
-			9,
-			10,
-			11,
-			12,
-			13,
-			14,
-			15,
-			16,
-			17,
-			18,
-		])
+		const [slots, setSlots] = useState([])
 		const [booked, setBooked] = useState([])
 		const [startTime, setStartTime] = useState(0)
 		const [startHour, setStartHour] = useState(0)
@@ -87,6 +67,7 @@ const Booking = () => {
 		const [endTime, setEndTime] = useState(0)
 		const [endHour, setEndHour] = useState(0)
 		const [endMinute, setEndMinute] = useState(0)
+		const [days, setDays] = useState([])
 		const [user, setUser] = useState({})
 		const [data, setData] = useState({
 			user: "",
@@ -108,6 +89,18 @@ const Booking = () => {
 					headers: { "auth-token": localStorage.userToken },
 				})
 				setUser(userData.data.user)
+				const appointmentsData = await axios.get(
+					`/appointment/${doctor._id}/${new Date()}`,
+					{
+						headers: {
+							"auth-token": localStorage.userToken,
+						},
+					}
+				)
+				setDays(appointmentsData.data.doctorTiming.days)
+				setBooked(appointmentsData.data.timeArray)
+				setStartTime(appointmentsData.data.doctorTiming.startTime)
+				setEndTime(appointmentsData.data.doctorTiming.endTime)
 			})()
 		}, [])
 
@@ -130,20 +123,17 @@ const Booking = () => {
 		}, [startTime, endTime])
 
 		useEffect(() => {
-			console.log(startHour, startMinute, endHour, endMinute)
 			let startTime = dayjs()
 				.hour(startHour)
 				.minute(startMinute)
 			let endTime = dayjs()
 				.hour(endHour)
 				.minute(endMinute)
-			// console.log(startTime," TO ", endTime)
 			let tempSlots = []
 			while (startTime.isBefore(endTime)) {
 				tempSlots.push(startTime.format("hh:mm A"))
 				startTime = startTime.add(30, "minute")
 			}
-			console.log(tempSlots)
 			setSlots(tempSlots)
 		}, [endMinute])
 
@@ -176,9 +166,6 @@ const Booking = () => {
 			}
 
 			try {
-				// console.log(details.time)
-				// console.log(data.date)
-				// console.log(doctor._id)
 				if (booked.includes(details.time)) {
 					alert("Appointment already booked")
 				}
@@ -356,7 +343,15 @@ const Booking = () => {
 						<Grid item xs={12} sm={3}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
+									maxDate={new Date().setDate(
+										new Date().getDate() + 60
+									)}
 									disablePast
+									shouldDisableDate={(date) => {
+										// console.log(days.includes(date.getDay()))
+										// console.log(days[0])
+										return !days.includes(date.getDay())
+									}}
 									{...register("date", {
 										required: "Pick date!",
 									})}
@@ -381,6 +376,7 @@ const Booking = () => {
 										setEndTime(
 											appointmentsData.data.doctorTiming.endTime
 										)
+										// console.log(appointmentsData.data.doctorTiming)
 										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
@@ -396,38 +392,43 @@ const Booking = () => {
 									p: 1,
 								}}
 							>
-								<Carousel
-									responsive={responsive}
-									autoPlaySpeed={100000}
-									customRightArrow={<></>}
-									customLeftArrow={<></>}
-								>
-									{slots.map((slot, index) => {
-										return (
-											<Button
-												onClick={() => {
-													handleTimeClick(index, slot)
-												}}
-												disabled={booked.includes(slot)}
-												sx={{
-													backgroundColor:
-														slot === data.time
-															? "#609acf"
-															: "#f5f5f5",
-													color: slot === data.time ? "#000" : "",
-												}}
-												key={index}
-											>
-												{slot}
-											</Button>
-										)
-									})}
-									{slots.length === 0 ? (
-										<Typography sx={{ fontSize: 12 }}>
-											No Time slot available
-										</Typography>
-									) : null}
-								</Carousel>
+								{data.date ? (
+									<Carousel
+										responsive={responsive}
+										autoPlaySpeed={100000}
+										// customRightArrow={<></>}
+										// customLeftArrow={<></>}
+										key={slots}
+									>
+										{console.log(slots)}
+
+										{slots.map((slot, index) => {
+											return (
+												<Button
+													onClick={() => {
+														handleTimeClick(index, slot)
+													}}
+													disabled={booked.includes(slot)}
+													sx={{
+														backgroundColor:
+															slot === data.time
+																? "#609acf"
+																: "#f5f5f5",
+														color:
+															slot === data.time ? "#000" : "",
+													}}
+													key={index}
+												>
+													{slot}
+												</Button>
+											)
+										})}
+									</Carousel>
+								) : (
+									<Typography sx={{ fontSize: 12, p:1.15, color:'#595959' }}>
+										Select a date to see available Time slots
+									</Typography>
+								)}
 							</Container>
 						</Grid>
 					</Grid>
