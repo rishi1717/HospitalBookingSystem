@@ -27,12 +27,6 @@ import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
 dayjs.extend(customParseFormat)
 
-// import customParseFormat from "dayjs/plugin/customParseFormat"
-// dayjs.extend(customParseFormat)
-// const ti = "19:20"
-// const me = dayjs(ti, "HH:mm")
-// console.log(me.format("hh:mm A"))
-
 const responsive = {
 	superLargeDesktop: {
 		breakpoint: { max: 4000, min: 3000 },
@@ -60,6 +54,7 @@ const Booking = () => {
 			doctor = location.state.doctor
 		}
 		const [slots, setSlots] = useState([])
+		const [errMessage, setErrMessage] = useState("")
 		const [booked, setBooked] = useState([])
 		const [startTime, setStartTime] = useState(0)
 		const [startHour, setStartHour] = useState(0)
@@ -157,26 +152,31 @@ const Booking = () => {
 			setData({ ...data, time: time })
 		}
 
+		//+++++++++++++++++++++++++++++++++++++++SUBMIT FUNCTION++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 		const onSubmit = async () => {
+			setErrMessage("")
 			const details = {
 				...data,
 				date: dayjs(data.date).format("DD/MM/YYYY"),
 				userId: localStorage.userId,
 				doctorId: doctor._id,
 			}
-
+			console.log(details)
 			try {
-				if (booked.includes(details.time)) {
-					alert("Appointment already booked")
+				if (details.date === "Invalid Date") {
+					setErrMessage("Please select Date and Time for your appointment")
+				} else if (!details.time) {
+					setErrMessage("Please select a Time for your appointment")
+				} else {
+					axios.post("/appointment", details, {
+						headers: { "auth-token": localStorage.userToken },
+					})
+					navigate("/confirmbooking", { state: { details: details } })
 				}
 			} catch (err) {
 				console.log(err.message)
 			}
-
-			// axios.post("/appointment", details, {
-			// 	headers: { "auth-token": localStorage.userToken },
-			// })
-			// navigate("/confirmbooking", { state: { details: data } })
 		}
 
 		return (
@@ -348,13 +348,8 @@ const Booking = () => {
 									)}
 									disablePast
 									shouldDisableDate={(date) => {
-										// console.log(days.includes(date.getDay()))
-										// console.log(days[0])
 										return !days.includes(date.getDay())
 									}}
-									{...register("date", {
-										required: "Pick date!",
-									})}
 									label="Select date"
 									id="date"
 									name="date"
@@ -376,7 +371,6 @@ const Booking = () => {
 										setEndTime(
 											appointmentsData.data.doctorTiming.endTime
 										)
-										// console.log(appointmentsData.data.doctorTiming)
 										reset()
 									}}
 									renderInput={(params) => <TextField {...params} />}
@@ -400,8 +394,6 @@ const Booking = () => {
 										// customLeftArrow={<></>}
 										key={slots}
 									>
-										{console.log(slots)}
-
 										{slots.map((slot, index) => {
 											return (
 												<Button
@@ -425,13 +417,25 @@ const Booking = () => {
 										})}
 									</Carousel>
 								) : (
-									<Typography sx={{ fontSize: 12, p:1.15, color:'#595959' }}>
+									<Typography
+										sx={{ fontSize: 12, p: 1.15, color: "#595959" }}
+									>
 										Select a date to see available Time slots
 									</Typography>
 								)}
 							</Container>
 						</Grid>
 					</Grid>
+					<Typography
+						sx={{
+							fontSize: 12,
+							p: 1.15,
+							color: "red",
+							textAlign: "center",
+						}}
+					>
+						{errMessage}
+					</Typography>
 					<Grid item xs={6} sm={6}>
 						<Button
 							type="submit"
