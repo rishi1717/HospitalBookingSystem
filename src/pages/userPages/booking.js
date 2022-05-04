@@ -162,7 +162,6 @@ const Booking = () => {
 				userId: localStorage.userId,
 				doctorId: doctor._id,
 			}
-			console.log(details)
 			try {
 				if (details.date === "Invalid Date") {
 					setErrMessage("Please select Date and Time for your appointment")

@@ -157,7 +157,7 @@ function ConfirmBooking() {
 								}}
 								component="p"
 							>
-								<b>Date :</b> date 
+								<b>Date :</b> {details.date}
 							</Typography>
 							<Typography
 								sx={{
@@ -172,7 +172,7 @@ function ConfirmBooking() {
 								}}
 								component="p"
 							>
-								<b>Time :</b> time
+								<b>Time :</b> {details.time}
 							</Typography>
 							<Typography
 								sx={{
@@ -232,7 +232,7 @@ function ConfirmBooking() {
 							</Button>
 							<Button
 								sx={{
-									fontSize:'0.8rem',
+									fontSize: "0.8rem",
 									mt: 4,
 									ml: 1,
 									backgroundColor: "#609acf",
