@@ -49,6 +49,11 @@ function ConfirmBooking() {
 							razorpaySignature: response.razorpay_signature,
 						})
 						alert(result.data.msg)
+						if(result.status === 200) {
+							console.log(result.data.paymentId)
+							console.log(details)
+							
+						}
 					}
 				}
 				setLoading(false)
@@ -94,7 +99,7 @@ function ConfirmBooking() {
 							display: "flex",
 							flexDirection: { xs: "column", sm: "row" },
 							minHeight: { xs: 0, sm: 150 },
-							px: { xs: 2, sm: 7 },
+							px: { xs: 7 , sm: 10},
 							py: { xs: 2, sm: 4 },
 						}}
 					>
