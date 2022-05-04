@@ -168,9 +168,9 @@ const Booking = () => {
 				} else if (!details.time) {
 					setErrMessage("Please select a Time for your appointment")
 				} else {
-					axios.post("/appointment", details, {
-						headers: { "auth-token": localStorage.userToken },
-					})
+					// axios.post("/appointment", details, {
+					// 	headers: { "auth-token": localStorage.userToken },
+					// })
 					navigate("/confirmbooking", { state: { details: details } })
 				}
 			} catch (err) {
