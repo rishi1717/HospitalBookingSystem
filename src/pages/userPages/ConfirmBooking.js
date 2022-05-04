@@ -7,11 +7,62 @@ import { useLocation, useNavigate } from "react-router-dom"
 import FullLayout from "../../layouts/FullLayout"
 import Unauthorized from "./Unauthorized"
 import Swal from "sweetalert2"
+import axios from "../../axios"
 
 function ConfirmBooking() {
 	const navigate = useNavigate()
 	const location = useLocation()
 	const details = location.state.details
+	const [loading, setLoading] = React.useState(false)
+
+	function loadRazorPay() {
+		const script = document.createElement("script")
+		script.src = "https://checkout.razorpay.com/v1/checkout.js"
+		script.onerror = () => {
+			alert("Error loading Razorpay")
+		}
+		
+		script.onload = async () => {
+			console.log("onload")
+			try {
+				setLoading(true)
+				const result = await axios.post("/payment/create", {
+					amount: details.fee + "00",
+				})
+				const { amount, id: order_id, currency } = result.data
+				const {
+					data: { key },
+				} = await axios.get("/payment/get-razor-key")
+
+				const options = {
+					key: key,
+					amount: amount.toString(),
+					currency: currency,
+					name: "Razorpay",
+					description: "Booking Fee",
+					order_id: order_id,
+					handler: async(response) => {
+						const result = await axios.post('/payment/pay', {
+							amount: amount,
+							razorpayPaymentId: response.razorpay_payment_id,
+							razorpayOrderId: response.razorpay_order_id,
+							razorpaySignature: response.razorpay_signature,
+						})
+						alert(result.data.msg)
+					}
+				}
+				setLoading(false)
+				const paymentObject = new window.Razorpay(options)
+				paymentObject.open()
+
+			} catch (err) {
+				console.log("onload")
+				console.log(err.message)
+				setLoading(false)
+			}
+		}
+		document.body.appendChild(script)
+	}
 
 	if (localStorage.userToken) {
 		return (
@@ -242,9 +293,8 @@ function ConfirmBooking() {
 										color: "#609acf",
 									},
 								}}
-								onClick={async () => {
-									navigate("/payment", { state: { details: details } })
-								}}
+								disabled={loading}
+								onClick={loadRazorPay}
 							>
 								Confirm
 							</Button>
