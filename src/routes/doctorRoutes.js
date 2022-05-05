@@ -1,5 +1,6 @@
 import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import PatientHistory from "../pages/doctorPages/patientHistory"
 const UserProfile =  React.lazy(() => import("../pages/doctorPages/userProfile"))
 const EditDoctor =  React.lazy(() => import("../pages/doctorPages/editDoctorDetails"))
 const DoctorAppointments =  React.lazy(() => import("../pages/doctorPages/doctorAppointments"))
@@ -78,6 +79,14 @@ function DoctorRoutes() {
 						element={
 							<React.Suspense>
 								<UserProfile />
+							</React.Suspense>
+						}
+					/>
+					<Route
+						path="/doctor/patients/history"
+						element={
+							<React.Suspense>
+								<PatientHistory />
 							</React.Suspense>
 						}
 					/>

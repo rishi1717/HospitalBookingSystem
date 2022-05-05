@@ -194,7 +194,7 @@ function UserProfile() {
 						<Link
 							style={{ textDecoration: "none" }}
 							state={{ user: user }}
-							to="/doctor"
+							to="/doctor/patients/history"
 						>
 							<SmallButton
 								value="Appointment History"
