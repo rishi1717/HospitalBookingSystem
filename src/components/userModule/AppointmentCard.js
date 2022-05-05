@@ -5,30 +5,40 @@ import { Button, Grid, TextField, Typography } from "@mui/material"
 import { SmallButton } from "../Buttons"
 import axios from "../../axios.js"
 import Modal from "@mui/material/Modal"
+import Reschedule from "./Reschedule"
 
 const style = {
 	position: "absolute",
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: 400,
+	width: '60vw',
 	bgcolor: "background.paper",
 	borderRadius: "4px",
 	boxShadow: 24,
 	p: 4,
 }
 
-export default function AppointmentCard({update,setUpdate}) {
+export default function AppointmentCard({ update, setUpdate }) {
 	const [open, setOpen] = React.useState(false)
+	const [open2, setOpen2] = React.useState(false)
 	const [canceling, setCanceling] = React.useState("")
-	const handleOpen = () => setOpen(true)
-	const handleClose = () => setOpen(false)
+	const handleOpen = () => {
+		setOpen(true)
+		setOpen2(false)
+	}
+	const handleClose = () => {
+		setOpen(false)
+		setOpen2(false)
+	}
+	const handleOpen2 = () => setOpen2(true)
+	const handleClose2 = () => setOpen2(false)
 
 	const [cancelId, setCancelId] = useState(0)
 
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
-		(async function() {
+		;(async function() {
 			const appointmentData = await axios.get("/appointment", {
 				headers: { "auth-token": localStorage.userToken },
 			})
@@ -94,6 +104,11 @@ export default function AppointmentCard({update,setUpdate}) {
 										{appointment.time}
 									</Typography>
 									<Grid
+										onClick={() => {
+											handleOpen2()
+											console.log(appointment._id)
+											setCancelId(appointment._id)
+										}}
 										container
 										rowSpacing={1}
 										columnSpacing={{ xs: 4, sm: 0 }}
@@ -125,6 +140,51 @@ export default function AppointmentCard({update,setUpdate}) {
 									</Grid>
 								</Paper>
 							</Box>
+
+							<Modal
+								open={open2}
+								onClose={handleClose2}
+								aria-labelledby="modal-modal-title"
+								aria-describedby="modal-modal-description"
+							>
+								<Box sx={style}>
+									<Reschedule appointmentId={cancelId}/>
+									<Grid container spacing={2}>
+										<Grid item xs={6} sm={4} ml="auto">
+											<Button
+												onClick={handleClose2}
+												fullWidth
+												variant="contained"
+												sx={{
+													mt: 3,
+													mb: 2,
+												}}
+											>
+												Keep Appointment
+											</Button>
+										</Grid>
+										<Grid item xs={6} sm={4}>
+											<Button
+												onClick={async () => {
+													setUpdate(!update)
+													handleClose2()
+												}}
+												fullWidth
+												variant="contained"
+												sx={{
+													mt: 3,
+													mb: 2,
+													backgroundColor: "orange",
+													fontSize: "0.8rem",
+												}}
+											>
+												Reschedule
+											</Button>
+										</Grid>
+									</Grid>
+								</Box>
+							</Modal>
+
 							<Modal
 								open={open}
 								onClose={handleClose}
