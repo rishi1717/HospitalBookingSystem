@@ -66,7 +66,8 @@ function EditDoctor() {
 			experience: doctor.experience,
 			expertise: doctor.expertise,
 			days: doctor.days,
-			time: doctor.time,
+			startTime: doctor.startTime,
+			endTime: doctor.endTime,
 			fee: Number(doctor.fee),
 		})
 
@@ -75,7 +76,6 @@ function EditDoctor() {
 		}
 
 		const onSubmit = async () => {
-			console.log(data.name)
 			const newForm = new FormData()
 			newForm.append("name", data.name)
 			newForm.append("email", data.email)
@@ -83,12 +83,15 @@ function EditDoctor() {
 			newForm.append("department", data.department)
 			newForm.append("experience", data.experience)
 			newForm.append("expertise", data.expertise)
-			newForm.append("days", data.days)
-			newForm.append("time", data.time)
+			// newForm.append("days", data.days)
+			newForm.append("startTime", data.startTime)
+			newForm.append("endTime", data.endTime)
 			newForm.append("fee", data.fee)
 			if (selectedFile) {
 				newForm.append("image", selectedFile)
 			}
+
+			
 
 			const con = await Swal.fire({
 				title: "Are you sure?",
@@ -424,17 +427,37 @@ function EditDoctor() {
 											</Grid>
 											<Grid item xs={12}>
 												<TextField
-													{...register("time", {
-														required: "time",
+													{...register("startTime", {
+														required: "startTime",
 													})}
 													required
 													fullWidth
-													id="time"
-													label="time"
-													name="time"
+													id="startTime"
+													label="Start Time"
+													name="startTime"
 													onChange={handleChange}
-													value={data.time}
-													error={errors.time}
+													value={data.startTime}
+													error={errors.startTime}
+													helperText={
+														errors.time
+															? errors.time.message
+															: null
+													}
+												/>
+											</Grid>
+											<Grid item xs={12}>
+												<TextField
+													{...register("endTime", {
+														required: "endTime",
+													})}
+													required
+													fullWidth
+													id="endTime"
+													label="Start Time"
+													name="endTime"
+													onChange={handleChange}
+													value={data.endTime}
+													error={errors.endTime}
 													helperText={
 														errors.time
 															? errors.time.message

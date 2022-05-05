@@ -88,7 +88,7 @@ function DoctorProfile() {
 										maxHeight: { xs: 120, sm: 200 },
 										borderRadius: 100,
 									}}
-									image={image}
+									src={doctor.image}
 									alt="image"
 								/>
 							</Box>
@@ -191,7 +191,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>OP Time :</b> {doctor.days} from {doctor.time}
+									<b>OP Time :</b>{doctor.startTime} to {doctor.endTime}
 								</Typography>
 							</CardContent>
 						</Grid>
