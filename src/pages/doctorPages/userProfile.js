@@ -16,11 +16,11 @@ function UserProfile() {
 	const docState = useSelector((storeState) => storeState.doctor)
 	if (docState.token) {
 		const location = useLocation()
-		const { id } = location.state
+		const { patient } = location.state
 		const [user, setUser] = useState([])
 		useEffect(() => {
 			;(async function() {
-				const userData = await axios.get(`/user/${id}`, {
+				const userData = await axios.get(`/user/${patient}`, {
 					headers: { "auth-token": docState.token },
 				})
 				setUser(userData.data.user)
@@ -49,23 +49,25 @@ function UserProfile() {
 					direction="column"
 					alignItems="center"
 					justify="center"
-                    m={{xs:0,sm:4}}
+					mt={{ xs: 1, sm: 3 }}
 				>
 					<Card
-						elevation={3}
+						elevation={10}
 						sx={{
 							mt: 5,
 							display: "flex",
-							maxHeight: "18rem",
+							flexDirection: { xs: "column", sm: "row" },
 							minHeight: { xs: 0, sm: 150 },
-							px: { xs: 1, sm: 7 },
+							px: 7,
 							py: { xs: 2, sm: 4 },
+							border: "1px solid #609acf",
 						}}
 					>
 						<Box
 							component="div"
 							sx={{
 								display: "flex",
+								flexDirection: "column",
 								justifyContent: "center",
 								alignItems: "center",
 								mr: { xs: 2, sm: 5 },
@@ -182,30 +184,36 @@ function UserProfile() {
 							</Typography>
 						</CardContent>
 					</Card>
-					<Grid alignItems="center" justify="center">
+					<Grid
+						alignItems="center"
+						display="flex"
+						flexDirection={{ xs: "column", sm: "row" }}
+						justify="center"
+						sx={{ mt: 4 }}
+					>
 						<Link
 							style={{ textDecoration: "none" }}
 							state={{ user: user }}
-							to="/editprofile"
+							to="/doctor"
 						>
 							<SmallButton
 								value="Appointment History"
-								color="#eaeaea"
-								text="#595959"
+								color="#609acf"
+								text="#fff"
 							/>
 						</Link>
-						<Link style={{ textDecoration: "none" }} to="/prescriptions">
+						<Link style={{ textDecoration: "none" }} to="/doctor">
 							<SmallButton
 								value="Prescribe Medicine"
-								color="#eaeaea"
-								text="#595959"
+								color="#609acf"
+								text="#fff"
 							/>
 						</Link>
-						<Link style={{ textDecoration: "none" }} to="/appointments">
+						<Link style={{ textDecoration: "none" }} to="/doctor">
 							<SmallButton
 								value="Set Appointment"
-								color="#eaeaea"
-								text="#595959"
+								color="#609acf"
+								text="#fff"
 							/>
 						</Link>
 					</Grid>

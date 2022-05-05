@@ -10,10 +10,10 @@ const DoctorPatients = () => {
 	const [users, setUsers] = useState([])
 	useEffect(() => {
 		(async function() {
-			const userData = await axios.get("/user", {
+			const userData = await axios.get(`/user/doctor/${docState.id}`, {
 				headers: { "auth-token": docState.token },
 			})
-			setUsers(userData.data.user)
+			setUsers(userData.data.users)
 		})()
 	}, [])
 	if (docState.token) {

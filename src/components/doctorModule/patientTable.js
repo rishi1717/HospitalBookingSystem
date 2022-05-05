@@ -7,10 +7,10 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { SmallButton } from "../Buttons"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function PatientTable({users}) {
-	console.log(users)
+	const navigate = useNavigate()
 	return (
 		<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
 			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
@@ -46,9 +46,15 @@ export default function PatientTable({users}) {
 							<TableCell align="center">{row.age}</TableCell>
 							<TableCell align="center">{row.gender}</TableCell>
 							<TableCell align="center">
-								<Link style={{textDecoration:'none'}} state={{id:row._id}} to={`profile`}>
+								<div
+									onClick={() => {
+										navigate("/doctor/patients/profile", {
+											state: { patient: row._id },
+										})
+									}}
+								>
 									<SmallButton value="Profile" />
-								</Link>
+								</div>
 							</TableCell>
 						</TableRow>
 					))}

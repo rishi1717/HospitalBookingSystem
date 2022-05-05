@@ -7,8 +7,10 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { SmallButton } from "../Buttons"
+import { useNavigate } from "react-router-dom"
 
 export default function AppointmentTable({ appointments }) {
+	const navigate = useNavigate()
 	return (
 		<TableContainer
 			component={Paper}
@@ -41,7 +43,11 @@ export default function AppointmentTable({ appointments }) {
 							<TableCell align="center">{row.time}</TableCell>
 							<TableCell align="center">{row.reason}</TableCell>
 							<TableCell align="center">
-								<SmallButton value="Profile" />
+								<div onClick={()=>{
+									navigate('/doctor/patients/profile', {state: {patient: row.userId}})
+								}}>
+									<SmallButton value="Profile" />
+								</div>
 							</TableCell>
 						</TableRow>
 					))}
