@@ -18,7 +18,7 @@ const style = {
 	p: 4,
 }
 
-export default function AppointmentCard() {
+export default function AppointmentCard({update,setUpdate}) {
 	const [open, setOpen] = React.useState(false)
 	const [canceling, setCanceling] = React.useState("")
 	const handleOpen = () => setOpen(true)
@@ -186,6 +186,7 @@ export default function AppointmentCard() {
 													setAppointments(
 														appointmentData.data.appointment
 													)
+													setUpdate(!update)
 													handleClose()
 												}}
 												fullWidth

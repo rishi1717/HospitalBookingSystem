@@ -185,6 +185,7 @@ export default function AppointmentRows(props) {
 														setAppointments(
 															appointmentData.data.appointment
 														)
+														props.setUpdate(!props.update)
 														handleClose()
 													}}
 													fullWidth
