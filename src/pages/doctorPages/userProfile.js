@@ -202,7 +202,11 @@ function UserProfile() {
 								text="#fff"
 							/>
 						</Link>
-						<Link style={{ textDecoration: "none" }} to="/doctor">
+						<Link
+							style={{ textDecoration: "none" }}
+							state={{ user: user }}
+							to="/doctor/patients/prescribe"
+						>
 							<SmallButton
 								value="Prescribe Medicine"
 								color="#609acf"

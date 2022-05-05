@@ -5,7 +5,7 @@ import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
 import { Fab, Grid, TextField, Typography } from "@mui/material"
 import { Box } from "@mui/material"
 import { SmallButton } from "../../components/Buttons"
-import FullLayout from "../../layouts/FullLayout"
+import DoctorLayout from "../../layouts/DoctorsLayout"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import axios from "../../axios"
 import { useForm } from "react-hook-form"
@@ -91,8 +91,6 @@ function EditDoctor() {
 				newForm.append("image", selectedFile)
 			}
 
-			
-
 			const con = await Swal.fire({
 				title: "Are you sure?",
 				text: "Details will be Updated!",
@@ -125,7 +123,7 @@ function EditDoctor() {
 		}
 
 		return (
-			<FullLayout>
+			<DoctorLayout>
 				<Grid
 					container
 					spacing={0}
@@ -147,6 +145,7 @@ function EditDoctor() {
 							minHeight: { xs: 0, sm: 150 },
 							px: { xs: 1, sm: 7 },
 							py: { xs: 2, sm: 4 },
+							border: "1px solid #609acf",
 						}}
 					>
 						<Box
@@ -211,7 +210,13 @@ function EditDoctor() {
 									</Grid>
 								)}
 								{selectedFile && (
-									<Grid container spacing={2}>
+									<Grid
+										container
+										spacing={2}
+										direction="column"
+										alignItems="center"
+										justifyContent="center"
+									>
 										<Grid item xs={12}>
 											<img
 												style={{
@@ -490,7 +495,7 @@ function EditDoctor() {
 										<Grid alignItems="center" justify="center">
 											<Link
 												style={{ textDecoration: "none" }}
-												to="/profile"
+												to="/doctor/profile"
 											>
 												<SmallButton
 													value="Cancel"
@@ -511,7 +516,7 @@ function EditDoctor() {
 						</CardContent>
 					</Card>
 				</Grid>
-			</FullLayout>
+			</DoctorLayout>
 		)
 	} else {
 		return <Unauthorized />
