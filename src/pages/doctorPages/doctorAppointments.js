@@ -9,13 +9,17 @@ import { useSelector } from "react-redux"
 import axios from "../../axios"
 
 const DoctorAppointments = () => {
-	const [appointments,setAppointments] = useState([])
+	const [appointments, setAppointments] = useState([])
+	const [appointmentsByDate, setAppointmentsByDate] = useState([])
 	const docState = useSelector((storeState) => storeState.doctor)
 	useEffect(() => {
-		(async function() {
-			const appointmentData = await axios.get("/appointment", {
-				headers: { "auth-token": docState.token },
-			})
+		;(async function() {
+			const appointmentData = await axios.get(
+				`/appointment/date/${new Date()}/${docState.id}`,
+				{
+					headers: { "auth-token": docState.token },
+				}
+			)
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
@@ -71,20 +75,29 @@ const DoctorAppointments = () => {
 					}}
 					component="p"
 				>
-					Appointment History
+					Appointment By Date
 				</Typography>
 				<LocalizationProvider dateAdapter={AdapterDateFns}>
 					<DatePicker
 						label="Select Date"
 						value={date}
-						onChange={(newDate) => {
+						onChange={async (newDate) => {
 							setDate(newDate)
+							const appointmentData = await axios.get(
+								`/appointment/date/${newDate}/${docState.id}`,
+								{
+									headers: {
+										"auth-token": localStorage.userToken,
+									},
+								}
+							)
+							setAppointmentsByDate(appointmentData.data.appointment)
 						}}
 						renderInput={(params) => <TextField {...params} />}
 					/>
 				</LocalizationProvider>
 				{console.log(appointments)}
-				<AppointmentTable appointments={appointments} />
+				<AppointmentTable appointments={appointmentsByDate} />
 			</DoctorsLayout>
 		)
 	}
