@@ -62,7 +62,6 @@ function ConfirmBooking() {
 								...details,
 								paymentId: result.data.paymentId,
 							}
-							console.log(payDetails)
 							axios.post("/appointment", payDetails, {
 								headers: { "auth-token": localStorage.userToken },
 							})

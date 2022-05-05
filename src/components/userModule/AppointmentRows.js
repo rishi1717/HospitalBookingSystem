@@ -114,7 +114,6 @@ export default function AppointmentRows(props) {
 										<Grid
 											onClick={() => {
 												setCancelId(appointment._id)
-												console.log(appointment._id)
 												handleOpen()
 											}}
 											item
@@ -165,7 +164,6 @@ export default function AppointmentRows(props) {
 															status: "Canceled",
 															cancelReason: canceling,
 														}
-														console.log(newData)
 														await axios.put(
 															`/appointment/${cancelId}`,
 															newData,

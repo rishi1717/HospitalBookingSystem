@@ -20,7 +20,6 @@ function DoctorProfile() {
 					headers: { "auth-token": docState.token },
 				})
 				setDoctor(doctorData.data.doctor)
-				console.log(doctorData.data.doctor)
 			})()
 		}, [])
 		return (

@@ -9,7 +9,6 @@ import { useLocation } from "react-router-dom"
 const PatientHistory = () => {
 	const location = useLocation()
 	const { user } = location.state
-	console.log(user)
 	const [appointments, setAppointments] = useState([])
 	const docState = useSelector((storeState) => storeState.doctor)
 	useEffect(() => {

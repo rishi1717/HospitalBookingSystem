@@ -97,9 +97,6 @@ export default function Register() {
 					newForm.append("blood", data.blood)
 					newForm.append("phone", data.phone)
 					newForm.append("image", selectedFile)
-					for (var key of newForm.entries()) {
-						console.log(key[0] + ", " + key[1])
-					}
 					await axios.post("/user", newForm)
 					navigate("/login")
 					Toast.fire({

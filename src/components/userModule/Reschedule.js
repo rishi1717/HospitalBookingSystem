@@ -93,7 +93,6 @@ const Reschedule = ({ appointmentId }) => {
 
 	const handleTimeClick = (index, time) => {
 		setAppointment({ ...appointment, time: time })
-		console.log(appointment)
 	}
 
 	return (

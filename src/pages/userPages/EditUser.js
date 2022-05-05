@@ -93,11 +93,9 @@ function EditUser() {
 		newForm.append("phone", data.phone)
 		if (selectedFile) {
 			newForm.append("image", selectedFile)
-			console.log(selectedFile)
 		}
 		else{
 			newForm.append("image", user.image)
-			console.log(user.image)
 		}
 		
 

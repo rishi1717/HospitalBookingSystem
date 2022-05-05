@@ -263,7 +263,6 @@ const Prescribe = () => {
 					</Grid>
 				</Grid>
 			</Card>
-			{console.log(prescriptions)}
 			<DoctorPrescritption prescriptions={prescriptions}/>
 		</DoctorsLayout>
 	)

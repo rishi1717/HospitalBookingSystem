@@ -109,7 +109,6 @@ export default function AppointmentCard({ update, setUpdate }) {
 									<Grid
 										onClick={() => {
 											handleOpen2()
-											console.log(appointment._id)
 											setCancelId(appointment._id)
 										}}
 										container
@@ -130,7 +129,6 @@ export default function AppointmentCard({ update, setUpdate }) {
 										<Grid
 											onClick={() => {
 												handleOpen()
-												console.log(appointment._id)
 												setCancelId(appointment._id)
 											}}
 											item

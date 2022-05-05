@@ -96,7 +96,6 @@ const DoctorAppointments = () => {
 						renderInput={(params) => <TextField {...params} />}
 					/>
 				</LocalizationProvider>
-				{console.log(appointments)}
 				<AppointmentTable appointments={appointmentsByDate} />
 			</DoctorsLayout>
 		)

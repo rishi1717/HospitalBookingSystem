@@ -40,7 +40,6 @@ const Payment = () => {
 		if (location.state) {
 			details = location.state.details
 		}
-		console.log(details)
 
 		const navigate = useNavigate()
 		const {
