@@ -39,9 +39,12 @@ export default function AppointmentCard({ update, setUpdate }) {
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
 		;(async function() {
-			const appointmentData = await axios.get("/appointment", {
-				headers: { "auth-token": localStorage.userToken },
-			})
+			const appointmentData = await axios.get(
+				`/appointment/${localStorage.userId}`,
+				{
+					headers: { "auth-token": localStorage.userToken },
+				}
+			)
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
