@@ -19,6 +19,7 @@ import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined
 import Unauthorized from "./Unauthorized"
 
 function UserAppointments() {
+	const [update,setUpdate] = React.useState(false)
 	const appointmentRef = useRef()
 	const handleClickAppointment = () => {
 		appointmentRef.current.scrollIntoView({ behavior: "smooth" })

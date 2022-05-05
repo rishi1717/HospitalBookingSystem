@@ -13,7 +13,7 @@ const style = {
 	transform: "translate(-50%, -50%)",
 	width: 400,
 	bgcolor: "background.paper",
-	border: "2px solid #000",
+	borderRadius: "4px",
 	boxShadow: 24,
 	p: 4,
 }
@@ -24,16 +24,14 @@ export default function AppointmentCard() {
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
 
-	const [cancelId,setCancelId] = useState(0)
+	const [cancelId, setCancelId] = useState(0)
 
 	const [appointments, setAppointments] = useState([])
 	useEffect(() => {
 		(async function() {
-			const appointmentData = await axios.get(
-				"/appointment", {
+			const appointmentData = await axios.get("/appointment", {
 				headers: { "auth-token": localStorage.userToken },
-			}
-			)
+			})
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
@@ -168,7 +166,13 @@ export default function AppointmentCard() {
 													}
 													await axios.put(
 														`/appointment/${cancelId}`,
-														newData
+														newData,
+														{
+															headers: {
+																"auth-token":
+																	localStorage.userToken,
+															},
+														}
 													)
 													const appointmentData = await axios.get(
 														"/appointment",

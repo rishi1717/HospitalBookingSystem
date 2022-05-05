@@ -9,6 +9,16 @@ import Unauthorized from "./Unauthorized"
 import Swal from "sweetalert2"
 import axios from "../../axios"
 
+const Toast = Swal.mixin({
+	background: "#1E1E1E",
+	color: "white",
+	toast: true,
+	position: "top-end",
+	showConfirmButton: false,
+	timerProgressBar: true,
+})
+
+
 function ConfirmBooking() {
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -21,9 +31,8 @@ function ConfirmBooking() {
 		script.onerror = () => {
 			alert("Error loading Razorpay")
 		}
-		
+
 		script.onload = async () => {
-			console.log("onload")
 			try {
 				setLoading(true)
 				const result = await axios.post("/payment/create", {
@@ -41,27 +50,37 @@ function ConfirmBooking() {
 					name: "Razorpay",
 					description: "Booking Fee",
 					order_id: order_id,
-					handler: async(response) => {
-						const result = await axios.post('/payment/pay', {
+					handler: async (response) => {
+						const result = await axios.post("/payment/pay", {
 							amount: amount,
 							razorpayPaymentId: response.razorpay_payment_id,
 							razorpayOrderId: response.razorpay_order_id,
 							razorpaySignature: response.razorpay_signature,
 						})
-						alert(result.data.msg)
-						if(result.status === 200) {
-							console.log(result.data.paymentId)
-							console.log(details)
-							
+						if (result.status === 200) {
+							const payDetails = {
+								...details,
+								paymentId: result.data.paymentId,
+							}
+							console.log(payDetails)
+							axios.post("/appointment", payDetails, {
+								headers: { "auth-token": localStorage.userToken },
+							})
+							Toast.fire({
+								position: "bottom-right",
+								icon: "success",
+								title: "Appointment booked successfully",
+								showConfirmButton: false,
+								timer: 3000,
+							})
+							navigate("/appointments")
 						}
-					}
+					},
 				}
 				setLoading(false)
 				const paymentObject = new window.Razorpay(options)
 				paymentObject.open()
-
 			} catch (err) {
-				console.log("onload")
 				console.log(err.message)
 				setLoading(false)
 			}
@@ -99,7 +118,7 @@ function ConfirmBooking() {
 							display: "flex",
 							flexDirection: { xs: "column", sm: "row" },
 							minHeight: { xs: 0, sm: 150 },
-							px: { xs: 7 , sm: 10},
+							px: { xs: 7, sm: 10 },
 							py: { xs: 2, sm: 4 },
 						}}
 					>
