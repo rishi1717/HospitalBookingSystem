@@ -7,6 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
+import Unauthorized from "./unauthorized"
 
 const DoctorAppointments = () => {
 	const [appointments, setAppointments] = useState([])
@@ -99,6 +100,8 @@ const DoctorAppointments = () => {
 				<AppointmentTable appointments={appointmentsByDate} />
 			</DoctorsLayout>
 		)
+	} else {
+		return <Unauthorized />
 	}
 }
 

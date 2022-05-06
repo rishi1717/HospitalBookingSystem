@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import PatientTable from "../../components/doctorModule/patientTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
+import Unauthorized from "./unauthorized"
 
 const DoctorPatients = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
@@ -49,9 +50,11 @@ const DoctorPatients = () => {
 				>
 					Your patients list
 				</Typography>
-				<PatientTable users={users}/>
+				<PatientTable users={users} />
 			</DoctorsLayout>
 		)
+	} else {
+		return <Unauthorized />
 	}
 }
 

@@ -38,7 +38,7 @@ const Unauthorized = () => {
 					</Box>
 					<Button
 						onClick={() => {
-							navigate("/login")
+							navigate("/doctor/login")
 						}}
 						sx={{ p: 2, fontWeight: "bold" }}
 					>

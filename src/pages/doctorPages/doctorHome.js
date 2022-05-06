@@ -4,6 +4,7 @@ import SelectionCard from "../../components/doctorModule/SelectionCard"
 import WelcomeCard from "../../components/doctorModule/WelcomeCard"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { useSelector } from "react-redux"
+import Unauthorized from "./unauthorized"
 
 const DoctorHome = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
@@ -38,6 +39,8 @@ const DoctorHome = () => {
 				</DoctorsLayout>
 			</>
 		)
+	} else {
+		return <Unauthorized />
 	}
 }
 

@@ -22,7 +22,11 @@ import Logo from "../static/images/Logo.png"
 import LogoutIcon from "@mui/icons-material/Logout"
 import Swal from "sweetalert2"
 import { useDispatch } from "react-redux"
-import {removeDoctorId,removeDoctorToken} from "../redux/doctorSlice"
+import {
+	removeDoctorId,
+	removeDoctorToken,
+	removeDoctorName,
+} from "../redux/doctorSlice"
 
 const linkStyle = {
 	padding: "1rem",
@@ -34,7 +38,7 @@ const drawerWidth = 240
 
 function ResponsiveDrawer(props) {
 	const dispatch = useDispatch()
-    const navigate = useNavigate()
+	const navigate = useNavigate()
 	const { window, children } = props
 	const [mobileOpen, setMobileOpen] = React.useState(false)
 
@@ -145,6 +149,7 @@ function ResponsiveDrawer(props) {
 					if (con.isConfirmed) {
 						dispatch(removeDoctorToken())
 						dispatch(removeDoctorId())
+						dispatch(removeDoctorName())
 						navigate("/doctor/login")
 					}
 				}}

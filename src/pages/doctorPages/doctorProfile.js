@@ -9,6 +9,7 @@ import { MediumButton } from "../../components/Buttons"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import axios from "../../axios"
+import Unauthorized from "./unauthorized"
 
 function DoctorProfile() {
 	const docState = useSelector((storeState) => storeState.doctor)
@@ -189,7 +190,8 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>OP Time :</b>{doctor.startTime} to {doctor.endTime}
+									<b>OP Time :</b>
+									{doctor.startTime} to {doctor.endTime}
 								</Typography>
 							</CardContent>
 						</Grid>
@@ -206,6 +208,8 @@ function DoctorProfile() {
 				</Card>
 			</DoctorsLayout>
 		)
+	} else {
+		return <Unauthorized />
 	}
 }
 export default DoctorProfile

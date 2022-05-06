@@ -7,6 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
+import Unauthorized from "./unauthorized"
 
 const DoctorSchedule = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
@@ -15,9 +16,12 @@ const DoctorSchedule = () => {
 		const [schedules, setSchedules] = useState([])
 		useEffect(() => {
 			;(async function() {
-				const scheduleData = await axios.get(`/schedule/?id=${docState.id}`, {
-					headers: { "auth-token": docState.token },
-				})
+				const scheduleData = await axios.get(
+					`/schedule/?id=${docState.id}`,
+					{
+						headers: { "auth-token": docState.token },
+					}
+				)
 				setSchedules(scheduleData.data.schedule)
 			})()
 		}, [])
@@ -64,9 +68,11 @@ const DoctorSchedule = () => {
 						renderInput={(params) => <TextField {...params} />}
 					/>
 				</LocalizationProvider>
-				<ScheduleTable schedules={schedules}/>
+				<ScheduleTable schedules={schedules} />
 			</DoctorsLayout>
 		)
+	} else {
+		return <Unauthorized />
 	}
 }
 

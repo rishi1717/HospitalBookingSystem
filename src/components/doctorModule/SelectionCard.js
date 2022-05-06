@@ -27,7 +27,7 @@ const SelectionCard = (props) => {
 						{props.value}
 					</Button>
 					<Box sx={{ p: 2 }} textAlign="center">
-						You have 11 appointments today{" "}
+						View your {props.value}
 					</Box>
 				</Paper>
 			</Grid>
