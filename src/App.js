@@ -1,13 +1,20 @@
 import React from "react"
+import { BrowserRouter, Routes } from "react-router-dom"
 import "./App.css"
-import DoctorRoutes from "./routes/doctorRoutes"
-import UserRoutes from "./routes/userRoutes"
+import doctorRoutes from "./routes/doctorRoutes.js"
+import userRoutes from "./routes/userRoutes.js"
 
 function App() {
+	const userRoute = userRoutes()
+	const doctorRoute = doctorRoutes()
 	return (
 		<>
-			<UserRoutes />
-			<DoctorRoutes />
+			<BrowserRouter>
+				<Routes>
+					{userRoute}
+					{doctorRoute}
+				</Routes>
+			</BrowserRouter>
 		</>
 	)
 }

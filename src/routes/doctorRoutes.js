@@ -1,108 +1,120 @@
 import React from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-const PatientHistory = React.lazy(() => import("../pages/doctorPages/patientHistory"))
+import { Route } from "react-router-dom"
+const PatientHistory = React.lazy(() =>
+	import("../pages/doctorPages/patientHistory")
+)
 const Prescribe = React.lazy(() => import("../pages/doctorPages/prescribe"))
-const UserProfile =  React.lazy(() => import("../pages/doctorPages/userProfile"))
-const EditDoctor =  React.lazy(() => import("../pages/doctorPages/editDoctorDetails"))
-const DoctorAppointments =  React.lazy(() => import("../pages/doctorPages/doctorAppointments"))
-const DoctorSchedule =  React.lazy(() => import("../pages/doctorPages/doctorSchedule"))
+const UserProfile = React.lazy(() => import("../pages/doctorPages/userProfile"))
+const EditDoctor = React.lazy(() =>
+	import("../pages/doctorPages/editDoctorDetails")
+)
+const DoctorAppointments = React.lazy(() =>
+	import("../pages/doctorPages/doctorAppointments")
+)
+const DoctorSchedule = React.lazy(() =>
+	import("../pages/doctorPages/doctorSchedule")
+)
 const DoctorLogin = React.lazy(() => import("../pages/doctorPages/doctorLogin"))
 const DoctorHome = React.lazy(() => import("../pages/doctorPages/doctorHome"))
+const NotFound = React.lazy(() => import("../pages/notFound"))
 const DoctorProfile = React.lazy(() =>
 	import("../pages/doctorPages/doctorProfile")
 )
 const DoctorPatients = React.lazy(() =>
 	import("../pages/doctorPages/doctorPatients")
 )
-function DoctorRoutes() {
+export default function doctorRoutes() {
 	return (
 		<>
-			<BrowserRouter>
-				<Routes>
-					<Route
-						path="/doctor/login"
-						element={
-							<React.Suspense>
-								<DoctorLogin />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor"
-						element={
-							<React.Suspense>
-								<DoctorHome />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/profile"
-						element={
-							<React.Suspense>
-								<DoctorProfile />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/patients"
-						element={
-							<React.Suspense>
-								<DoctorPatients />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/schedule"
-						element={
-							<React.Suspense>
-								<DoctorSchedule />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/appointments"
-						element={
-							<React.Suspense>
-								<DoctorAppointments />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/Profile/edit"
-						element={
-							<React.Suspense>
-								<EditDoctor />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/patients/profile"
-						element={
-							<React.Suspense>
-								<UserProfile />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/patients/history"
-						element={
-							<React.Suspense>
-								<PatientHistory />
-							</React.Suspense>
-						}
-					/>
-					<Route
-						path="/doctor/patients/prescribe"
-						element={
-							<React.Suspense>
-								<Prescribe />
-							</React.Suspense>
-						}
-					/>
-				</Routes>
-			</BrowserRouter>
+			<Route
+				path="/doctor/login"
+				element={
+					<React.Suspense>
+						<DoctorLogin />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor"
+				element={
+					<React.Suspense>
+						<DoctorHome />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/profile"
+				element={
+					<React.Suspense>
+						<DoctorProfile />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/patients"
+				element={
+					<React.Suspense>
+						<DoctorPatients />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/schedule"
+				element={
+					<React.Suspense>
+						<DoctorSchedule />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/appointments"
+				element={
+					<React.Suspense>
+						<DoctorAppointments />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/Profile/edit"
+				element={
+					<React.Suspense>
+						<EditDoctor />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/patients/profile"
+				element={
+					<React.Suspense>
+						<UserProfile />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/patients/history"
+				element={
+					<React.Suspense>
+						<PatientHistory />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/doctor/patients/prescribe"
+				element={
+					<React.Suspense>
+						<Prescribe />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="*"
+				element={
+					<React.Suspense>
+						<NotFound />
+					</React.Suspense>
+				}
+			/>
 		</>
 	)
 }
 
-export default DoctorRoutes

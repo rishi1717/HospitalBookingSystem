@@ -1,6 +1,7 @@
-import { Box, Button, Container, Paper } from "@mui/material"
+import { Box, Button, Container } from "@mui/material"
 import React from "react"
 import { useNavigate } from "react-router-dom"
+import notFound from "../static/images/404.jpg"
 
 const NotFound = () => {
 	const navigate = useNavigate()
@@ -11,38 +12,49 @@ const NotFound = () => {
 				flexDirection: "column",
 				alignContent: "center",
 				justifyContent: "center",
-				height: "60vh",
+				height:'90vh'
 			}}
 		>
-			<Paper
-				elevation={3}
+			<Container
 				sx={{
-					border: 1,
-					borderColor: "#EF4242",
 					display: "flex",
 					flexDirection: "column",
 					alignContent: "center",
 					justifyContent: "center",
-					m: { xs: 1, sm: 15 },
-					p: { xs: 2, sm: 4 },
-					backgroundColor: "#eaeaea",
 				}}
 			>
 				<Box
 					sx={{ p: 2, color: "#595959", fontSize: "1.6rem" }}
 					textAlign="center"
 				>
-					404!!!
+					404, Page Not Found!
 				</Box>
+				<Container
+					sx={{
+						display: "flex",
+						flexDirection: "row",
+						alignContent: "center",
+						justifyContent: "center",
+					}}
+				>
+					<Box
+						component="img"
+						sx={{
+							width: "50vw",
+						}}
+						alt="Hospital"
+						src={notFound}
+					/>
+				</Container>
 				<Button
 					onClick={() => {
 						navigate("/")
 					}}
 					sx={{ p: 2, fontWeight: "bold" }}
 				>
-					Page Not Found
+					Back to home
 				</Button>
-			</Paper>
+			</Container>
 		</Container>
 	)
 }
