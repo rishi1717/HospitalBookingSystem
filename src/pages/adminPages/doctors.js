@@ -1,26 +1,27 @@
-import { Container, Typography } from "@mui/material"
 import axios from "../../axios"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import AdminLayout from "../../layouts/AdminLayout"
+import { Container, Typography } from "@mui/material"
 
-const Departments = () => {
+const Doctors = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
 	const [data, setData] = useState([])
 	useEffect(() => {
 		;(async function() {
 			try {
-				const response = await axios.get("/department", {
+				const response = await axios.get("/doctor", {
 					headers: {
-						"auth-token": adminState.token,
-					},
+						"auth-token": adminState.token
+					}
 				})
-				setData(response.data.department)
+				console.log(response.data.doctor)
+				setData(response.data.doctor)
 			} catch (err) {
 				console.log(err.message)
 			}
 		})()
-	}, [])
+	},[])
 	return (
 		<AdminLayout>
 			<Container>
@@ -35,11 +36,11 @@ const Departments = () => {
 					}}
 					component="p"
 				>
-					Departments
+					Doctors
 				</Typography>
 			</Container>
 		</AdminLayout>
 	)
 }
 
-export default Departments
+export default Doctors

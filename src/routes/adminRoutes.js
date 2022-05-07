@@ -6,7 +6,7 @@ import Departments from "../pages/adminPages/departments"
 import Login from "../pages/adminPages/login"
 import Patients from "../pages/adminPages/patients"
 import Profile from "../pages/adminPages/profile"
-import Doctors from "../pages/doctorPages/doctors"
+import Doctors from "../pages/adminPages/doctors"
 
 const adminRoutes = () => {
 	return (
