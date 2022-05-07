@@ -3,6 +3,7 @@ import {
 	configureStore,
 } from "@reduxjs/toolkit"
 import doctorReducer from "./doctorSlice"
+import adminReducer from "./adminSlice"
 import {
 	persistReducer,
 	FLUSH,
@@ -23,6 +24,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
 	doctor: doctorReducer,
+	admin: adminReducer,
 })
 
 const _persistedReducer = persistReducer(persistConfig, reducers)

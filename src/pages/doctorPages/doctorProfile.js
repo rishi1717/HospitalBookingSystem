@@ -14,13 +14,22 @@ import Unauthorized from "./unauthorized"
 function DoctorProfile() {
 	const docState = useSelector((storeState) => storeState.doctor)
 	if (docState.token) {
-		const [doctor, setDoctor] = useState([])
+		const [doctor, setDoctor] = useState({
+			image: "",
+			name: "",
+			qualification: "",
+			department: "",
+			expertise: "",
+			experience: "",
+			startTime: "",
+			endTime: "",
+		})
 		useEffect(() => {
 			;(async function() {
 				const doctorData = await axios.get(`/doctor/${docState.id}`, {
 					headers: { "auth-token": docState.token },
 				})
-				setDoctor(doctorData.data.doctor)
+				if (doctorData.data.doctor) setDoctor(doctorData.data.doctor)
 			})()
 		}, [])
 		return (

@@ -86,6 +86,14 @@ export default function Register() {
 
 	const onSubmit = async () => {
 		try {
+					if (data.password !== data.cpassword) {
+						setError("Passwords do not match")
+						throw new Error("Passwords do not match")
+					}
+					if (!selectedFile) {
+						setError("Upload an image")
+						throw new Error("Upload an image")
+					}
 					const newForm = new FormData()
 					newForm.append("firstName", data.firstName)
 					newForm.append("secondName", data.secondName)

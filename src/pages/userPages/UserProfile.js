@@ -13,13 +13,13 @@ import Unauthorized from "./Unauthorized"
 
 function UserProfile() {
 	const navigate = useNavigate()
-	const [user, setUser] = useState([])
+	const [user, setUser] = useState({})
 	useEffect(() => {
 		;(async function() {
 			const userData = await axios.get(`/user/${localStorage.userId}`, {
 				headers: { "auth-token": localStorage.userToken },
 			})
-			setUser(userData.data.user)
+			if (userData.data.user) setUser(userData.data.user)
 		})()
 	}, [])
 

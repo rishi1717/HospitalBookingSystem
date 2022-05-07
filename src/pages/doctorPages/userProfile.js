@@ -213,13 +213,6 @@ function UserProfile() {
 								text="#fff"
 							/>
 						</Link>
-						<Link style={{ textDecoration: "none" }} to="/doctor">
-							<SmallButton
-								value="Set Appointment"
-								color="#609acf"
-								text="#fff"
-							/>
-						</Link>
 					</Grid>
 				</Grid>
 			</DoctorsLayout>

@@ -16,14 +16,15 @@ export const doctorSlice = createSlice({
 		addDoctorId: (state, action) => {
 			state.id = action.payload
 		},
+		addDoctorName: (state, action) => {
+			state.name = action.payload
+		},
+
 		removeDoctorToken: (state) => {
 			state.token = ""
 		},
 		removeDoctorId: (state) => {
 			state.id = ""
-		},
-		addDoctorName: (state, action) => {
-			state.name = action.payload
 		},
 		removeDoctorName: (state) => {
 			state.name = ""
@@ -41,4 +42,11 @@ const {
 } = doctorSlice.actions
 
 export default doctorSlice.reducer
-export { addDoctorToken, removeDoctorToken, addDoctorId, removeDoctorId,addDoctorName,removeDoctorName }
+export {
+	addDoctorToken,
+	removeDoctorToken,
+	addDoctorId,
+	removeDoctorId,
+	addDoctorName,
+	removeDoctorName,
+}
