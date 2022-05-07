@@ -14,7 +14,7 @@ const PatientHistory = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
 	useEffect(() => {
 		;(async function() {
-			const appointmentData = await axios.get(`/appointment/${user._id}`, {
+			const appointmentData = await axios.get(`/appointment/history/${user._id}/${docState.id}`, {
 				headers: { "auth-token": docState.token },
 			})
 			setAppointments(appointmentData.data.appointment)

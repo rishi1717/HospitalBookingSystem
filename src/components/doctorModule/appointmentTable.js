@@ -26,6 +26,9 @@ export default function AppointmentTable({ appointments }) {
 							Time
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
+							Date
+						</TableCell>
+						<TableCell align="center" sx={{ color: "white" }}>
 							Reason
 						</TableCell>
 						<TableCell align="center" sx={{ color: "white" }}>
@@ -41,11 +44,16 @@ export default function AppointmentTable({ appointments }) {
 						>
 							<TableCell align="center">{row.user}</TableCell>
 							<TableCell align="center">{row.time}</TableCell>
+							<TableCell align="center">{row.date}</TableCell>
 							<TableCell align="center">{row.reason}</TableCell>
 							<TableCell align="center">
-								<div onClick={()=>{
-									navigate('/doctor/patients/profile', {state: {patient: row.userId}})
-								}}>
+								<div
+									onClick={() => {
+										navigate("/doctor/patients/profile", {
+											state: { patient: row.userId },
+										})
+									}}
+								>
 									<SmallButton value="Profile" />
 								</div>
 							</TableCell>

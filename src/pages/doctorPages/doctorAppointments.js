@@ -88,7 +88,7 @@ const DoctorAppointments = () => {
 								`/appointment/date/${newDate}/${docState.id}`,
 								{
 									headers: {
-										"auth-token": localStorage.userToken,
+										"auth-token": docState.token,
 									},
 								}
 							)

@@ -81,6 +81,7 @@ const Prescribe = () => {
 				timer: 3000,
 			})
 			setData({ ...data, medicine: "", dosage: "", prescribedFor: "" })
+			
 		} catch (err) {
 			console.log(err.message)
 		}
