@@ -17,11 +17,7 @@ import Swal from "sweetalert2"
 import image from "../../static/images/teams.webp"
 import Paper from "@mui/material/Paper"
 import { useDispatch } from "react-redux"
-import {
-	addDoctorToken,
-	addDoctorId,
-	addDoctorName,
-} from "../../redux/doctorSlice"
+import { addAdminToken, addAdminId, addAdminName } from "../../redux/adminSlice"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -53,11 +49,11 @@ export default function Login() {
 
 	const onSubmit = async () => {
 		try {
-			const resData = await axios.post("/doctor/login", data)
+			const resData = await axios.post("/admin/login", data)
 
-			dispatch(addDoctorToken(resData.data.token))
-			dispatch(addDoctorId(resData.data.doctorId))
-			dispatch(addDoctorName(resData.data.doctorName))
+			dispatch(addAdminToken(resData.data.token))
+			dispatch(addAdminId(resData.data.adminId))
+			dispatch(addAdminName(resData.data.adminName))
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
@@ -65,8 +61,9 @@ export default function Login() {
 				showConfirmButton: false,
 				timer: 3000,
 			})
-			navigate("/doctor")
+			navigate("/admin")
 		} catch (err) {
+			console.log(err.message)
 			setError(err.response.data.message)
 		}
 	}
@@ -77,7 +74,7 @@ export default function Login() {
 				<AppBar position="static" sx={{ borderRadius: 2 }}>
 					<Toolbar>
 						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-							Doctor Login
+							Admin Login
 						</Typography>
 					</Toolbar>
 				</AppBar>
