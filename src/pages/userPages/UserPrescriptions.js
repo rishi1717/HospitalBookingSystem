@@ -15,14 +15,22 @@ import Unauthorized from "./Unauthorized.js"
 
 function UserPrescriptions() {
 	const [prescriptions, setPrescriptions] = useState([])
+	const [user, setUser] = useState({})
 	const [result, setResult] = useState([])
 	const [searchValue, setSearchValue] = useState("")
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			const userData = await axios.get(`/prescription/${localStorage.userId}`, {
 				headers: { "auth-token": localStorage.userToken },
 			})
 			setPrescriptions(userData.data.prescription)
+			const user = await axios.get(
+				`/user/${localStorage.userId}`,
+				{
+					headers: { "auth-token": localStorage.userToken },
+				}
+			)
+			setUser(user.data.user)
 		})()
 	}, [])
 
@@ -156,6 +164,7 @@ function UserPrescriptions() {
 								? prescriptions
 								: result
 						}
+						user={user}
 					/>
 				</Container>
 			</FullLayout>

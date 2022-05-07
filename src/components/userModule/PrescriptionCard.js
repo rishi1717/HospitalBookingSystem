@@ -1,12 +1,20 @@
 import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
+import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined"
 import { Grid } from "@mui/material"
+import jsPdf from "jspdf"
 
-export default function PrescriptionCard({prescriptions}) {
-	
+export default function PrescriptionCard({ prescriptions, user }) {
+	const doc = new jsPdf()
+	doc.setTextColor("#609acf")
+	doc.setLineWidth(0.2)
+	doc.rect(10, 8, 190, 280)
+	doc.setFontSize(22)
+	doc.text("One Health Hospital", 72, 20)
+
 	return (
 		<>
 			{prescriptions.map((prescription) => (
@@ -57,7 +65,7 @@ export default function PrescriptionCard({prescriptions}) {
 							</CardContent>
 						</Grid>
 
-						<Grid item sm={3}>
+						<Grid item sm={2.5}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
@@ -69,21 +77,59 @@ export default function PrescriptionCard({prescriptions}) {
 							</CardContent>
 						</Grid>
 
-						<Grid item sm={1}>
+						<Grid item sm={1.5}>
 							<CardContent sx={{ flex: "0.1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
 									color="text.secondary"
 									component="div"
+									textAlign="center"
 								>
-									<a
-										href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-										rel="noopener noreferrer"
-										target="_blank"
-										download="PDF"
+									<Button
+										onClick={() => {
+											doc.setTextColor("#595959")
+											doc.setFontSize(16)
+											doc.text(
+												"Prescription for : " +
+													user.firstName +
+													" " +
+													user.secondName,
+												20,
+												40
+											)
+											doc.text("Age : " + user.age, 150, 40)
+											doc.text(
+												"Date : " + prescription.date,
+												20,
+												50
+											)
+											doc.text(
+												"Medicine : " + prescription.medicine,
+												20,
+												70
+											)
+											console.log(prescription);
+											doc.text(
+												"Prescribed for : " + prescription.prescribedFor,
+												20,
+												80
+											)
+											doc.text(
+												"Dosage : " + prescription.dosage,
+												20,
+												90
+											)
+											doc.text(
+												"Prescribed by : " + prescription.doctor,
+												20,
+												100
+											)
+
+											doc.save(prescription.medicine + ".pdf")
+										}}
 									>
 										<FileDownloadOutlinedIcon />
-									</a>
+									</Button>
 								</Typography>
 							</CardContent>
 						</Grid>
