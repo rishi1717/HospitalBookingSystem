@@ -174,7 +174,21 @@ export default function AppointmentCard({ update, setUpdate }) {
 										<Grid item xs={6} sm={4}>
 											<Button
 												onClick={async () => {
-													console.log(modalAppointment)
+													const response = await axios.put(
+
+														`/appointment/${cancelId}`,
+														{
+															date: modalAppointment.date,
+															time: modalAppointment.time,
+														},
+														{
+															headers: {
+																"auth-token": localStorage.getItem(
+																	"userToken"
+																),
+															},
+														}
+													)
 													setUpdate(!update)
 													handleClose2()
 												}}
