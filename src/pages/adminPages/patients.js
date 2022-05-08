@@ -37,7 +37,6 @@ const Patients = () => {
 					.includes(searchValue)
 			)
 		)
-		console.log(searchResult)
 		setResult(searchResult)
 	}
 

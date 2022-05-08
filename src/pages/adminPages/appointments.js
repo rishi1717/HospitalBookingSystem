@@ -25,7 +25,7 @@ const Appointments = () => {
 						"auth-token": adminState.token
 					}
 				})
-				setData(response.data.appointment)
+				setData(response.data.appointment) 
 				console.log(response.data.appointment)
 			}catch(err){
 				console.log(err.message)
@@ -49,9 +49,13 @@ const Appointments = () => {
 				>
 					Appointments
 				</Typography>
-				<div style={{ display: "flex", height: '70vh', marginTop: '3rem' }}>
+				<div style={{ display: "flex", height: "70vh", marginTop: "3rem" }}>
 					<div style={{ flexGrow: 1 }}>
-						<DataGrid columns={columns} rows={data} />
+						<DataGrid
+							getRowId={(row) => row._id}
+							columns={columns}
+							rows={data}
+						/>
 					</div>
 				</div>
 			</Container>
