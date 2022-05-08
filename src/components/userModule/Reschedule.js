@@ -29,8 +29,7 @@ const responsive = {
 	},
 }
 
-const Reschedule = ({ appointmentId }) => {
-	const [appointment, setAppointment] = useState({})
+const Reschedule = ({ appointmentId, appointment, setAppointment }) => {
 	const [days, setDays] = useState([])
 	const [startTime, setStartTime] = useState(0)
 	const [startHour, setStartHour] = useState(0)
@@ -40,6 +39,7 @@ const Reschedule = ({ appointmentId }) => {
 	const [endMinute, setEndMinute] = useState(0)
 	const [booked, setBooked] = useState([])
 	const [slots, setSlots] = useState([])
+	
 	const bookingDetails = async (newValue) => {
 		setAppointment({ ...appointment, date: newValue })
 		const appointmentsData = await axios.get(
@@ -55,20 +55,22 @@ const Reschedule = ({ appointmentId }) => {
 		setStartTime(appointmentsData.data.doctorTiming.startTime)
 		setEndTime(appointmentsData.data.doctorTiming.endTime)
 	}
+
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			const appointmentsData = await axios.get(
-				`/appointment/${appointmentId}`,
+				`/appointment/detail/${appointmentId}`,
 				{
 					headers: {
 						"auth-token": localStorage.userToken,
 					},
 				}
 			)
-			setAppointment(appointmentsData.data.appointment)
-            
+			const temp = dayjs(appointmentsData.data.appointment.date,"DD/MM/YYYY")
+			setAppointment({...appointmentsData.data.appointment,date:temp})
 		})()
 	}, [])
+
 	useEffect(() => {
 		setStartHour(dayjs(startTime, "hh:mm A").format("HH"))
 		setStartMinute(dayjs(startTime, "hh:mm A").format("mm"))

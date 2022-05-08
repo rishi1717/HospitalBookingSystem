@@ -12,7 +12,7 @@ const style = {
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: '60vw',
+	width: "60vw",
 	bgcolor: "background.paper",
 	borderRadius: "4px",
 	boxShadow: 24,
@@ -20,19 +20,22 @@ const style = {
 }
 
 export default function AppointmentCard({ update, setUpdate }) {
+	const [modalAppointment, setModalAppointment] = useState({})
 	const [open, setOpen] = React.useState(false)
 	const [open2, setOpen2] = React.useState(false)
 	const [canceling, setCanceling] = React.useState("")
 	const handleOpen = () => {
 		setOpen(true)
-		setOpen2(false)
 	}
 	const handleClose = () => {
 		setOpen(false)
+	}
+	const handleOpen2 = () => {
+		setOpen2(true)
+	}
+	const handleClose2 = () => {
 		setOpen2(false)
 	}
-	const handleOpen2 = () => setOpen2(true)
-	const handleClose2 = () => setOpen2(false)
 
 	const [cancelId, setCancelId] = useState(0)
 
@@ -107,15 +110,15 @@ export default function AppointmentCard({ update, setUpdate }) {
 										{appointment.time}
 									</Typography>
 									<Grid
-										onClick={() => {
-											handleOpen2()
-											setCancelId(appointment._id)
-										}}
 										container
 										rowSpacing={1}
 										columnSpacing={{ xs: 4, sm: 0 }}
 									>
 										<Grid
+											onClick={() => {
+												setCancelId(appointment._id)
+												handleOpen2()
+											}}
 											item
 											xs={3.5}
 											sm={3}
@@ -128,8 +131,8 @@ export default function AppointmentCard({ update, setUpdate }) {
 										</Grid>
 										<Grid
 											onClick={() => {
-												handleOpen()
 												setCancelId(appointment._id)
+												handleOpen()
 											}}
 											item
 											xs={2}
@@ -149,7 +152,11 @@ export default function AppointmentCard({ update, setUpdate }) {
 								aria-describedby="modal-modal-description"
 							>
 								<Box sx={style}>
-									<Reschedule appointmentId={cancelId}/>
+									<Reschedule
+										appointmentId={cancelId}
+										appointment={modalAppointment}
+										setAppointment={setModalAppointment}
+									/>
 									<Grid container spacing={2}>
 										<Grid item xs={6} sm={4} ml="auto">
 											<Button
@@ -167,6 +174,7 @@ export default function AppointmentCard({ update, setUpdate }) {
 										<Grid item xs={6} sm={4}>
 											<Button
 												onClick={async () => {
+													console.log(modalAppointment)
 													setUpdate(!update)
 													handleClose2()
 												}}
