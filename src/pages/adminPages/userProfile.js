@@ -177,7 +177,7 @@ const UserProfile = () => {
 						</Typography>
 					</CardContent>
 				</Card>
-				<Grid sx={{ display: "flex", my:3 }} alignItems="center" justify="center">
+				<Grid sx={{ display: "flex", flexDirection:{xs:'column',sm:'row'}, my:3 }} alignItems="center" justify="center">
 					<div
 						onClick={() => {
 							setShow("prescriptions")

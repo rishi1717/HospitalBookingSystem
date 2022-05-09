@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom"
 export default function DoctorTable({ doctors }) {
 	const navigate = useNavigate()
 	return (
-		<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
+		<TableContainer component={Paper} sx={{ maxWidth: "80vw" }}>
 			<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
 				<TableHead>
 					<TableRow sx={{ backgroundColor: "#1976D2" }}>

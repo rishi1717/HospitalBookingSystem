@@ -22,6 +22,7 @@ const DoctorProfile = () => {
 	const doctor = location.state.doctor
 	const [show, setShow] = useState("none")
 	const [active, setActive] = useState(doctor.active)
+	const [admin, setAdmin] = useState(doctor.admin)
 	return (
 		<AdminLayout>
 			<Typography
@@ -212,7 +213,7 @@ const DoctorProfile = () => {
 				</Grid>
 			</Card>
 			<Grid
-				sx={{ display: "flex", my: 3, justifyContent: "center" }}
+				sx={{ display: "flex", flexDirection:{xs:'column',sm:'row'}, my: 3, justifyContent: "center" }}
 				alignItems="center"
 				justify="center"
 			>
@@ -252,7 +253,7 @@ const DoctorProfile = () => {
 								confirmButtonColor: "#B81C1C",
 							})
 							if (con.isConfirmed) {
-                console.log(doctor)
+								console.log(doctor)
 								await axios.put(
 									`/doctor/${doctor._id}`,
 									{ ...doctor, active: false },
@@ -303,6 +304,76 @@ const DoctorProfile = () => {
 					>
 						<SmallButton
 							value="Set Active"
+							color="#eaeaea"
+							text="green"
+						/>
+					</div>
+				)}
+				{admin === true ? (
+					<div
+						onClick={async () => {
+							const con = await Swal.fire({
+								title: "Are you sure?",
+								text: "Remove admin access?",
+								background: "#eaeaea",
+								color: "#595959",
+								showCancelButton: true,
+								cancelButtonColor: "#609ACF",
+								confirmButtonText: "Remove",
+								confirmButtonColor: "#B81C1C",
+							})
+							if (con.isConfirmed) {
+								console.log(doctor)
+								await axios.put(
+									`/doctor/${doctor._id}`,
+									{ ...doctor, admin: false },
+									{
+										headers: {
+											"auth-token": adminState.token,
+										},
+									}
+								)
+								setAdmin(false)
+							}
+						}}
+						style={{ textDecoration: "none" }}
+					>
+						<SmallButton
+							value="Remove admin access"
+							color="#eaeaea"
+							text="#B81C1C"
+						/>
+					</div>
+				) : (
+					<div
+						onClick={async () => {
+							const con = await Swal.fire({
+								title: "Are you sure?",
+								text: "Provide admin access!",
+								background: "#eaeaea",
+								color: "#595959",
+								showCancelButton: true,
+								cancelButtonColor: "#B81C1C",
+								confirmButtonText: "Make Admin",
+								confirmButtonColor: "#609ACF",
+							})
+							if (con.isConfirmed) {
+								await axios.put(
+									`/doctor/${doctor._id}`,
+									{ ...doctor, admin: true },
+									{
+										headers: {
+											"auth-token": adminState.token,
+										},
+									}
+								)
+								setAdmin(true)
+							}
+						}}
+						style={{ textDecoration: "none" }}
+					>
+						<SmallButton
+							value="Make admin"
 							color="#eaeaea"
 							text="green"
 						/>
