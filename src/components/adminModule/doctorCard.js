@@ -62,7 +62,7 @@ export default function DoctorCard(props) {
 			</CardContent>
 			<CardContent sx={{ display: "flex", flexDirection: "column", justifyContent:'center', alignContent:'center' }}>
 				<Link
-					to="/doctors/profile"
+					to="/admin/doctors/profile"
 					state={{ doctor: props.doctor }}
 					style={{ textDecoration: "none" }}
 				>

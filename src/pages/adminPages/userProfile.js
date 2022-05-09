@@ -8,7 +8,7 @@ import {
 } from "@mui/material"
 import axios from "../../axios"
 import React, { useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import { SmallButton } from "../../components/Buttons"
 import AdminLayout from "../../layouts/AdminLayout"
@@ -17,6 +17,7 @@ import UserPrescriptions from "../../components/adminModule/userPrescriptions"
 import UserAppointments from "../../components/adminModule/userAppointments"
 
 const UserProfile = () => {
+	const navigate = useNavigate()
 	const adminState = useSelector((storeState) => storeState.admin)
 	const location = useLocation()
 	const user = location.state.user
@@ -177,7 +178,15 @@ const UserProfile = () => {
 						</Typography>
 					</CardContent>
 				</Card>
-				<Grid sx={{ display: "flex", flexDirection:{xs:'column',sm:'row'}, my:3 }} alignItems="center" justify="center">
+				<Grid
+					sx={{
+						display: "flex",
+						flexDirection: { xs: "column", sm: "row" },
+						my: 3,
+					}}
+					alignItems="center"
+					justify="center"
+				>
 					<div
 						onClick={() => {
 							setShow("prescriptions")
@@ -231,7 +240,7 @@ const UserProfile = () => {
 							<SmallButton
 								value="Block User"
 								color="#eaeaea"
-								text="#B81C1C"
+								text="#FEB139"
 							/>
 						</div>
 					) : (
@@ -269,6 +278,35 @@ const UserProfile = () => {
 							/>
 						</div>
 					)}
+					<div
+						onClick={async () => {
+							const con = await Swal.fire({
+								title: "Are you sure?",
+								text: "User details will be removed!",
+								background: "#eaeaea",
+								color: "#595959",
+								showCancelButton: true,
+								cancelButtonColor: "#B81C1C",
+								confirmButtonText: "Remove User",
+								confirmButtonColor: "#609ACF",
+							})
+							if (con.isConfirmed) {
+								await axios.delete(`/user/${user._id}`, {
+									headers: {
+										"auth-token": adminState.token,
+									},
+								})
+								navigate("/admin/patients")
+							}
+						}}
+						style={{ textDecoration: "none" }}
+					>
+						<SmallButton
+							value="Remove User"
+							color="#eaeaea"
+							text="#B81C1C"
+						/>
+					</div>
 				</Grid>
 			</Grid>
 			{show === "none" ? (

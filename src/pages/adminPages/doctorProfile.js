@@ -213,7 +213,12 @@ const DoctorProfile = () => {
 				</Grid>
 			</Card>
 			<Grid
-				sx={{ display: "flex", flexDirection:{xs:'column',sm:'row'}, my: 3, justifyContent: "center" }}
+				sx={{
+					display: "flex",
+					flexDirection: { xs: "column", sm: "row" },
+					my: 3,
+					justifyContent: "center",
+				}}
 				alignItems="center"
 				justify="center"
 			>
@@ -244,12 +249,12 @@ const DoctorProfile = () => {
 						onClick={async () => {
 							const con = await Swal.fire({
 								title: "Are you sure?",
-								text: "User will be blocked!",
+								text: "Doctor will be made Inactive!",
 								background: "#eaeaea",
 								color: "#595959",
 								showCancelButton: true,
 								cancelButtonColor: "#609ACF",
-								confirmButtonText: "Block",
+								confirmButtonText: "Make Inactive",
 								confirmButtonColor: "#B81C1C",
 							})
 							if (con.isConfirmed) {
@@ -271,7 +276,7 @@ const DoctorProfile = () => {
 						<SmallButton
 							value="Set Inactive"
 							color="#eaeaea"
-							text="#B81C1C"
+							text="#FEB139"
 						/>
 					</div>
 				) : (
@@ -279,12 +284,12 @@ const DoctorProfile = () => {
 						onClick={async () => {
 							const con = await Swal.fire({
 								title: "Are you sure?",
-								text: "User will be unBlocked!",
+								text: "Doctor will be made Active!",
 								background: "#eaeaea",
 								color: "#595959",
 								showCancelButton: true,
 								cancelButtonColor: "#B81C1C",
-								confirmButtonText: "UnBlock",
+								confirmButtonText: "Make Active",
 								confirmButtonColor: "#609ACF",
 							})
 							if (con.isConfirmed) {
@@ -341,7 +346,7 @@ const DoctorProfile = () => {
 						<SmallButton
 							value="Remove admin access"
 							color="#eaeaea"
-							text="#B81C1C"
+							text="#FEB139"
 						/>
 					</div>
 				) : (
@@ -375,10 +380,41 @@ const DoctorProfile = () => {
 						<SmallButton
 							value="Make admin"
 							color="#eaeaea"
-							text="green"
+							text="#609acf"
 						/>
 					</div>
 				)}
+				<div
+					onClick={async () => {
+						const con = await Swal.fire({
+							title: "Are you sure?",
+							text: "Doctor details will be removed!",
+							background: "#eaeaea",
+							color: "#595959",
+							showCancelButton: true,
+							cancelButtonColor: "#B81C1C",
+							confirmButtonText: "Remove Doctor",
+							confirmButtonColor: "#609ACF",
+						})
+						if (con.isConfirmed) {
+							await axios.delete(
+								`/doctor/${doctor._id}`,
+								{
+									headers: {
+										"auth-token": adminState.token,
+									},
+								}
+							)
+						}
+					}}
+					style={{ textDecoration: "none" }}
+				>
+					<SmallButton
+						value="Remove Doctor"
+						color="#eaeaea"
+						text="#B81C1C"
+					/>
+				</div>
 			</Grid>
 			{show === "none" ? (
 				<></>
