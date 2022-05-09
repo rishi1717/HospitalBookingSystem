@@ -2,12 +2,21 @@ import React from "react"
 import Typography from "@mui/material/Typography"
 import DoctorCard from "./doctorCard"
 import image1 from "../../static/images/doctorPortrait.webp"
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material"
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Box,
+} from "@mui/material"
 import { SmallButton } from "../Buttons"
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
-const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
-const editIcon = <EditRoundedIcon sx={{ fontSize: "1rem" }} />
+const deleteIcon = (
+	<DeleteRoundedIcon sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} />
+)
+const editIcon = (
+	<EditRoundedIcon sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} />
+)
 
 export default function DepartmentList({ departments, doctors }) {
 	return (
@@ -42,15 +51,18 @@ export default function DepartmentList({ departments, doctors }) {
 								}}
 							>
 								<Typography
-									sx={{ fontSize: "1.4rem", color: "#595959" }}
+									sx={{
+										fontSize: { xs: "1rem", sm: "1.4rem" },
+										color: "#595959",
+									}}
 								>
 									{department.name}
 								</Typography>
 							</div>
-							<div
-								style={{
+							<Box
+								sx={{
 									display: "flex",
-									flexDirection: "column",
+									// flexDirection: {xs:'column', sm: 'row'},
 								}}
 							>
 								<div
@@ -75,7 +87,7 @@ export default function DepartmentList({ departments, doctors }) {
 										text="#B81C1C"
 									/>
 								</div>
-							</div>
+							</Box>
 						</div>
 					</AccordionSummary>
 					<AccordionDetails>

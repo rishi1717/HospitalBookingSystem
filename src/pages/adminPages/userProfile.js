@@ -177,7 +177,7 @@ const UserProfile = () => {
 						</Typography>
 					</CardContent>
 				</Card>
-				<Grid sx={{ display: "flex" }} alignItems="center" justify="center">
+				<Grid sx={{ display: "flex", my:3 }} alignItems="center" justify="center">
 					<div
 						onClick={() => {
 							setShow("prescriptions")
@@ -265,18 +265,18 @@ const UserProfile = () => {
 							<SmallButton
 								value="UnBlock User"
 								color="#eaeaea"
-								text="#B81C1C"
+								text="green"
 							/>
 						</div>
 					)}
 				</Grid>
 			</Grid>
-			{show === 'none' ? (
+			{show === "none" ? (
 				<></>
 			) : show === "appointments" ? (
-				<UserAppointments/>
+				<UserAppointments token={adminState.token} userId={user._id} />
 			) : (
-				<UserPrescriptions/>
+				<UserPrescriptions token={adminState.token} userId={user._id} />
 			)}
 		</AdminLayout>
 	)
