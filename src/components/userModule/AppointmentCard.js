@@ -174,7 +174,7 @@ export default function AppointmentCard({ update, setUpdate }) {
 										<Grid item xs={6} sm={4}>
 											<Button
 												onClick={async () => {
-													const response = await axios.put(
+													await axios.put(
 
 														`/appointment/${cancelId}`,
 														{
