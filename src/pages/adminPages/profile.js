@@ -307,8 +307,9 @@ const Profile = () => {
 					>
 						Admin Access
 					</Typography>
-						{admins.map((admin) =><AdminCard key={admin._id} admin={admin} /> )}
-					
+					{admins.map((admin) => (
+						<AdminCard key={admin._id} admin={admin} />
+					))}
 				</>
 			)}
 		</AdminLayout>

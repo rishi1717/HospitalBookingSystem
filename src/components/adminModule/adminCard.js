@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import { SmallButton } from "../Buttons"
-import { Link } from "react-router-dom"
 
 export default function AdminCard({admin}) {
 	return (
@@ -50,17 +49,13 @@ export default function AdminCard({admin}) {
 					alignContent: "center",
 				}}
 			>
-				<Link
-					to="/doctors/profile"
-					state={{ doctor: admin }}
-					style={{ textDecoration: "none" }}
-				>
+				<div>
 					<SmallButton
-						value="Remove Admon Access"
+						value="Remove Admin Access"
 						color="white"
 						text="#B81C1C"
 					/>
-				</Link>
+				</div>
 			</CardContent>
 		</Card>
 	)

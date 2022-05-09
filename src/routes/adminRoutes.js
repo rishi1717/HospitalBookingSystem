@@ -7,6 +7,7 @@ import Login from "../pages/adminPages/login"
 import Patients from "../pages/adminPages/patients"
 import Profile from "../pages/adminPages/profile"
 import Doctors from "../pages/adminPages/doctors"
+import UserProfile from "../pages/adminPages/userProfile"
 
 const adminRoutes = () => {
 	return (
@@ -64,6 +65,14 @@ const adminRoutes = () => {
 				element={
 					<React.Suspense>
 						<Profile />
+					</React.Suspense>
+				}
+			/>
+			<Route
+				path="/admin/patients/profile"
+				element={
+					<React.Suspense>
+						<UserProfile />
 					</React.Suspense>
 				}
 			/>

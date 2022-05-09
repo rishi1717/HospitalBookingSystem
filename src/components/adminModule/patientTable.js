@@ -49,7 +49,7 @@ export default function PatientTable({ users }) {
 								<div
 									onClick={() => {
 										navigate("/admin/patients/profile", {
-											state: { patient: row._id },
+											state: { user: row},
 										})
 									}}
 								>
