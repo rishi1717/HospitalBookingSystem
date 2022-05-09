@@ -18,7 +18,6 @@ const Doctors = () => {
 						"auth-token": adminState.token,
 					},
 				})
-				console.log(response.data.doctor)
 				setData(response.data.doctor)
 			} catch (err) {
 				console.log(err.message)

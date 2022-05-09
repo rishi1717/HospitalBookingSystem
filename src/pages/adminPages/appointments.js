@@ -26,7 +26,6 @@ const Appointments = () => {
 					}
 				})
 				setData(response.data.appointment) 
-				console.log(response.data.appointment)
 			}catch(err){
 				console.log(err.message)
 			}	

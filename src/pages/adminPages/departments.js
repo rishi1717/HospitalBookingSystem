@@ -10,7 +10,7 @@ const Departments = () => {
 	const [departments, setDepartments] = useState([])
 	const [doctors, setDoctors] = useState([])
 	useEffect(() => {
-		;(async function() {
+		(async function() {
 			try {
 				const response = await axios.get("/department", {
 					headers: {
@@ -31,7 +31,6 @@ const Departments = () => {
 	}, [])
 	return (
 		<AdminLayout>
-			<Container>
 				<Typography
 					sx={{
 						fontSize: {
@@ -62,7 +61,6 @@ const Departments = () => {
 					Department list
 				</Typography>
 				<DepartmentList departments={departments} doctors={doctors} />
-			</Container>
 		</AdminLayout>
 	)
 }
