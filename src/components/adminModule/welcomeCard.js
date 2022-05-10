@@ -26,6 +26,7 @@ const WelcomeCard = () => {
 					backgroundColor: "#eaeaea",
 					color: "#595959",
 				}}
+				elevation={5}
 			>
 				<Grid
 					container

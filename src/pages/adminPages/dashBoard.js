@@ -6,22 +6,24 @@ import PieChart from "../../components/adminModule/pieGraph"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
 import WelcomeCard from "../../components/adminModule/welcomeCard"
+import { useNavigate } from "react-router-dom"
 
 const DashBoard = () => {
-  const adminState = useSelector((storeState) => storeState.admin)
-  const [doctor, setDoctor] = useState({})
-  const [user, setUser] = useState({})
-  useEffect(() => {
-    (async () => {
-      const response = await axios.get("/chart/card",{
-        headers:{
-          "auth-token": adminState.token
-        }
-      })
-      setDoctor(response.data.doctor)
-      setUser(response.data.user)
-    })()
-  }, [])
+	const navigate = useNavigate()
+	const adminState = useSelector((storeState) => storeState.admin)
+	const [doctor, setDoctor] = useState({})
+	const [user, setUser] = useState({})
+	useEffect(() => {
+		;(async () => {
+			const response = await axios.get("/chart/card", {
+				headers: {
+					"auth-token": adminState.token,
+				},
+			})
+			setDoctor(response.data.doctor)
+			setUser(response.data.user)
+		})()
+	}, [])
 	return (
 		<AdminLayout>
 			<Typography
@@ -37,10 +39,18 @@ const DashBoard = () => {
 			>
 				Dashboard
 			</Typography>
-      <WelcomeCard />
+			<WelcomeCard />
 			<Grid container spacing={2}>
 				<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
-					<Card elevation={3} sx={{ backgroundColor: "#eaeaea" }}>
+					<Card
+						elevation={5}
+						sx={{
+							backgroundColor: "#eaeaea",
+							"&:hover": {
+								transform: "scale(1.03)",
+							},
+						}}
+					>
 						<Grid
 							container
 							spacing={2}
@@ -49,6 +59,9 @@ const DashBoard = () => {
 								display: "flex",
 								justifyContent: "center",
 								alignItems: "center",
+							}}
+							onClick={() => {
+								navigate("/admin/doctors")
 							}}
 						>
 							<Grid
@@ -115,7 +128,18 @@ const DashBoard = () => {
 					</Card>
 				</Grid>
 				<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
-					<Card elevation={3} sx={{ backgroundColor: "#eaeaea" }}>
+					<Card
+						elevation={5}
+						sx={{
+							backgroundColor: "#eaeaea",
+							"&:hover": {
+								transform: "scale(1.03)",
+							},
+						}}
+						onClick={() => {
+							navigate("/admin/patients")
+						}}
+					>
 						<Grid
 							container
 							spacing={2}
