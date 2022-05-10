@@ -1,5 +1,5 @@
-import axios from '../../axios'
-import React, { useEffect } from 'react'
+import axios from "../../axios"
+import React, { useEffect } from "react"
 import {
 	Paper,
 	Table,
@@ -9,13 +9,17 @@ import {
 	TableHead,
 	TableRow,
 } from "@mui/material"
-import { SmallButton } from '../Buttons'
+import { SmallButton } from "../Buttons"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import { useSelector } from "react-redux"
+import Swal from "sweetalert2"
 const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
 
-const UserAppointments = ({userId,token}) => {
-  const [appointments, setAppointments] = React.useState([])
-  useEffect(() => {
+const UserAppointments = ({ userId, token }) => {
+	const adminState = useSelector((storeState) => storeState.admin)
+	const [appointments, setAppointments] = React.useState([])
+	const [state, setState] = React.useState(0)
+	useEffect(() => {
 		;(async function() {
 			const detail = await axios.get(`/appointment/${userId}`, {
 				headers: {
@@ -24,8 +28,8 @@ const UserAppointments = ({userId,token}) => {
 			})
 			setAppointments(detail.data.appointment)
 		})()
-  }, [])
-  return (
+	}, [state])
+	return (
 		<div>
 			<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
 				<Table sx={{ minWidth: { sm: 650 } }} aria-label="simple table">
@@ -72,7 +76,35 @@ const UserAppointments = ({userId,token}) => {
 										justifyContent: "center",
 									}}
 								>
-									<div>
+									<div
+										onClick={async () => {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Appointment will be removed!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Remove Appointment",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												try {
+													await axios.delete(
+														`/appointment/${row._id}`,
+														{
+															headers: {
+																"auth-token": adminState.token,
+															},
+														}
+													)
+													setState(!state)
+												} catch (err) {
+													console.log(err)
+												}
+											}
+										}}
+									>
 										<SmallButton
 											value={deleteIcon}
 											color="white"
@@ -86,7 +118,7 @@ const UserAppointments = ({userId,token}) => {
 				</Table>
 			</TableContainer>
 		</div>
-  )
+	)
 }
 
 export default UserAppointments

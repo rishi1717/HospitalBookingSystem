@@ -11,10 +11,14 @@ import {
 } from "@mui/material"
 import { SmallButton } from "../Buttons"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import Swal from "sweetalert2"
+import { useSelector } from "react-redux"
 const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
 
 const DoctorAppointments = ({ doctorId, token }) => {
+	const adminState = useSelector((storeState) => storeState.admin)
 	const [appointments, setAppointments] = React.useState([])
+	const [state, setState] = React.useState(0)
 	useEffect(() => {
 		;(async function() {
 			const detail = await axios.get(`/appointment/doctor/${doctorId}`, {
@@ -24,7 +28,7 @@ const DoctorAppointments = ({ doctorId, token }) => {
 			})
 			setAppointments(detail.data.appointment)
 		})()
-	}, [])
+	}, [state])
 	return (
 		<div>
 			<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
@@ -72,7 +76,35 @@ const DoctorAppointments = ({ doctorId, token }) => {
 										justifyContent: "center",
 									}}
 								>
-									<div>
+									<div
+										onClick={async () => {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Appointment will be removed!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Remove Appointment",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												try {
+													await axios.delete(
+														`/appointment/${row._id}`,
+														{
+															headers: {
+																"auth-token": adminState.token,
+															},
+														}
+													)
+													setState(!state)
+												} catch (err) {
+													console.log(err)
+												}
+											}
+										}}
+									>
 										<SmallButton
 											value={deleteIcon}
 											color="white"
