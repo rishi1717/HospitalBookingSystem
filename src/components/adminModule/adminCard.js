@@ -4,8 +4,12 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import { SmallButton } from "../Buttons"
+import Swal from "sweetalert2"
+import axios from "../../axios"
+import { useSelector } from "react-redux"
 
-export default function AdminCard({admin}) {
+export default function AdminCard({ admin, state, setState }) {
+	const adminState = useSelector((storeState) => storeState.admin)
 	return (
 		<Card
 			sx={{
@@ -49,7 +53,32 @@ export default function AdminCard({admin}) {
 					alignContent: "center",
 				}}
 			>
-				<div>
+				<div
+					onClick={async () => {
+						const con = await Swal.fire({
+							title: "Are you sure?",
+							text: "Remove admin access?",
+							background: "#eaeaea",
+							color: "#595959",
+							showCancelButton: true,
+							cancelButtonColor: "#609ACF",
+							confirmButtonText: "Remove",
+							confirmButtonColor: "#B81C1C",
+						})
+						if (con.isConfirmed) {
+							await axios.put(
+								`/doctor/${admin._id}`,
+								{ ...admin, admin: false },
+								{
+									headers: {
+										"auth-token": adminState.token,
+									},
+								}
+							)
+							setState(!state)
+						}
+					}}
+				>
 					<SmallButton
 						value="Remove Admin Access"
 						color="white"

@@ -17,6 +17,7 @@
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "chart.js": "^3.7.1",
     "date-fns": "^2.28.0",
     "dayjs": "^1.11.1",
     "jspdf": "^2.5.1",

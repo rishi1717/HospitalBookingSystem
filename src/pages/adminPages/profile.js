@@ -15,6 +15,7 @@ import AdminLayout from "../../layouts/AdminLayout"
 import AdminCard from "../../components/adminModule/adminCard"
 
 const Profile = () => {
+	const [state, setState] = React.useState(0)
 	const adminState = useSelector((storeState) => storeState.admin)
 	const [admin, setAdmin] = useState({})
 	const [admins, setAdmins] = useState([])
@@ -33,7 +34,7 @@ const Profile = () => {
 			})
 			setAdmins(res2.data.admins)
 		})()
-	}, [])
+	}, [state])
 	return (
 		<AdminLayout>
 			<Typography
@@ -308,7 +309,12 @@ const Profile = () => {
 						Admin Access
 					</Typography>
 					{admins.map((admin) => (
-						<AdminCard key={admin._id} admin={admin} />
+						<AdminCard
+							key={admin._id}
+							state={state}
+							setState={setState}
+							admin={admin}
+						/>
 					))}
 				</>
 			)}
