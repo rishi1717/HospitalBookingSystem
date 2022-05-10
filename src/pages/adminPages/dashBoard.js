@@ -5,6 +5,7 @@ import BarGraph from "../../components/adminModule/barGraph"
 import PieChart from "../../components/adminModule/pieGraph"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
+import WelcomeCard from "../../components/adminModule/welcomeCard"
 
 const DashBoard = () => {
   const adminState = useSelector((storeState) => storeState.admin)
@@ -36,6 +37,7 @@ const DashBoard = () => {
 			>
 				Dashboard
 			</Typography>
+      <WelcomeCard />
 			<Grid container spacing={2}>
 				<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
 					<Card elevation={3} sx={{ backgroundColor: "#eaeaea" }}>
