@@ -36,7 +36,7 @@ export default function AppointmentRows(props) {
 			)
 			setAppointments(appointmentData.data.appointment)
 		})()
-	}, [])
+	}, [props.update])
 	return (
 		<>
 			{appointments.map((appointment) => (

@@ -50,7 +50,7 @@ export default function AppointmentCard({ update, setUpdate }) {
 			)
 			setAppointments(appointmentData.data.appointment)
 		})()
-	}, [])
+	}, [update])
 	return (
 		<>
 			{appointments.map((appointment, index) => {

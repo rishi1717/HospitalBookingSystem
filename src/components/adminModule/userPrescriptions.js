@@ -12,11 +12,15 @@ import {
 import { SmallButton } from "../Buttons"
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import Swal from "sweetalert2"
+import { useSelector } from "react-redux"
 const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
 const editIcon = <EditRoundedIcon sx={{ fontSize: "1rem" }} />
 
 const UserPrescriptions = ({ userId, token }) => {
 	const [prescriptions, setPrescriptions] = React.useState([])
+	const adminState = useSelector((storeState) => storeState.admin)
+	const [state, setState] = React.useState(0)
 	useEffect(() => {
 		;(async function() {
 			const detail = await axios.get(`/prescription/${userId}`, {
@@ -26,7 +30,7 @@ const UserPrescriptions = ({ userId, token }) => {
 			})
 			setPrescriptions(detail.data.prescription)
 		})()
-	}, [])
+	}, [state])
 	return (
 		<div>
 			<TableContainer component={Paper} sx={{ maxWidth: "88vw" }}>
@@ -61,7 +65,10 @@ const UserPrescriptions = ({ userId, token }) => {
 								<TableCell align="center">{row.date}</TableCell>
 								<TableCell align="center">{row.doctor}</TableCell>
 								<TableCell
-									sx={{ display: { sm: "flex" }, justifyContent: "center" }}
+									sx={{
+										display: { sm: "flex" },
+										justifyContent: "center",
+									}}
 								>
 									<div>
 										<SmallButton
@@ -70,7 +77,35 @@ const UserPrescriptions = ({ userId, token }) => {
 											text="#FEB139"
 										/>
 									</div>
-									<div>
+									<div
+										onClick={async () => {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Prescription will be removed!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Remove Prescription",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												try {
+													await axios.delete(
+														`/prescription/${row._id}`,
+														{
+															headers: {
+																"auth-token": adminState.token,
+															},
+														}
+													)
+													setState(!state)
+												} catch (err) {
+													console.log(err)
+												}
+											}
+										}}
+									>
 										<SmallButton
 											value={deleteIcon}
 											color="white"

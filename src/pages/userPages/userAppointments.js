@@ -35,7 +35,7 @@ function UserAppointments() {
 						image={image1}
 					/>
 					<Grid container spacing={2} mt={1} mb={1}>
-						<AppointmentCard key={update} update={update} setUpdate={setUpdate} />
+						<AppointmentCard update={update} setUpdate={setUpdate} />
 					</Grid>
 
 					<Grid textAlign={"center"}>
@@ -146,7 +146,7 @@ function UserAppointments() {
 							</Grid>
 						</Grid>
 					</Card>
-					<AppointmentRows key={update} update={update} setUpdate={setUpdate} />
+					<AppointmentRows update={update} setUpdate={setUpdate} />
 				</Container>
 			</FullLayout>
 		)
