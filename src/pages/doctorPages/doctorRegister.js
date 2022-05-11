@@ -93,6 +93,7 @@ export default function DoctorRegister() {
 		days: [],
 		startTime: "",
 		endTime: "",
+        fee: 0,
 		request: true,
 		image: "",
 	})
@@ -116,10 +117,22 @@ export default function DoctorRegister() {
 				throw new Error("Upload an image")
 			}
 			const newForm = new FormData()
-			newForm.append(...data)
+			newForm.append("name", data.name)
+            newForm.append("qualification", data.qualification)
+            newForm.append("department", data.department)
+            newForm.append("email", data.email)
+            newForm.append("password", data.password)
+            newForm.append("experience", data.experience)
+            newForm.append("expertise", data.expertise)
+            newForm.append("days", JSON.stringify(data.days))
+            newForm.append("startTime", data.startTime)
+            newForm.append("endTime", data.endTime)
+            newForm.append("fee", data.fee)
+            newForm.append("request", data.request)
 			newForm.append("image", selectedFile)
+            console.log(newForm)
 			await axios.post("/doctor", newForm)
-			navigate("/login")
+			navigate("/doctor/login")
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
@@ -129,6 +142,7 @@ export default function DoctorRegister() {
 				timer: 3000,
 			})
 		} catch (err) {
+            console.log(err.message)
 			if (err.response) {
 				setError(err.response.data.message)
 			}
@@ -136,18 +150,33 @@ export default function DoctorRegister() {
 	}
 
 	const [checked, setChecked] = React.useState({
+		sunday: false,
 		monday: true,
 		tuesday: true,
 		wednesday: true,
 		thursday: true,
 		friday: true,
 		saturday: true,
-		sunday: true,
 	})
 
 	const handleCheck = (event) => {
 		setChecked({ ...checked, [event.target.name]: event.target.checked })
 	}
+
+	useEffect(() => {
+		const weekdays = [
+			"sunday",
+			"monday",
+			"tuesday",
+			"wednesday",
+			"thursday",
+			"friday",
+			"saturday",
+		]
+		const selectedDays = Object.keys(checked).filter((day) => checked[day])
+		const daysNumber = selectedDays.map((day) => weekdays.indexOf(day))
+        setData({ ...data, days: daysNumber })
+	}, [checked])
 
 	return (
 		<Container>
@@ -454,7 +483,15 @@ export default function DoctorRegister() {
 							<Typography sx={{ color: "#595959", fontSize: "1.1rem" }}>
 								Select Working days :
 							</Typography>
-							<FormGroup sx={{ display: "flex", flexDirection: "row" }}>
+							<FormGroup
+								sx={{
+									display: "flex",
+									flexDirection: "row",
+									border: "1px solid #b5b5b5",
+									borderRadius: 1,
+									padding: "0.5rem",
+								}}
+							>
 								<FormControlLabel
 									sx={{ color: "#595959", fontSize: "1.1rem" }}
 									control={
@@ -534,7 +571,7 @@ export default function DoctorRegister() {
 								/>
 							</FormGroup>
 						</Grid>
-						<Grid item xs={12} sm={6}>
+						<Grid item xs={12} sm={4}>
 							<TextField
 								{...register("startTime", {
 									required: "Confirm your password!",
@@ -553,7 +590,7 @@ export default function DoctorRegister() {
 								}
 							/>
 						</Grid>
-						<Grid item xs={12} sm={6}>
+						<Grid item xs={12} sm={4}>
 							<TextField
 								{...register("endTime", {
 									required: "Confirm your password!",
@@ -572,7 +609,33 @@ export default function DoctorRegister() {
 								}
 							/>
 						</Grid>
-						<Typography sx={{ color: "red", m: 2 }}>
+						<Grid item xs={12} sm={4}>
+							<TextField
+								{...register("fee", {
+									required: "Enter your fees!",
+								})}
+								required
+								fullWidth
+								name="fee"
+								label="Your Fee"
+								type="number"
+								id="fee"
+								onChange={handleChange}
+								value={data.fee}
+								error={errors.fee}
+								helperText={
+									errors.fee ? errors.fee.message : null
+								}
+							/>
+						</Grid>
+						<Typography
+							sx={{
+								color: "red",
+								m: 2,
+								width: "100%",
+								textAlign: "center",
+							}}
+						>
 							{error ? error : ""}
 						</Typography>
 					</Grid>
