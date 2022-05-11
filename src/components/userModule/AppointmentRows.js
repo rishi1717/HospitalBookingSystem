@@ -6,13 +6,14 @@ import axios from "../../axios.js"
 import { Box, Button, Grid, TextField } from "@mui/material"
 import { SmallButton } from "../Buttons"
 import Modal from "@mui/material/Modal"
+import Reschedule from "./Reschedule.js"
 
 const style = {
 	position: "absolute",
 	top: "50%",
 	left: "50%",
 	transform: "translate(-50%, -50%)",
-	width: 400,
+	width: "60vw",
 	bgcolor: "background.paper",
 	borderRadius: "4px",
 	boxShadow: 24,
@@ -21,9 +22,17 @@ const style = {
 
 export default function AppointmentRows(props) {
 	const [open, setOpen] = React.useState(false)
+	const [modalAppointment, setModalAppointment] = React.useState({})
 	const [canceling, setCanceling] = React.useState("")
 	const handleOpen = () => setOpen(true)
 	const handleClose = () => setOpen(false)
+	const [open2, setOpen2] = React.useState(false)
+	const handleOpen2 = () => {
+		setOpen2(true)
+	}
+	const handleClose2 = () => {
+		setOpen2(false)
+	}
 	const [cancelId, setCancelId] = React.useState(0)
 	const [appointments, setAppointments] = React.useState([])
 	React.useEffect(() => {
@@ -53,7 +62,7 @@ export default function AppointmentRows(props) {
 					}}
 				>
 					<Grid container spacing={2}>
-						<Grid item xs={6} sm={3}>
+						<Grid item xs={6} sm={2.8}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
@@ -107,22 +116,28 @@ export default function AppointmentRows(props) {
 						{appointment.status === "Scheduled" ? (
 							<>
 								<Grid item xs={6} sm={3}>
-									<CardContent
-										sx={{ display: "flex", flex: "0.1 0 auto" }}
-									>
-										<SmallButton value="reschedule" color="#FEB139" />
-										<Grid
+									<CardContent sx={{ display: "flex" }}>
+										<div
+											onClick={() => {
+												setCancelId(appointment._id)
+												handleOpen2()
+											}}
+										>
+											<SmallButton
+												value="reschedule"
+												color="#FEB139"
+											/>
+										</div>
+
+										<div
+											style={{ paddingRight: "1rem" }}
 											onClick={() => {
 												setCancelId(appointment._id)
 												handleOpen()
 											}}
-											item
-											xs={2}
-											sm={2.9}
-											sx={{ mr: { xs: "2rem", sm: "0.5rem" } }}
 										>
 											<SmallButton value="cancel" color="#CC3E34" />
-										</Grid>
+										</div>
 									</CardContent>
 								</Grid>
 								<Modal
@@ -198,6 +213,68 @@ export default function AppointmentRows(props) {
 													}}
 												>
 													Cancel Appointment
+												</Button>
+											</Grid>
+										</Grid>
+									</Box>
+								</Modal>
+
+								<Modal
+									open={open2}
+									onClose={handleClose2}
+									aria-labelledby="modal-modal-title"
+									aria-describedby="modal-modal-description"
+								>
+									<Box sx={style}>
+										<Reschedule
+											appointmentId={cancelId}
+											appointment={modalAppointment}
+											setAppointment={setModalAppointment}
+										/>
+										<Grid container spacing={2}>
+											<Grid item xs={6} sm={4} ml="auto">
+												<Button
+													onClick={handleClose2}
+													fullWidth
+													variant="contained"
+													sx={{
+														mt: 3,
+														mb: 2,
+													}}
+												>
+													Keep Appointment
+												</Button>
+											</Grid>
+											<Grid item xs={6} sm={4}>
+												<Button
+													onClick={async () => {
+														await axios.put(
+															`/appointment/${cancelId}`,
+															{
+																date: modalAppointment.date,
+																time: modalAppointment.time,
+															},
+															{
+																headers: {
+																	"auth-token": localStorage.getItem(
+																		"userToken"
+																	),
+																},
+															}
+														)
+														props.setUpdate(!props.update)
+														handleClose2()
+													}}
+													fullWidth
+													variant="contained"
+													sx={{
+														mt: 3,
+														mb: 2,
+														backgroundColor: "orange",
+														fontSize: "0.8rem",
+													}}
+												>
+													Reschedule
 												</Button>
 											</Grid>
 										</Grid>

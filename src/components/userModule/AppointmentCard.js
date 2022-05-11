@@ -175,7 +175,6 @@ export default function AppointmentCard({ update, setUpdate }) {
 											<Button
 												onClick={async () => {
 													await axios.put(
-
 														`/appointment/${cancelId}`,
 														{
 															date: modalAppointment.date,
