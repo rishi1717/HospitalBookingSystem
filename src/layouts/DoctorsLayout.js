@@ -36,7 +36,7 @@ const linkStyle = {
 
 const drawerWidth = 240
 
-function ResponsiveDrawer(props) {
+function DoctorLayout(props) {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { window, children } = props
@@ -241,4 +241,4 @@ function ResponsiveDrawer(props) {
 	)
 }
 
-export default ResponsiveDrawer
+export default DoctorLayout
