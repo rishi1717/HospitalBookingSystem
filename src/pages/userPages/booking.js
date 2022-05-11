@@ -391,6 +391,14 @@ const Booking = () => {
 										key={slots}
 									>
 										{slots.map((slot, index) => {
+											const now = dayjs()
+											const time = dayjs(slot, "hh:mm A")
+											const today = now.format("DD/MM/YYYY")
+											if(dayjs(data.date).format("DD/MM/YYYY") === today){
+												if (time.isBefore(now.add(1, "Hour"))) {
+													booked.push(slot)
+												}
+											}
 											return (
 												<Button
 													onClick={() => {
