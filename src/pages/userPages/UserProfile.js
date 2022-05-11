@@ -53,6 +53,11 @@ function UserProfile() {
 	}
 	const handleClose = () => {
 		setOpen(false)
+		setData({
+			oldPassword: "",
+			newPassword: "",
+			cPassword: "",
+		})
 	}
 	useEffect(() => {
 		;(async function() {

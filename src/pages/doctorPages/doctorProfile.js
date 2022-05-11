@@ -68,6 +68,11 @@ function DoctorProfile() {
 		}
 		const handleClose = () => {
 			setOpen(false)
+			setData({
+				oldPassword: "",
+				newPassword: "",
+				cPassword: "",
+			})
 		}
 
 		const handleChange = (e) => {
