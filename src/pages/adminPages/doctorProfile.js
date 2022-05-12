@@ -9,7 +9,7 @@ import {
 import axios from "../../axios"
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import DoctorAppointments from "../../components/adminModule/DoctorAppointments"
 import DoctorPrescriptions from "../../components/adminModule/DoctorPrescriptions"
@@ -17,6 +17,7 @@ import { SmallButton } from "../../components/Buttons"
 import AdminLayout from "../../layouts/AdminLayout"
 
 const DoctorProfile = () => {
+	const navigate = useNavigate()
 	const adminState = useSelector((storeState) => storeState.admin)
 	const location = useLocation()
 	const doctor = location.state.doctor
@@ -397,14 +398,28 @@ const DoctorProfile = () => {
 							confirmButtonColor: "#609ACF",
 						})
 						if (con.isConfirmed) {
-							await axios.delete(
-								`/doctor/${doctor._id}`,
-								{
-									headers: {
-										"auth-token": adminState.token,
-									},
+							try {
+								const con = await Swal.fire({
+									title: "Are you sure?",
+									text: "User details will be removed!",
+									background: "#eaeaea",
+									color: "#595959",
+									showCancelButton: true,
+									cancelButtonColor: "#B81C1C",
+									confirmButtonText: "Remove User",
+									confirmButtonColor: "#609ACF",
+								})
+								if (con.isConfirmed) {
+									await axios.delete(`/doctor/${doctor._id}`, {
+										headers: {
+											"auth-token": adminState.token,
+										},
+									})
+									navigate("/admin/doctors")
 								}
-							)
+							} catch (err) {
+								console.log(err)
+							}
 						}
 					}}
 					style={{ textDecoration: "none" }}
