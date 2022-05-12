@@ -15,6 +15,17 @@ import {
 import { SmallButton } from "../Buttons"
 import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import Swal from "sweetalert2"
+
+const Toast = Swal.mixin({
+	background: "#1E1E1E",
+	color: "white",
+	toast: true,
+	position: "top-end",
+	showConfirmButton: false,
+	timerProgressBar: true,
+})
+
 const deleteIcon = (
 	<DeleteRoundedIcon sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} />
 )
@@ -22,7 +33,12 @@ const editIcon = (
 	<EditRoundedIcon sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} />
 )
 
-export default function DepartmentList({ departments, doctors, state, setState }) {
+export default function DepartmentList({
+	departments,
+	doctors,
+	state,
+	setState,
+}) {
 	const adminState = useSelector((storeState) => storeState.admin)
 	const [depName, setDepName] = React.useState("")
 	const handleSubmit = async (e) => {
@@ -99,8 +115,40 @@ export default function DepartmentList({ departments, doctors, state, setState }
 									/>
 								</div>
 								<div
-									onClick={(e) => {
+									onClick={async (e) => {
 										e.stopPropagation()
+										try {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Department will be deleted!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Delete",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												await axios.delete(
+													`/department/${department._id}`,
+													{
+														headers: {
+															"auth-token": adminState.token,
+														},
+													}
+												)
+												setState(!state)
+												Toast.fire({
+													position: "bottom-right",
+													icon: "success",
+													title: "Deleted",
+													showConfirmButton: false,
+													timer: 3000,
+												})
+											}
+										} catch (err) {
+											console.log(err)
+										}
 									}}
 								>
 									<SmallButton
