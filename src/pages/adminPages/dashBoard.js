@@ -3,6 +3,7 @@ import AdminLayout from "../../layouts/AdminLayout"
 import { Box, Card, Grid, Typography } from "@mui/material"
 import BarGraph from "../../components/adminModule/barGraph"
 import PieChart from "../../components/adminModule/pieGraph"
+import DoughnutChart from "../../components/adminModule/doughnut"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
 import WelcomeCard from "../../components/adminModule/welcomeCard"
@@ -223,6 +224,11 @@ const DashBoard = () => {
 				<Grid item xs={10} sm={4}>
 					<Box>
 						<PieChart />
+					</Box>
+				</Grid>
+				<Grid item xs={10} sm={4}>
+					<Box>
+						<DoughnutChart />
 					</Box>
 				</Grid>
 			</Grid>
