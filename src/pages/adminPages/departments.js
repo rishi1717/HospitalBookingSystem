@@ -9,6 +9,7 @@ const Departments = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
 	const [departments, setDepartments] = useState([])
 	const [doctors, setDoctors] = useState([])
+	const [state, setState] = useState(true)
 	useEffect(() => {
 		(async function() {
 			try {
@@ -28,7 +29,7 @@ const Departments = () => {
 				console.log(err.message)
 			}
 		})()
-	}, [])
+	}, [state])
 	return (
 		<AdminLayout>
 				<Typography
@@ -60,7 +61,7 @@ const Departments = () => {
 				>
 					Department list
 				</Typography>
-				<DepartmentList departments={departments} doctors={doctors} />
+				<DepartmentList state={state} setState={setState} departments={departments} doctors={doctors} />
 		</AdminLayout>
 	)
 }
