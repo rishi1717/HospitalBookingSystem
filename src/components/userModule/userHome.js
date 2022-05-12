@@ -11,6 +11,7 @@ import AppointmentCard from "../userModule/AppointmentCard"
 import FullLayout from "../../layouts/FullLayout"
 
 function UserHome() {
+	const [update, setUpdate] = React.useState(0)
 	return (
 		<FullLayout>
 			<Container>
@@ -21,7 +22,7 @@ function UserHome() {
 					image={image1}
 				/>
 				<Grid container spacing={2} mt={1} mb={1}>
-					<AppointmentCard />
+					<AppointmentCard update={update} setUpdate={setUpdate} />
 				</Grid>
 				<Grid container spacing={2}>
 					<HomeCard
