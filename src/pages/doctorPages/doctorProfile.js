@@ -166,6 +166,7 @@ function DoctorProfile() {
 									mr: { xs: 2, sm: 5 },
 								}}
 							>
+								{console.log(doctor.image)}
 								<CardMedia
 									component="img"
 									sx={{
@@ -292,7 +293,7 @@ function DoctorProfile() {
 									}}
 									component="p"
 								>
-									<b>OP Time :</b>
+									<b>OP Time : </b>
 									{doctor.startTime} to {doctor.endTime}
 								</Typography>
 							</CardContent>

@@ -23,7 +23,6 @@ import {
 	Select,
 	Toolbar,
 } from "@mui/material"
-import { useSelector } from "react-redux"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -35,7 +34,6 @@ const Toast = Swal.mixin({
 })
 
 export default function DoctorRegister() {
-	const docState = useSelector((storeState) => storeState.doctor)
 	const navigate = useNavigate()
 	const {
 		register,
@@ -49,11 +47,7 @@ export default function DoctorRegister() {
 
 	useEffect(() => {
 		;(async () => {
-			const res = await axios.get("/department", {
-				headers: {
-					"auth-token": docState.token,
-				},
-			})
+			const res = await axios.get("/department")
 			const depNames = res.data.department.map((dep) => dep.name)
 			setDepartments(depNames)
 		})()
