@@ -3,21 +3,21 @@ import Chart from "chart.js/auto"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
 
-let DoughnutChart
+let LineChart
 
-const Doughnut = () => {
+const LineGraph = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
-	const [depNames, setDepNames] = React.useState([])
+	const [date, setDate] = React.useState([])
 	const [count, setCount] = React.useState([])
 	useEffect(() => {
 		;(async () => {
-			const response = await axios.get("chart/doughnut", {
+			const response = await axios.get("chart/line", {
 				headers: {
 					"auth-token": adminState.token,
 				},
 			})
-			setDepNames(response.data.depName)
-			setCount(response.data.depCount)
+			setDate(response.data.dates)
+			setCount(response.data.count)
 		})()
 	}, [])
 
@@ -26,14 +26,14 @@ const Doughnut = () => {
 	}, [count])
 
 	const buildChart = () => {
-		const ctx = document.getElementById("DoughnutChart").getContext("2d")
+		const ctx = document.getElementById("LineChart").getContext("2d")
 
-		if (typeof DoughnutChart !== "undefined") DoughnutChart.destroy()
+		if (typeof LineChart !== "undefined") LineChart.destroy()
 
-		DoughnutChart = new Chart(ctx, {
-			type: "doughnut",
+		LineChart = new Chart(ctx, {
+			type: "line",
 			data: {
-				labels: depNames,
+				labels: date,
 				datasets: [
 					{
 						label: "Total Amount",
@@ -50,12 +50,12 @@ const Doughnut = () => {
 
 	return (
 		<>
-			<h4 style={{ color: "#595959" }}>Departments</h4>
+			<h4 style={{ color: "#595959" }}>Users per day</h4>
 			<div>
-				<canvas id="DoughnutChart" width="1000" height="500" />
+				<canvas id="LineChart" width="1000" height="500" />
 			</div>
 		</>
 	)
 }
 
-export default Doughnut
+export default LineGraph

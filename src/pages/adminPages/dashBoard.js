@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import axios from "../../axios"
 import WelcomeCard from "../../components/adminModule/welcomeCard"
 import { useNavigate } from "react-router-dom"
+import LineGraph from "../../components/adminModule/lineChart"
 
 const DashBoard = () => {
 	const navigate = useNavigate()
@@ -224,6 +225,12 @@ const DashBoard = () => {
 				<Grid item xs={10} sm={4}>
 					<Box>
 						<PieChart />
+					</Box>
+				</Grid>
+
+				<Grid item xs={11} sm={8}>
+					<Box>
+						<LineGraph />
 					</Box>
 				</Grid>
 				<Grid item xs={10} sm={4}>
