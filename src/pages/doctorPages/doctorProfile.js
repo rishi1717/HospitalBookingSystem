@@ -166,7 +166,6 @@ function DoctorProfile() {
 									mr: { xs: 2, sm: 5 },
 								}}
 							>
-								{console.log(doctor.image)}
 								<CardMedia
 									component="img"
 									sx={{

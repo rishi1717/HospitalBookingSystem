@@ -34,8 +34,8 @@ const Departments = () => {
 				<Typography
 					sx={{
 						fontSize: {
-							xs: "1.2rem",
-							sm: "1.4rem",
+							xs: "1rem",
+							sm: "1.2rem",
 						},
 						fontFamily: "sans-serif",
 						color: "#1976D2",

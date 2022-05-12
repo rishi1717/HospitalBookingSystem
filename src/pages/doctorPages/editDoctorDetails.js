@@ -166,6 +166,7 @@ export default function DoctorRegister() {
 			const newForm = new FormData()
 			newForm.append("name", data.name)
 			newForm.append("qualification", data.qualification)
+			newForm.append("oldDepartment", doctor.department)
 			newForm.append("department", data.department)
 			newForm.append("email", data.email)
 			newForm.append("experience", data.experience)
@@ -179,32 +180,31 @@ export default function DoctorRegister() {
 			} else {
 				newForm.append("image", doctor.image)
 			}
-			console.log(newForm)
 			const con = await Swal.fire({
-			title: "Are you sure?",
-			text: "Details will Updated!",
-			background: "#eaeaea",
-			color: "#595959",
-			showCancelButton: true,
-			cancelButtonColor: "#B81C1C",
-			confirmButtonText: "Update",
-			confirmButtonColor: "#609ACF",
-		})
-		if (con.isConfirmed) {
-			await axios.put(`/doctor/${docState.id}`, newForm,{
-				headers: {
-					"auth-token": docState.token,
-				}
+				title: "Are you sure?",
+				text: "Details will Updated!",
+				background: "#eaeaea",
+				color: "#595959",
+				showCancelButton: true,
+				cancelButtonColor: "#B81C1C",
+				confirmButtonText: "Update",
+				confirmButtonColor: "#609ACF",
 			})
-			navigate("/doctor/profile")
-			Toast.fire({
-				position: "bottom-right",
-				icon: "success",
-				title: "Updated details",
-				showConfirmButton: false,
-				timer: 3000,
-			})
-		}
+			if (con.isConfirmed) {
+				await axios.put(`/doctor/${docState.id}`, newForm, {
+					headers: {
+						"auth-token": docState.token,
+					},
+				})
+				navigate("/doctor/profile")
+				Toast.fire({
+					position: "bottom-right",
+					icon: "success",
+					title: "Updated details",
+					showConfirmButton: false,
+					timer: 3000,
+				})
+			}
 		} catch (err) {
 			console.log(err.message)
 			if (err.response) {
@@ -234,7 +234,6 @@ export default function DoctorRegister() {
 
 	return (
 		<Container>
-			{console.log(data)}
 			<Box sx={{ flexGrow: 1 }}>
 				<AppBar position="static" sx={{ borderRadius: 2 }}>
 					<Toolbar>
