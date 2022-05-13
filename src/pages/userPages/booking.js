@@ -183,8 +183,7 @@ const Booking = () => {
 						fontSize: { xs: "1rem", sm: "1.5rem" },
 						fontFamily: "sans-serif",
 						mt: 2,
-						fontWeight: "bold",
-						color: "#595959",
+						color: "#1976D2",
 					}}
 					component="p"
 				>
@@ -394,7 +393,10 @@ const Booking = () => {
 											const now = dayjs()
 											const time = dayjs(slot, "hh:mm A")
 											const today = now.format("DD/MM/YYYY")
-											if(dayjs(data.date).format("DD/MM/YYYY") === today){
+											if (
+												dayjs(data.date).format("DD/MM/YYYY") ===
+												today
+											) {
 												if (time.isBefore(now.add(1, "Hour"))) {
 													booked.push(slot)
 												}

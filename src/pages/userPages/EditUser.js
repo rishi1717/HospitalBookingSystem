@@ -148,6 +148,7 @@ function EditUser() {
 						onSubmit={handleSubmit(onSubmit)}
 						elevation={3}
 						sx={{
+							border: "1px solid #609acf",
 							mt: 5,
 							display: "flex",
 							flexDirection: { xs: "column", sm: "row" },

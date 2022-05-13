@@ -38,6 +38,9 @@ function UserPrescriptions() {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
 		setSearchValue(data.get("search").toLowerCase())
+	}
+
+	useEffect(() => {
 		const searchResult = prescriptions.filter((o) =>
 			Object.entries(o).some((entry) =>
 				String(entry[1])
@@ -46,7 +49,7 @@ function UserPrescriptions() {
 			)
 		)
 		setResult(searchResult)
-	}
+	} , [searchValue])
 
 	if (localStorage.userToken) {
 		return (
@@ -58,8 +61,7 @@ function UserPrescriptions() {
 							fontSize: { xs: "1rem", sm: "1.5rem" },
 							fontFamily: "sans-serif",
 							mt: 2,
-							fontWeight: "bold",
-							color: "#595959",
+							color: "#1976D2",
 						}}
 						component="p"
 					>

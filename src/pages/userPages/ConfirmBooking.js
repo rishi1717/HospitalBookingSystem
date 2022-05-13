@@ -101,9 +101,8 @@ function ConfirmBooking() {
 						sx={{
 							fontSize: { xs: "1rem", sm: "1.5rem" },
 							fontFamily: "sans-serif",
-							mt: 2,
-							fontWeight: "bold",
-							color: "#595959",
+							mt: 3,
+							color: "#1976D2",
 						}}
 						component="p"
 					>
@@ -112,8 +111,9 @@ function ConfirmBooking() {
 					<Card
 						elevation={3}
 						sx={{
-							mt: 5,
-							mb: 5,
+							border: "1px solid #609acf",
+							mt: 3,
+							mb: 4,
 							display: "flex",
 							flexDirection: { xs: "column", sm: "row" },
 							minHeight: { xs: 0, sm: 150 },

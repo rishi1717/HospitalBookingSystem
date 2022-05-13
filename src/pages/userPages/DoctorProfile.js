@@ -5,166 +5,224 @@ import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import image from "../../static/images/doctorPortrait.webp"
 import { Box, Grid } from "@mui/material"
-import { SmallButton } from "../../components/Buttons"
+import { MediumButton } from "../../components/Buttons"
 import { Link, useLocation } from "react-router-dom"
 import FullLayout from "../../layouts/FullLayout"
 import Unauthorized from "./Unauthorized"
 
 function DoctorProfile() {
 	const location = useLocation()
-	const { doctor } = location.state?location.state:""
+	const { doctor } = location.state ? location.state : ""
 
 	if (localStorage.userToken) {
 		return (
 			<FullLayout>
-				<Card
-					elevation={3}
-					sx={{
-						m: "auto",
-						mt: 5,
-						width: "85%",
-						minHeight: { xs: 0, sm: 150 },
-						px: { xs: 1, sm: 7 },
-						py: { xs: 2, sm: 4 },
-					}}
+				<Grid
+					container
+					spacing={0}
+					direction="column"
+					alignItems="center"
+					justify="center"
 				>
-					<Grid container spacing={2} alignItems="center">
-						<Grid item xs={12} sm={4} sx={{ mt: "1rem" }}>
-							<Box
-								component="div"
-								sx={{
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-									mr: { xs: 2, sm: 5 },
-								}}
-							>
-								<Typography
+					<Typography
+						sx={{
+							fontSize: { xs: "1rem", sm: "1.5rem" },
+							fontFamily: "sans-serif",
+							mt: 3,
+							color: "#1976D2",
+						}}
+						component="p"
+					>
+						Doctor Profile
+					</Typography>
+					<Card
+						elevation={3}
+						sx={{
+							border: "1px solid #609acf",
+							mx: "auto",
+							mt: 3,
+							width: "75%",
+							minHeight: { xs: 0, sm: 150 },
+							px: { xs: 1, sm: 7 },
+							py: { xs: 2, sm: 4 },
+						}}
+					>
+						<Grid container spacing={2} alignItems="center">
+							<Grid item xs={12} sm={6} sx={{ mt: "1rem" }}>
+								<Box
+									component="div"
 									sx={{
-										fontSize: {
-											xs: "0.9rem",
-											sm: "1.2rem",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+										mr: { xs: 2, sm: 5 },
 									}}
-									component="p"
 								>
-									<b>{doctor.name}</b>
-								</Typography>
-								<CardMedia
-									component="img"
-									sx={{
-										margin: "0.4rem",
-										maxWidth: { xs: 120, sm: 150 },
-										maxHeight: { xs: 120, sm: 150 },
-										borderRadius: 100,
-									}}
-									image={image}
-									alt="image"
-								/>
-								<Link
-									style={{ textDecoration: "none" }}
-									state={{ doctor: doctor }}
-									to="/booking"
-								>
-									<SmallButton
-										value="Book now"
-										color="#609acf"
-										text="##1976D2"
+									<Typography
+										sx={{
+											fontSize: {
+												xs: "0.9rem",
+												sm: "1.2rem",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Dr. {doctor.name}</b>
+									</Typography>
+									<CardMedia
+										component="img"
+										sx={{
+											margin: "0.4rem",
+											maxWidth: { xs: 120, sm: 180 },
+											maxHeight: { xs: 120, sm: 180 },
+											borderRadius: 100,
+										}}
+										image={image}
+										alt="image"
 									/>
-								</Link>
-							</Box>
-						</Grid>
+								</Box>
+							</Grid>
 
-						<Grid item xs={12} sm={8} sx={{ mt: "1rem" }}>
-							<CardContent
-								sx={{
-									flex: 1,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-								}}
-							>
-								<Typography
+							<Grid item xs={12} sm={6} sx={{ mt: "1rem" }}>
+								<CardContent
 									sx={{
-										fontSize: {
-											xs: "0.75rem",
-											sm: "1rem",
-											textAlign: "left",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
+										flex: 1,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
 									}}
-									component="p"
 								>
-									<b>Qualification :</b> {doctor.qualification}
-								</Typography>
-								<Typography
-									sx={{
-										mt: 2,
-										fontSize: {
-											xs: "0.75rem",
-											sm: "1rem",
-											textAlign: "left",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
-									}}
-									component="p"
-								>
-									<b>Department :</b> {doctor.department}
-								</Typography>
-								<Typography
-									sx={{
-										mt: 2,
-										fontSize: {
-											xs: "0.75rem",
-											sm: "1rem",
-											textAlign: "left",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
-									}}
-									component="p"
-								>
-									<b>Experience :</b> {doctor.experience}
-								</Typography>
-								<Typography
-									sx={{
-										mt: 2,
-										fontSize: {
-											xs: "0.75rem",
-											sm: "1rem",
-											textAlign: "left",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
-									}}
-									component="p"
-								>
-									<b>Area of Expertise :</b> {doctor.expertise}
-								</Typography>
-								<Typography
-									sx={{
-										mt: 2,
-										fontSize: {
-											xs: "0.75rem",
-											sm: "1rem",
-											textAlign: "left",
-										},
-										fontFamily: "sans-serif",
-										color: "#595959",
-									}}
-									component="p"
-								>
-									<b>OP Time :</b> {doctor.days} from {doctor.time}
-								</Typography>
-							</CardContent>
+									<Typography
+										sx={{
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Qualification :</b> {doctor.qualification}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Department :</b> {doctor.department}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Experience :</b> {doctor.experience}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Area of Expertise :</b> {doctor.expertise}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Working days :</b>{" "}
+										{doctor.days.map((day, i) => {
+											const weekDays = [
+												"sun",
+												"mon",
+												"tue",
+												"wed",
+												"thu",
+												"fri",
+												"sat",
+											]
+											if (i + 1 === doctor.days.length) {
+												return weekDays[day] + "."
+											}
+											return weekDays[day] + ", "
+										})}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Timing :</b> {doctor.startTime} to{" "}
+										{doctor.endTime}
+									</Typography>
+								</CardContent>
+							</Grid>
 						</Grid>
-					</Grid>
-				</Card>
+					</Card>
+					<Box
+						sx={{
+							ml: "auto",
+							mr: "auto",
+						}}
+					>
+						<Link
+							style={{ textDecoration: "none" }}
+							state={{ doctor: doctor }}
+							to="/booking"
+						>
+							<MediumButton
+								value="Book now"
+								color="#1976D2"
+								text="#fff"
+							/>
+						</Link>
+					</Box>
+				</Grid>
 			</FullLayout>
 		)
 	} else {

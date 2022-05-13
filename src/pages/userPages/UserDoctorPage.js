@@ -27,6 +27,9 @@ function UserDoctorPage() {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
 		setSearchValue(data.get("search").toLowerCase())
+	}
+
+	useEffect(() => {
 		const searchResult = doctors.filter((o) =>
 			Object.entries(o).some((entry) =>
 				String(entry[1])
@@ -35,7 +38,7 @@ function UserDoctorPage() {
 			)
 		)
 		setResult(searchResult)
-	}
+	} , [searchValue])
 
 	if (localStorage.userToken) {
 		return (

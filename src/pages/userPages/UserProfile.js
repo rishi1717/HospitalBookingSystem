@@ -102,6 +102,18 @@ function UserProfile() {
 	if (localStorage.userToken) {
 		return (
 			<FullLayout>
+				<Typography
+					sx={{
+						textAlign: "center",
+						fontSize: { xs: "1rem", sm: "1.3rem" },
+						fontFamily: "sans-serif",
+						mt: 2,
+						color: "#609acf",
+					}}
+					component="p"
+				>
+					User Profile
+				</Typography>
 				<Grid
 					container
 					spacing={0}
@@ -112,7 +124,8 @@ function UserProfile() {
 					<Card
 						elevation={3}
 						sx={{
-							mt: 5,
+							border: "1px solid #609acf",
+							mt: 3,
 							display: "flex",
 							maxHeight: "18rem",
 							minHeight: { xs: 0, sm: 150 },

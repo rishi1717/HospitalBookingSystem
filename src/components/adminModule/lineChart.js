@@ -36,7 +36,7 @@ const LineGraph = () => {
 				labels: date,
 				datasets: [
 					{
-						label: "Total Amount",
+						label: "Total Users",
 						data: count,
 						fill: false,
 						borderColor: "rgb(75, 192, 192)",
