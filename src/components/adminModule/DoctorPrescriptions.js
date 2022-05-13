@@ -10,13 +10,15 @@ import {
 	TableRow,
 } from "@mui/material"
 import { SmallButton } from "../Buttons"
-import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
+import Swal from "sweetalert2"
+import { useSelector } from "react-redux"
 const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
-const editIcon = <EditRoundedIcon sx={{ fontSize: "1rem" }} />
 
 const DoctorPrescriptions = ({ doctorId, token }) => {
 	const [prescriptions, setPrescriptions] = React.useState([])
+	const adminState = useSelector((storeState) => storeState.admin)
+	const [state, setState] = React.useState(0)
 	useEffect(() => {
 		;(async function() {
 			const detail = await axios.get(`/prescription/doctor/${doctorId}`, {
@@ -66,14 +68,35 @@ const DoctorPrescriptions = ({ doctorId, token }) => {
 										justifyContent: "center",
 									}}
 								>
-									<div>
-										<SmallButton
-											value={editIcon}
-											color="white"
-											text="#FEB139"
-										/>
-									</div>
-									<div>
+									<div
+										onClick={async () => {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Prescription will be removed!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Remove Prescription",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												try {
+													await axios.delete(
+														`/prescription/${row._id}`,
+														{
+															headers: {
+																"auth-token": adminState.token,
+															},
+														}
+													)
+													setState(!state)
+												} catch (err) {
+													console.log(err)
+												}
+											}
+										}}
+									>
 										<SmallButton
 											value={deleteIcon}
 											color="white"

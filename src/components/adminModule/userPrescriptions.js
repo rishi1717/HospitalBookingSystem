@@ -10,12 +10,10 @@ import {
 	TableRow,
 } from "@mui/material"
 import { SmallButton } from "../Buttons"
-import EditRoundedIcon from "@mui/icons-material/EditRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 import Swal from "sweetalert2"
 import { useSelector } from "react-redux"
 const deleteIcon = <DeleteRoundedIcon sx={{ fontSize: "1rem" }} />
-const editIcon = <EditRoundedIcon sx={{ fontSize: "1rem" }} />
 
 const UserPrescriptions = ({ userId, token }) => {
 	const [prescriptions, setPrescriptions] = React.useState([])
@@ -70,13 +68,6 @@ const UserPrescriptions = ({ userId, token }) => {
 										justifyContent: "center",
 									}}
 								>
-									<div>
-										<SmallButton
-											value={editIcon}
-											color="white"
-											text="#FEB139"
-										/>
-									</div>
 									<div
 										onClick={async () => {
 											const con = await Swal.fire({
