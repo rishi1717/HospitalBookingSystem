@@ -71,6 +71,7 @@ export default function AppointmentCard({ update, setUpdate }) {
 								<Paper
 									elevation={8}
 									sx={{
+										border: "1px solid #609acf",
 										backgroundColor: "#eaeaea",
 										p: { xs: 1, sm: 2 },
 									}}
@@ -81,7 +82,7 @@ export default function AppointmentCard({ update, setUpdate }) {
 										}}
 										component="p"
 									>
-										Appointment with {appointment.doctor}
+										Appointment with Dr. {appointment.doctor}
 									</Typography>
 									<Typography
 										sx={{

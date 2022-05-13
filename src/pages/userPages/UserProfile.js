@@ -188,8 +188,8 @@ function UserProfile() {
 								}}
 								component="p"
 							>
-								<b>ID :</b>
-								{user._id}
+								<b>Email :</b>
+								{user.email}
 							</Typography>
 							<Typography
 								sx={{

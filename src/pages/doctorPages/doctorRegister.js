@@ -11,7 +11,6 @@ import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import AddBoxRoundedIcon from "@mui/icons-material/AddBoxRounded"
 import {
-	AppBar,
 	Checkbox,
 	Fab,
 	FormControl,
@@ -21,7 +20,6 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
-	Toolbar,
 } from "@mui/material"
 import DocNav from "../../components/doctorModule/docNav.js"
 

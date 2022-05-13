@@ -11,7 +11,7 @@ function HomeCard(props) {
 	return (
 		<Grid item xs={12} sm={6} sx={{ mt: "1rem" }}>
 			<Card
-				elevation={3}
+				elevation={6}
 				sx={{
 					display: "flex",
 					maxHeight: "18rem",
@@ -31,7 +31,6 @@ function HomeCard(props) {
 							marginLeft: "1rem",
 							display: { xs: "block", sm: "block" },
 							fontSize: { xs: "0.8rem", sm: "1rem" },
-							fontFamily: "sans-serif",
 						}}
 						component="p"
 					>

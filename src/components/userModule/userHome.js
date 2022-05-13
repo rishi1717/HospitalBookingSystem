@@ -9,6 +9,8 @@ import image5 from "../../static/images/userPortrait-removebg.png"
 import Banner from "../userModule/Banner"
 import AppointmentCard from "../userModule/AppointmentCard"
 import FullLayout from "../../layouts/FullLayout"
+import { MediumButton } from "../Buttons"
+import { Link } from "react-router-dom"
 
 function UserHome() {
 	const [update, setUpdate] = React.useState(0)
@@ -24,7 +26,21 @@ function UserHome() {
 				<Grid container spacing={2} mt={1} mb={1}>
 					<AppointmentCard update={update} setUpdate={setUpdate} />
 				</Grid>
-				<Grid container spacing={2}>
+				<Grid textAlign={"center"} sx={{
+					mb:4
+				}}>
+					<Link
+						style={{
+							textDecoration: "none",
+						}}
+						to="/doctors"
+					>
+						<MediumButton value="Make an Appointment now" text="#606acf" color="#eaeaea"/>
+					</Link>
+				</Grid>
+				<Grid container spacing={2} sx={{
+					mb:4
+				}}>
 					<HomeCard
 						smallPhrase="We care about our Patients. Take a look at your Profile"
 						phrase="Profile"
