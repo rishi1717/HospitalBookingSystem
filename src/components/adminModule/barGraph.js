@@ -52,7 +52,7 @@ const BarGraph = () => {
 		<>
 			<h4 style={{color: "#595959"}}>Amount Per Day</h4>
 			<div>
-				<canvas id="BarChart" width="1000" height="500" />
+				<canvas id="BarChart" width="1000" height="450" />
 			</div>
 		</>
 	)

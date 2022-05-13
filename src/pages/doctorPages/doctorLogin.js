@@ -22,6 +22,7 @@ import {
 	addDoctorId,
 	addDoctorName,
 } from "../../redux/doctorSlice"
+import DocNav from "../../components/doctorModule/docNav.js"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -74,13 +75,7 @@ export default function DoctorLogin() {
 	return (
 		<>
 			<Box sx={{ flexGrow: 1 }}>
-				<AppBar position="static" sx={{ borderRadius: 2 }}>
-					<Toolbar>
-						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-							Doctor Login
-						</Typography>
-					</Toolbar>
-				</AppBar>
+				<DocNav />
 			</Box>
 			<Container>
 				<Grid container mt={4}>

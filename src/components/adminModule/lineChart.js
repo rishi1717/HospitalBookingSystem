@@ -52,7 +52,7 @@ const LineGraph = () => {
 		<>
 			<h4 style={{ color: "#595959" }}>Users per day</h4>
 			<div>
-				<canvas id="LineChart" width="1000" height="500" />
+				<canvas id="LineChart" width="1000" height="450" />
 			</div>
 		</>
 	)

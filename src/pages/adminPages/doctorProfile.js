@@ -401,12 +401,12 @@ const DoctorProfile = () => {
 							try {
 								const con = await Swal.fire({
 									title: "Are you sure?",
-									text: "User details will be removed!",
+									text: "Doctor details will be removed!",
 									background: "#eaeaea",
 									color: "#595959",
 									showCancelButton: true,
 									cancelButtonColor: "#B81C1C",
-									confirmButtonText: "Remove User",
+									confirmButtonText: "Remove Doctor",
 									confirmButtonColor: "#609ACF",
 								})
 								if (con.isConfirmed) {
