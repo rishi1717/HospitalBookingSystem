@@ -30,6 +30,9 @@ const Patients = () => {
 		event.preventDefault()
 		const search = new FormData(event.currentTarget)
 		setSearchValue(search.get("search").toLowerCase())
+	}
+
+	useEffect(() => {
 		const searchResult = data.filter((o) =>
 			Object.entries(o).some((entry) =>
 				String(entry[1])
@@ -38,7 +41,7 @@ const Patients = () => {
 			)
 		)
 		setResult(searchResult)
-	}
+	}, [searchValue])
 
 	return (
 		<AdminLayout>

@@ -30,7 +30,7 @@ const Appointments = () => {
 		{ field: "date", headerName: "Date", minWidth: 100, flex: 1 },
 		{ field: "time", headerName: "Time", minWidth: 100, flex: 1 },
 		{ field: "fee", headerName: "Amount", minWidth: 100, flex: 1 },
-		{ field: "doctor", headerName: "Doctor", minWidth: 100, flex: 1.5 },
+		{ field: "doctor", headerName: "Doctor", minWidth: 100, flex: 1.8 },
 		{
 			field: "Complete",
 			renderCell: (cellValues) => {
@@ -68,7 +68,7 @@ const Appointments = () => {
 					return
 				}
 			},
-			width: 1,
+			width: 80,
 		},
 		{
 			field: "Cancel",
@@ -107,7 +107,7 @@ const Appointments = () => {
 					return
 				}
 			},
-			width: 1,
+			width: 80,
 		},
 		{
 			field: "Delete",
@@ -151,7 +151,7 @@ const Appointments = () => {
 					</div>
 				)
 			},
-			width: 1,
+			width: 80,
 		},
 	]
 	const [data, setData] = React.useState([])
@@ -197,7 +197,7 @@ const Appointments = () => {
 				>
 					<div>
 						<DataGrid
-							sx={{ width: { xs: "78vw", sm: "74vw" } }}
+							sx={{ width: { xs: "78vw", sm: "70vw" } }}
 							getRowId={(row) => row._id}
 							columns={columns}
 							rows={data}

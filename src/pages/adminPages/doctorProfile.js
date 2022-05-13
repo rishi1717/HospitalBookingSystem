@@ -387,39 +387,27 @@ const DoctorProfile = () => {
 				)}
 				<div
 					onClick={async () => {
-						const con = await Swal.fire({
-							title: "Are you sure?",
-							text: "Doctor details will be removed!",
-							background: "#eaeaea",
-							color: "#595959",
-							showCancelButton: true,
-							cancelButtonColor: "#B81C1C",
-							confirmButtonText: "Remove Doctor",
-							confirmButtonColor: "#609ACF",
-						})
-						if (con.isConfirmed) {
-							try {
-								const con = await Swal.fire({
-									title: "Are you sure?",
-									text: "Doctor details will be removed!",
-									background: "#eaeaea",
-									color: "#595959",
-									showCancelButton: true,
-									cancelButtonColor: "#B81C1C",
-									confirmButtonText: "Remove Doctor",
-									confirmButtonColor: "#609ACF",
+						try {
+							const con = await Swal.fire({
+								title: "Are you sure?",
+								text: "Doctor details will be removed!",
+								background: "#eaeaea",
+								color: "#595959",
+								showCancelButton: true,
+								cancelButtonColor: "#B81C1C",
+								confirmButtonText: "Remove Doctor",
+								confirmButtonColor: "#609ACF",
+							})
+							if (con.isConfirmed) {
+								await axios.delete(`/doctor/${doctor._id}`, {
+									headers: {
+										"auth-token": adminState.token,
+									},
 								})
-								if (con.isConfirmed) {
-									await axios.delete(`/doctor/${doctor._id}`, {
-										headers: {
-											"auth-token": adminState.token,
-										},
-									})
-									navigate("/admin/doctors")
-								}
-							} catch (err) {
-								console.log(err)
+								navigate("/admin/doctors")
 							}
+						} catch (err) {
+							console.log(err)
 						}
 					}}
 					style={{ textDecoration: "none" }}

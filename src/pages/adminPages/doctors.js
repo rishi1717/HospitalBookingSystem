@@ -4,12 +4,15 @@ import { useSelector } from "react-redux"
 import AdminLayout from "../../layouts/AdminLayout"
 import { Box, Container, TextField, Typography } from "@mui/material"
 import DoctorTable from "../../components/adminModule/doctorTable"
+import DoctorRequest from "../../components/adminModule/doctorRequest"
 
 const Doctors = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
 	const [searchValue, setSearchValue] = useState("")
 	const [result, setResult] = useState([])
+	const [request, setRequest] = useState([])
 	const [data, setData] = useState([])
+	const [update, setUpdate] = useState(0)
 	useEffect(() => {
 		;(async function() {
 			try {
@@ -18,17 +21,23 @@ const Doctors = () => {
 						"auth-token": adminState.token,
 					},
 				})
-				setData(response.data.doctor)
+				const temp = response.data.doctor.filter((o) => o.request === false)
+				setData(temp)
+				const temp2 = response.data.doctor.filter((o) => o.request === true)
+				setRequest(temp2)
 			} catch (err) {
 				console.log(err.message)
 			}
 		})()
-	}, [])
+	}, [update])
 
 	const handleSearch = (event) => {
 		event.preventDefault()
 		const search = new FormData(event.currentTarget)
 		setSearchValue(search.get("search").toLowerCase())
+	}
+
+	useEffect(() => {
 		const searchResult = data.filter((o) =>
 			Object.entries(o).some((entry) =>
 				String(entry[1])
@@ -37,7 +46,7 @@ const Doctors = () => {
 			)
 		)
 		setResult(searchResult)
-	}
+	}, [searchValue])
 
 	return (
 		<AdminLayout>
@@ -55,6 +64,35 @@ const Doctors = () => {
 				>
 					Doctors
 				</Typography>
+
+				{request.length > 0 ? (
+					<>
+						<Typography
+							sx={{
+								fontSize: {
+									xs: "1.2rem",
+									sm: "1.4rem",
+								},
+								fontFamily: "sans-serif",
+								color: "#595959",
+								textAlign: "center",
+								mb: 3,
+								mt: { xs: 1, sm: 3 },
+							}}
+							component="p"
+						>
+							Doctor Requests
+						</Typography>
+						<DoctorRequest
+							update={update}
+							setUpdate={setUpdate}
+							doctors={request}
+						/>
+					</>
+				) : (
+					""
+				)}
+
 				<Typography
 					sx={{
 						fontSize: {

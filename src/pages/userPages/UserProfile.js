@@ -258,6 +258,9 @@ function UserProfile() {
 						display="flex"
 						flexDirection={{ xs: "column", sm: "row" }}
 						justify="center"
+						sx={{
+							pt: 2,
+						}}
 					>
 						<Link
 							style={{ textDecoration: "none" }}

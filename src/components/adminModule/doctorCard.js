@@ -22,7 +22,7 @@ export default function DoctorCard(props) {
 				image={props.image}
 				alt="picture"
 			/>
-			<CardContent sx={{ flex: "1 0 auto" }}>
+			<CardContent sx={{ flex: "1 0" }}>
 				<Typography component="div" variant="h5">
 					{props.doctor.name}
 				</Typography>
@@ -41,7 +41,7 @@ export default function DoctorCard(props) {
 					{props.doctor.qualification}
 				</Typography>
 			</CardContent>
-			<CardContent sx={{ flex: "1 0 auto" }}>
+			<CardContent sx={{ flex: "1 0" }}>
 				<Typography component="div" variant="h5">
 					OP Time
 				</Typography>
@@ -50,17 +50,38 @@ export default function DoctorCard(props) {
 					color="text.secondary"
 					component="div"
 				>
-					{props.doctor.days}
+					{props.doctor.days.map((day, i) => {
+						const weekDays = [
+							"sun",
+							"mon",
+							"tue",
+							"wed",
+							"thu",
+							"fri",
+							"sat",
+						]
+						if (i + 1 === props.doctor.days.length) {
+							return weekDays[day] + "."
+						}
+						return weekDays[day] + ", "
+					})}
 				</Typography>
 				<Typography
 					variant="subtitle1"
 					color="text.secondary"
 					component="div"
 				>
-					{props.doctor.optime}
+					{props.doctor.startTime} to {props.doctor.endTime}
 				</Typography>
 			</CardContent>
-			<CardContent sx={{ display: "flex", flexDirection: "column", justifyContent:'center', alignContent:'center' }}>
+			<CardContent
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignContent: "center",
+				}}
+			>
 				<Link
 					to="/admin/doctors/profile"
 					state={{ doctor: props.doctor }}
