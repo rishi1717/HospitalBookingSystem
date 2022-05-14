@@ -226,6 +226,7 @@ export default function DoctorRegister() {
 													<img
 														style={{
 															width: "12rem",
+															height: "12rem",
 															borderRadius: 100,
 														}}
 														src={preview}

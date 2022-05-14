@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
-import image from "../../static/images/doctorPortrait.webp"
 import { Box, Grid } from "@mui/material"
 import { MediumButton } from "../../components/Buttons"
 import { Link, useLocation } from "react-router-dom"
@@ -80,7 +79,7 @@ function DoctorProfile() {
 											maxHeight: { xs: 120, sm: 180 },
 											borderRadius: 100,
 										}}
-										image={image}
+										src={doctor.image}
 										alt="image"
 									/>
 								</Box>
