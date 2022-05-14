@@ -97,7 +97,19 @@ function UserPrescriptions() {
 						}}
 					>
 						<Grid container spacing={2}>
-							<Grid item xs={2}>
+							<Grid item xs={1}>
+								<CardContent sx={{ flex: "1 0 auto" }}>
+									<Typography
+										variant="subtitle1"
+										color="white"
+										component="div"
+										borderRight={1}
+									>
+										In
+									</Typography>
+								</CardContent>
+							</Grid>
+							<Grid item xs={3}>
 								<CardContent sx={{ flex: "1 0 auto" }}>
 									<Typography
 										variant="subtitle1"
@@ -110,7 +122,7 @@ function UserPrescriptions() {
 								</CardContent>
 							</Grid>
 
-							<Grid item xs={4}>
+							<Grid item xs={3}>
 								<CardContent>
 									<Typography
 										variant="subtitle1"
@@ -136,7 +148,7 @@ function UserPrescriptions() {
 								</CardContent>
 							</Grid>
 
-							<Grid item xs={3}>
+							<Grid item xs={2}>
 								<CardContent sx={{ flex: "1 0 auto" }}>
 									<Typography
 										variant="subtitle1"

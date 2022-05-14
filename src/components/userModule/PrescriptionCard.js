@@ -17,7 +17,7 @@ export default function PrescriptionCard({ prescriptions, user }) {
 
 	return (
 		<>
-			{prescriptions.map((prescription) => (
+			{prescriptions.map((prescription, index) => (
 				<Card
 					key={prescription._id}
 					sx={{
@@ -29,32 +29,64 @@ export default function PrescriptionCard({ prescriptions, user }) {
 					}}
 				>
 					<Grid container spacing={2}>
-						<Grid item xs={12} sm={2}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
+						<Grid item xs={12} sm={1}>
+							<CardContent
+								sx={{
+									flex: "1 0 auto",
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+									justifyContent: "center",
+								}}
+							>
 								<Typography
 									variant="subtitle1"
 									color="text.secondary"
 									component="div"
+									sx={{
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "center",
+										justifyContent: "center",
+									}}
 								>
-									{prescription.medicine}
+									{index + 1}
 								</Typography>
 							</CardContent>
 						</Grid>
 
-						<Grid item xs={12} sm={4}>
+						<Grid item xs={12} sm={3}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
-								<Typography
-									variant="subtitle1"
-									color="text.secondary"
-									component="div"
-								>
-									{prescription.dosage}
-								</Typography>
+								{prescription.medicine.map((medicine, i) => (
+									<Typography
+										key={i}
+										variant="subtitle1"
+										color="text.secondary"
+										component="div"
+									>
+										{i + 1}. {medicine}
+									</Typography>
+								))}
+							</CardContent>
+						</Grid>
+
+						<Grid item xs={12} sm={3}>
+							<CardContent sx={{ flex: "1 0 auto" }}>
+								{prescription.dosage.map((dosage, i) => (
+									<Typography
+										key={i}
+										variant="subtitle1"
+										color="text.secondary"
+										component="div"
+									>
+										{dosage}
+									</Typography>
+								))}
 							</CardContent>
 						</Grid>
 
 						<Grid item sm={2}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
+							<CardContent sx={{ flex: "1 0" }}>
 								<Typography
 									variant="subtitle1"
 									color="text.secondary"
@@ -65,8 +97,8 @@ export default function PrescriptionCard({ prescriptions, user }) {
 							</CardContent>
 						</Grid>
 
-						<Grid item sm={2.5}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
+						<Grid item sm={2}>
+							<CardContent sx={{ flex: "1 0" }}>
 								<Typography
 									variant="subtitle1"
 									color="text.secondary"
@@ -77,8 +109,8 @@ export default function PrescriptionCard({ prescriptions, user }) {
 							</CardContent>
 						</Grid>
 
-						<Grid item sm={1.5}>
-							<CardContent sx={{ flex: "0.1 0 auto" }}>
+						<Grid item sm={1}>
+							<CardContent sx={{ flex: "0.1 0" }}>
 								<Typography
 									variant="subtitle1"
 									color="text.secondary"
@@ -98,32 +130,34 @@ export default function PrescriptionCard({ prescriptions, user }) {
 												40
 											)
 											doc.text("Age : " + user.age, 150, 40)
+											doc.text("Date : " + prescription.date, 20, 50)
+											
+
 											doc.text(
-												"Date : " + prescription.date,
+												"Prescribed by : Dr. " + prescription.doctor,
 												20,
-												50
+												60
 											)
-											doc.text(
-												"Medicine : " + prescription.medicine,
-												20,
-												70
-											)
-											console.log(prescription);
-											doc.text(
-												"Prescribed for : " + prescription.prescribedFor,
-												20,
-												80
-											)
-											doc.text(
-												"Dosage : " + prescription.dosage,
-												20,
-												90
-											)
-											doc.text(
-												"Prescribed by : " + prescription.doctor,
-												20,
-												100
-											)
+
+											prescription.medicine.map((medicine, i) => {
+												doc.text(""+(i+1)+") ", 20, 80 + i * 40)
+												doc.text(
+													"Medicine : " + medicine,
+													27,
+													80+i*40
+												)
+												doc.text(
+													"Prescribed for : " +
+														prescription.prescribedFor[i],
+													27,
+													90+i*40
+												)
+												doc.text(
+													"Dosage : " + prescription.dosage[i],
+													27,
+													100+i*40
+												)
+											})
 
 											doc.save(prescription.medicine + ".pdf")
 										}}
