@@ -12,6 +12,9 @@ import { useSelector } from "react-redux"
 import Swal from "sweetalert2"
 
 export default function DoctorRequest({ doctors, update, setUpdate }) {
+	React.useEffect(() => {
+		console.log(update);
+	}, [update])
 	const adminState = useSelector((storeState) => storeState.admin)
 	return (
 		<TableContainer component={Paper} sx={{ maxWidth: "80vw" }}>
@@ -89,7 +92,8 @@ export default function DoctorRequest({ doctors, update, setUpdate }) {
 											confirmButtonText: "Accept",
 											confirmButtonColor: "#339933",
 										})
-										if (con.isConfirmed) {
+										if (con.isConfirmed) { 	
+											setUpdate(!update)
 											await axios.put(
 												`/doctor/${row._id}`,
 												{ ...row, request: "false" },
@@ -99,7 +103,6 @@ export default function DoctorRequest({ doctors, update, setUpdate }) {
 													},
 												}
 											)
-											setUpdate(!update)
 										}
 									}}
 								>

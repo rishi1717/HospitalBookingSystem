@@ -58,7 +58,7 @@ const DoctorPrescriptions = ({ doctorId, token }) => {
 								}}
 							>
 								<TableCell align="center" component="th" scope="row">
-									{row.medicine}
+									{row.medicine[0]}
 								</TableCell>
 								<TableCell align="center">{row.date}</TableCell>
 								<TableCell align="center">{row.user}</TableCell>

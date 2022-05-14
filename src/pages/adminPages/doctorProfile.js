@@ -21,6 +21,7 @@ const DoctorProfile = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
 	const location = useLocation()
 	const doctor = location.state.doctor
+	console.log(doctor.active)
 	const [show, setShow] = useState("none")
 	const [active, setActive] = useState(doctor.active)
 	const [admin, setAdmin] = useState(doctor.admin)
@@ -259,17 +260,20 @@ const DoctorProfile = () => {
 								confirmButtonColor: "#B81C1C",
 							})
 							if (con.isConfirmed) {
-								console.log(doctor)
-								await axios.put(
-									`/doctor/${doctor._id}`,
-									{ ...doctor, active: false },
-									{
-										headers: {
-											"auth-token": adminState.token,
-										},
-									}
-								)
-								setActive(false)
+								try {
+									setActive(false)
+									await axios.put(
+										`/doctor/${doctor._id}`,
+										{ ...doctor, active: false },
+										{
+											headers: {
+												"auth-token": adminState.token,
+											},
+										}
+									)
+								} catch (err) {
+									console.log(err)
+								}
 							}
 						}}
 						style={{ textDecoration: "none" }}
@@ -294,6 +298,7 @@ const DoctorProfile = () => {
 								confirmButtonColor: "#609ACF",
 							})
 							if (con.isConfirmed) {
+								setActive(true)
 								await axios.put(
 									`/doctor/${doctor._id}`,
 									{ ...doctor, active: true },
@@ -303,7 +308,6 @@ const DoctorProfile = () => {
 										},
 									}
 								)
-								setActive(true)
 							}
 						}}
 						style={{ textDecoration: "none" }}
@@ -329,7 +333,7 @@ const DoctorProfile = () => {
 								confirmButtonColor: "#B81C1C",
 							})
 							if (con.isConfirmed) {
-								console.log(doctor)
+								setAdmin(false)
 								await axios.put(
 									`/doctor/${doctor._id}`,
 									{ ...doctor, admin: false },
@@ -339,7 +343,6 @@ const DoctorProfile = () => {
 										},
 									}
 								)
-								setAdmin(false)
 							}
 						}}
 						style={{ textDecoration: "none" }}
@@ -364,6 +367,7 @@ const DoctorProfile = () => {
 								confirmButtonColor: "#609ACF",
 							})
 							if (con.isConfirmed) {
+								setAdmin(true)
 								await axios.put(
 									`/doctor/${doctor._id}`,
 									{ ...doctor, admin: true },
@@ -373,7 +377,6 @@ const DoctorProfile = () => {
 										},
 									}
 								)
-								setAdmin(true)
 							}
 						}}
 						style={{ textDecoration: "none" }}

@@ -22,7 +22,7 @@ export default function AdminCard({ admin, state, setState }) {
 		>
 			<CardMedia
 				component="img"
-				sx={{ width: 151 }}
+				sx={{ width: 151,height:151 }}
 				image={admin.image}
 				alt="picture"
 			/>

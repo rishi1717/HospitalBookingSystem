@@ -139,7 +139,7 @@ export default function PrescriptionCard({ prescriptions, user }) {
 												60
 											)
 
-											prescription.medicine.map((medicine, i) => {
+											prescription.medicine.forEach((medicine, i) => {
 												doc.text(""+(i+1)+") ", 20, 80 + i * 40)
 												doc.text(
 													"Medicine : " + medicine,

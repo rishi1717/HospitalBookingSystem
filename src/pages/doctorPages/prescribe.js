@@ -92,17 +92,12 @@ const Prescribe = () => {
 			prescribedFor: "",
 		})
 	}
-	
-	useEffect(() => {
-		console.log(data)
-	},[data])
 
 	const onSubmit = async () => {
 		try {
 			const details = {
 				...data,
 			}
-			console.log(details)
 			await axios.post("/prescription", details, {
 				headers: {
 					"auth-token": docState.token,
@@ -277,7 +272,7 @@ const Prescribe = () => {
 					}}
 				>
 					<Grid container spacing={2}>
-						<Grid item xs={3}>
+						<Grid item xs={4}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
@@ -303,7 +298,7 @@ const Prescribe = () => {
 							</CardContent>
 						</Grid>
 
-						<Grid item xs={2}>
+						<Grid item xs={2.3}>
 							<CardContent>
 								<Typography
 									variant="subtitle1"
@@ -316,7 +311,7 @@ const Prescribe = () => {
 							</CardContent>
 						</Grid>
 
-						<Grid item xs={3}>
+						<Grid item xs={1.7}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
 								<Typography
 									variant="subtitle1"
