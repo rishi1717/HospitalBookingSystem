@@ -2,8 +2,6 @@ import * as React from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import Checkbox from "@mui/material/Checkbox"
 import Link from "@mui/material/Link"
 import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
@@ -50,6 +48,7 @@ export default function UserLogin() {
 			const resData = await axios.post("/user/login", data)
 			localStorage.setItem("userToken", resData.data.token)
 			localStorage.setItem("userId", resData.data.user._id)
+			localStorage.setItem("userImage", resData.data.user.image)
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
@@ -157,12 +156,6 @@ export default function UserLogin() {
 								<Typography sx={{ color: "red", m: 1 }}>
 									{error ? error : ""}
 								</Typography>
-								<FormControlLabel
-									control={
-										<Checkbox value="remember" color="primary" />
-									}
-									label="Remember me"
-								/>
 								<Button
 									type="submit"
 									fullWidth
@@ -172,13 +165,8 @@ export default function UserLogin() {
 									Sign In
 								</Button>
 								<Grid container>
-									<Grid item xs>
-										<Link href="#" variant="body2">
-											Forgot password?
-										</Link>
-									</Grid>
 									<Grid item>
-										<Link href="#" variant="body2">
+										<Link href="/register" variant="body2">
 											{"Don't have an account? Sign Up"}
 										</Link>
 									</Grid>

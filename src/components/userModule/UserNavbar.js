@@ -10,7 +10,6 @@ import Container from "@mui/material/Container"
 import Avatar from "@mui/material/Avatar"
 import MenuItem from "@mui/material/MenuItem"
 import Logo from "../../static/images/Logo.png"
-import UserPicture from "../../static/images/userPortrait.png"
 import { Link } from "react-router-dom"
 
 const linkStyle = {
@@ -154,7 +153,7 @@ const UserNavbar = () => {
 					<Box sx={{ flexGrow: 0 }}>
 						<Link to="/profile">
 							<IconButton sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src={UserPicture} />
+								<Avatar alt="Remy Sharp" src={localStorage.getItem("userImage") } />
 							</IconButton>
 						</Link>
 					</Box>

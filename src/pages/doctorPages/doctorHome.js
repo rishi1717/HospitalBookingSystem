@@ -4,7 +4,7 @@ import SelectionCard from "../../components/doctorModule/SelectionCard"
 import WelcomeCard from "../../components/doctorModule/WelcomeCard"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
 import { useSelector } from "react-redux"
-import Unauthorized from "./unauthorized"
+import {Navigate} from 'react-router-dom'
 
 const DoctorHome = () => {
 	const docState = useSelector((storeState) => storeState.doctor)
@@ -40,7 +40,9 @@ const DoctorHome = () => {
 			</>
 		)
 	} else {
-		return <Unauthorized />
+		return (
+			<Navigate to="/doctor/login"/>
+		)
 	}
 }
 
