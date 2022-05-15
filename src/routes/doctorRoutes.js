@@ -68,7 +68,7 @@ export default function doctorRoutes() {
 				}
 			/>
 			<Route
-				path="/doctor/schedule"
+				path="/doctor/doctors"
 				element={
 					<React.Suspense>
 						<ViewDoctors />

@@ -112,13 +112,13 @@ function DoctorLayout(props) {
 					button
 					sx={{ marginTop: 2 }}
 					onClick={() => {
-						navigate("../doctor/schedule")
+						navigate("../doctor/doctors")
 					}}
 				>
 					<ListItemIcon sx={{ color: "#1976D2" }}>
 						<DateRangeRoundedIcon />
 					</ListItemIcon>
-					<ListItemText primary="Schedule" />
+					<ListItemText primary="Doctors" />
 				</ListItem>
 				<ListItem
 					button

@@ -33,7 +33,7 @@ const DoctorHome = () => {
 							link="/doctor/appointments"
 						/>
 						<SelectionCard value="Patients" link="/doctor/patients" />
-						<SelectionCard value="Schedule" link="/doctor/schedule" />
+						<SelectionCard value="Doctors" link="/doctor/doctors" />
 						<SelectionCard value="Profile" link="/doctor/profile" />
 					</Grid>
 				</DoctorsLayout>
