@@ -81,7 +81,7 @@ export default function DoctorCardDoc(props) {
 				}}
 			>
 				<Link
-					to="/doctorprofile"
+					to="/doctor/doctorprofile"
 					state={{ doctor: props.doctor }}
 					style={{ textDecoration: "none" }}
 				>
