@@ -41,18 +41,30 @@ const Appointments = () => {
 							color="primary"
 							onClick={async (event) => {
 								try {
-									await axios.put(
-										`/appointment/status/${cellValues.row._id}`,
-										{
-											status: "Complete",
-										},
-										{
-											headers: {
-												"auth-token": adminState.token,
+									const con = await Swal.fire({
+										title: "Are you sure?",
+										text: "Appointment will be marked as complete",
+										background: "#eaeaea",
+										color: "#595959",
+										showCancelButton: true,
+										cancelButtonColor: "#B81C1C",
+										confirmButtonText: "Mark as complete",
+										confirmButtonColor: "#609ACF",
+									})
+									if (con.isConfirmed) {
+										await axios.put(
+											`/appointment/status/${cellValues.row._id}`,
+											{
+												status: "Complete",
 											},
-										}
-									)
-									setUpdate(!update)
+											{
+												headers: {
+													"auth-token": adminState.token,
+												},
+											}
+										)
+										setUpdate(!update)
+									}
 								} catch (err) {
 									console.log(err.message)
 								}
@@ -80,18 +92,30 @@ const Appointments = () => {
 							color="primary"
 							onClick={async (event) => {
 								try {
-									await axios.put(
-										`/appointment/status/${cellValues.row._id}`,
-										{
-											status: "Canceled",
-										},
-										{
-											headers: {
-												"auth-token": adminState.token,
+									const con = await Swal.fire({
+										title: "Are you sure?",
+										text: "Appointment will be cancelled",
+										background: "#eaeaea",
+										color: "#595959",
+										showCancelButton: true,
+										cancelButtonColor: "#B81C1C",
+										confirmButtonText: "Mark as Cancelled",
+										confirmButtonColor: "#609ACF",
+									})
+									if (con.isConfirmed) {
+										await axios.put(
+											`/appointment/status/${cellValues.row._id}`,
+											{
+												status: "Canceled",
 											},
-										}
-									)
-									setUpdate(!update)
+											{
+												headers: {
+													"auth-token": adminState.token,
+												},
+											}
+										)
+										setUpdate(!update)
+									}
 								} catch (err) {
 									console.log(err.message)
 								}

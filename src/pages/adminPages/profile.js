@@ -4,8 +4,7 @@ import { Box, Grid, TextField, Modal, Container } from "@mui/material"
 import axios from "../../axios"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { MediumButton, SmallButton } from "../../components/Buttons"
+import { SmallButton } from "../../components/Buttons"
 import AdminLayout from "../../layouts/AdminLayout"
 import AdminCard from "../../components/adminModule/adminCard"
 import Swal from "sweetalert2"
@@ -38,18 +37,31 @@ const Profile = () => {
 	const [admins, setAdmins] = useState([])
 	useEffect(() => {
 		;(async () => {
-			const res = await axios.get(`/admin`, {
-				headers: {
-					"auth-token": adminState.token,
-				},
-			})
-			setAdmin(res.data.admin)
-			const res2 = await axios.get("/admin/admins", {
-				headers: {
-					"auth-token": adminState.token,
-				},
-			})
-			setAdmins(res2.data.admins)
+			try {
+				const res = await axios.get(`/admin`, {
+					headers: {
+						"auth-token": adminState.token,
+					},
+				})
+				setAdmin(res.data.admin)
+				const res2 = await axios.get("/admin/admins", {
+					headers: {
+						"auth-token": adminState.token,
+					},
+				})
+				setAdmins(res2.data.admins)
+			} catch (err) {
+				try {
+					const res = await axios.get(`/doctor/${adminState.id}`, {
+						headers: {
+							"auth-token": adminState.token,
+						},
+					})
+					setAdmin(res.data.doctor)
+				} catch (err) {
+					console.log(err)
+				}
+			}
 		})()
 	}, [state])
 
@@ -275,15 +287,6 @@ const Profile = () => {
 								</Typography>
 							</CardContent>
 						</Grid>
-						<div style={{ marginLeft: "auto", marginTop: 2 }}>
-							<Link
-								style={{ textDecoration: "none" }}
-								state={{ admin: admin }}
-								to="/admin/Profile/edit"
-							>
-								<MediumButton value="Edit" color="#595959" />
-							</Link>
-						</div>
 					</Grid>
 				</Card>
 			) : (

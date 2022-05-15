@@ -41,9 +41,9 @@ export default function DoctorPrescritption({ prescriptions }) {
 
 						<Grid item xs={12} sm={3.8}>
 							<CardContent sx={{ flex: "1 0 auto" }}>
-								{prescription.dosage.map((dosage) => (
+								{prescription.dosage.map((dosage,i) => (
 									<Typography
-										key={dosage}
+										key={i}
 										variant="subtitle1"
 										color="text.secondary"
 										component="div"
