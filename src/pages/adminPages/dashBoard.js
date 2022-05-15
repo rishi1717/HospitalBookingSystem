@@ -7,240 +7,244 @@ import DoughnutChart from "../../components/adminModule/doughnut"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
 import WelcomeCard from "../../components/adminModule/welcomeCard"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import LineGraph from "../../components/adminModule/lineChart"
 
 const DashBoard = () => {
 	const navigate = useNavigate()
 	const adminState = useSelector((storeState) => storeState.admin)
-	const [doctor, setDoctor] = useState({})
-	const [user, setUser] = useState({})
-	useEffect(() => {
-		;(async () => {
-			const response = await axios.get("/chart/card", {
-				headers: {
-					"auth-token": adminState.token,
-				},
-			})
-			setDoctor(response.data.doctor)
-			setUser(response.data.user)
-		})()
-	}, [])
-	return (
-		<AdminLayout>
-			<Typography
-				sx={{
-					fontSize: {
-						xs: "1.2rem",
-						sm: "1.4rem",
+	if (adminState.token) {
+		const [doctor, setDoctor] = useState({})
+		const [user, setUser] = useState({})
+		useEffect(() => {
+			;(async () => {
+				const response = await axios.get("/chart/card", {
+					headers: {
+						"auth-token": adminState.token,
 					},
-					fontFamily: "sans-serif",
-					color: "#1976D2",
-				}}
-				component="p"
-			>
-				Dashboard
-			</Typography>
-			<WelcomeCard />
-			<Grid container spacing={2}>
-				<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
-					<Card
-						elevation={5}
-						sx={{
-							backgroundColor: "#eaeaea",
-							"&:hover": {
-								transform: "scale(1.03)",
-							},
-						}}
-					>
-						<Grid
-							container
-							spacing={2}
+				})
+				setDoctor(response.data.doctor)
+				setUser(response.data.user)
+			})()
+		}, [])
+		return (
+			<AdminLayout>
+				<Typography
+					sx={{
+						fontSize: {
+							xs: "1.2rem",
+							sm: "1.4rem",
+						},
+						fontFamily: "sans-serif",
+						color: "#1976D2",
+					}}
+					component="p"
+				>
+					Dashboard
+				</Typography>
+				<WelcomeCard />
+				<Grid container spacing={2}>
+					<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
+						<Card
+							elevation={5}
 							sx={{
-								p: 2,
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
+								backgroundColor: "#eaeaea",
+								"&:hover": {
+									transform: "scale(1.03)",
+								},
+							}}
+						>
+							<Grid
+								container
+								spacing={2}
+								sx={{
+									p: 2,
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+								onClick={() => {
+									navigate("/admin/doctors")
+								}}
+							>
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								>
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.4rem" }}
+									>
+										Doctors
+									</Typography>
+									<Typography sx={{ color: "#609acf", pt: 1 }}>
+										{doctor[0]}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								>
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.2rem" }}
+									>
+										Active
+									</Typography>
+									<Typography sx={{ color: "#339933", pt: 1 }}>
+										{doctor[1]}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
+								>
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.2rem" }}
+									>
+										Inactive
+									</Typography>
+									<Typography sx={{ color: "#990000", pt: 1 }}>
+										{doctor[2]}
+									</Typography>
+								</Grid>
+							</Grid>
+						</Card>
+					</Grid>
+					<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
+						<Card
+							elevation={5}
+							sx={{
+								backgroundColor: "#eaeaea",
+								"&:hover": {
+									transform: "scale(1.03)",
+								},
 							}}
 							onClick={() => {
-								navigate("/admin/doctors")
+								navigate("/admin/patients")
 							}}
 						>
 							<Grid
-								item
-								xs={4}
+								container
+								spacing={2}
 								sx={{
 									p: 2,
 									display: "flex",
-									flexDirection: "column",
 									justifyContent: "center",
 									alignItems: "center",
 								}}
 							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.4rem" }}
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
 								>
-									Doctors
-								</Typography>
-								<Typography sx={{ color: "#609acf", pt: 1 }}>
-									{doctor[0]}
-								</Typography>
-							</Grid>
-							<Grid
-								item
-								xs={4}
-								sx={{
-									p: 2,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.2rem" }}
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.4rem" }}
+									>
+										Users
+									</Typography>
+									<Typography sx={{ color: "#609acf", pt: 1 }}>
+										{user[0]}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
 								>
-									Active
-								</Typography>
-								<Typography sx={{ color: "#339933", pt: 1 }}>
-									{doctor[1]}
-								</Typography>
-							</Grid>
-							<Grid
-								item
-								xs={4}
-								sx={{
-									p: 2,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.2rem" }}
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.2rem" }}
+									>
+										Active
+									</Typography>
+									<Typography sx={{ color: "#339933", pt: 1 }}>
+										{user[1]}
+									</Typography>
+								</Grid>
+								<Grid
+									item
+									xs={4}
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
 								>
-									Inactive
-								</Typography>
-								<Typography sx={{ color: "#990000", pt: 1 }}>
-									{doctor[2]}
-								</Typography>
+									<Typography
+										sx={{ color: "#595959", fontSize: "1.2rem" }}
+									>
+										Blocked
+									</Typography>
+									<Typography sx={{ color: "#990000", pt: 1 }}>
+										{user[2]}
+									</Typography>
+								</Grid>
 							</Grid>
-						</Grid>
-					</Card>
+						</Card>
+					</Grid>
 				</Grid>
-				<Grid item xs={12} sm={6} sx={{ mt: 5 }}>
-					<Card
-						elevation={5}
-						sx={{
-							backgroundColor: "#eaeaea",
-							"&:hover": {
-								transform: "scale(1.03)",
-							},
-						}}
-						onClick={() => {
-							navigate("/admin/patients")
-						}}
-					>
-						<Grid
-							container
-							spacing={2}
-							sx={{
-								p: 2,
-								display: "flex",
-								justifyContent: "center",
-								alignItems: "center",
-							}}
-						>
-							<Grid
-								item
-								xs={4}
-								sx={{
-									p: 2,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.4rem" }}
-								>
-									Users
-								</Typography>
-								<Typography sx={{ color: "#609acf", pt: 1 }}>
-									{user[0]}
-								</Typography>
-							</Grid>
-							<Grid
-								item
-								xs={4}
-								sx={{
-									p: 2,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.2rem" }}
-								>
-									Active
-								</Typography>
-								<Typography sx={{ color: "#339933", pt: 1 }}>
-									{user[1]}
-								</Typography>
-							</Grid>
-							<Grid
-								item
-								xs={4}
-								sx={{
-									p: 2,
-									display: "flex",
-									flexDirection: "column",
-									justifyContent: "center",
-									alignItems: "center",
-								}}
-							>
-								<Typography
-									sx={{ color: "#595959", fontSize: "1.2rem" }}
-								>
-									Blocked
-								</Typography>
-								<Typography sx={{ color: "#990000", pt: 1 }}>
-									{user[2]}
-								</Typography>
-							</Grid>
-						</Grid>
-					</Card>
-				</Grid>
-			</Grid>
-			<Grid sx={{ mt: 0 }} container spacing={4}>
-				<Grid item xs={11} sm={8}>
-					<Box>
-						<BarGraph />
-					</Box>
-				</Grid>
-				<Grid item xs={10} sm={4}>
-					<Box>
-						<PieChart />
-					</Box>
-				</Grid>
+				<Grid sx={{ mt: 0 }} container spacing={4}>
+					<Grid item xs={11} sm={8}>
+						<Box>
+							<BarGraph />
+						</Box>
+					</Grid>
+					<Grid item xs={10} sm={4}>
+						<Box>
+							<PieChart />
+						</Box>
+					</Grid>
 
-				<Grid item xs={11} sm={8}>
-					<Box>
-						<LineGraph />
-					</Box>
+					<Grid item xs={11} sm={8}>
+						<Box>
+							<LineGraph />
+						</Box>
+					</Grid>
+					<Grid item xs={10} sm={4}>
+						<Box>
+							<DoughnutChart />
+						</Box>
+					</Grid>
 				</Grid>
-				<Grid item xs={10} sm={4}>
-					<Box>
-						<DoughnutChart />
-					</Box>
-				</Grid>
-			</Grid>
-		</AdminLayout>
-	)
+			</AdminLayout>
+		)
+	} else {
+		return <Navigate to="/admin/login" />
+	}
 }
 
 export default DashBoard

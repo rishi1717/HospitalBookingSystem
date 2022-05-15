@@ -8,6 +8,7 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded"
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded"
 import AssignmentTurnedInRoundedIcon from "@mui/icons-material/AssignmentTurnedInRounded"
 import Swal from "sweetalert2"
+import { Navigate } from "react-router-dom"
 
 const deleteIcon = (
 	<DeleteRoundedIcon sx={{ fontSize: { xs: "0.8rem", sm: "1rem" } }} />
@@ -23,7 +24,8 @@ const completeIcon = (
 
 const Appointments = () => {
 	const adminState = useSelector((storeState) => storeState.admin)
-	const [update, setUpdate] = useState(true)
+	if(adminState.token)
+	{const [update, setUpdate] = useState(true)
 	const columns = [
 		{ field: "user", headerName: "Patient", minWidth: 100, flex: 1 },
 		{ field: "status", headerName: "Status", minWidth: 100, flex: 1 },
@@ -230,7 +232,10 @@ const Appointments = () => {
 				</div>
 			</Container>
 		</AdminLayout>
-	)
+	)}
+	else {
+		return <Navigate to="/admin/login" />
+	}
 }
 
 export default Appointments

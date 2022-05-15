@@ -32,105 +32,102 @@ const Toast = Swal.mixin({
 })
 
 function EditUser() {
-	const navigate = useNavigate()
-	const [selectedFile, setSelectedFile] = useState()
-	const [preview, setPreview] = useState()
-	React.useEffect(() => {
-		setData({ ...data, image: selectedFile })
-		if (!selectedFile) {
-			setPreview(undefined)
-			return
+	if (localStorage.userToken) {
+		const navigate = useNavigate()
+		const [selectedFile, setSelectedFile] = useState()
+		const [preview, setPreview] = useState()
+		React.useEffect(() => {
+			setData({ ...data, image: selectedFile })
+			if (!selectedFile) {
+				setPreview(undefined)
+				return
+			}
+			const objectUrl = URL.createObjectURL(selectedFile)
+			setPreview(objectUrl)
+
+			return () => URL.revokeObjectURL(objectUrl)
+		}, [selectedFile])
+
+		const onSelectFile = (e) => {
+			if (!e.target.files || e.target.files.length === 0) {
+				setSelectedFile(undefined)
+				return
+			}
+			setSelectedFile(e.target.files[0])
 		}
-		const objectUrl = URL.createObjectURL(selectedFile)
-		setPreview(objectUrl)
 
-		return () => URL.revokeObjectURL(objectUrl)
-	}, [selectedFile])
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
+		} = useForm()
+		const [error, setError] = React.useState()
 
-	const onSelectFile = (e) => {
-		if (!e.target.files || e.target.files.length === 0) {
-			setSelectedFile(undefined)
-			return
-		}
-		setSelectedFile(e.target.files[0])
-	}
-
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm()
-	const [error, setError] = React.useState()
-
-	const location = useLocation()
-	const { user } = location.state
-	const [data, setData] = React.useState({
-		firstName: user.firstName,
-		secondName: user.secondName,
-		age: user.age,
-		gender: user.gender,
-		email: user.email,
-		blood: user.blood,
-		phone: user.phone,
-	})
-	const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value })
-	}
-
-	const handleChangeSelect = (event) => {
-		setData({ ...data, [event.target.name]: event.target.value })
-	}
-
-
-	const onSubmit = async () => {
-		const newForm = new FormData()
-		newForm.append("firstName", data.firstName)
-		newForm.append("secondName", data.secondName)
-		newForm.append("age", data.age)
-		newForm.append("gender", data.gender)
-		newForm.append("email", data.email)
-		newForm.append("blood", data.blood)
-		newForm.append("phone", data.phone)
-		if (selectedFile) {
-			newForm.append("image", selectedFile)
-		}
-		else{
-			newForm.append("image", user.image)
-		}
-		
-
-		const con = await Swal.fire({
-			title: "Are you sure?",
-			text: "User details will Updated!",
-			background: "#eaeaea",
-			color: "#595959",
-			showCancelButton: true,
-			cancelButtonColor: "#B81C1C",
-			confirmButtonText: "Update",
-			confirmButtonColor: "#609ACF",
+		const location = useLocation()
+		const { user } = location.state
+		const [data, setData] = React.useState({
+			firstName: user.firstName,
+			secondName: user.secondName,
+			age: user.age,
+			gender: user.gender,
+			email: user.email,
+			blood: user.blood,
+			phone: user.phone,
 		})
-		if (con.isConfirmed) {
-			try {
-				await axios.put(`/user/${user._id}`, newForm, {
-					headers: { "auth-token": localStorage.userToken },
-				})
-				navigate("/profile")
-				Toast.fire({
-					position: "bottom-right",
-					icon: "success",
-					title: "user updated",
-					showConfirmButton: false,
-					timer: 3000,
-				})
-			} catch (err) {
-				if (err.response) {
-					setError(err.response.data.message)
+		const handleChange = ({ currentTarget: input }) => {
+			setData({ ...data, [input.name]: input.value })
+		}
+
+		const handleChangeSelect = (event) => {
+			setData({ ...data, [event.target.name]: event.target.value })
+		}
+
+		const onSubmit = async () => {
+			const newForm = new FormData()
+			newForm.append("firstName", data.firstName)
+			newForm.append("secondName", data.secondName)
+			newForm.append("age", data.age)
+			newForm.append("gender", data.gender)
+			newForm.append("email", data.email)
+			newForm.append("blood", data.blood)
+			newForm.append("phone", data.phone)
+			if (selectedFile) {
+				newForm.append("image", selectedFile)
+			} else {
+				newForm.append("image", user.image)
+			}
+
+			const con = await Swal.fire({
+				title: "Are you sure?",
+				text: "User details will Updated!",
+				background: "#eaeaea",
+				color: "#595959",
+				showCancelButton: true,
+				cancelButtonColor: "#B81C1C",
+				confirmButtonText: "Update",
+				confirmButtonColor: "#609ACF",
+			})
+			if (con.isConfirmed) {
+				try {
+					await axios.put(`/user/${user._id}`, newForm, {
+						headers: { "auth-token": localStorage.userToken },
+					})
+					navigate("/profile")
+					Toast.fire({
+						position: "bottom-right",
+						icon: "success",
+						title: "user updated",
+						showConfirmButton: false,
+						timer: 3000,
+					})
+				} catch (err) {
+					if (err.response) {
+						setError(err.response.data.message)
+					}
 				}
 			}
 		}
-	}	
 
-	if (localStorage.userToken) {
 		return (
 			<FullLayout>
 				<Grid

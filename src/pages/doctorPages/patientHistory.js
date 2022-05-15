@@ -8,19 +8,23 @@ import { useLocation } from "react-router-dom"
 import Unauthorized from "./unauthorized"
 
 const PatientHistory = () => {
-	const location = useLocation()
-	const { user } = location.state
-	const [appointments, setAppointments] = useState([])
 	const docState = useSelector((storeState) => storeState.doctor)
-	useEffect(() => {
-		;(async function() {
-			const appointmentData = await axios.get(`/appointment/history/${user._id}/${docState.id}`, {
-				headers: { "auth-token": docState.token },
-			})
-			setAppointments(appointmentData.data.appointment)
-		})()
-	}, [])
 	if (docState.token) {
+		const location = useLocation()
+		const { user } = location.state
+		const [appointments, setAppointments] = useState([])
+		useEffect(() => {
+			;(async function() {
+				const appointmentData = await axios.get(
+					`/appointment/history/${user._id}/${docState.id}`,
+					{
+						headers: { "auth-token": docState.token },
+					}
+				)
+				setAppointments(appointmentData.data.appointment)
+			})()
+		}, [])
+
 		return (
 			<DoctorsLayout>
 				<Typography

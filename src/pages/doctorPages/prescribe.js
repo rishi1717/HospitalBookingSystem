@@ -28,95 +28,100 @@ const Toast = Swal.mixin({
 })
 
 const Prescribe = () => {
-	const location = useLocation()
-	const { user } = location.state
 	const docState = useSelector((storeState) => storeState.doctor)
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm()
 
-	const [data, setData] = useState({
-		doctorId: docState.id,
-		userId: user._id,
-		user: user.firstName,
-		doctor: docState.name,
-		medicine: [],
-		dosage: [],
-		prescribedFor: [],
-		date: new Date(),
-	})
+	if (docState.token) {
+		const location = useLocation()
+		const { user } = location.state
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
+		} = useForm()
 
-	const [medicine, setMedicine] = useState({
-		medicine: "",
-		dosage: "",
-		prescribedFor: "",
-	})
-
-	const [prescriptions, setPrescriptions] = useState([])
-
-	useEffect(() => {
-		;(async function() {
-			const userData = await axios.get(`/prescription/${user._id}`, {
-				headers: {
-					"auth-token": docState.token,
-				},
-			})
-			setPrescriptions(userData.data.prescription)
-		})()
-	}, [])
-
-	const handleChange = ({ currentTarget: input }) => {
-		const { name, value } = input
-		setMedicine({ ...medicine, [name]: value })
-	}
-
-	const addToList = () => {
-		if (medicine.medicine === "" || medicine.dosage === "" || medicine.prescribedFor === "") {
-			Toast.fire({
-				icon: "error",
-				title: "Please fill all fields",
-			})
-			return
-		}
-		setData({
-			...data,
-			medicine: [...data.medicine, medicine.medicine],
-			dosage: [...data.dosage, medicine.dosage],
-			prescribedFor: [...data.prescribedFor, medicine.prescribedFor],
+		const [data, setData] = useState({
+			doctorId: docState.id,
+			userId: user._id,
+			user: user.firstName,
+			doctor: docState.name,
+			medicine: [],
+			dosage: [],
+			prescribedFor: [],
+			date: new Date(),
 		})
-		setMedicine({
+
+		const [medicine, setMedicine] = useState({
 			medicine: "",
 			dosage: "",
 			prescribedFor: "",
 		})
-	}
 
-	const onSubmit = async () => {
-		try {
-			const details = {
-				...data,
-			}
-			await axios.post("/prescription", details, {
-				headers: {
-					"auth-token": docState.token,
-				},
-			})
-			Toast.fire({
-				position: "bottom-right",
-				icon: "success",
-				title: "Prescription Added",
-				showConfirmButton: false,
-				timer: 3000,
-			})
-			setData({ ...data, medicine: [], dosage: [], prescribedFor: [] })
-		} catch (err) {
-			console.log(err.message)
+		const [prescriptions, setPrescriptions] = useState([])
+
+		useEffect(() => {
+			;(async function() {
+				const userData = await axios.get(`/prescription/${user._id}`, {
+					headers: {
+						"auth-token": docState.token,
+					},
+				})
+				setPrescriptions(userData.data.prescription)
+			})()
+		}, [])
+
+		const handleChange = ({ currentTarget: input }) => {
+			const { name, value } = input
+			setMedicine({ ...medicine, [name]: value })
 		}
-	}
 
-	if (docState.token) {
+		const addToList = () => {
+			if (
+				medicine.medicine === "" ||
+				medicine.dosage === "" ||
+				medicine.prescribedFor === ""
+			) {
+				Toast.fire({
+					icon: "error",
+					title: "Please fill all fields",
+				})
+				return
+			}
+			setData({
+				...data,
+				medicine: [...data.medicine, medicine.medicine],
+				dosage: [...data.dosage, medicine.dosage],
+				prescribedFor: [...data.prescribedFor, medicine.prescribedFor],
+			})
+			setMedicine({
+				medicine: "",
+				dosage: "",
+				prescribedFor: "",
+			})
+		}
+
+		const onSubmit = async () => {
+			try {
+				const details = {
+					...data,
+				}
+				await axios.post("/prescription", details, {
+					headers: {
+						"auth-token": docState.token,
+					},
+				})
+				Toast.fire({
+					position: "bottom-right",
+					icon: "success",
+					title: "Prescription Added",
+					showConfirmButton: false,
+					timer: 3000,
+				})
+				setData({ ...data, medicine: [], dosage: [], prescribedFor: [] })
+			} catch (err) {
+				console.log(err.message)
+			}
+		}
+
 		return (
 			<DoctorsLayout>
 				<Typography
@@ -234,14 +239,19 @@ const Prescribe = () => {
 										alignItems: "center",
 									}}
 								>
-									<Button type="submit" sx={{
-										backgroundColor: "#1976D2",
-										color: "white",
-										":hover": {
-											backgroundColor: "white",
-											color: "#1976D2",
-										}
-									}}>Prescribe</Button>
+									<Button
+										type="submit"
+										sx={{
+											backgroundColor: "#1976D2",
+											color: "white",
+											":hover": {
+												backgroundColor: "white",
+												color: "#1976D2",
+											},
+										}}
+									>
+										Prescribe
+									</Button>
 								</Grid>
 							</>
 						)}
