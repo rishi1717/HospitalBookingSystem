@@ -2,7 +2,6 @@ import * as React from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import Link from "@mui/material/Link"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
@@ -171,13 +170,6 @@ export default function Login() {
 								>
 									Sign In
 								</Button>
-								<Grid container>
-									<Grid item xs>
-										<Link href="#" variant="body2">
-											Forgot password?
-										</Link>
-									</Grid>
-								</Grid>
 							</Box>
 						</Box>
 					</Grid>
