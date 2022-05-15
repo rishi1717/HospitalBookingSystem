@@ -21,6 +21,7 @@ import {
 	addDoctorToken,
 	addDoctorId,
 	addDoctorName,
+	addDoctorImage,
 } from "../../redux/doctorSlice"
 import DocNav from "../../components/doctorModule/docNav.js"
 
@@ -59,6 +60,7 @@ export default function DoctorLogin() {
 			dispatch(addDoctorToken(resData.data.token))
 			dispatch(addDoctorId(resData.data.doctorId))
 			dispatch(addDoctorName(resData.data.doctorName))
+			dispatch(addDoctorImage(resData.data.image))
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",

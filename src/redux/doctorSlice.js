@@ -4,6 +4,7 @@ const initialState = {
 	token: "",
 	id: "",
 	name: "",
+	image: "",
 }
 
 export const doctorSlice = createSlice({
@@ -19,6 +20,9 @@ export const doctorSlice = createSlice({
 		addDoctorName: (state, action) => {
 			state.name = action.payload
 		},
+		addDoctorImage: (state, action) => {
+			state.image = action.payload
+		},
 
 		removeDoctorToken: (state) => {
 			state.token = ""
@@ -28,6 +32,9 @@ export const doctorSlice = createSlice({
 		},
 		removeDoctorName: (state) => {
 			state.name = ""
+		},
+		removeDoctorImage: (state) => {
+			state.image = ""
 		},
 	},
 })
@@ -39,6 +46,8 @@ const {
 	removeDoctorId,
 	addDoctorName,
 	removeDoctorName,
+	addDoctorImage,
+	removeDoctorImage,
 } = doctorSlice.actions
 
 export default doctorSlice.reducer
@@ -49,4 +58,6 @@ export {
 	removeDoctorId,
 	addDoctorName,
 	removeDoctorName,
+	addDoctorImage,
+	removeDoctorImage,
 }

@@ -3,13 +3,13 @@ import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
-import Image from "../../static/images/doctorPortrait.webp"
 import moment from "moment"
 import { Container, Grid } from "@mui/material"
 import { useSelector } from "react-redux"
 
 const WelcomeCard = () => {
 	const docName = useSelector((storeState) => storeState.doctor.name)
+	const docImage = useSelector((storeState) => storeState.doctor.image)
 	const [time, setTime] = useState(moment().format("h:mm a"))
 	const [date, setDate] = useState(moment().format("MMMM Do"))
 	const [day, setDay] = useState(moment().format("dddd"))
@@ -103,8 +103,8 @@ const WelcomeCard = () => {
 					>
 						<CardMedia
 							component="img"
-							sx={{ width: 120, borderRadius: "100%", m: 1 }}
-							image={Image}
+							sx={{ width: 120,height:120, borderRadius: "100%", m: 1 }}
+							image={docImage}
 							alt="picture"
 						/>
 					</Grid>

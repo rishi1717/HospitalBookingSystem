@@ -26,6 +26,7 @@ import {
 	removeDoctorId,
 	removeDoctorToken,
 	removeDoctorName,
+	removeDoctorImage,
 } from "../redux/doctorSlice"
 
 const linkStyle = {
@@ -150,6 +151,7 @@ function DoctorLayout(props) {
 						dispatch(removeDoctorToken())
 						dispatch(removeDoctorId())
 						dispatch(removeDoctorName())
+						dispatch(removeDoctorImage())
 						navigate("/doctor/login")
 					}
 				}}
