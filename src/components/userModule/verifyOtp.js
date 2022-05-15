@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
@@ -9,27 +9,71 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import { useForm } from "react-hook-form"
 import axios from "../../axios.js"
+import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
+import { SmallButton } from "../Buttons.js"
 
-const VerifyOtp = () => {
+const Toast = Swal.mixin({
+	background: "#1E1E1E",
+	color: "white",
+	toast: true,
+	position: "top-end",
+	showConfirmButton: false,
+	timerProgressBar: true,
+})
+
+const VerifyOtp = ({ phone, setOtp, otpData }) => {
+	const [counter, setCounter] = React.useState(30)
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCounter(counter - 1)
+		}, 1000)
+		if (counter < 1) {
+			clearInterval(interval)
+		}
+
+		return () => clearInterval(interval)
+	}, [counter])
+
+	const navigate = useNavigate()
 	const [error, setError] = React.useState()
+
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm()
 
 	const [data, setData] = React.useState({
 		otpVerify: "",
+		phone: phone,
 	})
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
+		reset()
 	}
 
 	const onSubmit = async () => {
 		try {
 			const resData = await axios.post("/user/otpverify", data)
-			console.log(resData.data)
+			if (resData.status === 200) {
+				localStorage.setItem("userToken", resData.data.token)
+				localStorage.setItem("userId", resData.data.user._id)
+				localStorage.setItem("userImage", resData.data.user.image)
+				Toast.fire({
+					position: "bottom-right",
+					icon: "success",
+					title: "user Logged in",
+					showConfirmButton: false,
+					timer: 3000,
+				})
+				navigate("/")
+			} else {
+				setError("Incorrect OTP")
+			}
 		} catch (err) {
 			if (err.response) {
 				setError(err.response.data.message)
@@ -86,7 +130,7 @@ const VerifyOtp = () => {
 						autoFocus
 						onChange={handleChange}
 						value={data.otpVerify}
-						error={errors.otpVerify}
+						error={errors.otpVerify ? true : false}
 						helperText={
 							errors.otpVerify ? errors.otpVerify.message : null
 						}
@@ -102,6 +146,35 @@ const VerifyOtp = () => {
 					>
 						Verify OTP
 					</Button>
+					<Button
+						onClick={() => {
+							setOtp(false)
+						}}
+						fullWidth
+						sx={{ mb: 4 }}
+					>
+						Sign In With Email and password
+					</Button>
+					{counter > 0 ? (
+						<div>Resend OTP in {counter} sec</div>
+					) : (
+						<div
+							onClick={async () => {
+								try {
+									await axios.post("/user/otplogin", otpData)
+									setCounter(30)
+								} catch (err) {
+									console.log(err.message)
+								}
+							}}
+						>
+							<SmallButton
+								value="Resend OTP"
+								text="#609acf"
+								color="#eaeaea"
+							/>
+						</div>
+					)}
 				</Box>
 			</Box>
 		</Grid>

@@ -2,7 +2,6 @@ import React from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import Link from "@mui/material/Link"
 import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
@@ -11,6 +10,7 @@ import Typography from "@mui/material/Typography"
 import { useForm } from "react-hook-form"
 import axios from "../../axios.js"
 import VerifyOtp from "./verifyOtp.js"
+import { Link } from "react-router-dom"
 
 const OtpSignin = ({ setOtp }) => {
 	const [error, setError] = React.useState()
@@ -31,8 +31,7 @@ const OtpSignin = ({ setOtp }) => {
 
 	const onSubmit = async () => {
 		try {
-			const resData = await axios.post("/user/otplogin", data)
-			console.log(resData.data)
+			await axios.post("/user/otplogin", data)
 			setSendOtp(true)
 		} catch (err) {
 			if (err.response) {
@@ -91,7 +90,7 @@ const OtpSignin = ({ setOtp }) => {
 							autoFocus
 							onChange={handleChange}
 							value={data.phone}
-							error={errors.phone}
+							error={errors.phone ? true : false}
 							helperText={errors.phone ? errors.phone.message : null}
 						/>
 						<Typography sx={{ color: "red", m: 1 }}>
@@ -116,7 +115,10 @@ const OtpSignin = ({ setOtp }) => {
 						</Button>
 						<Grid container>
 							<Grid item>
-								<Link href="/register" variant="body2">
+								<Link
+									to="/register"
+									style={{ textDecoration: "none", color: "#609acf" }}
+								>
 									{"Don't have an account? Sign Up"}
 								</Link>
 							</Grid>
@@ -125,11 +127,9 @@ const OtpSignin = ({ setOtp }) => {
 				</Box>
 			</Grid>
 		)
-	}else{
-        return (
-				<VerifyOtp />
-			)
-    }
+	} else {
+		return <VerifyOtp setOtp={setOtp} otpData={data} phone={data.phone} />
+	}
 }
 
 export default OtpSignin

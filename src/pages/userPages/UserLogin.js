@@ -2,7 +2,6 @@ import * as React from "react"
 import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import Link from "@mui/material/Link"
 import Paper from "@mui/material/Paper"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
@@ -11,7 +10,7 @@ import Typography from "@mui/material/Typography"
 import image from "../../static/images/hospital.webp"
 import { Container } from "@mui/material"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../../layouts/FullLayout"
@@ -133,7 +132,7 @@ export default function UserLogin() {
 										autoFocus
 										onChange={handleChange}
 										value={data.email}
-										error={errors.email}
+										error={errors.email ? true : false}
 										helperText={
 											errors.email ? errors.email.message : null
 										}
@@ -151,7 +150,7 @@ export default function UserLogin() {
 										id="password"
 										onChange={handleChange}
 										value={data.password}
-										error={errors.password}
+										error={errors.password ? true : false}
 										helperText={
 											errors.password
 												? errors.password.message
@@ -180,7 +179,7 @@ export default function UserLogin() {
 									</Button>
 									<Grid container>
 										<Grid item>
-											<Link href="/register" variant="body2">
+											<Link to="/register" style={{textDecoration:'none', color:'#609acf'}}>
 												{"Don't have an account? Sign Up"}
 											</Link>
 										</Grid>

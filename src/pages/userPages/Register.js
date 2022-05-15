@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import Link from "@mui/material/Link"
 import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../../layouts/FullLayout"
@@ -86,35 +85,35 @@ export default function Register() {
 
 	const onSubmit = async () => {
 		try {
-					if (data.password !== data.cpassword) {
-						setError("Passwords do not match")
-						throw new Error("Passwords do not match")
-					}
-					if (!selectedFile) {
-						setError("Upload an image")
-						throw new Error("Upload an image")
-					}
-					const newForm = new FormData()
-					newForm.append("firstName", data.firstName)
-					newForm.append("secondName", data.secondName)
-					newForm.append("age", data.age)
-					newForm.append("gender", data.gender)
-					newForm.append("email", data.email)
-					newForm.append("password", data.password)
-					newForm.append("cpassword", data.cpassword)
-					newForm.append("blood", data.blood)
-					newForm.append("phone", data.phone)
-					newForm.append("image", selectedFile)
-					await axios.post("/user", newForm)
-					navigate("/login")
-					Toast.fire({
-						position: "bottom-right",
-						icon: "success",
-						title: "user registered",
-						showConfirmButton: false,
-						timer: 3000,
-					})
-				} catch (err) {
+			if (data.password !== data.cpassword) {
+				setError("Passwords do not match")
+				throw new Error("Passwords do not match")
+			}
+			if (!selectedFile) {
+				setError("Upload an image")
+				throw new Error("Upload an image")
+			}
+			const newForm = new FormData()
+			newForm.append("firstName", data.firstName)
+			newForm.append("secondName", data.secondName)
+			newForm.append("age", data.age)
+			newForm.append("gender", data.gender)
+			newForm.append("email", data.email)
+			newForm.append("password", data.password)
+			newForm.append("cpassword", data.cpassword)
+			newForm.append("blood", data.blood)
+			newForm.append("phone", data.phone)
+			newForm.append("image", selectedFile)
+			await axios.post("/user", newForm)
+			navigate("/login")
+			Toast.fire({
+				position: "bottom-right",
+				icon: "success",
+				title: "user registered",
+				showConfirmButton: false,
+				timer: 3000,
+			})
+		} catch (err) {
 			if (err.response) {
 				setError(err.response.data.message)
 			}
@@ -228,7 +227,7 @@ export default function Register() {
 												label="First Name"
 												onChange={handleChange}
 												value={data.firstName}
-												error={errors.firstName}
+												error={errors.firstName ? true : false}
 												helperText={
 													errors.firstName
 														? errors.firstName.message
@@ -253,7 +252,7 @@ export default function Register() {
 												name="secondName"
 												onChange={handleChange}
 												value={data.secondName}
-												error={errors.secondName}
+												error={errors.secondName ? true : false}
 												helperText={
 													errors.secondName
 														? errors.secondName.message
@@ -277,7 +276,7 @@ export default function Register() {
 												name="age"
 												onChange={handleChange}
 												value={data.age}
-												error={errors.age}
+												error={errors.age ? true : false}
 												helperText={
 													errors.age ? errors.age.message : null
 												}
@@ -298,7 +297,7 @@ export default function Register() {
 													name="gender"
 													value={data.gender}
 													onChange={handleChangeSelect}
-													error={errors.gender}
+													error={errors.gender ? true : false}
 												>
 													<MenuItem value={"Male"}>Male</MenuItem>
 													<MenuItem value={"Female"}>
@@ -326,7 +325,7 @@ export default function Register() {
 													name="blood"
 													value={data.blood}
 													onChange={handleChangeSelect}
-													error={errors.blood}
+													error={errors.blood ? true : false}
 												>
 													<MenuItem value={"A+ve"}>A+ve</MenuItem>
 													<MenuItem value={"A-ve"}>A-ve</MenuItem>
@@ -354,7 +353,7 @@ export default function Register() {
 												autoComplete="email"
 												onChange={handleChange}
 												value={data.email}
-												error={errors.email}
+												error={errors.email? true : false}
 												helperText={
 													errors.email
 														? errors.email.message
@@ -378,7 +377,7 @@ export default function Register() {
 												name="phone"
 												onChange={handleChange}
 												value={data.phone}
-												error={errors.phone}
+												error={errors.phone? true : false}
 												helperText={
 													errors.phone
 														? errors.phone.message
@@ -404,7 +403,7 @@ export default function Register() {
 												id="password"
 												onChange={handleChange}
 												value={data.password}
-												error={errors.password}
+												error={errors.password? true : false}
 												helperText={
 													errors.password
 														? errors.password.message
@@ -425,7 +424,7 @@ export default function Register() {
 												id="cpassword"
 												onChange={handleChange}
 												value={data.cpassword}
-												error={errors.cpassword}
+												error={errors.cpassword? true : false}
 												helperText={
 													errors.cpassword
 														? errors.cpassword.message
@@ -447,7 +446,13 @@ export default function Register() {
 									</Button>
 									<Grid container justifyContent="flex-end">
 										<Grid item>
-											<Link href="#" variant="body2">
+											<Link
+												to="/login"
+												style={{
+													textDecoration: "none",
+													color: "#609acf",
+												}}
+											>
 												Already have an account? Sign in
 											</Link>
 										</Grid>
