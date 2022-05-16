@@ -9,7 +9,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import Typography from "@mui/material/Typography"
 import { useForm } from "react-hook-form"
 import axios from "../../axios.js"
-// import VerifyOtp from "./verifyOtp.js"
+import VerifyOtp from "./verifyOtp.js"
 import { Link } from "react-router-dom"
 
 const OtpSignin = ({ setOtp }) => {
@@ -128,7 +128,7 @@ const OtpSignin = ({ setOtp }) => {
 			</Grid>
 		)
 	} else {
-		// return <VerifyOtp setOtp={setOtp} otpData={data} phone={data.phone} />
+		return <VerifyOtp setOtp={setOtp} otpData={data} phone={data.phone} />
 	}
 }
 
