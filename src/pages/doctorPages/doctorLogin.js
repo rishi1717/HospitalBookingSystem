@@ -102,23 +102,33 @@ export default function DoctorLogin() {
 							src={image}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6} component={Paper} elevation={6}>
-						<Box
+					{!otp ? (
+						<Grid
+							item
+							xs={12}
+							sm={6}
+							component={Paper}
+							elevation={6}
 							sx={{
-								my: 8,
-								mx: 4,
-								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
+								borderRadius: 2,
 							}}
 						>
-							<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-								<LockOutlinedIcon />
-							</Avatar>
-							<Typography component="h1" variant="h5">
-								Sign in
-							</Typography>
-							{otp ? (
+							<Box
+								sx={{
+									my: 6,
+									mx: 4,
+									display: "flex",
+									flexDirection: "column",
+									alignItems: "center",
+								}}
+							>
+								<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+									<LockOutlinedIcon />
+								</Avatar>
+								<Typography component="h1" variant="h5">
+									Sign in
+								</Typography>
+
 								<Box
 									component="form"
 									noValidate
@@ -185,11 +195,11 @@ export default function DoctorLogin() {
 										Sign In With OTP
 									</Button>
 								</Box>
-							) : (
-								<OtpSignin setOtp={setOtp} />
-							)}
-						</Box>
-					</Grid>
+							</Box>
+						</Grid>
+					) : (
+						<OtpSignin setOtp={setOtp} />
+					)}
 				</Grid>
 			</Container>
 		</>
