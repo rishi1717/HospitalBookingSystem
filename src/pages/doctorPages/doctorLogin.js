@@ -21,6 +21,7 @@ import {
 	addDoctorImage,
 } from "../../redux/doctorSlice"
 import DocNav from "../../components/doctorModule/docNav.js"
+import OtpSignin from "../../components/doctorModule/OtpSignin.js"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -35,6 +36,7 @@ export default function DoctorLogin() {
 	const dispatch = useDispatch()
 	const [error, setError] = React.useState()
 	const navigate = useNavigate()
+	const [otp, setOtp] = React.useState(false)
 	const {
 		register,
 		handleSubmit,
@@ -116,61 +118,76 @@ export default function DoctorLogin() {
 							<Typography component="h1" variant="h5">
 								Sign in
 							</Typography>
-							<Box
-								component="form"
-								noValidate
-								onSubmit={handleSubmit(onSubmit)}
-								sx={{ mt: 1 }}
-							>
-								<TextField
-									{...register("email", {
-										required: "Provide email!",
-									})}
-									margin="normal"
-									required
-									fullWidth
-									id="email"
-									label="Email Address"
-									name="email"
-									autoComplete="email"
-									autoFocus
-									onChange={handleChange}
-									value={data.email}
-									error={errors.email}
-									helperText={
-										errors.email ? errors.email.message : null
-									}
-								/>
-								<TextField
-									{...register("password", {
-										required: "provide a password!",
-									})}
-									margin="normal"
-									required
-									fullWidth
-									name="password"
-									label="Password"
-									type="password"
-									id="password"
-									onChange={handleChange}
-									value={data.password}
-									error={errors.password}
-									helperText={
-										errors.password ? errors.password.message : null
-									}
-								/>
-								<Typography sx={{ color: "red", m: 1 }}>
-									{error ? error : ""}
-								</Typography>
-								<Button
-									type="submit"
-									fullWidth
-									variant="contained"
-									sx={{ mt: 3, mb: 2 }}
+							{otp ? (
+								<Box
+									component="form"
+									noValidate
+									onSubmit={handleSubmit(onSubmit)}
+									sx={{ mt: 1 }}
 								>
-									Sign In
-								</Button>
-							</Box>
+									<TextField
+										{...register("email", {
+											required: "Provide email!",
+										})}
+										margin="normal"
+										required
+										fullWidth
+										id="email"
+										label="Email Address"
+										name="email"
+										autoComplete="email"
+										autoFocus
+										onChange={handleChange}
+										value={data.email}
+										error={errors.email}
+										helperText={
+											errors.email ? errors.email.message : null
+										}
+									/>
+									<TextField
+										{...register("password", {
+											required: "provide a password!",
+										})}
+										margin="normal"
+										required
+										fullWidth
+										name="password"
+										label="Password"
+										type="password"
+										id="password"
+										onChange={handleChange}
+										value={data.password}
+										error={errors.password}
+										helperText={
+											errors.password
+												? errors.password.message
+												: null
+										}
+									/>
+									<Typography sx={{ color: "red", m: 1 }}>
+										{error ? error : ""}
+									</Typography>
+									<Button
+										type="submit"
+										fullWidth
+										variant="contained"
+										sx={{ mt: 3, mb: 2 }}
+									>
+										Sign In
+									</Button>
+									<Button
+										onClick={() => {
+											setOtp(true)
+										}}
+										fullWidth
+										sx={{ mb: 4 }}
+									>
+										Sign In With OTP
+									</Button>
+								</Box>
+							) : (
+								<OtpSignin setOtp={setOtp} />
+							)}
 						</Box>
 					</Grid>
 				</Grid>
