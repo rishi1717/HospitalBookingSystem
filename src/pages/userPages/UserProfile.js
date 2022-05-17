@@ -313,6 +313,7 @@ function UserProfile() {
 								if (con.isConfirmed) {
 									localStorage.removeItem("userToken")
 									localStorage.removeItem("userId")
+									localStorage.removeItem("userImage")
 									navigate("/login")
 								}
 							}}
