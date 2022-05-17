@@ -79,6 +79,7 @@ export default function DoctorRegister() {
 		qualification: "",
 		department: "",
 		email: "",
+		phone:"",
 		password: "",
 		cpassword: "",
 		experience: "",
@@ -114,6 +115,7 @@ export default function DoctorRegister() {
 			newForm.append("qualification", data.qualification)
 			newForm.append("department", data.department)
 			newForm.append("email", data.email)
+			newForm.append("phone", data.phone)
 			newForm.append("password", data.password)
 			newForm.append("experience", data.experience)
 			newForm.append("expertise", data.expertise)
@@ -316,6 +318,32 @@ export default function DoctorRegister() {
 													helperText={
 														errors.email
 															? errors.email.message
+															: null
+													}
+												/>
+											</Grid>
+											<Grid item xs={12} sm={12}>
+												<TextField
+													{...register("phone", {
+														required: "Provide phone!",
+														minLength: {
+															value: 9,
+															message:
+																"Atleast 9 characters required",
+														},
+													})}
+													autoFocus
+													required
+													fullWidth
+													name="phone"
+													id="phone"
+													label="Phone"
+													onChange={handleChange}
+													value={data.phone}
+													error={errors.phone}
+													helperText={
+														errors.phone
+															? errors.phone.message
 															: null
 													}
 												/>
