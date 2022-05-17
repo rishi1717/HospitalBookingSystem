@@ -68,10 +68,11 @@ const VerifyOtp = ({ phone, setOtp, otpData }) => {
 		try {
 			const resData = await axios.post("/doctor/otpverify", data)
 			if (resData.status === 200) {
+				console.log(resData.data)
 				dispatch(addDoctorToken(resData.data.token))
-				dispatch(addDoctorId(resData.data.doctorId))
-				dispatch(addDoctorName(resData.data.doctorName))
-				dispatch(addDoctorImage(resData.data.image))
+				dispatch(addDoctorId(resData.data.doctor._id))
+				dispatch(addDoctorName(resData.data.doctor.name))
+				dispatch(addDoctorImage(resData.data.doctor.image))
 				Toast.fire({
 					position: "bottom-right",
 					icon: "success",
@@ -79,7 +80,7 @@ const VerifyOtp = ({ phone, setOtp, otpData }) => {
 					showConfirmButton: false,
 					timer: 3000,
 				})
-				navigate("/")
+				navigate("/doctor")
 			} else {
 				setError("Incorrect OTP")
 			}
@@ -101,6 +102,7 @@ const VerifyOtp = ({ phone, setOtp, otpData }) => {
 			elevation={6}
 			square
 			sx={{
+				border: "1px solid #609acf",
 				borderRadius: "1rem",
 			}}
 		>

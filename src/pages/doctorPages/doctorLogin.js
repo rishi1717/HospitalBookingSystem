@@ -106,11 +106,13 @@ export default function DoctorLogin() {
 						<Grid
 							item
 							xs={12}
-							sm={6}
+							sm={8}
+							md={5}
 							component={Paper}
 							elevation={6}
 							sx={{
-								borderRadius: 2,
+								border: "1px solid #609acf",
+								borderRadius: "1rem",
 							}}
 						>
 							<Box

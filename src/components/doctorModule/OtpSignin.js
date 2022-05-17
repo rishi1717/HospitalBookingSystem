@@ -31,7 +31,9 @@ const OtpSignin = ({ setOtp }) => {
 
 	const onSubmit = async () => {
 		try {
-			await axios.post("/doctor/otplogin", data)
+			console.log('doc');
+			const res = await axios.post("/doctor/otplogin", data)
+			console.log(res.data)
 			setSendOtp(true)
 		} catch (err) {
 			if (err.response) {
@@ -52,6 +54,7 @@ const OtpSignin = ({ setOtp }) => {
 				elevation={6}
 				square
 				sx={{
+					border: "1px solid #609acf",
 					borderRadius: "1rem",
 				}}
 			>
