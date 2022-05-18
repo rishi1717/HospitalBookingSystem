@@ -46,258 +46,291 @@ export default function AppointmentRows(props) {
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [props.update])
-	return (
-		<>
-			{appointments.map((appointment) => (
-				<Card
-					key={appointment._id}
-					sx={{
-						border: appointment.status === "Scheduled" ? 1 : 0,
-						borderColor: "green",
-						display: "flex",
-						m: "0.4rem",
-						flexDirection: { xs: "column", md: "row" },
-						borderRadius: 2,
-						backgroundColor: "#eaeaea",
-					}}
-				>
-					<Grid container spacing={2}>
-						<Grid item xs={6} sm={2.8}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
-								<Typography
-									variant="subtitle1"
-									color="text.secondary"
-									component="div"
-								>
-									{appointment.doctor}
-								</Typography>
-							</CardContent>
-						</Grid>
 
-						<Grid item xs={6} sm={2}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
-								<Typography
-									variant="subtitle1"
-									color="text.secondary"
-									component="div"
-								>
-									{appointment.date}
-								</Typography>
-							</CardContent>
-						</Grid>
-
-						<Grid item xs={6} sm={2}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
-								<Typography
-									variant="subtitle1"
-									color="text.secondary"
-									component="div"
-								>
-									{appointment.time}
-								</Typography>
-							</CardContent>
-						</Grid>
-
-						<Grid item xs={6} sm={2}>
-							<CardContent sx={{ flex: "1 0 auto" }}>
-								<Typography
-									variant="subtitle1"
-									color={
-										appointment.status === "Scheduled"
-											? "green"
-											: "text.secondary"
-									}
-									component="div"
-								>
-									{appointment.status}
-								</Typography>
-							</CardContent>
-						</Grid>
-						{appointment.status === "Scheduled" ? (
-							<>
-								<Grid item xs={6} sm={3}>
-									<CardContent sx={{ display: "flex" }}>
-										<div
-											onClick={() => {
-												setCancelId(appointment._id)
-												handleOpen2()
-											}}
-										>
-											<SmallButton
-												value="reschedule"
-												color="#FEB139"
-											/>
-										</div>
-
-										<div
-											style={{ paddingRight: "1rem" }}
-											onClick={() => {
-												setCancelId(appointment._id)
-												handleOpen()
-											}}
-										>
-											<SmallButton value="cancel" color="#CC3E34" />
-										</div>
-									</CardContent>
-								</Grid>
-								<Modal
-									open={open}
-									onClose={handleClose}
-									aria-labelledby="modal-modal-title"
-									aria-describedby="modal-modal-description"
-								>
-									<Box sx={style}>
-										<TextField
-											required
-											fullWidth
-											id="cancelingFor"
-											label="Reason For cancelling"
-											name="cancelingFor"
-											value={canceling}
-											onChange={({ currentTarget: input }) => {
-												setCanceling(input.value)
-											}}
-										/>
-										<Grid container spacing={2}>
-											<Grid item xs={6} sm={4} ml="auto">
-												<Button
-													onClick={handleClose}
-													fullWidth
-													variant="contained"
-													sx={{
-														mt: 3,
-														mb: 2,
-													}}
-												>
-													Keep Appointment
-												</Button>
-											</Grid>
-											<Grid item xs={6} sm={4}>
-												<Button
-													onClick={async () => {
-														const newData = {
-															status: "Canceled",
-															cancelReason: canceling,
-														}
-														await axios.put(
-															`/appointment/${cancelId}`,
-															newData,
-															{
-																headers: {
-																	"auth-token":
-																		localStorage.userToken,
-																},
-															}
-														)
-														const appointmentData = await axios.get(
-															"/appointment",
-															{
-																headers: {
-																	"auth-token":
-																		localStorage.userToken,
-																},
-															}
-														)
-														setAppointments(
-															appointmentData.data.appointment
-														)
-														props.setUpdate(!props.update)
-														handleClose()
-													}}
-													fullWidth
-													variant="contained"
-													sx={{
-														mt: 3,
-														mb: 2,
-														backgroundColor: "#EF4242",
-													}}
-												>
-													Cancel Appointment
-												</Button>
-											</Grid>
-										</Grid>
-									</Box>
-								</Modal>
-
-								<Modal
-									open={open2}
-									onClose={handleClose2}
-									aria-labelledby="modal-modal-title"
-									aria-describedby="modal-modal-description"
-								>
-									<Box sx={style}>
-										<Reschedule
-											appointmentId={cancelId}
-											appointment={modalAppointment}
-											setAppointment={setModalAppointment}
-										/>
-										<Grid container spacing={2}>
-											<Grid item xs={6} sm={4} ml="auto">
-												<Button
-													onClick={handleClose2}
-													fullWidth
-													variant="contained"
-													sx={{
-														mt: 3,
-														mb: 2,
-													}}
-												>
-													Keep Appointment
-												</Button>
-											</Grid>
-											<Grid item xs={6} sm={4}>
-												<Button
-													onClick={async () => {
-														await axios.put(
-															`/appointment/${cancelId}`,
-															{
-																date: modalAppointment.date,
-																time: modalAppointment.time,
-															},
-															{
-																headers: {
-																	"auth-token": localStorage.getItem(
-																		"userToken"
-																	),
-																},
-															}
-														)
-														props.setUpdate(!props.update)
-														handleClose2()
-													}}
-													fullWidth
-													variant="contained"
-													sx={{
-														mt: 3,
-														mb: 2,
-														backgroundColor: "orange",
-														fontSize: "0.8rem",
-													}}
-												>
-													Reschedule
-												</Button>
-											</Grid>
-										</Grid>
-									</Box>
-								</Modal>
-							</>
-						) : (
-							<Grid item xs={6} sm={3}>
-								<CardContent sx={{ flex: "0.1 0 auto" }}>
+	if (appointments.length === 0) {
+		return (
+			<Card
+				sx={{
+					display: "flex",
+					m: "0.4rem",
+					flexDirection: { xs: "column", md: "row" },
+					borderRadius: 2,
+					backgroundColor: "#eaeaea",
+				}}
+			>
+				<Grid container spacing={2}>
+					<Grid item xs={12} sm={12}>
+						<CardContent sx={{ flex: "1 0 auto" }}>
+							<Typography
+								variant="subtitle1"
+								color="text.secondary"
+								component="div"
+								textAlign="center"
+							>
+								You have not made an appointment yet
+							</Typography>
+						</CardContent>
+					</Grid>
+				</Grid>
+			</Card>
+		)
+	} else {
+		return (
+			<>
+				{appointments.map((appointment) => (
+					<Card
+						key={appointment._id}
+						sx={{
+							border: appointment.status === "Scheduled" ? 1 : 0,
+							borderColor: "green",
+							display: "flex",
+							m: "0.4rem",
+							flexDirection: { xs: "column", md: "row" },
+							borderRadius: 2,
+							backgroundColor: "#eaeaea",
+						}}
+					>
+						<Grid container spacing={2}>
+							<Grid item xs={6} sm={2.8}>
+								<CardContent sx={{ flex: "1 0 auto" }}>
 									<Typography
 										variant="subtitle1"
-										color="#FEB139"
+										color="text.secondary"
 										component="div"
-										ml={2}
 									>
-										No Actions
+										{appointment.doctor}
 									</Typography>
 								</CardContent>
 							</Grid>
-						)}
-					</Grid>
-				</Card>
-			))}
-		</>
-	)
+
+							<Grid item xs={6} sm={2}>
+								<CardContent sx={{ flex: "1 0 auto" }}>
+									<Typography
+										variant="subtitle1"
+										color="text.secondary"
+										component="div"
+									>
+										{appointment.date}
+									</Typography>
+								</CardContent>
+							</Grid>
+
+							<Grid item xs={6} sm={2}>
+								<CardContent sx={{ flex: "1 0 auto" }}>
+									<Typography
+										variant="subtitle1"
+										color="text.secondary"
+										component="div"
+									>
+										{appointment.time}
+									</Typography>
+								</CardContent>
+							</Grid>
+
+							<Grid item xs={6} sm={2}>
+								<CardContent sx={{ flex: "1 0 auto" }}>
+									<Typography
+										variant="subtitle1"
+										color={
+											appointment.status === "Scheduled"
+												? "green"
+												: "text.secondary"
+										}
+										component="div"
+									>
+										{appointment.status}
+									</Typography>
+								</CardContent>
+							</Grid>
+							{appointment.status === "Scheduled" ? (
+								<>
+									<Grid item xs={6} sm={3}>
+										<CardContent sx={{ display: "flex" }}>
+											<div
+												onClick={() => {
+													setCancelId(appointment._id)
+													handleOpen2()
+												}}
+											>
+												<SmallButton
+													value="reschedule"
+													color="#FEB139"
+												/>
+											</div>
+
+											<div
+												style={{ paddingRight: "1rem" }}
+												onClick={() => {
+													setCancelId(appointment._id)
+													handleOpen()
+												}}
+											>
+												<SmallButton
+													value="cancel"
+													color="#CC3E34"
+												/>
+											</div>
+										</CardContent>
+									</Grid>
+									<Modal
+										open={open}
+										onClose={handleClose}
+										aria-labelledby="modal-modal-title"
+										aria-describedby="modal-modal-description"
+									>
+										<Box sx={style}>
+											<TextField
+												required
+												fullWidth
+												id="cancelingFor"
+												label="Reason For cancelling"
+												name="cancelingFor"
+												value={canceling}
+												onChange={({ currentTarget: input }) => {
+													setCanceling(input.value)
+												}}
+											/>
+											<Grid container spacing={2}>
+												<Grid item xs={6} sm={4} ml="auto">
+													<Button
+														onClick={handleClose}
+														fullWidth
+														variant="contained"
+														sx={{
+															mt: 3,
+															mb: 2,
+														}}
+													>
+														Keep Appointment
+													</Button>
+												</Grid>
+												<Grid item xs={6} sm={4}>
+													<Button
+														onClick={async () => {
+															const newData = {
+																status: "Canceled",
+																cancelReason: canceling,
+															}
+															await axios.put(
+																`/appointment/${cancelId}`,
+																newData,
+																{
+																	headers: {
+																		"auth-token":
+																			localStorage.userToken,
+																	},
+																}
+															)
+															const appointmentData = await axios.get(
+																"/appointment",
+																{
+																	headers: {
+																		"auth-token":
+																			localStorage.userToken,
+																	},
+																}
+															)
+															setAppointments(
+																appointmentData.data.appointment
+															)
+															props.setUpdate(!props.update)
+															handleClose()
+														}}
+														fullWidth
+														variant="contained"
+														sx={{
+															mt: 3,
+															mb: 2,
+															backgroundColor: "#EF4242",
+														}}
+													>
+														Cancel Appointment
+													</Button>
+												</Grid>
+											</Grid>
+										</Box>
+									</Modal>
+
+									<Modal
+										open={open2}
+										onClose={handleClose2}
+										aria-labelledby="modal-modal-title"
+										aria-describedby="modal-modal-description"
+									>
+										<Box sx={style}>
+											<Reschedule
+												appointmentId={cancelId}
+												appointment={modalAppointment}
+												setAppointment={setModalAppointment}
+											/>
+											<Grid container spacing={2}>
+												<Grid item xs={6} sm={4} ml="auto">
+													<Button
+														onClick={handleClose2}
+														fullWidth
+														variant="contained"
+														sx={{
+															mt: 3,
+															mb: 2,
+														}}
+													>
+														Keep Appointment
+													</Button>
+												</Grid>
+												<Grid item xs={6} sm={4}>
+													<Button
+														onClick={async () => {
+															await axios.put(
+																`/appointment/${cancelId}`,
+																{
+																	date: modalAppointment.date,
+																	time: modalAppointment.time,
+																},
+																{
+																	headers: {
+																		"auth-token": localStorage.getItem(
+																			"userToken"
+																		),
+																	},
+																}
+															)
+															props.setUpdate(!props.update)
+															handleClose2()
+														}}
+														fullWidth
+														variant="contained"
+														sx={{
+															mt: 3,
+															mb: 2,
+															backgroundColor: "orange",
+															fontSize: "0.8rem",
+														}}
+													>
+														Reschedule
+													</Button>
+												</Grid>
+											</Grid>
+										</Box>
+									</Modal>
+								</>
+							) : (
+								<Grid item xs={6} sm={3}>
+									<CardContent sx={{ flex: "0.1 0 auto" }}>
+										<Typography
+											variant="subtitle1"
+											color="#FEB139"
+											component="div"
+											ml={2}
+										>
+											No Actions
+										</Typography>
+									</CardContent>
+								</Grid>
+							)}
+						</Grid>
+					</Card>
+				))}
+			</>
+		)
+	}
 }
