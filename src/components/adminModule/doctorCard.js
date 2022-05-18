@@ -18,8 +18,8 @@ export default function DoctorCard(props) {
 		>
 			<CardMedia
 				component="img"
-				sx={{ width: 151 }}
-				image={props.image}
+				sx={{ width: 151,height:151 }}
+				image={props.doctor.image}
 				alt="picture"
 			/>
 			<CardContent sx={{ flex: "1 0" }}>

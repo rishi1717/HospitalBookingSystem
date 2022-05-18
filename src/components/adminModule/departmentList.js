@@ -1,7 +1,6 @@
 import React from "react"
 import Typography from "@mui/material/Typography"
 import DoctorCard from "./doctorCard"
-import image1 from "../../static/images/doctorPortrait.webp"
 import axios from "../../axios.js"
 import { useSelector } from "react-redux"
 import {
@@ -167,7 +166,6 @@ export default function DepartmentList({
 									<DoctorCard
 										key={doctor.id}
 										doctor={doctor}
-										image={image1}
 									/>
 								) : (
 									""
