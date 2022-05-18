@@ -18,7 +18,7 @@ function UserHome() {
 		<FullLayout>
 			<Container>
 				<Banner
-					smallText="Hi Rishi,"
+					smallText={`Hi ${localStorage.getItem("userName") },`}
 					largeText="Welcome Back!"
 					phrase="Feel better about finding Healthcare"
 					image={image1}
