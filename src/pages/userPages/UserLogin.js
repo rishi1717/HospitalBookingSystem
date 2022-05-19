@@ -15,6 +15,7 @@ import axios from "../../axios.js"
 import Swal from "sweetalert2"
 import FullLayout from "../../layouts/FullLayout"
 import OtpSignin from "../../components/userModule/otpSignin"
+import { Navigate } from "react-router-dom"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -64,155 +65,164 @@ export default function UserLogin() {
 		}
 	}
 
-	return (
-		<FullLayout>
-			<Container>
-				<Grid container mt={4}>
-					<Grid item xs={false} sm={4} md={7}>
-						<Box
-							item
-							mt={10}
-							xs={false}
-							sm={4}
-							md={7}
-							component="img"
-							sx={{
-								height: "auto",
-								width: "auto",
-								maxWidth: { xs: 0, sm: 400, md: 500 },
-							}}
-							alt="Hospital"
-							src={image}
-						/>
-					</Grid>
-					{!otp ? (
-						<Grid
-							item
-							xs={12}
-							sm={8}
-							md={5}
-							component={Paper}
-							elevation={6}
-							square
-							sx={{
-								borderRadius: "1rem",
-							}}
-						>
+	if (localStorage.getItem("userToken")) {
+		return <Navigate to="/" />
+	} else {
+		return (
+			<FullLayout>
+				<Container>
+					<Grid container mt={4}>
+						<Grid item xs={false} sm={4} md={7}>
 							<Box
+								item
+								mt={10}
+								xs={false}
+								sm={4}
+								md={7}
+								component="img"
 								sx={{
-									my: 4,
-									mx: 4,
-									display: "flex",
-									flexDirection: "column",
-									alignItems: "center",
+									height: "auto",
+									width: "auto",
+									maxWidth: { xs: 0, sm: 400, md: 500 },
+								}}
+								alt="Hospital"
+								src={image}
+							/>
+						</Grid>
+						{!otp ? (
+							<Grid
+								item
+								xs={12}
+								sm={8}
+								md={5}
+								component={Paper}
+								elevation={6}
+								square
+								sx={{
+									borderRadius: "1rem",
 								}}
 							>
-								<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-									<LockOutlinedIcon />
-								</Avatar>
-								<Typography component="h1" variant="h5">
-									Sign in
-								</Typography>
 								<Box
-									component="form"
-									noValidate
-									onSubmit={handleSubmit(onSubmit)}
-									sx={{ mt: 1 }}
+									sx={{
+										my: 4,
+										mx: 4,
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "center",
+									}}
 								>
-									<TextField
-										{...register("email", {
-											required: "Provide email!",
-										})}
-										margin="normal"
-										required
-										fullWidth
-										id="email"
-										label="Email Address"
-										name="email"
-										autoComplete="email"
-										autoFocus
-										onChange={handleChange}
-										value={data.email}
-										error={errors.email ? true : false}
-										helperText={
-											errors.email ? errors.email.message : null
-										}
-									/>
-									<TextField
-										{...register("password", {
-											required: "provide a password!",
-										})}
-										margin="normal"
-										required
-										fullWidth
-										name="password"
-										label="Password"
-										type="password"
-										id="password"
-										onChange={handleChange}
-										value={data.password}
-										error={errors.password ? true : false}
-										helperText={
-											errors.password
-												? errors.password.message
-												: null
-										}
-									/>
-									<Typography sx={{ color: "red", m: 1 }}>
-										{error ? error : ""}
+									<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+										<LockOutlinedIcon />
+									</Avatar>
+									<Typography component="h1" variant="h5">
+										Sign in
 									</Typography>
-									<Button
-										type="submit"
-										fullWidth
-										variant="contained"
-										sx={{ mt: 3, mb: 2 }}
+									<Box
+										component="form"
+										noValidate
+										onSubmit={handleSubmit(onSubmit)}
+										sx={{ mt: 1 }}
 									>
-										Sign In
-									</Button>
-									<Button
-										onClick={() => {
-											setOtp(true)
-										}}
-										fullWidth
-										sx={{ mb: 4 }}
-									>
-										Sign In With OTP
-									</Button>
-									<Grid container>
-										<Grid item>
-											<Link
-												to="/register"
-												style={{
-													textDecoration: "none",
-													color: "#609acf",
-												}}
-											>
-												{"Don't have an account? Sign Up"}
-											</Link>
+										<TextField
+											{...register("email", {
+												required: "Provide email!",
+											})}
+											margin="normal"
+											required
+											fullWidth
+											id="email"
+											label="Email Address"
+											name="email"
+											autoComplete="email"
+											autoFocus
+											onChange={handleChange}
+											value={data.email}
+											error={errors.email ? true : false}
+											helperText={
+												errors.email ? errors.email.message : null
+											}
+										/>
+										<TextField
+											{...register("password", {
+												required: "provide a password!",
+											})}
+											margin="normal"
+											required
+											fullWidth
+											name="password"
+											label="Password"
+											type="password"
+											id="password"
+											onChange={handleChange}
+											value={data.password}
+											error={errors.password ? true : false}
+											helperText={
+												errors.password
+													? errors.password.message
+													: null
+											}
+										/>
+										<Typography sx={{ color: "red", m: 1 }}>
+											{error ? error : ""}
+										</Typography>
+										<Button
+											type="submit"
+											fullWidth
+											variant="contained"
+											sx={{ mt: 3, mb: 2 }}
+										>
+											Sign In
+										</Button>
+										<Button
+											onClick={() => {
+												setOtp(true)
+											}}
+											fullWidth
+											sx={{ mb: 4 }}
+										>
+											Sign In With OTP
+										</Button>
+										<Grid container>
+											<Grid item>
+												<Link
+													to="/register"
+													style={{
+														textDecoration: "none",
+														color: "#609acf",
+													}}
+												>
+													{"Don't have an account? Sign Up"}
+												</Link>
+											</Grid>
 										</Grid>
-									</Grid>
+									</Box>
 								</Box>
-							</Box>
-						</Grid>
-					) : (
-						<OtpSignin setOtp={setOtp} />
-					)}
-				</Grid>
-				<Grid container sx={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					mt: 5,
-				}}>
-					<Grid item>
-						<Button onClick={()=>{
-							navigate("/doctor")
-						}} >
-							{"Doctors page"}
-						</Button>
+							</Grid>
+						) : (
+							<OtpSignin setOtp={setOtp} />
+						)}
 					</Grid>
-				</Grid>
-			</Container>
-		</FullLayout>
-	)
+					<Grid
+						container
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							mt: 5,
+						}}
+					>
+						<Grid item>
+							<Button
+								onClick={() => {
+									navigate("/doctor")
+								}}
+							>
+								{"Doctors page"}
+							</Button>
+						</Grid>
+					</Grid>
+				</Container>
+			</FullLayout>
+		)
+	}
 }

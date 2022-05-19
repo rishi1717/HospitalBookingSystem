@@ -83,7 +83,7 @@ const DoctorAppointments = () => {
 					}}
 					component="p"
 				>
-					Your Appointments today
+					Your Appointment History
 				</Typography>
 				<AppointmentTable appointments={viewApppointments} />
 				<Box
