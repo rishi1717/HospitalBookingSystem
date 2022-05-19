@@ -180,7 +180,13 @@ export default function UserLogin() {
 									</Button>
 									<Grid container>
 										<Grid item>
-											<Link to="/register" style={{textDecoration:'none', color:'#609acf'}}>
+											<Link
+												to="/register"
+												style={{
+													textDecoration: "none",
+													color: "#609acf",
+												}}
+											>
 												{"Don't have an account? Sign Up"}
 											</Link>
 										</Grid>
@@ -189,8 +195,22 @@ export default function UserLogin() {
 							</Box>
 						</Grid>
 					) : (
-						<OtpSignin setOtp={setOtp}/>
+						<OtpSignin setOtp={setOtp} />
 					)}
+				</Grid>
+				<Grid container sx={{
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					mt: 5,
+				}}>
+					<Grid item>
+						<Button onClick={()=>{
+							navigate("/doctor")
+						}} >
+							{"Doctors page"}
+						</Button>
+					</Grid>
 				</Grid>
 			</Container>
 		</FullLayout>

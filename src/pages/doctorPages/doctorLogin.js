@@ -128,7 +128,7 @@ export default function DoctorLogin() {
 									<LockOutlinedIcon />
 								</Avatar>
 								<Typography component="h1" variant="h5">
-									Sign in
+									Doctor sign in
 								</Typography>
 
 								<Box
@@ -202,6 +202,25 @@ export default function DoctorLogin() {
 					) : (
 						<OtpSignin setOtp={setOtp} />
 					)}
+				</Grid>
+				<Grid
+					container
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						mt: 3,
+					}}
+				>
+					<Grid item>
+						<Button
+							onClick={() => {
+								navigate("/login")
+							}}
+						>
+							{"Not a Doctor? Click here"}
+						</Button>
+					</Grid>
 				</Grid>
 			</Container>
 		</>
