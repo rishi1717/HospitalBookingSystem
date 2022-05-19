@@ -314,6 +314,7 @@ function UserProfile() {
 									localStorage.removeItem("userToken")
 									localStorage.removeItem("userId")
 									localStorage.removeItem("userImage")
+									localStorage.removeItem("userName")
 									navigate("/login")
 								}
 							}}
