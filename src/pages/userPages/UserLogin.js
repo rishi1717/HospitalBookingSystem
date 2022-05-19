@@ -52,7 +52,6 @@ export default function UserLogin() {
 			localStorage.setItem("userId", resData.data.user._id)
 			localStorage.setItem("userImage", resData.data.user.image)
 			localStorage.setItem("userName", resData.data.user.firstName)
-			console.log(resData.data.user.firstName)
 			Toast.fire({
 				position: "bottom-right",
 				icon: "success",
