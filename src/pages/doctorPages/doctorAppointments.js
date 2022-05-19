@@ -1,4 +1,4 @@
-import { TextField, Toolbar, Typography } from "@mui/material"
+import { Pagination, TextField, Toolbar, Typography } from "@mui/material"
 import React, { useEffect, useState } from "react"
 import AppointmentTable from "../../components/doctorModule/appointmentTable"
 import DoctorsLayout from "../../layouts/DoctorsLayout"
@@ -8,15 +8,20 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { useSelector } from "react-redux"
 import axios from "../../axios"
 import Unauthorized from "./unauthorized"
+import { Box } from "@mui/system"
 
 const DoctorAppointments = () => {
 	const [appointments, setAppointments] = useState([])
 	const [appointmentsByDate, setAppointmentsByDate] = useState([])
+	const [viewApppointments, setViewAppointments] = useState([])
+	const [page, setPage] = useState(1)
+	const pageItems = 5
+	const pageCount = Math.ceil(appointments.length / pageItems)
 	const docState = useSelector((storeState) => storeState.doctor)
 	useEffect(() => {
 		;(async function() {
 			const appointmentData = await axios.get(
-				`/appointment/date/${new Date()}/${docState.id}`,
+				`/appointment/doctor/${docState.id}`,
 				{
 					headers: { "auth-token": docState.token },
 				}
@@ -24,6 +29,25 @@ const DoctorAppointments = () => {
 			setAppointments(appointmentData.data.appointment)
 		})()
 	}, [])
+	useEffect(() => {
+		setViewAppointments(
+			appointments.slice(
+				(page - 1) * pageItems,
+				(page - 1) * pageItems + pageItems
+			)
+		)
+	}, [appointments])
+	useEffect(() => {
+		setViewAppointments(
+			appointments.slice(
+				(page - 1) * pageItems,
+				(page - 1) * pageItems + pageItems
+			)
+		)
+	}, [page])
+	const handlePageChange = (event, value) => {
+		setPage(value)
+	}
 	if (docState.token) {
 		const [date, setDate] = useState(null)
 		return (
@@ -61,7 +85,21 @@ const DoctorAppointments = () => {
 				>
 					Your Appointments today
 				</Typography>
-				<AppointmentTable appointments={appointments} />
+				<AppointmentTable appointments={viewApppointments} />
+				<Box
+					sx={{
+						mt: 2,
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
+				>
+					<Pagination
+						count={pageCount}
+						onChange={handlePageChange}
+						color="primary"
+					/>
+				</Box>
 				<Toolbar />
 				<Typography
 					sx={{
