@@ -8,6 +8,7 @@ import FullLayout from "../../layouts/FullLayout"
 import Unauthorized from "./Unauthorized"
 import Swal from "sweetalert2"
 import axios from "../../axios"
+import image1 from "../../static/images/services.png"
 
 const Toast = Swal.mixin({
 	background: "#1E1E1E",
@@ -91,237 +92,271 @@ function ConfirmBooking() {
 			<FullLayout>
 				<Grid
 					container
-					spacing={0}
-					direction="column"
-					alignItems="center"
-					justify="center"
+					spacing={2}
+					sx={{
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+					}}
 				>
-					<Typography
+					<Grid
+						item
+						md={4}
 						sx={{
-							fontSize: { xs: "1rem", sm: "1.5rem" },
-							fontFamily: "sans-serif",
-							mt: 3,
-							color: "#1976D2",
-						}}
-						component="p"
-					>
-						Confirm Booking
-					</Typography>
-					<Card
-						elevation={3}
-						sx={{
-							border: "1px solid #609acf",
-							mt: 3,
-							mb: 4,
-							display: "flex",
-							flexDirection: { xs: "column", sm: "row" },
-							minHeight: { xs: 0, sm: 150 },
-							px: { xs: 7, sm: 10 },
-							py: { xs: 2, sm: 4 },
+							display: { xs: "none", md: "block" },
 						}}
 					>
-						<CardContent
-							sx={{
-								flex: 1,
-								display: "flex",
-								flexDirection: "column",
-								justifyContent: "center",
-							}}
-						>
-							<Typography
-								sx={{
-									fontSize: {
-										xs: "0.85rem",
-										sm: "1rem",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Patient Name :</b> {details.user}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Age :</b> {details.age}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Gender :</b> {details.gender}
-							</Typography>
-
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Mobile :</b> {details.phone}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Appointed to :</b> {details.doctor}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Reason :</b> {details.reason}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Date :</b> {details.date}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Time :</b> {details.time}
-							</Typography>
-							<Typography
-								sx={{
-									mt: 2,
-									fontSize: {
-										xs: "0.75rem",
-										sm: "1rem",
-										textAlign: "left",
-									},
-									fontFamily: "sans-serif",
-									color: "#595959",
-								}}
-								component="p"
-							>
-								<b>Amount to be paid :</b> {details.fee}
-							</Typography>
-						</CardContent>
 						<Box
-							component="div"
+							mt={1}
+							p={2}
+							component="img"
 							sx={{
-								display: "flex",
-								flexDirection: "column",
-								justifyContent: "center",
-								alignItems: "center",
-								ml: { xs: 0, sm: 5 },
+								borderRadius: "10%",
+								height: "auto",
+								width: "auto",
+								// maxHeight: {xs:0, sm: 233, md: 400 },
+								maxWidth: { xs: 300, sm: 400, md: 500 },
 							}}
+							alt="Hospital"
+							src={image1}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={8} md={7}>
+						<Grid
+							container
+							spacing={0}
+							direction="column"
+							alignItems="center"
+							justify="center"
 						>
-							<Button
+							<Typography
 								sx={{
-									mt: 4,
-									ml: 1,
-									backgroundColor: "#EF4242",
-									color: "white",
-									"&:hover": {
-										backgroundColor: "white",
-										color: "#EF4242",
-									},
+									fontSize: { xs: "1rem", sm: "1.5rem" },
+									fontFamily: "sans-serif",
+									mt: 3,
+									color: "#1976D2",
 								}}
-								onClick={async () => {
-									const con = await Swal.fire({
-										title: "Are you sure?",
-										text: "Provided details will be cleared!",
-										background: "#eaeaea",
-										color: "#595959",
-										showCancelButton: true,
-										cancelButtonColor: "#609ACF",
-										confirmButtonText: "Cancel",
-										cancelButtonText: "Don't Cancel",
-										confirmButtonColor: "#B81C1C",
-									})
-									if (con.isConfirmed) {
-										navigate("/doctors")
-									}
+								component="p"
+							>
+								Confirm Booking
+							</Typography>
+							<Card
+								elevation={3}
+								sx={{
+									border: "1px solid #609acf",
+									mt: 3,
+									mb: 4,
+									display: "flex",
+									flexDirection: { xs: "column", sm: "row" },
+									minHeight: { xs: 0, sm: 150 },
+									px: { xs: 7, sm: 10 },
+									py: { xs: 2, sm: 4 },
 								}}
 							>
-								Cancel
-							</Button>
-							<Button
-								sx={{
-									fontSize: "0.8rem",
-									mt: 4,
-									ml: 1,
-									backgroundColor: "#609acf",
-									color: "white",
-									"&:hover": {
-										backgroundColor: "white",
-										color: "#609acf",
-									},
-								}}
-								disabled={loading}
-								onClick={loadRazorPay}
-							>
-								Confirm
-							</Button>
-						</Box>
-					</Card>
+								<CardContent
+									sx={{
+										flex: 1,
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+									}}
+								>
+									<Typography
+										sx={{
+											fontSize: {
+												xs: "0.85rem",
+												sm: "1rem",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Patient Name :</b> {details.user}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Age :</b> {details.age}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Gender :</b> {details.gender}
+									</Typography>
+
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Mobile :</b> {details.phone}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Appointed to :</b> {details.doctor}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Reason :</b> {details.reason}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Date :</b> {details.date}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Time :</b> {details.time}
+									</Typography>
+									<Typography
+										sx={{
+											mt: 2,
+											fontSize: {
+												xs: "0.75rem",
+												sm: "1rem",
+												textAlign: "left",
+											},
+											fontFamily: "sans-serif",
+											color: "#595959",
+										}}
+										component="p"
+									>
+										<b>Amount to be paid :</b> {details.fee}
+									</Typography>
+								</CardContent>
+								<Box
+									component="div"
+									sx={{
+										display: "flex",
+										flexDirection: "column",
+										justifyContent: "center",
+										alignItems: "center",
+										ml: { xs: 0, sm: 5 },
+									}}
+								>
+									<Button
+										sx={{
+											mt: 4,
+											ml: 1,
+											backgroundColor: "#EF4242",
+											color: "white",
+											"&:hover": {
+												backgroundColor: "white",
+												color: "#EF4242",
+											},
+										}}
+										onClick={async () => {
+											const con = await Swal.fire({
+												title: "Are you sure?",
+												text: "Provided details will be cleared!",
+												background: "#eaeaea",
+												color: "#595959",
+												showCancelButton: true,
+												cancelButtonColor: "#609ACF",
+												confirmButtonText: "Cancel",
+												cancelButtonText: "Don't Cancel",
+												confirmButtonColor: "#B81C1C",
+											})
+											if (con.isConfirmed) {
+												navigate("/doctors")
+											}
+										}}
+									>
+										Cancel
+									</Button>
+									<Button
+										sx={{
+											fontSize: "0.8rem",
+											mt: 4,
+											ml: 1,
+											backgroundColor: "#609acf",
+											color: "white",
+											"&:hover": {
+												backgroundColor: "white",
+												color: "#609acf",
+											},
+										}}
+										disabled={loading}
+										onClick={loadRazorPay}
+									>
+										Confirm
+									</Button>
+								</Box>
+							</Card>
+						</Grid>
+					</Grid>
 				</Grid>
 			</FullLayout>
 		)
