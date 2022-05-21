@@ -192,6 +192,7 @@ export default function DoctorRegister() {
 					</Typography>
 
 					<Box
+						autoComplete="off"
 						component="form"
 						onSubmit={handleSubmit(onSubmit)}
 						noValidate
@@ -426,7 +427,6 @@ export default function DoctorRegister() {
 									id="experience"
 									label="Experience (in years)"
 									name="experience"
-									autoComplete="experience"
 									onChange={handleChange}
 									value={data.experience}
 									error={errors.experience}

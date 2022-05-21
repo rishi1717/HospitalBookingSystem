@@ -135,7 +135,12 @@ export default function Register() {
 					Register
 				</Typography>
 
-				<Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+				<Box
+					autoComplete="off"
+					component="form"
+					onSubmit={handleSubmit(onSubmit)}
+					noValidate
+				>
 					<Grid container spacing={2} alignItems="center">
 						<Grid item xs={12} sm={6} textAlign="center">
 							<Grid sx={{ maxHeight: "50vh" }} container spacing={2}>
@@ -350,10 +355,9 @@ export default function Register() {
 												id="email"
 												label="Email Address"
 												name="email"
-												autoComplete="email"
 												onChange={handleChange}
 												value={data.email}
-												error={errors.email? true : false}
+												error={errors.email ? true : false}
 												helperText={
 													errors.email
 														? errors.email.message
@@ -377,7 +381,7 @@ export default function Register() {
 												name="phone"
 												onChange={handleChange}
 												value={data.phone}
-												error={errors.phone? true : false}
+												error={errors.phone ? true : false}
 												helperText={
 													errors.phone
 														? errors.phone.message
@@ -403,7 +407,7 @@ export default function Register() {
 												id="password"
 												onChange={handleChange}
 												value={data.password}
-												error={errors.password? true : false}
+												error={errors.password ? true : false}
 												helperText={
 													errors.password
 														? errors.password.message
@@ -424,7 +428,7 @@ export default function Register() {
 												id="cpassword"
 												onChange={handleChange}
 												value={data.cpassword}
-												error={errors.cpassword? true : false}
+												error={errors.cpassword ? true : false}
 												helperText={
 													errors.cpassword
 														? errors.cpassword.message

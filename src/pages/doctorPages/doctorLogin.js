@@ -132,6 +132,7 @@ export default function DoctorLogin() {
 								</Typography>
 
 								<Box
+									autoComplete="off"
 									component="form"
 									noValidate
 									onSubmit={handleSubmit(onSubmit)}
@@ -147,7 +148,6 @@ export default function DoctorLogin() {
 										id="email"
 										label="Email Address"
 										name="email"
-										autoComplete="email"
 										autoFocus
 										onChange={handleChange}
 										value={data.email}
