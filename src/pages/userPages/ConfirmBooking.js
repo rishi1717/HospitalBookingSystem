@@ -103,7 +103,7 @@ function ConfirmBooking() {
 						item
 						md={4}
 						sx={{
-							display: { xs: "none", md: "block" },
+							display: { xs: "none", lg: "block" },
 						}}
 					>
 						<Box
