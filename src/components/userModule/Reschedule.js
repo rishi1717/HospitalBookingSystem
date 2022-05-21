@@ -41,7 +41,9 @@ const Reschedule = ({ appointmentId, appointment, setAppointment }) => {
 	const [slots, setSlots] = useState([])
 	
 	const bookingDetails = async (newValue) => {
-		setAppointment({ ...appointment, date: newValue })
+		const tempDate = dayjs(newValue).add(1, "day")
+		console.log(tempDate)
+		setAppointment({ ...appointment, date: tempDate })
 		const appointmentsData = await axios.get(
 			`/appointment/${appointment.doctorId}/${newValue}`,
 			{
