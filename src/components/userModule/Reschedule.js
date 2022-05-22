@@ -112,7 +112,7 @@ const Reschedule = ({ appointmentId, appointment, setAppointment }) => {
 						label="Select date"
 						id="date"
 						name="date"
-						value={appointment.date}
+						value={dayjs(appointment.date).subtract(1, "day")}
 						onChange={(newValue) => {
 							bookingDetails(newValue)
 						}}
