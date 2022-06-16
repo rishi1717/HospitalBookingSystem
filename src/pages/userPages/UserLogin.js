@@ -33,6 +33,7 @@ export default function UserLogin() {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm()
 
@@ -43,6 +44,7 @@ export default function UserLogin() {
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value })
+		reset(data)
 	}
 
 	const onSubmit = async () => {
